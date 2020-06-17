@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import Foundation
@@ -31,8 +35,10 @@ class DatabaseSyncer {
         }
     }
 
-    func forceSyncDatabase() {
-        syncDatabase(completionHandler: nil)
+    func forceSyncDatabase(completionHandler: (() -> Void)?) {
+        syncDatabase { _ in
+            completionHandler?()
+        }
     }
 
     @UBOptionalUserDefault(key: "lastDatabaseSync") private var lastDatabaseSync: Date?
@@ -54,21 +60,33 @@ class DatabaseSyncer {
                 // - unexpected errors -> immediately show, backend could  be broken
                 UIStateManager.shared.blockUpdate {
                     UIStateManager.shared.syncError = e
-                    if case let DP3TTracingError.networkingError(wrappedError) = e {
+                    switch e {
+                    case let .networkingError(error: wrappedError):
+                        UIStateManager.shared.lastSyncErrorTime = Date()
                         switch wrappedError {
+                        case let .networkSessionError(netErr as NSError) where netErr.code == -999 && netErr.domain == NSURLErrorDomain:
+                            UIStateManager.shared.immediatelyShowSyncError = false
+                            UIStateManager.shared.syncErrorIsNetworkError = true
+                        case let .HTTPFailureResponse(status: status) where status == 502 || status == 503:
+                            // this means the backend is under maintanance
+                            UIStateManager.shared.immediatelyShowSyncError = false
+                            UIStateManager.shared.syncErrorIsNetworkError = true
+                        case .networkSessionError:
+                            UIStateManager.shared.immediatelyShowSyncError = false
+                            UIStateManager.shared.syncErrorIsNetworkError = true
                         case .timeInconsistency:
                             UIStateManager.shared.hasTimeInconsistencyError = true
                         default:
-                            break
-                        }
-                        UIStateManager.shared.lastSyncErrorTime = Date()
-                        if case DP3TNetworkingError.networkSessionError = wrappedError {
-                            UIStateManager.shared.immediatelyShowSyncError = false
-                        } else {
                             UIStateManager.shared.immediatelyShowSyncError = true
+                            UIStateManager.shared.syncErrorIsNetworkError = false
                         }
-                    } else {
+                    case .cancelled:
+                        // background task got cancelled, dont show error immediately
+                        UIStateManager.shared.immediatelyShowSyncError = false
+                        UIStateManager.shared.syncErrorIsNetworkError = true
+                    default:
                         UIStateManager.shared.immediatelyShowSyncError = true
+                        UIStateManager.shared.syncErrorIsNetworkError = false
                     }
                 }
 
@@ -87,7 +105,7 @@ class DatabaseSyncer {
                 }
 
                 // wait another 2 days befor warning
-                TracingLocalPush.shared.resetSyncWarningTriggers()
+                TracingLocalPush.shared.resetSyncWarningTriggers(lastSuccess: Date())
 
                 // reload status, user could have been exposed
                 TracingManager.shared.updateStatus(completion: nil)

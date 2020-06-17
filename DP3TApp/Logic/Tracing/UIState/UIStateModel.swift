@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import Foundation
@@ -14,7 +18,7 @@ struct UIStateModel: Equatable {
     var shouldStartAtMeldungenDetail = false
     var meldungenDetail: MeldungenDetail = MeldungenDetail()
 
-    #if ENABLE_TESTING
+    #if ENABLE_STATUS_OVERRIDE
         var debug: Debug = Debug()
     #endif
 
@@ -42,8 +46,10 @@ struct UIStateModel: Equatable {
             var pushProblem: Bool = false
             var syncProblemNetworkingError: Bool = false
             var syncProblemOtherError: Bool = false
+            var canRetrySyncError: Bool = true
             var backgroundUpdateProblem: Bool = false
             var errorCode: String?
+            var errorMessage: String?
         }
 
         struct InfoBox: Equatable {
@@ -82,7 +88,7 @@ struct UIStateModel: Equatable {
         }
     }
 
-    #if ENABLE_TESTING
+    #if ENABLE_STATUS_OVERRIDE
         struct Debug: Equatable {
             var lastSync: Date?
             var infectionStatus: DebugInfectionStatus = .healthy

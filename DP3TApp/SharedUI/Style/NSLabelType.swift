@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -27,12 +31,15 @@ class NSFontSize {
 
 public enum NSLabelType: UBLabelType {
     case title
+    case splashTitle
     case textLight
     case textBold
     case button // used for button
     case uppercaseBold
     case date
     case smallRegular
+    case interRegular
+    case interBold
 
     public var font: UIFont {
         let bfs = NSFontSize.bodyFontSize
@@ -52,18 +59,21 @@ public enum NSLabelType: UBLabelType {
 
         switch self {
         case .title: return UIFont(name: boldFontName, size: bfs + 6.0)!
+        case .splashTitle: return UIFont(name: boldFontName, size: bfs + 11.0)!
         case .textLight: return UIFont(name: lightFontName, size: bfs)!
         case .textBold: return UIFont(name: boldFontName, size: bfs)!
         case .button: return UIFont(name: boldFontName, size: bfs)!
         case .uppercaseBold: return UIFont(name: boldFontName, size: bfs)!
         case .date: return UIFont(name: boldFontName, size: bfs - 3.0)!
         case .smallRegular: return UIFont(name: regularFontName, size: bfs - 3.0)!
+        case .interRegular: return UIFont(name: regularFontName, size: bfs - 3.0)!
+        case .interBold: return UIFont(name: boldFontName, size: bfs - 3.0)!
         }
     }
 
     public var textColor: UIColor {
         switch self {
-        case .button:
+        case .button, .splashTitle:
             return .white
         case .smallRegular:
             return UIColor.black.withAlphaComponent(0.28)
@@ -75,12 +85,15 @@ public enum NSLabelType: UBLabelType {
     public var lineSpacing: CGFloat {
         switch self {
         case .title: return 30.0 / 22.0
+        case .splashTitle: return 30.0 / 22.0
         case .textBold: return 24.0 / 16.0
         case .button: return 1.0
         case .uppercaseBold: return 26.0 / 16.0
         case .textLight: return 24.0 / 16.0
         case .date: return 2.0
         case .smallRegular: return 26.0 / 13.0
+        case .interRegular: return 24.0 / 16.0
+        case .interBold: return 24.0 / 16.0
         }
     }
 

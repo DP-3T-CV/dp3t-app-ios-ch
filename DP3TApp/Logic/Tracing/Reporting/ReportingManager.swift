@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import DP3TSDK
@@ -20,7 +24,7 @@ class ReportingManager {
     // MARK: - Variables
 
     enum ReportingProblem {
-        case failure(error: Error)
+        case failure(error: CodedError)
         case invalidCode
     }
 
@@ -32,12 +36,14 @@ class ReportingManager {
 
     // MARK: - API
 
-    static let fakeCode = "000000000000"
+    private static var fakeCode: String {
+        String(Int.random(in: 100_000_000_000 ... 999_999_999_999))
+    }
 
     func report(covidCode: String = ReportingManager.fakeCode, isFakeRequest fake: Bool = false, completion: @escaping (ReportingProblem?) -> Void) {
         if let tokenDate = codeDictionary[covidCode] {
             // only second part needed
-            sendIWasExposed(token: tokenDate.0, date: tokenDate.1, isFakeRequest: fake, completion: completion)
+            sendIWasExposed(token: tokenDate.0, date: tokenDate.1, isFakeRequest: fake, covidCode: covidCode, completion: completion)
         } else {
             // get token and date first
             codeValidator.sendCodeRequest(code: covidCode, isFakeRequest: fake) { [weak self] result in
@@ -49,7 +55,7 @@ class ReportingManager {
                     strongSelf.codeDictionary[covidCode] = (token, date)
 
                     // second part
-                    strongSelf.sendIWasExposed(token: token, date: date, isFakeRequest: fake, completion: completion)
+                    strongSelf.sendIWasExposed(token: token, date: date, isFakeRequest: fake, covidCode: covidCode, completion: completion)
                 case let .failure(error: error):
                     completion(.failure(error: error))
                 case .invalidTokenError:
@@ -61,16 +67,17 @@ class ReportingManager {
 
     // MARK: - Second part: I was exposed
 
-    private func sendIWasExposed(token: String, date: Date, isFakeRequest fake: Bool, completion: @escaping (ReportingProblem?) -> Void) {
-        DP3TTracing.iWasExposed(onset: date, authentication: .HTTPAuthorizationBearer(token: token), isFakeRequest: fake) { result in
-            DispatchQueue.main.async {
+    private func sendIWasExposed(token: String, date: Date, isFakeRequest fake: Bool, covidCode: String, completion: @escaping (ReportingProblem?) -> Void) {
+        DP3TTracing.iWasExposed(onset: date, authentication: .HTTPAuthorizationBearer(token: token), isFakeRequest: fake) { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.codeDictionary.removeValue(forKey: covidCode)
                 switch result {
                 case .success:
                     TracingManager.shared.updateStatus { error in
                         if let error = error {
                             completion(.failure(error: error))
                         } else {
-                            UserStorage.shared.positiveTestSendDate = Date()
                             completion(nil)
                         }
                     }

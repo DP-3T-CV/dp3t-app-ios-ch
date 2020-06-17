@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -76,6 +80,15 @@ class NSWhatToDoSymptomViewController: NSViewController {
 
         stackScrollView.addArrangedView(symptomView)
 
+        let externalLinkButtonInSymptomView = NSExternalLinkButton(style: .normal(color: .ns_purple))
+        externalLinkButtonInSymptomView.title = "symptom_detail_box_button".ub_localized
+        symptomView.contentView.addSpacerView(NSPadding.medium)
+        symptomView.contentView.addArrangedSubview(externalLinkButtonInSymptomView)
+        externalLinkButtonInSymptomView.touchUpCallback = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.presentCoronaCheck()
+        }
+
         stackScrollView.addSpacerView(3.0 * NSPadding.large)
 
         let infoView = NSOnboardingInfoView(icon: UIImage(named: "ic-check-round")!, text: "symptom_faq1_text".ub_localized, title: "symptom_faq1_title".ub_localized, leftRightInset: 0)
@@ -84,7 +97,7 @@ class NSWhatToDoSymptomViewController: NSViewController {
 
         let buttonView = UIView()
 
-        let externalLinkButton = NSExternalLinkButton(color: .ns_purple)
+        let externalLinkButton = NSExternalLinkButton(style: .normal(color: .ns_purple))
         externalLinkButton.title = "symptom_detail_box_button".ub_localized
         externalLinkButton.touchUpCallback = { [weak self] in
             guard let strongSelf = self else { return }

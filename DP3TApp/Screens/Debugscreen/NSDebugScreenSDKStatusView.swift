@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 #if ENABLE_TESTING
@@ -21,10 +25,12 @@
             super.init(title: "debug_sdk_state_title".ub_localized)
             setup()
 
-            UIStateManager.shared.addObserver(self) { [weak self] stateModel in
-                guard let strongSelf = self else { return }
-                strongSelf.update(stateModel)
-            }
+            #if ENABLE_STATUS_OVERRIDE
+                UIStateManager.shared.addObserver(self) { [weak self] stateModel in
+                    guard let strongSelf = self else { return }
+                    strongSelf.update(stateModel)
+                }
+            #endif
         }
 
         required init?(coder _: NSCoder) {
@@ -97,27 +103,29 @@
             exit(0)
         }
 
-        private func update(_ state: UIStateModel) {
-            switch state.homescreen.begegnungen {
-            case .tracingActive:
-                tracingLabel.text = "tracing_active_title".ub_localized
-            case .tracingDisabled, .bluetoothTurnedOff, .bluetoothPermissionError, .tracingEnded, .timeInconsistencyError, .unexpectedError, .tracingPermissionError:
-                tracingLabel.text = "bluetooth_setting_tracking_inactive".ub_localized
+        #if ENABLE_STATUS_OVERRIDE
+            private func update(_ state: UIStateModel) {
+                switch state.homescreen.begegnungen {
+                case .tracingActive:
+                    tracingLabel.text = "tracing_active_title".ub_localized
+                case .tracingDisabled, .bluetoothTurnedOff, .bluetoothPermissionError, .tracingEnded, .timeInconsistencyError, .unexpectedError, .tracingPermissionError:
+                    tracingLabel.text = "bluetooth_setting_tracking_inactive".ub_localized
+                }
+
+                var texts: [String] = []
+
+                let date = dateFormatter(state.debug.lastSync)
+                texts.append("\("debug_sdk_state_last_synced".ub_localized)\(date)")
+
+                let isInfected = state.debug.infectionStatus == .infected
+                texts.append("\("debug_sdk_state_self_exposed".ub_localized)\(yesOrNo(isInfected))")
+
+                let isExposed = state.debug.infectionStatus == .exposed
+                texts.append("\("debug_sdk_state_contact_exposed".ub_localized)\(yesOrNo(isExposed))")
+
+                commentsLabel.text = texts.joined(separator: "\n")
             }
-
-            var texts: [String] = []
-
-            let date = dateFormatter(state.debug.lastSync)
-            texts.append("\("debug_sdk_state_last_synced".ub_localized)\(date)")
-
-            let isInfected = state.debug.infectionStatus == .infected
-            texts.append("\("debug_sdk_state_self_exposed".ub_localized)\(yesOrNo(isInfected))")
-
-            let isExposed = state.debug.infectionStatus == .exposed
-            texts.append("\("debug_sdk_state_contact_exposed".ub_localized)\(yesOrNo(isExposed))")
-
-            commentsLabel.text = texts.joined(separator: "\n")
-        }
+        #endif
 
         private func dateFormatter(_ date: Date?) -> String {
             guard let d = date else { return "–" }

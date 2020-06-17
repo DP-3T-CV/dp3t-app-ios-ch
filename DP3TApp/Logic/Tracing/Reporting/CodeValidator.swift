@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import Foundation
@@ -11,7 +15,7 @@ class CodeValidator {
 
     enum ValidationResult {
         case success(token: String, date: Date)
-        case failure(error: Error)
+        case failure(error: CodedError)
         case invalidTokenError
     }
 
@@ -32,7 +36,14 @@ class CodeValidator {
                 }
 
                 if let error = error {
-                    completion(.failure(error: error))
+                    let nsError = error as NSError
+                    if let e = error as? CodedError {
+                        completion(.failure(error: e))
+                    } else if nsError.domain == NSURLErrorDomain, nsError.code == -999 {
+                        completion(.failure(error: CertificateValidationError.validationFailed))
+                    } else {
+                        completion(.failure(error: NetworkError.unexpected(error: error)))
+                    }
                     return
                 } else if response == nil {
                     completion(.failure(error: NetworkError.networkError))

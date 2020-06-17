@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 #if ENABLE_TESTING
@@ -15,9 +19,17 @@
 
         private let imageView = UIImageView(image: UIImage(named: "03-privacy"))
 
-        private let mockModuleView = NSDebugScreenMockView()
-        private let sdkStatusView = NSDebugScreenSDKStatusView()
-        private let logsView = NSSimpleModuleBaseView(title: "Logs", text: "")
+        #if ENABLE_STATUS_OVERRIDE
+            private let sdkStatusView = NSDebugScreenSDKStatusView()
+            private let mockModuleView = NSDebugScreenMockView()
+        #endif
+
+        private let certificatePinningButton = NSButton(title: "", style: .uppercase(.ns_purple))
+        private let certificatePinningView = NSSimpleModuleBaseView(title: "")
+
+        #if ENABLE_LOGGING
+            private let logsView = NSSimpleModuleBaseView(title: "Logs", text: "")
+        #endif
 
         // MARK: - Init
 
@@ -32,17 +44,24 @@
             super.viewDidLoad()
             view.backgroundColor = .ns_backgroundSecondary
             setup()
+            certificatePinningView.contentView.addArrangedView(certificatePinningButton)
+            certificatePinningButton.addTarget(self, action: #selector(toggleCertificatePinning), for: .touchUpInside)
         }
 
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             navigationController?.setNavigationBarHidden(false, animated: true)
-            updateLogs()
+            #if ENABLE_LOGGING && ENABLE_STATUS_OVERRIDE
+                updateLogs()
+            #endif
+            updateCertificatePinningView()
         }
 
-        private func updateLogs() {
-            logsView.textLabel.attributedText = UIStateManager.shared.uiState.debug.logOutput
-        }
+        #if ENABLE_LOGGING && ENABLE_STATUS_OVERRIDE
+            private func updateLogs() {
+                logsView.textLabel.attributedText = UIStateManager.shared.uiState.debug.logOutput
+            }
+        #endif
 
         // MARK: - Setup
 
@@ -73,17 +92,41 @@
 
             stackScrollView.addSpacerView(NSPadding.large)
 
-            stackScrollView.addArrangedView(sdkStatusView)
+            #if ENABLE_STATUS_OVERRIDE
+                stackScrollView.addArrangedView(sdkStatusView)
+
+                stackScrollView.addSpacerView(NSPadding.large)
+
+                stackScrollView.addArrangedView(mockModuleView)
+
+                stackScrollView.addSpacerView(NSPadding.large)
+            #endif
+
+            stackScrollView.addArrangedView(certificatePinningView)
 
             stackScrollView.addSpacerView(NSPadding.large)
 
-            stackScrollView.addArrangedView(mockModuleView)
+            #if ENABLE_LOGGING
+                stackScrollView.addArrangedView(logsView)
+            #endif
 
             stackScrollView.addSpacerView(NSPadding.large)
+        }
 
-            stackScrollView.addArrangedView(logsView)
+        @objc
+        private func toggleCertificatePinning() {
+            URLSession.evaluator.useCertificatePinning.toggle()
+            updateCertificatePinningView()
+        }
 
-            stackScrollView.addSpacerView(NSPadding.large)
+        private func updateCertificatePinningView() {
+            if URLSession.evaluator.useCertificatePinning {
+                certificatePinningView.title = "certificate_pinning_title".ub_localized + "🔒"
+                certificatePinningButton.setTitle("certificate_pinning_button_disable".ub_localized, for: .normal)
+            } else {
+                certificatePinningView.title = "certificate_pinning_title".ub_localized + "🔓"
+                certificatePinningButton.setTitle("certificate_pinning_button_enable".ub_localized, for: .normal)
+            }
         }
     }
 

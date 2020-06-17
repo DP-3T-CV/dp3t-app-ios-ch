@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -14,10 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // setup sdk
         TracingManager.shared.initialize()
-
-        // Schedule Update check in background
-        ConfigBackgroundTaskManager().register()
-        FakePublishBackgroundTaskManager.shared.register()
 
         // defer window initialization if app was launched in
         // background because of location change
@@ -50,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupWindow() {
+        KeychainMigration.migrate()
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.overrideUserInterfaceStyle = .light
 
@@ -80,12 +82,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     _ = self.jumpToMessageIfRequired(onlyFirst: true)
                 }
             }
+            NSSynchronizationPersistence.shared?.removeLogsBefore14Days()
             startForceUpdateCheck()
         } else {
             _ = jumpToMessageIfRequired(onlyFirst: false)
         }
 
-        FakePublishBackgroundTaskManager.shared.runForegroundTask()
+        FakePublishManager.shared.runTask()
+
+        NSSynchronizationPersistence.shared?.appendLog(eventType: .open, date: Date(), payload: nil)
     }
 
     func jumpToMessageIfRequired(onlyFirst: Bool) -> Bool {
@@ -112,6 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // App should not have badges
         // Reset to 0 to ensure a unexpected badge doesn't stay forever
         application.applicationIconBadgeNumber = 0
+        TracingLocalPush.shared.clearNotifications()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -124,6 +130,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             let backgroundTime = -(lastForegroundActivity?.timeIntervalSinceNow ?? 0)
             willAppearAfterColdstart(application, coldStart: false, backgroundTime: backgroundTime)
+            application.applicationIconBadgeNumber = 0
+            TracingLocalPush.shared.clearNotifications()
         }
     }
 

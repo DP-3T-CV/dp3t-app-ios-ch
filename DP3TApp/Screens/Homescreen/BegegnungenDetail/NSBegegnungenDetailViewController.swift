@@ -1,13 +1,21 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
 
 class NSBegegnungenDetailViewController: NSTitleViewScrollViewController {
     private let bluetoothControl: NSBluetoothSettingsControl
+
+    #if ENABLE_SYNC_LOGGING
+        private let lastSyncronizationControl: NSLastSyncronizationControl
+    #endif
 
     private let appTitleView: NSAppTitleView
 
@@ -16,7 +24,9 @@ class NSBegegnungenDetailViewController: NSTitleViewScrollViewController {
     init(initialState: UIStateModel.BegegnungenDetail) {
         bluetoothControl = NSBluetoothSettingsControl(initialState: initialState)
         appTitleView = NSAppTitleView(initialState: initialState.tracing)
-
+        #if ENABLE_SYNC_LOGGING
+            lastSyncronizationControl = NSLastSyncronizationControl(frame: .zero)
+        #endif
         super.init()
 
         title = "handshakes_title_homescreen".ub_localized
@@ -39,6 +49,9 @@ class NSBegegnungenDetailViewController: NSTitleViewScrollViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        #if ENABLE_SYNC_LOGGING
+            lastSyncronizationControl.lastSyncronizationDate = NSSynchronizationPersistence.shared?.fetchLatestSuccessfulSync()?.date
+        #endif
     }
 
     // MARK: - Setup
@@ -52,6 +65,12 @@ class NSBegegnungenDetailViewController: NSTitleViewScrollViewController {
         bluetoothControl.viewToBeLayouted = view
 
         stackScrollView.addArrangedView(bluetoothControl)
+
+        #if ENABLE_SYNC_LOGGING
+            stackScrollView.addSpacerView(NSPadding.large)
+
+            stackScrollView.addArrangedView(lastSyncronizationControl)
+        #endif
 
         stackScrollView.addSpacerView(3 * NSPadding.large)
 
@@ -70,9 +89,24 @@ class NSBegegnungenDetailViewController: NSTitleViewScrollViewController {
         stackScrollView.addArrangedView(NSButton.faqButton(color: .ns_blue))
 
         stackScrollView.addSpacerView(NSPadding.large)
+
+        #if ENABLE_SYNC_LOGGING
+            lastSyncronizationControl.addTarget(self, action: #selector(openSynchronizationStatusDetails(sender:)), for: .touchUpInside)
+        #endif
     }
 
     private func updateState(_ state: UIStateModel) {
+        #if ENABLE_SYNC_LOGGING
+            lastSyncronizationControl.lastSyncronizationDate = NSSynchronizationPersistence.shared?.fetchLatestSuccessfulSync()?.date
+        #endif
         appTitleView.uiState = state.homescreen.header
     }
+
+    #if ENABLE_SYNC_LOGGING
+        @objc
+        private func openSynchronizationStatusDetails(sender _: UIControl?) {
+            let syncViewController = NSSynchronizationStatusDetailController()
+            navigationController?.pushViewController(syncViewController, animated: true)
+        }
+    #endif
 }

@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 #if ENABLE_TESTING
@@ -19,11 +23,12 @@
         init() {
             super.init(title: "debug_state_setting_title".ub_localized)
             setup()
-
-            UIStateManager.shared.addObserver(self) { [weak self] stateModel in
-                guard let strongSelf = self else { return }
-                strongSelf.update(stateModel)
-            }
+            #if ENABLE_STATUS_OVERRIDE
+                UIStateManager.shared.addObserver(self) { [weak self] stateModel in
+                    guard let strongSelf = self else { return }
+                    strongSelf.update(stateModel)
+                }
+            #endif
         }
 
         required init?(coder _: NSCoder) {
@@ -65,38 +70,40 @@
 
         // MARK: - Logic
 
-        private func select(_ checkBox: NSCheckBoxView) {
-            let stateManager = UIStateManager.shared
+        #if ENABLE_STATUS_OVERRIDE
+            private func select(_ checkBox: NSCheckBoxView) {
+                let stateManager = UIStateManager.shared
 
-            if let index = checkboxes.firstIndex(of: checkBox) {
-                switch index {
-                case 1:
-                    stateManager.overwrittenInfectionState = .healthy
-                case 2:
-                    stateManager.overwrittenInfectionState = .exposed
-                case 3:
-                    stateManager.overwrittenInfectionState = .infected
-                default:
-                    stateManager.overwrittenInfectionState = nil
+                if let index = checkboxes.firstIndex(of: checkBox) {
+                    switch index {
+                    case 1:
+                        stateManager.overwrittenInfectionState = .healthy
+                    case 2:
+                        stateManager.overwrittenInfectionState = .exposed
+                    case 3:
+                        stateManager.overwrittenInfectionState = .infected
+                    default:
+                        stateManager.overwrittenInfectionState = nil
+                    }
                 }
             }
-        }
 
-        private func update(_ stateModel: UIStateModel) {
-            // only set once because it's animated
-            let status = stateModel.debug.overwrittenInfectionState
-            checkboxes[0].isChecked = status == nil
+            private func update(_ stateModel: UIStateModel) {
+                // only set once because it's animated
+                let status = stateModel.debug.overwrittenInfectionState
+                checkboxes[0].isChecked = status == nil
 
-            if let s = status {
-                checkboxes[1].isChecked = s == .healthy
-                checkboxes[2].isChecked = s == .exposed
-                checkboxes[3].isChecked = s == .infected
-            } else {
-                checkboxes[1].isChecked = false
-                checkboxes[2].isChecked = false
-                checkboxes[3].isChecked = false
+                if let s = status {
+                    checkboxes[1].isChecked = s == .healthy
+                    checkboxes[2].isChecked = s == .exposed
+                    checkboxes[3].isChecked = s == .infected
+                } else {
+                    checkboxes[1].isChecked = false
+                    checkboxes[2].isChecked = false
+                    checkboxes[3].isChecked = false
+                }
             }
-        }
+        #endif
     }
 
 #endif

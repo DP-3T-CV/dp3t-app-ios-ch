@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -14,6 +18,15 @@ struct NSOnboardingStepModel {
     let textGroups: [(UIImage, String)]
 
     // MARK: - Factory
+
+    static let step0 = NSOnboardingStepModel(heading: "onboarding_legal_heading".ub_localized,
+                                             headingColor: .ns_blue,
+                                             foregroundImage: UIImage(named: "onboarding-outro")!,
+                                             title: "onboarding_legal_title".ub_localized,
+                                             textGroups: [
+                                                 (UIImage(named: "ic-error")!, "onboarding_legal_text1".ub_localized),
+                                                 (UIImage(named: "ic-error")!, "onboarding_legal_text2".ub_localized),
+                                             ])
 
     static let step1 = NSOnboardingStepModel(heading: "onboarding_prinzip_heading".ub_localized,
                                              headingColor: .ns_blue,
