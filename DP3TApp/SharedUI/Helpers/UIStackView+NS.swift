@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -47,6 +51,21 @@ extension UIStackView {
                     make.top.bottom.equalToSuperview().inset(insets)
                 }
             }
+        }
+    }
+
+    func addDividerView(inset: CGFloat) {
+        let container = UIView()
+        let line = UIView()
+        line.backgroundColor = .ns_line
+
+        addArrangedView(container)
+        container.addSubview(line)
+
+        line.snp.makeConstraints { make in
+            make.height.equalTo(1.0 / UIScreen.main.scale)
+            make.left.right.equalToSuperview().inset(inset)
+            make.top.bottom.equalToSuperview()
         }
     }
 

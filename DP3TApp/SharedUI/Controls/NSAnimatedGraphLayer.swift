@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -47,6 +51,12 @@ class NSAnimatedGraphLayer: CALayer {
         self.edges = edges
         super.init()
         draw()
+        addObservers()
+    }
+
+    override init(layer: Any) {
+        type = .header
+        super.init(layer: layer)
     }
 
     required init?(coder _: NSCoder) {
@@ -110,14 +120,16 @@ class NSAnimatedGraphLayer: CALayer {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.02) {
             self.step()
         }
-
-        NotificationCenter.default.addObserver(self, selector: #selector(pauseAnimating), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
 
     @objc
     func pauseAnimating() {
         timer?.invalidate()
         timer = nil
+    }
+
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseAnimating), name: UIApplication.didEnterBackgroundNotification, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(startAnimating), name: UIApplication.willEnterForegroundNotification, object: nil)
     }

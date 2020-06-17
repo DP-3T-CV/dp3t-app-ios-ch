@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -44,7 +48,7 @@ class NSWebViewController: NSViewController {
         super.viewDidLoad()
         setup()
 
-        guard let path = Bundle.main.path(forResource: local ?? "", ofType: "html", inDirectory: "Impressum/\("language_key".ub_localized)/")
+        guard let path = Bundle.main.path(forResource: local ?? "index", ofType: "html", inDirectory: "Impressum/\("language_key".ub_localized)/")
         else { return }
 
         let url = URL(fileURLWithPath: path)
@@ -98,13 +102,14 @@ extension NSWebViewController: WKNavigationDelegate {
 
             if scheme == "dp3t" || scheme == "file" {
                 let webVC: NSWebViewController
-                if url.absoluteString.contains("licence") {
-                    webVC = NSWebViewController(local: "license-ios")
-                }
-                else {
-                    webVC = NSWebViewController(local: url.lastPathComponent)
-                }
-                webVC.title = self.title
+//                if url.absoluteString.contains("licence") {
+//                    webVC = NSWebViewController(local: "license-ios")
+//                }
+//                else {
+                let path = (url.host ?? url.lastPathComponent).replacingOccurrences(of: ".html", with: "")
+                webVC = NSWebViewController(local: path)
+//                }
+                webVC.title = title
                 if let navVC = navigationController {
                     navVC.pushViewController(webVC, animated: true)
                 } else {
@@ -138,23 +143,27 @@ extension Bundle {
 
     static var environment: String {
         #if ENABLE_TESTING
-        switch Environment.current {
-            case .dev:
-            return " DEV"
-            case .abnahme:
-            return " ABNAHME"
-            case .prod:
-            return " PROD"
-        }
-        #else
-        switch Environment.current {
+            switch Environment.current {
             case .dev:
                 return " DEV"
+            case .test:
+                return " TEST"
+            case .abnahme:
+                return " ABNAHME"
+            case .prod:
+                return " PROD"
+            }
+        #else
+            switch Environment.current {
+            case .dev:
+                return " DEV"
+            case .test:
+                return " TEST"
             case .abnahme:
                 return " ABNAHME"
             case .prod:
                 return "p"
-        }
+            }
         #endif
     }
 }

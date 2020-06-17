@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import Foundation
@@ -10,8 +14,8 @@ extension Endpoint {
     /// Load Config
     /// let av = "ios-10"
     /// let os = "ios13"
-    static func config(appversion av: String, osversion os: String) -> Endpoint {
-        return Environment.current.configService.endpoint("config", queryParameters: ["appversion": av, "osversion": os])
+    static func config(appversion av: String, osversion os: String, buildnr: String) -> Endpoint {
+        return Environment.current.configService.endpoint("config", queryParameters: ["appversion": av, "osversion": os, "buildnr": buildnr])
     }
 
     /// Validate Code
@@ -19,4 +23,3 @@ extension Endpoint {
         return Environment.current.codegenService.endpoint("onset", method: .post, headers: ["accept": "*/*", "Content-Type": "application/json"], body: auth)
     }
 }
-

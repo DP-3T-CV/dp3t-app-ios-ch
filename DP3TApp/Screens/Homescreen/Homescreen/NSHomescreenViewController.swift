@@ -1,10 +1,13 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
-import CoreBluetooth
 import SnapKit
 import UIKit
 
@@ -108,8 +111,6 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
 
         finishTransition?()
         finishTransition = nil
-
-        presentOnboardingIfNeeded()
     }
 
     private var finishTransition: (() -> Void)?
@@ -138,13 +139,15 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
         stackScrollView.addSpacerView(2.0 * NSPadding.large)
 
         #if ENABLE_TESTING
+            #if ENABLE_STATUS_OVERRIDE
+                // DEBUG version for testing
+                let previewWarning = NSInfoBoxView(title: "preview_warning_title".ub_localized, subText: "preview_warning_text".ub_localized, image: UIImage(named: "ic-error")!, titleColor: .gray, subtextColor: .gray, leadingIconRenderingMode: .alwaysOriginal)
+                stackScrollView.addArrangedView(previewWarning)
 
-        let previewWarning = NSInfoBoxView(title: "preview_warning_title".ub_localized, subText: "preview_warning_text".ub_localized, image: UIImage(named: "ic-error")!, titleColor: .gray, subtextColor: .gray, leadingIconRenderingMode: .alwaysOriginal)
-        stackScrollView.addArrangedView(previewWarning)
+                stackScrollView.addSpacerView(NSPadding.large)
+            #endif
 
-        stackScrollView.addSpacerView(NSPadding.large)
-
-        let debugScreenContainer = UIView()
+            let debugScreenContainer = UIView()
 
             if Environment.current != Environment.prod {
                 debugScreenContainer.addSubview(debugScreenButton)
@@ -162,26 +165,26 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
 
                 stackScrollView.addSpacerView(NSPadding.large)
             }
+            debugScreenContainer.alpha = 0
+        #endif
 
-        // DEBUG version for testing
-        let uploadDBContainer = UIView()
-        uploadDBContainer.addSubview(uploadDBButton)
-        uploadDBButton.snp.makeConstraints { make in
-            make.left.right.lessThanOrEqualToSuperview().inset(NSPadding.medium)
-            make.top.bottom.centerX.equalToSuperview()
-        }
+        #if ENABLE_LOGGING
+            let uploadDBContainer = UIView()
+            uploadDBContainer.addSubview(uploadDBButton)
+            uploadDBButton.snp.makeConstraints { make in
+                make.left.right.lessThanOrEqualToSuperview().inset(NSPadding.medium)
+                make.top.bottom.centerX.equalToSuperview()
+            }
 
-        uploadDBButton.touchUpCallback = { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.uploadDatabaseForDebugPurposes()
-        }
+            uploadDBButton.touchUpCallback = { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.uploadDatabaseForDebugPurposes()
+            }
 
-        stackScrollView.addArrangedView(uploadDBContainer)
+            stackScrollView.addArrangedView(uploadDBContainer)
 
-        stackScrollView.addSpacerView(NSPadding.large)
-
-        debugScreenContainer.alpha = 0
-        uploadDBContainer.alpha = 0
+            stackScrollView.addSpacerView(NSPadding.large)
+            uploadDBContainer.alpha = 0
         #endif
         // End DEBUG version for testing
 
@@ -212,13 +215,15 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
             }, completion: nil)
 
             #if ENABLE_TESTING
-            UIView.animate(withDuration: 0.3, delay: 0.7, options: [.allowUserInteraction], animations: {
-                debugScreenContainer.alpha = 1
-            }, completion: nil)
+                UIView.animate(withDuration: 0.3, delay: 0.7, options: [.allowUserInteraction], animations: {
+                    debugScreenContainer.alpha = 1
+                }, completion: nil)
+            #endif
 
-            UIView.animate(withDuration: 0.3, delay: 0.7, options: [.allowUserInteraction], animations: {
-                uploadDBContainer.alpha = 1
-            }, completion: nil)
+            #if ENABLE_LOGGING
+                UIView.animate(withDuration: 0.3, delay: 0.7, options: [.allowUserInteraction], animations: {
+                    uploadDBContainer.alpha = 1
+                }, completion: nil)
             #endif
         }
     }
@@ -240,14 +245,6 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
 
     // MARK: - Details
 
-    private func presentOnboardingIfNeeded() {
-        if !UserStorage.shared.hasCompletedOnboarding {
-            let onboardingViewController = NSOnboardingViewController()
-            onboardingViewController.modalPresentationStyle = .fullScreen
-            present(onboardingViewController, animated: false)
-        }
-    }
-
     private func presentBegegnungenDetail() {
         navigationController?.pushViewController(NSBegegnungenDetailViewController(initialState: lastState.begegnungenDetail), animated: true)
     }
@@ -257,9 +254,9 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
     }
 
     #if ENABLE_TESTING
-    private func presentDebugScreen() {
-        navigationController?.pushViewController(NSDebugscreenViewController(), animated: true)
-    }
+        private func presentDebugScreen() {
+            navigationController?.pushViewController(NSDebugscreenViewController(), animated: true)
+        }
     #endif
 
     private func presentWhatToDoPositiveTest() {
@@ -274,36 +271,38 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
         present(NSNavigationController(rootViewController: NSAboutViewController()), animated: true)
     }
 
-    private let uploadDBButton = NSButton(title: "Upload DB to server", style: .outlineUppercase(.ns_red))
-    private let uploadHelper = NSDebugDatabaseUploadHelper()
-    private func uploadDatabaseForDebugPurposes() {
-        let alert = UIAlertController(title: "Username", message: nil, preferredStyle: .alert)
-        alert.addTextField { $0.text = "" }
-        alert.addAction(UIAlertAction(title: "Upload", style: .default, handler: { [weak alert, weak self] _ in
-            let username = alert?.textFields?.first?.text ?? ""
-            self?.uploadDB(with: username)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
+    #if ENABLE_LOGGING
+        private let uploadDBButton = NSButton(title: "Upload DB to server", style: .outlineUppercase(.ns_red))
+        private let uploadHelper = NSDebugDatabaseUploadHelper()
+        private func uploadDatabaseForDebugPurposes() {
+            let alert = UIAlertController(title: "Username", message: nil, preferredStyle: .alert)
+            alert.addTextField { $0.text = "" }
+            alert.addAction(UIAlertAction(title: "Upload", style: .default, handler: { [weak alert, weak self] _ in
+                let username = alert?.textFields?.first?.text ?? ""
+                self?.uploadDB(with: username)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
 
-    private func uploadDB(with username: String) {
-        let loading = UIAlertController(title: "Uploading...", message: "Please wait", preferredStyle: .alert)
-        present(loading, animated: true)
+        private func uploadDB(with username: String) {
+            let loading = UIAlertController(title: "Uploading...", message: "Please wait", preferredStyle: .alert)
+            present(loading, animated: true)
 
-        uploadHelper.uploadDatabase(username: username) { result in
-            let alert: UIAlertController
-            switch result {
-            case .success:
-                alert = UIAlertController(title: "Upload successful", message: nil, preferredStyle: .alert)
-            case let .failure(error):
-                alert = UIAlertController(title: "Upload failed", message: error.message, preferredStyle: .alert)
-            }
+            uploadHelper.uploadDatabase(username: username) { result in
+                let alert: UIAlertController
+                switch result {
+                case .success:
+                    alert = UIAlertController(title: "Upload successful", message: nil, preferredStyle: .alert)
+                case let .failure(error):
+                    alert = UIAlertController(title: "Upload failed", message: error.message, preferredStyle: .alert)
+                }
 
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            loading.dismiss(animated: false) {
-                self.present(alert, animated: false)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                loading.dismiss(animated: false) {
+                    self.present(alert, animated: false)
+                }
             }
         }
-    }
+    #endif
 }

@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import Foundation
@@ -14,8 +18,8 @@ struct UIStateModel: Equatable {
     var shouldStartAtMeldungenDetail = false
     var meldungenDetail: MeldungenDetail = MeldungenDetail()
 
-    #if ENABLE_TESTING
-    var debug: Debug = Debug()
+    #if ENABLE_STATUS_OVERRIDE
+        var debug: Debug = Debug()
     #endif
 
     enum TracingState: Equatable {
@@ -23,8 +27,9 @@ struct UIStateModel: Equatable {
         case tracingDisabled
         case bluetoothTurnedOff
         case bluetoothPermissionError
+        case tracingPermissionError
         case timeInconsistencyError
-        case unexpectedError
+        case unexpectedError(code: String?)
         case tracingEnded
     }
 
@@ -41,7 +46,10 @@ struct UIStateModel: Equatable {
             var pushProblem: Bool = false
             var syncProblemNetworkingError: Bool = false
             var syncProblemOtherError: Bool = false
+            var canRetrySyncError: Bool = true
             var backgroundUpdateProblem: Bool = false
+            var errorCode: String?
+            var errorMessage: String?
         }
 
         struct InfoBox: Equatable {
@@ -69,7 +77,7 @@ struct UIStateModel: Equatable {
         var showMeldungWithAnimation: Bool = false
 
         struct NSMeldungModel: Equatable {
-            let identifier: Int
+            let identifier: UUID
             let timestamp: Date
         }
 
@@ -80,22 +88,18 @@ struct UIStateModel: Equatable {
         }
     }
 
+    #if ENABLE_STATUS_OVERRIDE
+        struct Debug: Equatable {
+            var lastSync: Date?
+            var infectionStatus: DebugInfectionStatus = .healthy
+            var overwrittenInfectionState: DebugInfectionStatus?
+            var logOutput: NSAttributedString = NSAttributedString()
 
-    #if ENABLE_TESTING
-    struct Debug: Equatable {
-        var handshakeCount: Int?
-        var contactCount: Int?
-        var lastSync: Date?
-        var infectionStatus: DebugInfectionStatus = .healthy
-        var overwrittenInfectionState: DebugInfectionStatus?
-        var secretKeyRepresentation: String?
-        var logOutput: NSAttributedString = NSAttributedString()
-
-        enum DebugInfectionStatus: Equatable {
-            case healthy
-            case exposed
-            case infected
+            enum DebugInfectionStatus: Equatable {
+                case healthy
+                case exposed
+                case infected
+            }
         }
-    }
     #endif
 }

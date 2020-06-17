@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -35,11 +39,18 @@ class NSSendViewController: NSInformBottomButtonViewController {
         stackScrollView.addSpacerView(NSPadding.large)
         stackScrollView.addArrangedView(imageView)
         stackScrollView.addSpacerView(NSPadding.large)
-        stackScrollView.addArrangedView(titleLabel)
-        stackScrollView.addSpacerView(NSPadding.large)
-        stackScrollView.addArrangedView(textLabel)
-        stackScrollView.addSpacerView(NSPadding.large)
 
+        let container = UIStackView()
+        container.isAccessibilityElement = true
+        container.axis = .vertical
+        container.addArrangedView(titleLabel)
+        container.addSpacerView(NSPadding.large)
+        container.addArrangedView(textLabel)
+        container.accessibilityLabel = (titleLabel.text ?? "") + "." + (textLabel.text ?? "")
+
+        stackScrollView.addArrangedView(container)
+        stackScrollView.addSpacerView(NSPadding.large)
+        UIAccessibility.post(notification: .layoutChanged, argument: container)
         enableBottomButton = true
     }
 

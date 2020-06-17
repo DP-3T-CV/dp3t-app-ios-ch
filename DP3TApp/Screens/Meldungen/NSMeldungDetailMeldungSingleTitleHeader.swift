@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -149,12 +153,11 @@ class NSMeldungDetailMeldungSingleTitleHeader: UIView {
             var i = 0
             for v in [newMeldungInitialView, imageInitialView, titleLabel, dateLabel, subtitleLabel, continueButton] {
                 v.alpha = 0.0
-                v.transform = CGAffineTransform(translationX: 0, y: -NSPadding.large)
+                v.transform = CGAffineTransform(translationX: 0, y: -NSPadding.large).scaledBy(x: 0.8, y: 0.8)
 
-                UIView.animate(withDuration: 0.25, delay: 0.25 + Double(i) * 0.2, options: [.beginFromCurrentState, .curveEaseInOut], animations: {
+                UIView.animate(withDuration: 0.45, delay: 0.2 + Double(i) * 0.15, usingSpringWithDamping: 0.99, initialSpringVelocity: 0, options: .beginFromCurrentState, animations: {
                     v.alpha = 1.0
                     v.transform = .identity
-
                 }, completion: nil)
 
                 i = i + 1

@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -38,6 +42,7 @@ class NSAppTitleView: NSTitleView {
         super.init(frame: .zero)
         setup()
         startSpawn()
+        addObservers()
         updateState(animated: false)
     }
 
@@ -85,7 +90,6 @@ class NSAppTitleView: NSTitleView {
     private var slowTimer: Timer?
     @objc
     private func startSpawn() {
-
         timer?.invalidate()
         slowTimer?.invalidate()
 
@@ -108,8 +112,6 @@ class NSAppTitleView: NSTitleView {
             strongSelf.hightlight()
         })
         slowTimer?.tolerance = 5.0
-
-        NotificationCenter.default.addObserver(self, selector: #selector(pauseSpawn), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
 
     @objc
@@ -118,6 +120,10 @@ class NSAppTitleView: NSTitleView {
         timer = nil
         slowTimer?.invalidate()
         slowTimer = nil
+    }
+
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseSpawn), name: UIApplication.didEnterBackgroundNotification, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(startSpawn), name: UIApplication.willEnterForegroundNotification, object: nil)
     }

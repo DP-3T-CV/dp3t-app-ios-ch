@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -75,13 +79,13 @@ class NSHeaderImageBackgroundView: UIView {
 
         switch state {
         case .tracingActive:
-            colorView.backgroundColor = UIColor.ns_blue.withAlphaComponent(alpha)
+            colorView.backgroundColor = UIColor.ns_blue.withHighContrastColor(color: UIColor(ub_hexString: "#63a0c7")!).withAlphaComponent(alpha)
         case .tracingDisabled:
-            colorView.backgroundColor = UIColor.ns_text.withAlphaComponent(alpha)
-        case .bluetoothPermissionError, .bluetoothTurnedOff, .timeInconsistencyError, .unexpectedError:
+            colorView.backgroundColor = UIColor.ns_text.withHighContrastColor(color: UIColor(ub_hexString: "#4a4969")!).withAlphaComponent(alpha)
+        case .bluetoothPermissionError, .bluetoothTurnedOff, .timeInconsistencyError, .unexpectedError, .tracingPermissionError:
             colorView.backgroundColor = UIColor.ns_red.withAlphaComponent(alpha)
         case .tracingEnded:
-            colorView.backgroundColor = UIColor.ns_purple.withAlphaComponent(alpha)
+            colorView.backgroundColor = UIColor.ns_purple.withHighContrastColor(color: UIColor(ub_hexString: "#8d6a9f")!).withAlphaComponent(alpha)
         }
     }
 }

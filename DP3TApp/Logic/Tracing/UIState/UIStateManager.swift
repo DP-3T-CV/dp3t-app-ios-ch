@@ -1,18 +1,17 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
-import CoreBluetooth
 import Foundation
 import UIKit
 
-#if ENABLE_TESTING
-    import DP3TSDK_CALIBRATION
-#else
-    import DP3TSDK
-#endif
+import DP3TSDK
 
 class UIStateManager: NSObject {
     static var shared: UIStateManager {
@@ -40,7 +39,7 @@ class UIStateManager: NSObject {
 
             // don't trigger ui update based on debug values
             // otherwise behaviour in prob build could be different
-            #if ENABLE_TESTING
+            #if ENABLE_STATUS_OVERRIDE
                 var newUIStateWithoutDebug = uiState
                 newUIStateWithoutDebug?.debug = .init()
                 var oldUIStateWithoutDebug = oldValue
@@ -112,7 +111,7 @@ class UIStateManager: NSObject {
         }
     }
 
-    var syncError: Error? {
+    var syncError: CodedError? {
         didSet {
             if (syncError == nil) != (oldValue == nil) {
                 refresh()
@@ -126,7 +125,13 @@ class UIStateManager: NSObject {
         }
     }
 
-    var tracingStartError: Error? {
+    var syncErrorIsNetworkError: Bool = false {
+        didSet {
+            if oldValue != immediatelyShowSyncError { refresh() }
+        }
+    }
+
+    var tracingStartError: CodedError? {
         didSet {
             if (tracingStartError == nil) != (oldValue == nil) {
                 refresh()
@@ -134,7 +139,7 @@ class UIStateManager: NSObject {
         }
     }
 
-    var updateError: Error? {
+    var updateError: CodedError? {
         didSet {
             if (updateError == nil) != (oldValue == nil) {
                 refresh()
@@ -142,10 +147,10 @@ class UIStateManager: NSObject {
         }
     }
 
-    @UBUserDefault(key: "hasTimeInconsistencyError", defaultValue: false)
+    @KeychainPersisted(key: "hasTimeInconsistencyError", defaultValue: false)
     var hasTimeInconsistencyError: Bool
 
-    var anyError: Error? {
+    var anyError: CodedError? {
         tracingStartError ?? updateError
     }
 
@@ -163,7 +168,6 @@ class UIStateManager: NSObject {
                 switch (e1, e2) {
                 case (.networkingError(_), .networkingError(_)),
                      (.caseSynchronizationError, .caseSynchronizationError),
-                     (.cryptographyError(_), .cryptographyError(_)),
                      (.databaseError(_), .databaseError(_)),
                      (.bluetoothTurnedOff, .bluetoothTurnedOff),
                      (.permissonError, .permissonError):
@@ -178,10 +182,10 @@ class UIStateManager: NSObject {
         }
     }
 
-    #if ENABLE_TESTING
-    var overwrittenInfectionState: DebugInfectionStatus? {
-        didSet { refresh() }
-    }
+    #if ENABLE_STATUS_OVERRIDE
+        var overwrittenInfectionState: UIStateModel.Debug.DebugInfectionStatus? {
+            didSet { refresh() }
+        }
     #endif
 
     var tracingIsActivated: Bool {

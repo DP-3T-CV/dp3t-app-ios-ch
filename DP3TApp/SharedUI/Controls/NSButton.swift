@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -12,6 +16,7 @@ class NSButton: UBButton {
         case normal(UIColor)
         case uppercase(UIColor)
         case outlineUppercase(UIColor)
+        case borderlessUppercase(UIColor)
 
         var textColor: UIColor {
             switch self {
@@ -20,6 +25,8 @@ class NSButton: UBButton {
             case .uppercase:
                 return UIColor.white
             case let .outlineUppercase(c):
+                return c
+            case let .borderlessUppercase(c):
                 return c
             }
         }
@@ -31,6 +38,8 @@ class NSButton: UBButton {
             case let .uppercase(c):
                 return c
             case .outlineUppercase:
+                return .clear
+            case .borderlessUppercase:
                 return .clear
             }
         }
@@ -53,6 +62,8 @@ class NSButton: UBButton {
             case .uppercase:
                 return true
             case .outlineUppercase:
+                return true
+            case .borderlessUppercase:
                 return true
             default:
                 return false
@@ -142,6 +153,7 @@ extension NSButton {
             make.left.greaterThanOrEqualToSuperview()
         }
 
+        faqButton.accessibilityHint = "accessibility_faq_button_hint".ub_localized
         return view
     }
 }

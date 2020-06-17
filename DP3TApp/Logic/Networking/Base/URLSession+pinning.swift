@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import Foundation
@@ -20,21 +24,61 @@ extension URLSession {
 
 class CertificateEvaluator: NSObject, URLSessionDelegate {
     typealias AuthenticationChallengeCompletion = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
-
-    private let trustManager: UBServerTrustManager
-
-    #if DEBUG
-        static let useCertificatePinning = true
+    #if ENABLE_TESTING
+        private var trustManager: UBServerTrustManager
     #else
-        static let useCertificatePinning = true
+        private let trustManager: UBServerTrustManager
+    #endif
+
+    #if ENABLE_TESTING
+        private let useCertificatePinningKey = "useCertificatePinning"
+
+        @UBUserDefault(key: "useCertificatePinning", defaultValue: true)
+        private(set) static var useCertificatePinning: Bool
+
+        var useCertificatePinning: Bool {
+            get {
+                Self.useCertificatePinning
+            }
+            set {
+                Self.useCertificatePinning = newValue
+                if newValue {
+                    trustManager = Self.getServerTrustManager()
+                } else {
+                    trustManager = Self.getEmptyServerTrustManager()
+                }
+            }
+        }
+
+    #elseif DEBUG
+        private static let useCertificatePinning = true
     #endif
 
     override init() {
-        if !CertificateEvaluator.useCertificatePinning {
-            trustManager = UBServerTrustManager(evaluators: ["*": UBDisabledEvaluator()])
-            return
-        }
+        #if ENABLE_TESTING
+            if Self.useCertificatePinning {
+                trustManager = Self.getServerTrustManager()
+            } else {
+                trustManager = Self.getEmptyServerTrustManager()
+            }
+        #elseif DEBUG
+            if CertificateEvaluator.useCertificatePinning {
+                trustManager = Self.getServerTrustManager()
+            } else {
+                trustManager = Self.getEmptyServerTrustManager()
+            }
+        #else
+            trustManager = Self.getServerTrustManager()
+        #endif
+    }
 
+    #if DEBUG || ENABLE_TESTING
+        private static func getEmptyServerTrustManager() -> UBServerTrustManager {
+            UBServerTrustManager(evaluators: [:], default: UBDisabledEvaluator())
+        }
+    #endif
+
+    private static func getServerTrustManager() -> UBServerTrustManager {
         var evaluators: [String: UBServerTrustEvaluator] = [:]
 
         let bundle = Bundle.main
@@ -43,13 +87,17 @@ class CertificateEvaluator: NSObject, URLSessionDelegate {
         let hosts = ["www.pt1.bfs.admin.ch",
                      "www.pt1-d.bfs.admin.ch",
                      "www.pt1-a.bfs.admin.ch",
+                     "www.pt1-t.bfs.admin.ch",
                      "codegen-service.bag.admin.ch",
                      "codegen-service-d.bag.admin.ch",
-                     "codegen-service-a.bag.admin.ch"]
+                     "codegen-service-a.bag.admin.ch",
+                     "codegen-service-t.bag.admin.ch"]
         for host in hosts {
             if let certificate = bundle.getCertificate(with: host) {
                 let evaluator = UBPinnedCertificatesTrustEvaluator(certificates: [certificate], validateHost: true)
                 evaluators[host] = evaluator
+            } else {
+                assertionFailure("Could not load certificate for pinned host")
             }
         }
 
@@ -58,10 +106,11 @@ class CertificateEvaluator: NSObject, URLSessionDelegate {
             let evaluator = UBPinnedCertificatesTrustEvaluator(certificates: [c], validateHost: true)
             evaluators["www.pt-d.bfs.admin.ch"] = evaluator
             evaluators["www.pt-a.bfs.admin.ch"] = evaluator
+            evaluators["www.pt-t.bfs.admin.ch"] = evaluator
             evaluators["www.pt.bfs.admin.ch"] = evaluator
         }
 
-        trustManager = UBServerTrustManager(evaluators: evaluators)
+        return UBServerTrustManager(evaluators: evaluators)
     }
 
     // MARK: - URLSessionDelegate

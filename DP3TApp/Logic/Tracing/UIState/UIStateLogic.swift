@@ -1,16 +1,16 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import Foundation
 
-#if ENABLE_TESTING
-    import DP3TSDK_CALIBRATION
-#else
-    import DP3TSDK
-#endif
+import DP3TSDK
 
 /// Implementation of business rules to link SDK and all errors and states  to UI state
 class UIStateLogic {
@@ -47,8 +47,8 @@ class UIStateLogic {
         //
 
         var infectionStatus = tracingState.infectionStatus
-        #if ENABLE_TESTING
-        setDebugOverwrite(&infectionStatus, &newState)
+        #if ENABLE_STATUS_OVERRIDE
+            setDebugOverwrite(&infectionStatus, &newState)
         #endif
 
         switch infectionStatus {
@@ -64,9 +64,12 @@ class UIStateLogic {
         }
 
         // Set debug helpers
-        #if ENABLE_TESTING
+        #if ENABLE_STATUS_OVERRIDE
             setDebugMeldungen(&newState)
             setDebugDisplayValues(&newState, tracingState: tracingState)
+        #endif
+
+        #if ENABLE_LOGGING && ENABLE_STATUS_OVERRIDE
             setDebugLog(&newState)
         #endif
 
@@ -80,17 +83,15 @@ class UIStateLogic {
             case .bluetoothTurnedOff:
                 tracing = .bluetoothTurnedOff
             case .permissonError:
-                tracing = .bluetoothPermissionError
-            case .cryptographyError(_), .databaseError:
-                tracing = .unexpectedError
-            case .networkingError, .caseSynchronizationError, .userAlreadyMarkedAsInfected:
+                tracing = .tracingPermissionError
+            case .databaseError:
+                tracing = .unexpectedError(code: error.errorCodeString)
+            case .exposureNotificationError:
+                tracing = .tracingPermissionError
+            case .networkingError, .caseSynchronizationError, .userAlreadyMarkedAsInfected, .cancelled:
                 // TODO: Something
                 break // networkingError should already be handled elsewhere, ignore caseSynchronizationError for now
             }
-            #if ENABLE_TESTING
-        case .activeReceiving, .activeAdvertising:
-            assertionFailure("These states should never be set in production")
-            #endif
         case .stopped:
             tracing = .tracingDisabled
         case .active:
@@ -114,33 +115,50 @@ class UIStateLogic {
         }
 
         if manager.immediatelyShowSyncError {
-            newState.homescreen.meldungen.syncProblemOtherError = true
+            if manager.syncErrorIsNetworkError {
+                newState.homescreen.meldungen.syncProblemNetworkingError = true
+            } else {
+                newState.homescreen.meldungen.syncProblemOtherError = true
+            }
+            if let codedError = UIStateManager.shared.syncError, let errorCode = codedError.errorCodeString {
+                if manager.immediatelyShowSyncError {
+                    newState.homescreen.meldungen.errorMessage = codedError.localizedDescription
+                } else {
+                    newState.homescreen.meldungen.errorMessage = "homescreen_meldung_data_outdated_text".ub_localized
+                }
+
+                #if ENABLE_VERBOSE
+                    newState.homescreen.meldungen.errorCode = "\(errorCode): \(codedError)"
+                #else
+                    newState.homescreen.meldungen.errorCode = errorCode
+                #endif
+
+                newState.homescreen.meldungen.canRetrySyncError = !errorCode.contains(DP3TTracingError.nonRecoverableSyncErrorCode)
+            }
         }
 
         if let first = manager.firstSyncErrorTime,
             let last = manager.lastSyncErrorTime,
             last.timeIntervalSince(first) > manager.syncProblemInterval {
             newState.homescreen.meldungen.syncProblemNetworkingError = true
+            if let codedError = UIStateManager.shared.syncError {
+                newState.homescreen.meldungen.errorMessage = codedError.localizedDescription
+
+                #if ENABLE_VERBOSE
+                    newState.homescreen.meldungen.errorCode = "\(codedError.errorCodeString ?? "-"): \(codedError)"
+                #else
+                    newState.homescreen.meldungen.errorCode = codedError.errorCodeString
+                #endif
+            }
         }
     }
 
     private func setInfoBoxState(_ newState: inout UIStateModel) {
-        if let localizedInfoBox = ConfigManager.currentConfig?.infoBox {
-            let infoBox: ConfigResponseBody.LocalizedInfobox.InfoBox
-            switch Language.current {
-            case .german:
-                infoBox = localizedInfoBox.deInfoBox
-            case .italian:
-                infoBox = localizedInfoBox.itInfoBox
-            case .english:
-                infoBox = localizedInfoBox.enInfoBox
-            case .france:
-                infoBox = localizedInfoBox.frInfoBox
-            }
+        if let infoBox = ConfigManager.currentConfig?.infoBox?.value {
             newState.homescreen.infoBox = UIStateModel.Homescreen.InfoBox(title: infoBox.title,
-                                                                                      text: infoBox.msg,
-                                                                                      link: infoBox.urlTitle,
-                                                                                      url: infoBox.url)
+                                                                          text: infoBox.msg,
+                                                                          link: infoBox.urlTitle,
+                                                                          url: infoBox.url)
         }
     }
 
@@ -157,7 +175,7 @@ class UIStateLogic {
         newState.homescreen.meldungen.meldung = .exposed
         newState.meldungenDetail.meldung = .exposed
 
-        newState.meldungenDetail.meldungen = days.map { (mc) -> UIStateModel.MeldungenDetail.NSMeldungModel in UIStateModel.MeldungenDetail.NSMeldungModel(identifier: mc.identifier, timestamp: mc.reportDate)
+        newState.meldungenDetail.meldungen = days.map { (mc) -> UIStateModel.MeldungenDetail.NSMeldungModel in UIStateModel.MeldungenDetail.NSMeldungModel(identifier: mc.identifier, timestamp: mc.exposedDate)
         }.sorted(by: { (a, b) -> Bool in
             a.timestamp < b.timestamp
         })
@@ -182,7 +200,7 @@ class UIStateLogic {
         }
     }
 
-    #if ENABLE_TESTING
+    #if ENABLE_STATUS_OVERRIDE
 
         // MARK: - DEBUG Helpers
 
@@ -201,11 +219,16 @@ class UIStateLogic {
             }
         }
 
+        static let randIdentifier1 = UUID()
+        static let randIdentifier2 = UUID()
+        static let randDate1 = Date(timeIntervalSinceNow: -10000)
+        static let randDate2 = Date(timeIntervalSinceNow: -100_000)
+
         private func setDebugMeldungen(_ newState: inout UIStateModel) {
             // in case the infection state is overwritten, we need to
             // add at least one meldung
             if let os = manager.overwrittenInfectionState, os == .exposed {
-                newState.meldungenDetail.meldungen = [NSMeldungModel(identifier: 123_452621, timestamp: Date(timeIntervalSinceReferenceDate: 609_777_287)), NSMeldungModel(identifier: 252525252, timestamp: Date(timeIntervalSinceReferenceDate: 609_787_287))].sorted(by: { (a, b) -> Bool in
+                newState.meldungenDetail.meldungen = [UIStateModel.MeldungenDetail.NSMeldungModel(identifier: Self.randIdentifier1, timestamp: Self.randDate1), UIStateModel.MeldungenDetail.NSMeldungModel(identifier: Self.randIdentifier2, timestamp: Self.randDate2)].sorted(by: { (a, b) -> Bool in
                     a.timestamp < b.timestamp
                 })
                 newState.shouldStartAtMeldungenDetail = true
@@ -216,10 +239,7 @@ class UIStateLogic {
         }
 
         private func setDebugDisplayValues(_ newState: inout UIStateModel, tracingState: TracingState) {
-            newState.debug.handshakeCount = tracingState.numberOfHandshakes
-            newState.debug.contactCount = tracingState.numberOfContacts
             newState.debug.lastSync = tracingState.lastSync
-            newState.debug.secretKeyRepresentation = try? DP3TTracing.getSecretKeyRepresentationForToday()
 
             // add real tracing state of sdk and overwritten state
             switch tracingState.infectionStatus {
@@ -231,24 +251,26 @@ class UIStateLogic {
                 newState.debug.infectionStatus = .infected
             }
         }
+    #endif
 
-    private func setDebugLog(_ newState: inout UIStateModel) {
-        let logs = Logger.lastLogs
-        let df = DateFormatter()
-        df.dateFormat = "dd.MM, HH:mm"
-        let attr = NSMutableAttributedString()
-        logs.forEach { (date, log)  in
-            let s1 = NSAttributedString(string: df.string(from: date), attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-            let s2 = NSAttributedString(string: " ")
-            let s3 = NSAttributedString(string: log, attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])
-            let s4 = NSAttributedString(string: "\n")
-            attr.append(s1)
-            attr.append(s2)
-            attr.append(s3)
-            attr.append(s4)
+    #if ENABLE_LOGGING && ENABLE_STATUS_OVERRIDE
+        private func setDebugLog(_ newState: inout UIStateModel) {
+            let logs = Logger.lastLogs
+            let df = DateFormatter()
+            df.dateFormat = "dd.MM, HH:mm"
+            let attr = NSMutableAttributedString()
+            logs.forEach { date, log in
+                let s1 = NSAttributedString(string: df.string(from: date), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+                let s2 = NSAttributedString(string: " ")
+                let s3 = NSAttributedString(string: log, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+                let s4 = NSAttributedString(string: "\n")
+                attr.append(s1)
+                attr.append(s2)
+                attr.append(s3)
+                attr.append(s4)
+            }
+            newState.debug.logOutput = attr
         }
-        newState.debug.logOutput = attr
-    }
 
     #endif
 }

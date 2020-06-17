@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -39,7 +43,7 @@ class NSLoadingView: UIView {
         loadingIndicatorView.startAnimating()
     }
 
-    public func stopLoading(error: Error? = nil, reloadHandler: (() -> Void)? = nil) {
+    public func stopLoading(error: CodedError? = nil, reloadHandler: (() -> Void)? = nil) {
         loadingIndicatorView.stopAnimating()
 
         if let err = error {
@@ -48,11 +52,12 @@ class NSLoadingView: UIView {
             } else {
                 errorTextLabel.text = err.localizedDescription
             }
-            if let codedError = err as? CodedError {
-                errorCodeLabel.text = codedError.errorCodeString
-            } else {
-                errorCodeLabel.text = CodeErrorUnexpected
-            }
+            #if ENABLE_VERBOSE
+                errorCodeLabel.text = "\(err.errorCodeString ?? "-"): \(err)"
+            #else
+                errorCodeLabel.text = error?.errorCodeString
+            #endif
+
             reloadButton.touchUpCallback = reloadHandler
             loadingIndicatorView.alpha = 0.0
             errorStackView.alpha = 1.0

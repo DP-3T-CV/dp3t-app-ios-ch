@@ -1,16 +1,16 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import Foundation
 
-#if ENABLE_TESTING
-    import DP3TSDK_CALIBRATION
-#else
-    import DP3TSDK
-#endif
+import DP3TSDK
 
 class DatabaseSyncer {
     static var shared: DatabaseSyncer {
@@ -24,7 +24,8 @@ class DatabaseSyncer {
     }
 
     func syncDatabaseIfNeeded(completionHandler: ((UIBackgroundFetchResult) -> Void)? = nil) {
-        guard !databaseIsSyncing else {
+        guard !databaseIsSyncing,
+            UserStorage.shared.hasCompletedOnboarding else {
             completionHandler?(.noData)
             return
         }
@@ -65,13 +66,21 @@ class DatabaseSyncer {
                             break
                         }
                         UIStateManager.shared.lastSyncErrorTime = Date()
-                        if case DP3TNetworkingError.networkSessionError = wrappedError {
+                        switch wrappedError {
+                        case let DP3TNetworkingError.networkSessionError(netErr as NSError) where netErr.code == -999 && netErr.domain == NSURLErrorDomain:
                             UIStateManager.shared.immediatelyShowSyncError = false
-                        } else {
+                            UIStateManager.shared.syncErrorIsNetworkError = true
+                        case DP3TNetworkingError.networkSessionError:
+                            UIStateManager.shared.immediatelyShowSyncError = false
+                            UIStateManager.shared.syncErrorIsNetworkError = true
+                        default:
                             UIStateManager.shared.immediatelyShowSyncError = true
+                            UIStateManager.shared.syncErrorIsNetworkError = false
                         }
+
                     } else {
                         UIStateManager.shared.immediatelyShowSyncError = true
+                        UIStateManager.shared.syncErrorIsNetworkError = false
                     }
                 }
 
@@ -90,14 +99,12 @@ class DatabaseSyncer {
                 }
 
                 // wait another 2 days befor warning
-                TracingLocalPush.shared.resetSyncWarningTriggers()
+                TracingLocalPush.shared.resetSyncWarningTriggers(lastSuccess: Date())
 
                 // reload status, user could have been exposed
                 TracingManager.shared.updateStatus(completion: nil)
 
                 completionHandler?(.newData)
-
-
             }
             if taskIdentifier != .invalid {
                 UIApplication.shared.endBackgroundTask(taskIdentifier)

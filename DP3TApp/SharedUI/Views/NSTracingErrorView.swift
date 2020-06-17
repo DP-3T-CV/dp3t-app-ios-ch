@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -13,19 +17,24 @@ class NSTracingErrorView: UIView {
     private let imageView = UIImageView()
     private let titleLabel = NSLabel(.uppercaseBold, textColor: .ns_red, numberOfLines: 2, textAlignment: .center)
     private let textLabel = NSLabel(.textLight, textColor: .ns_text, textAlignment: .center)
+    private let errorCodeLabel = NSLabel(.smallRegular, textAlignment: .center)
     private let actionButton = NSUnderlinedButton()
 
     // MARK: - Model
 
     struct NSTracingErrorViewModel {
-        let icon: UIImage
-        let title: String
-        let text: String
-        let buttonTitle: String?
-        let action: (() -> Void)?
+        var icon: UIImage
+        var title: String
+        var text: String
+        var buttonTitle: String?
+        var action: (() -> Void)?
     }
 
     var model: NSTracingErrorViewModel? {
+        didSet { update() }
+    }
+
+    var errorCode: String? {
         didSet { update() }
     }
 
@@ -78,6 +87,10 @@ class NSTracingErrorView: UIView {
         if model?.action != nil {
             stackView.addArrangedView(actionButton)
         }
+        if let code = errorCode {
+            stackView.addArrangedView(errorCodeLabel)
+            errorCodeLabel.text = code
+        }
         stackView.addSpacerView(20)
 
         stackView.layoutIfNeeded()
@@ -103,11 +116,11 @@ class NSTracingErrorView: UIView {
                                            text: "tracing_turned_off_text".ub_localized,
                                            buttonTitle: nil,
                                            action: nil)
-        case .bluetoothPermissionError:
+        case .tracingPermissionError:
             return NSTracingErrorViewModel(icon: UIImage(named: "ic-bluetooth-disabled")!,
-                                           title: "bluetooth_permission_error_title".ub_localized,
-                                           text: "bluetooth_permission_error_text".ub_localized,
-                                           buttonTitle: "onboarding_bluetooth_button".ub_localized,
+                                           title: "tracing_permission_error_title".ub_localized,
+                                           text: "tracing_permission_error_text".ub_localized,
+                                           buttonTitle: "onboarding_gaen_button_activate".ub_localized,
                                            action: {
                                                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
                                                    UIApplication.shared.canOpenURL(settingsUrl) else { return }
@@ -118,11 +131,8 @@ class NSTracingErrorView: UIView {
             return NSTracingErrorViewModel(icon: UIImage(named: "ic-bluetooth-off")!,
                                            title: "bluetooth_turned_off_title".ub_localized,
                                            text: "bluetooth_turned_off_text".ub_localized,
-                                           buttonTitle: "bluetooth_turn_on_button_title".ub_localized,
-                                           action: {
-                                               TracingManager.shared.endTracing()
-                                               TracingManager.shared.beginUpdatesAndTracing()
-            })
+                                           buttonTitle: nil,
+                                           action: nil)
         case .timeInconsistencyError:
             return NSTracingErrorViewModel(icon: UIImage(named: "ic-error")!,
                                            title: "time_inconsistency_title".ub_localized,

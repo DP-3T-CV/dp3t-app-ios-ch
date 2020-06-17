@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -45,5 +49,16 @@ class NSWhatToDoInformView: NSSimpleModuleBaseView {
 
         contentView.addArrangedView(view)
         contentView.addSpacerView(NSPadding.small)
+
+        informButton.isAccessibilityElement = true
+        isAccessibilityElement = false
+        accessibilityElementsHidden = false
+    }
+
+    override func layoutSubviews() {
+        let el = UIAccessibilityElement(accessibilityContainer: self)
+        el.accessibilityLabel = "inform_detail_box_subtitle".ub_localized.deleteSuffix("...") + "inform_detail_box_title".ub_localized + "." + "inform_detail_box_text".ub_localized
+        el.accessibilityFrameInContainerSpace = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        accessibilityElements = [el, informButton]
     }
 }

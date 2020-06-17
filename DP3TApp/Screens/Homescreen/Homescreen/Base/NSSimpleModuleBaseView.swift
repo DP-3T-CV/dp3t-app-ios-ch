@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -22,6 +26,7 @@ class NSSimpleModuleBaseView: UIView {
     private let subview: UIView?
 
     private let sideInset: CGFloat
+    private let bottomPadding: Bool
 
     // MARK: - Public
 
@@ -29,8 +34,9 @@ class NSSimpleModuleBaseView: UIView {
 
     // MARK: - Init
 
-    init(title: String, subtitle: String? = nil, subview: UIView? = nil, boldText: String? = nil, text: String? = nil, image: UIImage? = nil, subtitleColor: UIColor? = nil) {
+    init(title: String, subtitle: String? = nil, subview: UIView? = nil, boldText: String? = nil, text: String? = nil, image: UIImage? = nil, subtitleColor: UIColor? = nil, bottomPadding: Bool = true) {
         sideInset = NSPadding.large
+        self.bottomPadding = bottomPadding
         self.subview = subview
 
         super.init(frame: .zero)
@@ -115,7 +121,7 @@ class NSSimpleModuleBaseView: UIView {
 
             if let subview = subview {
                 view.addSubview(subview)
-                subview.snp.makeConstraints { (make) in
+                subview.snp.makeConstraints { make in
                     make.top.equalTo(textLabel.snp.bottom).offset(NSPadding.large)
                     make.left.equalToSuperview()
                     make.right.equalTo(imageView.snp.left).offset(-NSPadding.medium)
@@ -141,15 +147,19 @@ class NSSimpleModuleBaseView: UIView {
             make.top.equalTo(lastView.snp.bottom).offset(NSPadding.small)
             make.left.right.equalToSuperview().inset(sideInset)
             /*
-            make.left.equalToSuperview().inset(sideInset)
-            if imageView.superview != nil {
-                make.right.equalTo(imageView.snp.left).offset(-sideInset)
-            }
-            else {
-                make.right.equalToSuperview().offset(-sideInset)
-            }
+             make.left.equalToSuperview().inset(sideInset)
+             if imageView.superview != nil {
+                 make.right.equalTo(imageView.snp.left).offset(-sideInset)
+             }
+             else {
+                 make.right.equalToSuperview().offset(-sideInset)
+             }
              */
-            make.bottom.equalToSuperview().inset(sideInset)
+            if bottomPadding {
+                make.bottom.equalToSuperview().inset(15)
+            } else {
+                make.bottom.equalToSuperview()
+            }
         }
 
         contentView.axis = .vertical

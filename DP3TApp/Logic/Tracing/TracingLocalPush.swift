@@ -1,73 +1,84 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
+import DP3TSDK
 import Foundation
 import UserNotifications
 
-#if ENABLE_TESTING
-    import DP3TSDK_CALIBRATION
-#else
-    import DP3TSDK
-#endif
+protocol UserNotificationCenter {
+    var delegate: UNUserNotificationCenterDelegate? { get set }
+    func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?)
+    func removeAllDeliveredNotifications()
+}
+
+extension UNUserNotificationCenter: UserNotificationCenter {}
+
+protocol ExposureIdentifierProvider {
+    var exposureIdentifiers: [String]? { get }
+}
+
+extension TracingState: ExposureIdentifierProvider {
+    var exposureIdentifiers: [String]? {
+        switch infectionStatus {
+        case let .exposed(matches):
+            return matches.map { $0.identifier.uuidString }
+        case .healthy:
+            return []
+        case .infected:
+            return nil
+        }
+    }
+}
 
 /// Helper to show a local push notification when the state of the user changes from not-exposed to exposed
-class TracingLocalPush {
+class TracingLocalPush: NSObject {
     static let shared = TracingLocalPush()
 
-    func update(state: TracingState) {
-        switch state.infectionStatus {
-        case let .exposed(matches):
-            exposureIdentifiers = matches.map { $0.identifier }
-        case .healthy:
-            exposureIdentifiers = []
-        case .infected:
-            break // don't update
+    private var center: UserNotificationCenter
+
+    init(notificationCenter: UserNotificationCenter = UNUserNotificationCenter.current(), keychain: KeychainProtocol = Keychain()) {
+        center = notificationCenter
+        _exposureIdentifiers.keychain = keychain
+        super.init()
+        center.delegate = self
+    }
+
+    func update(provider: ExposureIdentifierProvider) {
+        if let identifers = provider.exposureIdentifiers {
+            exposureIdentifiers = identifers
         }
     }
 
-    @UBUserDefault(key: "exposureIdentifiers", defaultValue: [])
-    private var exposureIdentifiers: [Int] {
+    func clearNotifications() {
+        center.removeAllDeliveredNotifications()
+    }
+
+    @KeychainPersisted(key: "exposureIdentifiers", defaultValue: [])
+    private var exposureIdentifiers: [String] {
         didSet {
             for identifier in exposureIdentifiers {
                 if !oldValue.contains(identifier) {
-                    // in foreground, show alert (unless already on detail screen)
-                    if UIApplication.shared.applicationState == .active {
-                        if !alreadyShowsMeldung() {
-                            showAlert()
-                        }
-                    // in background schedule notification
-                    } else {
-                        scheduleNotification()
-                    }
+                    scheduleNotification(identifier: identifier)
                     return
                 }
             }
         }
     }
 
-    private func scheduleNotification() {
+    private func scheduleNotification(identifier: String) {
         let content = UNMutableNotificationContent()
         content.title = "push_exposed_title".ub_localized
         content.body = "push_exposed_text".ub_localized
 
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-    }
-
-    private func showAlert() {
-        let alert = UIAlertController(title: "push_exposed_title".ub_localized, message: nil, preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "meldung_in_app_alert_accept_button".ub_localized, style: .default, handler: { _ in
-            self.jumpToMeldung()
-        }))
-
-        alert.addAction(UIAlertAction(title: "meldung_in_app_alert_ignore_button".ub_localized, style: .cancel, handler: nil))
-
-        UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+        center.add(request, withCompletionHandler: nil)
     }
 
     private func alreadyShowsMeldung() -> Bool {
@@ -81,6 +92,10 @@ class TracingLocalPush {
     }
 
     private func jumpToMeldung() {
+        guard !alreadyShowsMeldung() else {
+            return
+        }
+
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
             let navigationVC = appDelegate.window?.rootViewController as? NSNavigationController {
             navigationVC.popToRootViewController(animated: false)
@@ -89,6 +104,7 @@ class TracingLocalPush {
     }
 
     // MARK: - Sync warnings
+
     // If sync doesnt work for 2 days, we show a notification
     // User should open app to fix issues
 
@@ -98,19 +114,51 @@ class TracingLocalPush {
     private let timeInterval1: TimeInterval = 60 * 60 * 24 * 2 // Two days
     private let timeInterval2: TimeInterval = 60 * 60 * 24 * 7 // Seven days
 
-    func resetSyncWarningTriggers() {
+    func resetSyncWarningTriggers(tracingState: TracingState) {
+        if let lastSync = tracingState.lastSync {
+            resetSyncWarningTriggers(lastSuccess: lastSync)
+        }
+    }
+
+    func resetSyncWarningTriggers(lastSuccess: Date) {
         let content = UNMutableNotificationContent()
         content.title = "sync_warning_notification_title".ub_localized
         content.body = "sync_warning_notification_text".ub_localized
 
-        let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval1, repeats: false)
+        let timePassed = lastSuccess.timeIntervalSinceNow
+
+        let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval1 - timePassed, repeats: false)
         let request1 = UNNotificationRequest(identifier: notificationIdentifier1, content: content, trigger: trigger1)
 
-        let trigger2 = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval2, repeats: false)
+        let trigger2 = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval2 - timePassed, repeats: false)
         let request2 = UNNotificationRequest(identifier: notificationIdentifier2, content: content, trigger: trigger2)
 
         // Adding a request with the same identifier again automatically cancels an existing request with that identifier, if present
-        UNUserNotificationCenter.current().add(request1, withCompletionHandler: nil)
-        UNUserNotificationCenter.current().add(request2, withCompletionHandler: nil)
+        center.add(request1, withCompletionHandler: nil)
+        center.add(request2, withCompletionHandler: nil)
+    }
+}
+
+extension TracingLocalPush: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if alreadyShowsMeldung(), exposureIdentifiers.contains(notification.request.identifier) {
+            completionHandler([])
+        } else {
+            completionHandler([.alert, .sound])
+        }
+    }
+
+    func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler _: @escaping () -> Void) {
+        guard exposureIdentifiers.contains(response.notification.request.identifier) else {
+            return // not a exposure notification
+        }
+
+        guard response.actionIdentifier == UNNotificationDefaultActionIdentifier else {
+            return // cancelled
+        }
+
+        jumpToMeldung()
     }
 }

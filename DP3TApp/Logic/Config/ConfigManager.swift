@@ -1,15 +1,15 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
+import DP3TSDK
 import UIKit
-#if ENABLE_TESTING
-    import DP3TSDK_CALIBRATION
-#else
-    import DP3TSDK
-#endif
 
 /// Config request allows to disable old versions of the app if
 class ConfigManager: NSObject {
@@ -28,10 +28,14 @@ class ConfigManager: NSObject {
     static var currentConfig: ConfigResponseBody? {
         didSet {
             UIStateManager.shared.refresh()
-            if let sdkConfig = currentConfig?.sdkConfig {
-                ConfigManager.updateSDKParameters(config: sdkConfig)
+            if let config = currentConfig?.iOSGaenSdkConfig {
+                ConfigManager.updateSDKParameters(config: config)
             }
         }
+    }
+
+    static var allowTracing: Bool {
+        return true
     }
 
     // MARK: - Version Numbers
@@ -44,6 +48,11 @@ class ConfigManager: NSObject {
     static var osVersion: String {
         let systemVersion = UIDevice.current.systemVersion
         return "ios\(systemVersion)"
+    }
+
+    static var buildNumber: String {
+        let shortVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+        return "ios-\(shortVersion)"
     }
 
     // MARK: - Start config request
@@ -63,12 +72,9 @@ class ConfigManager: NSObject {
     }
 
     public func loadConfig(completion: @escaping (ConfigResponseBody?) -> Void) {
-
-
-
         Logger.log("Load Config", appState: true)
 
-        dataTask = session.dataTask(with: Endpoint.config(appversion: ConfigManager.appVersion, osversion: ConfigManager.osVersion).request(), completionHandler: { data, response, error in
+        dataTask = session.dataTask(with: Endpoint.config(appversion: ConfigManager.appVersion, osversion: ConfigManager.osVersion, buildnr: ConfigManager.buildNumber).request(), completionHandler: { data, response, error in
 
             guard let httpResponse = response as? HTTPURLResponse,
                 let data = data else {
@@ -109,7 +115,6 @@ class ConfigManager: NSObject {
     }
 
     public func startConfigRequest(window: UIWindow?) {
-
         // immediate alert if old config enforced update
         if let oldConfig = ConfigManager.currentConfig {
             presentAlertIfNeeded(config: oldConfig, window: window)
@@ -123,34 +128,46 @@ class ConfigManager: NSObject {
         }
     }
 
-    public static func updateSDKParameters(config: ConfigResponseBody.SDKConfig) {
+    public static func updateSDKParameters(config: ConfigResponseBody.GAENSDKConfig) {
         var parameters = DP3TTracing.parameters
 
-        if let numberOfWindowsForExposure = config.numberOfWindowsForExposure {
-            parameters.contactMatching.numberOfWindowsForExposure = numberOfWindowsForExposure
-        }
-        if let eventThreshold = config.eventThreshold {
-            parameters.contactMatching.eventThreshold = eventThreshold
-        }
-        if let badAttenuationThreshold = config.badAttenuationThreshold {
-            parameters.contactMatching.badAttenuationThreshold = badAttenuationThreshold
-        }
-        if let contactAttenuationThreshold = config.contactAttenuationThreshold {
-            parameters.contactMatching.contactAttenuationThreshold = contactAttenuationThreshold
-        }
+        parameters.contactMatching.factorHigh = config.factorHigh
+        parameters.contactMatching.factorLow = config.factorLow
+        parameters.contactMatching.lowerThreshold = config.lowerThreshold
+        parameters.contactMatching.higherThreshold = config.higherThreshold
+        parameters.contactMatching.triggerThreshold = config.triggerThreshold
 
         DP3TTracing.parameters = parameters
     }
 
+    private static var configAlert: UIAlertController?
+
     private func presentAlertIfNeeded(config: ConfigResponseBody, window: UIWindow?) {
         if config.forceUpdate {
-            let alert = UIAlertController(title: "force_update_title".ub_localized,
-                                          message: "force_update_text".ub_localized,
-                                          preferredStyle: .alert)
+            if Self.configAlert == nil {
+                let alert = UIAlertController(title: "force_update_title".ub_localized,
+                                              message: "force_update_text".ub_localized,
+                                              preferredStyle: .alert)
 
-            window?.rootViewController?.present(alert, animated: true, completion: nil)
+                window?.rootViewController?.topViewController.present(alert, animated: false, completion: nil)
+                Self.configAlert = alert
+            }
         } else {
             Logger.log("NO force update alert")
+            if Self.configAlert != nil {
+                Self.configAlert?.dismiss(animated: true, completion: nil)
+                Self.configAlert = nil
+            }
+        }
+    }
+}
+
+private extension UIViewController {
+    var topViewController: UIViewController {
+        if let p = presentedViewController {
+            return p.topViewController
+        } else {
+            return self
         }
     }
 }

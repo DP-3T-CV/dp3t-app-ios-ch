@@ -1,31 +1,35 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
-import CoreBluetooth
+import DP3TSDK
 import Foundation
 import UIKit
 
-#if ENABLE_TESTING
-    import DP3TSDK_CALIBRATION
-#else
-    import DP3TSDK
+#if DEBUG || RELEASE_DEV
+    import UserNotifications
 #endif
 
 /// Glue code between SDK and UI. TracingManager is responsible for starting and stopping the SDK and update the interface via UIStateManager
 class TracingManager: NSObject {
-    /// Identifier known to
-    /// https://github.com/DP-3T/dp3t-discovery/blob/master/discovery.json
-    let appId = "org.dpppt.demo" // "ch.ubique.nextstep"
+    let appId = "ch.admin.bag.dp3t"
 
     static let shared = TracingManager()
 
     let uiStateManager = UIStateManager()
     let databaseSyncer = DatabaseSyncer()
 
-    @UBUserDefault(key: "tracingIsActivated", defaultValue: true)
+    #if ENABLE_LOGGING
+        var loggingStorage: LoggingStorage?
+    #endif
+
+    @KeychainPersisted(key: "tracingIsActivated", defaultValue: true)
     public var isActivated: Bool {
         didSet {
             if isActivated {
@@ -37,43 +41,47 @@ class TracingManager: NSObject {
         }
     }
 
-    private var central: CBCentralManager?
-
     func initialize() {
         do {
             let bucketBaseUrl = Environment.current.configService.baseURL
             let reportBaseUrl = Environment.current.publishService.baseURL
             // JWT is not supported for now since the backend keeps rotating the private key
-            let descriptor = ApplicationDescriptor(appId: appId,
-                                                   bucketBaseUrl: bucketBaseUrl,
-                                                   reportBaseUrl: reportBaseUrl,
-                                                   jwtPublicKey: Environment.current.jwtPublicKey)
 
-            #if ENABLE_TESTING
-                switch Environment.current {
-                case .dev:
-                    // 5min Batch lenght on dev Enviroment
-                    DP3TTracing.parameters.networking.batchLength = 5 * 60
-                    var appVersion = "N/A"
-                    if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-                        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-                        appVersion = "\(version)(\(build))"
-                    }
-                    try DP3TTracing.initialize(with: .manual(descriptor),
-                                               urlSession: URLSession.certificatePinned,
-                                               mode: .calibration(identifierPrefix: "", appVersion: appVersion))
-                case .abnahme:
-                    try DP3TTracing.initialize(with: .manual(descriptor),
-                                               urlSession: URLSession.certificatePinned)
-                case .prod:
-                    try DP3TTracing.initialize(with: .manual(descriptor),
-                                               urlSession: URLSession.certificatePinned)
-                }
+            #if TEST_ENTITLEMENT
+                let descriptor = ApplicationDescriptor(appId: appId,
+                                                       bucketBaseUrl: bucketBaseUrl,
+                                                       reportBaseUrl: reportBaseUrl,
+                                                       jwtPublicKey: Environment.current.jwtPublicKey,
+                                                       mode: .test)
             #else
-                try DP3TTracing.initialize(with: .manual(descriptor))
+                let descriptor = ApplicationDescriptor(appId: appId,
+                                                       bucketBaseUrl: bucketBaseUrl,
+                                                       reportBaseUrl: reportBaseUrl,
+                                                       jwtPublicKey: Environment.current.jwtPublicKey)
             #endif
+
+            #if ENABLE_LOGGING
+                // Set logging Storage
+                loggingStorage = try? .init()
+                #if DEBUG
+                    DP3TTracing.loggingDelegate = self
+                #else
+                    DP3TTracing.loggingDelegate = loggingStorage
+                #endif
+            #endif
+
+            DP3TTracing.activityDelegate = self
+
+            try DP3TTracing.initialize(with: descriptor,
+                                       urlSession: URLSession.certificatePinned,
+                                       backgroundHandler: self)
+
         } catch {
-            UIStateManager.shared.tracingStartError = error
+            if let e = error as? DP3TTracingError {
+                UIStateManager.shared.tracingStartError = e
+            } else {
+                UIStateManager.shared.tracingStartError = UnexpectedThrownError.startTracing(error: error)
+            }
         }
 
         updateStatus { _ in
@@ -81,11 +89,15 @@ class TracingManager: NSObject {
         }
     }
 
+    func requestTracingPermission(completion: @escaping (Error?) -> Void) {
+        try? DP3TTracing.startTracing(completionHandler: completion)
+    }
+
     func beginUpdatesAndTracing() {
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForegroundNotification), name: UIApplication.willEnterForegroundNotification, object: nil)
 
-        if UserStorage.shared.hasCompletedOnboarding, isActivated {
+        if UserStorage.shared.hasCompletedOnboarding, isActivated, ConfigManager.allowTracing {
             do {
                 try DP3TTracing.startTracing()
                 UIStateManager.shared.tracingStartError = nil
@@ -93,11 +105,11 @@ class TracingManager: NSObject {
                 // Tracing should not start if the user is marked as infected
                 UIStateManager.shared.tracingStartError = nil
             } catch {
-                UIStateManager.shared.tracingStartError = error
-            }
-
-            if central == nil {
-                central = CBCentralManager(delegate: self, queue: nil)
+                if let e = error as? DP3TTracingError {
+                    UIStateManager.shared.tracingStartError = e
+                } else {
+                    UIStateManager.shared.tracingStartError = UnexpectedThrownError.startTracing(error: error)
+                }
             }
         }
 
@@ -109,21 +121,59 @@ class TracingManager: NSObject {
     }
 
     func resetSDK() {
+        // completely reset SDK
         try? DP3TTracing.reset()
-        #if ENABLE_TESTING
-        UIStateManager.shared.overwrittenInfectionState = nil
+
+        // reset debugi fake data to test UI reset
+        #if ENABLE_STATUS_OVERRIDE
+            UIStateManager.shared.overwrittenInfectionState = nil
         #endif
+    }
+
+    func deletePositiveTest() {
+        // reset infection status
+        try? DP3TTracing.resetInfectionStatus()
+
+        // reset debug fake data to test UI reset
+        #if ENABLE_STATUS_OVERRIDE
+            UIStateManager.shared.overwrittenInfectionState = nil
+        #endif
+
+        // during infection, tracing is diabled
+        // after infection, it works again, but user must manually
+        // enable if desired
+        isActivated = false
+
+        UIStateManager.shared.refresh()
+    }
+
+    func deleteMeldungen() {
+        // delete all visible messages
+        try? DP3TTracing.resetExposureDays()
+
+        // reset debug fake data to test UI reset
+        #if ENABLE_STATUS_OVERRIDE
+            UIStateManager.shared.overwrittenInfectionState = nil
+        #endif
+
+        UIStateManager.shared.refresh()
     }
 
     func userHasCompletedOnboarding() {
         do {
-            try DP3TTracing.startTracing()
+            if ConfigManager.allowTracing {
+                try DP3TTracing.startTracing()
+            }
             UIStateManager.shared.tracingStartError = nil
         } catch DP3TTracingError.userAlreadyMarkedAsInfected {
             // Tracing should not start if the user is marked as infected
             UIStateManager.shared.tracingStartError = nil
         } catch {
-            UIStateManager.shared.tracingStartError = error
+            if let e = error as? DP3TTracingError {
+                UIStateManager.shared.tracingStartError = e
+            } else {
+                UIStateManager.shared.tracingStartError = UnexpectedThrownError.startTracing(error: error)
+            }
         }
 
         updateStatus(completion: nil)
@@ -134,7 +184,7 @@ class TracingManager: NSObject {
         updateStatus(completion: nil)
     }
 
-    func updateStatus(completion: ((Error?) -> Void)?) {
+    func updateStatus(completion: ((CodedError?) -> Void)?) {
         DP3TTracing.status { result in
             switch result {
             case let .failure(e):
@@ -151,20 +201,13 @@ class TracingManager: NSObject {
                 completion?(nil)
 
                 // schedule local push if exposed
-                TracingLocalPush.shared.update(state: st)
+                TracingLocalPush.shared.update(provider: st)
+                TracingLocalPush.shared.resetSyncWarningTriggers(tracingState: st)
             }
             DP3TTracing.delegate = self
         }
 
         DatabaseSyncer.shared.syncDatabaseIfNeeded()
-    }
-}
-
-extension TracingManager: CBCentralManagerDelegate {
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn, isActivated {
-            beginUpdatesAndTracing()
-        }
     }
 }
 
@@ -176,17 +219,125 @@ extension TracingManager: DP3TTracingDelegate {
                 UIStateManager.shared.tracingState = state
                 UIStateManager.shared.trackingState = state.trackingState
             }
+            TracingLocalPush.shared.update(provider: state)
+            TracingLocalPush.shared.resetSyncWarningTriggers(tracingState: state)
         }
+    }
+}
+
+extension TracingManager: DP3TBackgroundHandler {
+    func didScheduleBackgrounTask() {
+        #if ENABLE_SYNC_LOGGING
+            NSSynchronizationPersistence.shared?.appendLog(eventType: .scheduled, date: Date(), payload: nil)
+        #endif
     }
 
-    #if ENABLE_TESTING
-    func didAddLog(logEntry: LogEntry) {
-        switch logEntry.type {
-        case .backgroundTask:
-            Logger.log(logEntry.message)
-        default:
-            break
+    func performBackgroundTasks(completionHandler: @escaping (Bool) -> Void) {
+        #if DEBUG || RELEASE_DEV
+            let center = UNUserNotificationCenter.current()
+            let content = UNMutableNotificationContent()
+            content.title = "Debug"
+            content.body = "Backgroundtask got triggered at \(Date().description)"
+            content.sound = UNNotificationSound.default
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            center.add(request)
+        #endif
+
+        let queue = OperationQueue()
+
+        let group = DispatchGroup()
+
+        let configOperation = ConfigLoadOperation()
+        group.enter()
+        configOperation.completionBlock = {
+            group.leave()
+        }
+
+        group.enter()
+        let fakePublishOperation = FakePublishManager.shared.runTask {
+            group.leave()
+        }
+
+        NSSynchronizationPersistence.shared?.removeLogsBefore14Days()
+
+        queue.addOperation(configOperation)
+
+        group.notify(queue: .global(qos: .background)) {
+            completionHandler(!configOperation.isCancelled && !fakePublishOperation.isCancelled)
         }
     }
-    #endif
+}
+
+#if DEBUG
+    extension TracingManager: LoggingDelegate {
+        func log(_ string: String, type: OSLogType) {
+            print(string)
+            #if ENABLE_LOGGING
+                loggingStorage?.log(string, type: type)
+            #endif
+        }
+    }
+#endif
+
+extension TracingManager: ActivityDelegate {
+    func syncCompleted(totalRequest: Int, errors: [DP3TTracingError]) {
+        let encoding = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+        let numberOfSuccess = totalRequest - errors.count
+        var numberOfInstantErrors: Int = 0
+        var numberOfDelayedErrors: Int = 0
+
+        for e in errors {
+            if case let DP3TTracingError.networkingError(wrappedError) = e {
+                switch wrappedError {
+                case .timeInconsistency:
+                    UIStateManager.shared.hasTimeInconsistencyError = true
+                default:
+                    break
+                }
+                switch wrappedError {
+                case let DP3TNetworkingError.networkSessionError(netErr as NSError) where netErr.code == -999 && netErr.domain == NSURLErrorDomain:
+                    numberOfDelayedErrors += 1 // If error is certificate
+                case DP3TNetworkingError.networkSessionError:
+                    numberOfDelayedErrors += 1 // If error is networking
+                default:
+                    numberOfInstantErrors += 1
+                }
+            } else {
+                numberOfInstantErrors += 1
+            }
+        }
+
+        var payload = String(encoding[min(numberOfInstantErrors, encoding.count - 1)])
+        payload += String(encoding[min(numberOfDelayedErrors, encoding.count - 1)])
+        payload += String(encoding[min(numberOfSuccess, encoding.count - 1)])
+        NSSynchronizationPersistence.shared?.appendLog(eventType: .sync, date: Date(), payload: payload)
+    }
+
+    func fakeRequestCompleted(result: Result<Int, DP3TNetworkingError>) {
+        #if ENABLE_SYNC_LOGGING
+            var payload: String?
+            switch result {
+            case let .success(code):
+                payload = "\(code)"
+            case let .failure(error):
+                payload = "\(error.errorCode) \(error.errorDescription ?? "")"
+            }
+            NSSynchronizationPersistence.shared?.appendLog(eventType: .fakeRequest, date: Date(), payload: payload)
+        #endif
+    }
+
+    func outstandingKeyUploadCompleted(result: Result<Int, DP3TNetworkingError>) {
+        #if ENABLE_SYNC_LOGGING
+            var payload: String?
+            switch result {
+            case let .success(code):
+                payload = "\(code)"
+            case let .failure(error):
+                payload = "\(error.errorCode) \(error.errorDescription ?? "")"
+            }
+            NSSynchronizationPersistence.shared?.appendLog(eventType: .nextDayKeyUpload, date: Date(), payload: payload)
+        #endif
+    }
 }

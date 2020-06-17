@@ -1,7 +1,11 @@
 /*
- * Created by Ubique Innovation AG
- * https://www.ubique.ch
- * Copyright (c) 2020. All rights reserved.
+ * Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
 import UIKit
@@ -26,7 +30,9 @@ class NSMeldungView: NSModuleBaseView {
         UIApplication.shared.open(settingsUrl)
     }))
 
-    private let unexpectedErrorView = NSTracingErrorView(model: NSTracingErrorView.NSTracingErrorViewModel(icon: UIImage(named: "ic-error")!, title: "unexpected_error_title".ub_localized, text: "unexpected_error_with_retry".ub_localized, buttonTitle: "homescreen_meldung_data_outdated_retry_button".ub_localized, action: {
+    private let unexpectedErrorView = NSTracingErrorView(model: NSTracingErrorView.NSTracingErrorViewModel(icon: UIImage(named: "ic-error")!, title: "unexpected_error_title".ub_localized, text: "unexpected_error_title".ub_localized, buttonTitle: nil, action: nil))
+
+    private let unexpectedErrorWithRetryView = NSTracingErrorView(model: NSTracingErrorView.NSTracingErrorViewModel(icon: UIImage(named: "ic-error")!, title: "unexpected_error_title".ub_localized, text: "unexpected_error_with_retry".ub_localized, buttonTitle: "homescreen_meldung_data_outdated_retry_button".ub_localized, action: {
         DatabaseSyncer.shared.forceSyncDatabase()
     }))
 
@@ -62,11 +68,22 @@ class NSMeldungView: NSModuleBaseView {
             if uiState.pushProblem {
                 views.append(noPushView)
             } else if uiState.syncProblemOtherError {
-                views.append(unexpectedErrorView)
+                if uiState.canRetrySyncError {
+                    unexpectedErrorWithRetryView.model?.text = uiState.errorMessage ?? "unexpected_error_title".ub_localized
+                    unexpectedErrorWithRetryView.errorCode = uiState.errorCode
+                    views.append(unexpectedErrorWithRetryView)
+                } else {
+                    unexpectedErrorView.model?.text = uiState.errorMessage ?? "unexpected_error_title".ub_localized
+                    unexpectedErrorView.errorCode = uiState.errorCode
+                    views.append(unexpectedErrorView)
+                }
             } else if uiState.syncProblemNetworkingError {
                 views.append(syncProblemView)
+                syncProblemView.model?.text = uiState.errorMessage ?? "homescreen_meldung_data_outdated_text".ub_localized
+                syncProblemView.errorCode = uiState.errorCode
             } else if uiState.backgroundUpdateProblem {
                 views.append(backgroundFetchProblemView)
+                backgroundFetchProblemView.errorCode = uiState.errorCode
             }
         case .exposed:
             views.append(exposedView)
