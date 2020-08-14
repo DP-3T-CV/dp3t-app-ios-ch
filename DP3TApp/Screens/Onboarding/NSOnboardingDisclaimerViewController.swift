@@ -12,7 +12,7 @@ import SafariServices
 import UIKit
 
 class NSOnboardingDisclaimerViewController: NSOnboardingContentViewController {
-    private let headingLabel = NSLabel(.textLight, textColor: .ns_lightBlue, textAlignment: .center)
+    private let headingLabel = NSLabel(.textLight, textColor: .ns_blue, textAlignment: .center)
     private let titleLabel = NSLabel(.title, textAlignment: .center)
 
     private let warningContainer = UIView()
@@ -25,6 +25,12 @@ class NSOnboardingDisclaimerViewController: NSOnboardingContentViewController {
 
     private var elements: [Any] = []
 
+    private let privacyHeader = NSExpandableDisclaimerViewHeader(title: "onboarding_disclaimer_data_protection_statement".ub_localized)
+    private let privacyBody = NSExpandableDisclaimerViewBody(content: .privacy)
+
+    private let conditionOfUseHeader = NSExpandableDisclaimerViewHeader(title: "onboarding_disclaimer_conditions_of_use".ub_localized)
+    private let conditionOfUseBody = NSExpandableDisclaimerViewBody(content: .conditionOfUse)
+
     override init() {
         super.init()
         continueButtonText = "onboarding_accept_button".ub_localized
@@ -32,11 +38,8 @@ class NSOnboardingDisclaimerViewController: NSOnboardingContentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        elements = [titleLabel, warningTitle, warningBody, warningRow0, warningRow1].compactMap { $0 }
         setupViews()
         fillViews()
-
-        accessibilityElements = elements.compactMap { $0 }
     }
 
     deinit {
@@ -55,23 +58,69 @@ class NSOnboardingDisclaimerViewController: NSOnboardingContentViewController {
         let sidePadding = UIEdgeInsets(top: 0, left: NSPadding.large, bottom: 0, right: NSPadding.large)
         addArrangedView(titleLabel, spacing: NSPadding.medium, insets: sidePadding)
 
-        let info = NSOnboardingInfoView(icon: UIImage(named: "ic-info-blue")!, text: "onboarding_disclaimer_info".ub_localized)
+        addArrangedView(.init(), spacing: NSPadding.large)
+
+        let info = NSLabel(.textLight)
+        info.text = "onboarding_disclaimer_info".ub_localized
         addArrangedView(info, spacing: NSPadding.large)
         info.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.stackScrollView.stackView).inset(NSPadding.large)
         }
 
-        let privacyButton = NSExternalLinkButton(style: .normal(color: .ns_lightBlue))
-        privacyButton.title = "onboarding_disclaimer_legal_button".ub_localized
-        privacyButton.touchUpCallback = { [weak self] in
+        func addDivider(spacing: CGFloat? = nil) {
+            let spacer = UIView()
+            spacer.backgroundColor = .ns_text_secondary
+            addArrangedView(spacer, spacing: spacing)
+            spacer.snp.makeConstraints { make in
+                make.width.equalTo(self.stackScrollView.stackView)
+                make.height.equalTo(1)
+            }
+        }
+
+        addDivider()
+
+        addArrangedView(privacyHeader)
+        privacyHeader.snp.makeConstraints { make in
+            make.width.equalTo(self.stackScrollView.stackView)
+        }
+        addArrangedView(privacyBody)
+        privacyBody.snp.makeConstraints { make in
+            make.width.equalTo(self.stackScrollView.stackView)
+        }
+        privacyBody.superview?.isHidden = true
+        privacyHeader.didExpand = { [weak self] expanded in
+            guard let self = self else { return }
+            self.privacyBody.superview?.isHidden = !expanded
+            UIAccessibility.post(notification: .screenChanged, argument: expanded ? self.privacyBody : self.privacyHeader)
+        }
+        privacyBody.privacyButton.touchUpCallback = { [weak self] in
             self?.openPrivacyLink()
         }
 
-        privacyButton.titleLabel?.textAlignment = .center
+        addDivider()
 
-        privacyButton.contentHorizontalAlignment = .center
+        addArrangedView(conditionOfUseHeader)
+        conditionOfUseHeader.snp.makeConstraints { make in
+            make.width.equalTo(self.stackScrollView.stackView)
+        }
+        addArrangedView(conditionOfUseBody)
+        conditionOfUseBody.snp.makeConstraints { make in
+            make.width.equalTo(self.stackScrollView.stackView)
+        }
 
-        addArrangedView(privacyButton, spacing: NSPadding.large, insets: sidePadding)
+        // superview is used here to get a nice stackview animation
+        // since the views get wrapped in a UIView
+        conditionOfUseBody.superview?.isHidden = true
+        conditionOfUseHeader.didExpand = { [weak self] expanded in
+            guard let self = self else { return }
+            self.conditionOfUseBody.superview?.isHidden = !expanded
+            UIAccessibility.post(notification: .screenChanged, argument: expanded ? self.conditionOfUseBody : self.conditionOfUseHeader)
+        }
+        conditionOfUseBody.privacyButton.touchUpCallback = { [weak self] in
+            self?.openPrivacyLink()
+        }
+
+        addDivider()
 
         let warningStack = UIStackView()
         warningStack.axis = .vertical
@@ -86,7 +135,14 @@ class NSOnboardingDisclaimerViewController: NSOnboardingContentViewController {
         warningContainer.addSubview(warningStack)
         addArrangedView(warningContainer, spacing: NSPadding.large, insets: sidePadding)
 
-        stackScrollView.addSpacerView(NSPadding.large)
+        warningTitle.accessibilityTraits = [.header]
+
+        let spacerView = UIView()
+        addArrangedView(spacerView)
+
+        spacerView.snp.makeConstraints { make in
+            make.height.equalTo(NSPadding.large)
+        }
 
         warningStack.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -156,7 +212,7 @@ class NSOnboardingDisclaimerViewController: NSOnboardingContentViewController {
             make.height.equalTo(23)
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(NSPadding.large)
-            make.left.equalTo(versionStack.snp.right).inset(NSPadding.large)
+            make.left.equalTo(versionStack.snp.right).inset(-NSPadding.medium)
         }
 
         background.backgroundColor = .ns_backgroundSecondary
@@ -173,7 +229,7 @@ class NSOnboardingDisclaimerViewController: NSOnboardingContentViewController {
     private func fillViews() {
         headingLabel.text = "onboarding_disclaimer_heading".ub_localized
         titleLabel.text = "onboarding_disclaimer_title".ub_localized
-
+        titleLabel.accessibilityTraits = [.header]
         warningTitle.text = "onboarding_disclaimer_warning_title".ub_localized
         warningBody.text = "onboarding_disclaimer_warning_body".ub_localized
     }

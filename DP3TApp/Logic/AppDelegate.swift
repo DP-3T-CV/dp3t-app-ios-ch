@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // defer window initialization if app was launched in
         // background because of location change
         if shouldSetupWindow(application: application, launchOptions: launchOptions) {
+            TracingLocalPush.shared.resetBackgroundTaskWarningTriggers()
             setupWindow()
             willAppearAfterColdstart(application, coldStart: true, backgroundTime: 0)
         }
@@ -94,7 +95,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Logic for coldstart / background
 
         // if app is cold-started or comes from background > 30 minutes,
-        // do the force update check
         if coldStart || backgroundTime > 30.0 * 60.0 {
             if !jumpToMessageIfRequired(onlyFirst: true) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -102,10 +102,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             NSSynchronizationPersistence.shared?.removeLogsBefore14Days()
-            startForceUpdateCheck()
         } else {
             _ = jumpToMessageIfRequired(onlyFirst: false)
         }
+
+        startForceUpdateCheck()
 
         FakePublishManager.shared.runTask()
 
@@ -115,17 +116,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func jumpToMessageIfRequired(onlyFirst: Bool) -> Bool {
         let shouldJump: Bool
         if onlyFirst {
-            shouldJump = UIStateManager.shared.uiState.shouldStartAtMeldungenDetail
+            shouldJump = UIStateManager.shared.uiState.shouldStartAtReportsDetail
         } else {
-            shouldJump = UIStateManager.shared.uiState.shouldStartAtMeldungenDetail && UIStateManager.shared.uiState.meldungenDetail.showMeldungWithAnimation
+            shouldJump = UIStateManager.shared.uiState.shouldStartAtReportsDetail && UIStateManager.shared.uiState.reportsDetail.showReportWithAnimation
         }
         if shouldJump,
             let navigationController = window?.rootViewController as? NSNavigationController,
             let homescreenVC = navigationController.viewControllers.first as? NSHomescreenViewController {
-            // no need to present NSMeldungenDetailViewController if its already showing
-            if !(navigationController.viewControllers.last is NSMeldungenDetailViewController) {
+            // no need to present NSReportsDetailViewController if its already showing
+            if !(navigationController.viewControllers.last is NSReportsDetailViewController) {
                 navigationController.popToRootViewController(animated: false)
-                homescreenVC.presentMeldungenDetail(animated: false)
+                homescreenVC.presentReportsDetail(animated: false)
             }
             return true
         } else {
@@ -155,10 +156,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.applicationIconBadgeNumber = 0
             TracingLocalPush.shared.clearNotifications()
         }
-    }
-
-    func application(_: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        DatabaseSyncer.shared.performFetch(completionHandler: completionHandler)
     }
 
     // MARK: - Force update

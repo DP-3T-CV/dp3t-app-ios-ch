@@ -150,7 +150,7 @@ class TracingManager: NSObject {
         UIStateManager.shared.refresh()
     }
 
-    func deleteMeldungen() {
+    func deleteReports() {
         // delete all visible messages
         try? DP3TTracing.resetExposureDays()
 
@@ -200,7 +200,6 @@ class TracingManager: NSObject {
 
                 // schedule local push if exposed
                 TracingLocalPush.shared.update(provider: st)
-                TracingLocalPush.shared.resetSyncWarningTriggers(tracingState: st)
             }
             DP3TTracing.delegate = self
         }
@@ -218,8 +217,6 @@ extension TracingManager: DP3TTracingDelegate {
                 UIStateManager.shared.tracingState = state
                 UIStateManager.shared.trackingState = state.trackingState
             }
-            TracingLocalPush.shared.update(provider: state)
-            TracingLocalPush.shared.resetSyncWarningTriggers(tracingState: state)
         }
     }
 }
@@ -242,6 +239,9 @@ extension TracingManager: DP3TBackgroundHandler {
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             center.add(request)
         #endif
+
+        // wait another 2 days befor warning
+        TracingLocalPush.shared.resetBackgroundTaskWarningTriggers()
 
         let queue = OperationQueue()
 
@@ -306,7 +306,7 @@ extension TracingManager: ActivityDelegate {
                     numberOfDelayedErrors += 1 // If error is certificate
                 case DP3TNetworkingError.networkSessionError:
                     numberOfDelayedErrors += 1 // If error is networking
-                case let .HTTPFailureResponse(status: status) where status == 502 || status == 503:
+                case let .HTTPFailureResponse(status: status, data: _) where status == 502 || status == 503:
                     numberOfDelayedErrors += 1 // If error is 502 || 503
                 default:
                     numberOfInstantErrors += 1

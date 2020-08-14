@@ -37,6 +37,10 @@ class NSExternalLinkButton: UBButton {
     init(style: Style = .normal(color: .white)) {
         self.style = style
         super.init()
+        updateLayout()
+    }
+
+    private func updateLayout() {
         var image = UIImage(named: "ic-link-external")
 
         switch style {
@@ -92,9 +96,17 @@ class NSExternalLinkButton: UBButton {
     // MARK: - Fix content size
 
     override public var intrinsicContentSize: CGSize {
+        guard !(self.title?.isEmpty ?? true) else { return .zero }
         var size = titleLabel?.intrinsicContentSize ?? super.intrinsicContentSize
         size.width = size.width + titleEdgeInsets.left + titleEdgeInsets.right + 30
         size.height = size.height + titleEdgeInsets.top + titleEdgeInsets.bottom + 10
         return size
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if previousTraitCollection?.accessibilityContrast != traitCollection.accessibilityContrast || previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            updateLayout()
+        }
     }
 }

@@ -34,6 +34,15 @@ class ConfigManager: NSObject {
         }
     }
 
+    @UBOptionalUserDefault(key: "lastBackgroundConfigLoad")
+    static var lastConfigLoad: Date?
+
+    @UBOptionalUserDefault(key: "lastConfigURL")
+    static var lastConfigUrl: String?
+
+    static let configForegroundValidityInterval: TimeInterval = 60 * 60 * 12 // 12h
+    static let configBackgroundValidityInterval: TimeInterval = 60 * 60 * 6 // 6h
+
     static var allowTracing: Bool {
         return true
     }
@@ -71,10 +80,49 @@ class ConfigManager: NSObject {
         }
     }
 
-    public func loadConfig(completion: @escaping (ConfigResponseBody?) -> Void) {
+    private func shouldLoadConfig(backgroundTask: Bool, url: String?) -> Bool {
+        // if the config url was changes (by OS version or app version changing) load config
+        if let lastUrl = Self.lastConfigUrl,
+            let url = url,
+            lastUrl != url {
+            return true
+        }
+
+        if backgroundTask {
+            return Self.lastConfigLoad == nil || Date().timeIntervalSince(Self.lastConfigLoad!) > Self.configBackgroundValidityInterval
+        } else {
+            return Self.lastConfigLoad == nil || Date().timeIntervalSince(Self.lastConfigLoad!) > Self.configForegroundValidityInterval
+        }
+    }
+
+    private static func validateJWT(httpResponse: HTTPURLResponse, data: Data) throws {
+        if #available(iOS 11.0, *) {
+            let verifier = DP3TJWTVerifier(publicKey: Environment.current.configJwtPublicKey,
+                                           jwtTokenHeaderKey: "Signature")
+            do {
+                try verifier.verify(claimType: ConfigClaims.self, httpResponse: httpResponse, httpBody: data)
+            } catch let error as DP3TNetworkingError {
+                Logger.log("Failed to verify config signature, error: \(error.errorCodeString ?? error.localizedDescription)")
+                throw error
+            } catch {
+                Logger.log("Failed to verify config signature, error: \(error.localizedDescription)")
+                throw error
+            }
+        }
+    }
+
+    public func loadConfig(backgroundTask: Bool, completion: @escaping (ConfigResponseBody?) -> Void) {
+        let request = Endpoint.config(appversion: ConfigManager.appVersion, osversion: ConfigManager.osVersion, buildnr: ConfigManager.buildNumber).request()
+
+        guard shouldLoadConfig(backgroundTask: backgroundTask, url: request.url?.absoluteString) else {
+            Logger.log("Skipping config load request and returning from cache", appState: true)
+            completion(Self.currentConfig)
+            return
+        }
+
         Logger.log("Load Config", appState: true)
 
-        dataTask = session.dataTask(with: Endpoint.config(appversion: ConfigManager.appVersion, osversion: ConfigManager.osVersion, buildnr: ConfigManager.buildNumber).request(), completionHandler: { data, response, error in
+        dataTask = session.dataTask(with: request, completionHandler: { data, response, error in
 
             guard let httpResponse = response as? HTTPURLResponse,
                 let data = data else {
@@ -84,25 +132,17 @@ class ConfigManager: NSObject {
             }
 
             // Validate JWT
-            if #available(iOS 11.0, *) {
-                let verifier = DP3TJWTVerifier(publicKey: Environment.current.configJwtPublicKey,
-                                               jwtTokenHeaderKey: "Signature")
-                do {
-                    try verifier.verify(claimType: ConfigClaims.self, httpResponse: httpResponse, httpBody: data)
-                } catch let error as DP3TNetworkingError {
-                    Logger.log("Failed to verify config signature, error: \(error.errorCodeString ?? error.localizedDescription)")
-                    DispatchQueue.main.async { completion(nil) }
-                    return
-                } catch {
-                    Logger.log("Failed to verify config signature, error: \(error.localizedDescription)")
-                    DispatchQueue.main.async { completion(nil) }
-                    return
-                }
+            do {
+                try Self.validateJWT(httpResponse: httpResponse, data: data)
+            } catch {
+                DispatchQueue.main.async { completion(nil) }
             }
 
             DispatchQueue.main.async {
                 if let config = try? JSONDecoder().decode(ConfigResponseBody.self, from: data) {
                     ConfigManager.currentConfig = config
+                    Self.lastConfigLoad = Date()
+                    Self.lastConfigUrl = request.url?.absoluteString
                     completion(config)
                 } else {
                     Logger.log("Failed to load config, error: \(error?.localizedDescription ?? "?")")
@@ -115,12 +155,7 @@ class ConfigManager: NSObject {
     }
 
     public func startConfigRequest(window: UIWindow?) {
-        // immediate alert if old config enforced update
-        if let oldConfig = ConfigManager.currentConfig {
-            presentAlertIfNeeded(config: oldConfig, window: window)
-        }
-
-        loadConfig { config in
+        loadConfig(backgroundTask: false) { config in
             // self must be strong
             if let config = config {
                 self.presentAlertIfNeeded(config: config, window: window)
@@ -167,7 +202,6 @@ class ConfigManager: NSObject {
                 Self.configAlert = alert
             }
         } else {
-            Logger.log("NO force update alert")
             if Self.configAlert != nil {
                 Self.configAlert?.dismiss(animated: true, completion: nil)
                 Self.configAlert = nil

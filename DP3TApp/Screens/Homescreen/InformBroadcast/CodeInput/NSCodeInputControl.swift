@@ -34,6 +34,8 @@ class NSCodeControl: UIView {
     init() {
         super.init(frame: .zero)
         setup()
+
+        accessibilityElements = controls.compactMap { $0 }
     }
 
     required init?(coder _: NSCoder) {
@@ -109,6 +111,9 @@ class NSCodeControl: UIView {
             currentControl = controls[0]
         }
 
+        if UIAccessibility.isVoiceOverRunning {
+            readOutVoiceOverText()
+        }
         checkSendAllowed()
     }
 
@@ -123,8 +128,22 @@ class NSCodeControl: UIView {
             _ = controls[0].becomeFirstResponder()
             currentControl = controls[0]
         }
-
+        if UIAccessibility.isVoiceOverRunning {
+            readOutVoiceOverText()
+        }
         checkSendAllowed()
+    }
+
+    private func readOutVoiceOverText() {
+        var voiceOverText = ""
+        guard let currentControl = currentControl else { return }
+        if let text = currentControl.textField.text, !text.isEmpty {
+            voiceOverText = "accessibility_\(currentControl.indexInCodeControl + 1)nd".ub_localized + "accessibility_code_input_textfield".ub_localized + " \(text)"
+        } else {
+            voiceOverText = "accessibility_\(currentControl.indexInCodeControl + 1)nd".ub_localized + "accessibility_code_input_textfield_empty".ub_localized
+        }
+
+        UIAccessibility.post(notification: .announcement, argument: voiceOverText)
     }
 
     public func changeControl(control: NSCodeSingleControl) {
@@ -191,6 +210,21 @@ class NSCodeSingleControl: UIView, UITextFieldDelegate {
         textField.accessibilityTraits = .staticText
         accessibilityTraits = .staticText
         isAccessibilityElement = true
+        textField.isAccessibilityElement = false
+        textField.disableEditionInteraction = true
+    }
+
+    override var accessibilityLabel: String? {
+        get {
+            if let text = textField.text, !text.isEmpty {
+                return ("accessibility_\(indexInCodeControl + 1)nd".ub_localized) + "accessibility_code_input_textfield".ub_localized + " \(text)"
+            } else {
+                return ("accessibility_\(indexInCodeControl + 1)nd".ub_localized) + "accessibility_code_input_textfield_empty".ub_localized
+            }
+        }
+        set {
+            super.accessibilityLabel = newValue
+        }
     }
 
     override func accessibilityElementDidBecomeFocused() {
@@ -288,7 +322,15 @@ class NSCodeSingleControl: UIView, UITextFieldDelegate {
 
     @objc private func editingChanged(sender: UITextField) {
         if let text = sender.text, text.count >= 1 {
-            sender.text = String(text.dropFirst(text.count - 1))
+            if let selectedRange = sender.selectedTextRange {
+                let cursorPosition = sender.offset(from: sender.beginningOfDocument, to: selectedRange.start)
+                if cursorPosition == 1 {
+                    sender.text = String(text.dropLast(text.count - 1))
+                } else if cursorPosition == 2 {
+                    sender.text = String(text.dropFirst(text.count - 1))
+                }
+            }
+
             hadText = true
             parent?.jumpToNextField()
         } else if let text = sender.text, text.count == 0 {
@@ -316,6 +358,8 @@ class NSCodeSingleControl: UIView, UITextFieldDelegate {
 class NSTextField: UITextField {
     public weak var singleControl: NSCodeSingleControl?
 
+    public var disableEditionInteraction = false
+
     override func paste(_: Any?) {
         let pasteboard = UIPasteboard.general
 
@@ -328,25 +372,10 @@ class NSTextField: UITextField {
         return action == #selector(UIResponderStandardEditActions.paste)
     }
 
-    override var accessibilityLabel: String? {
-        get {
-            if let text = text, !text.isEmpty {
-                return (singleControl == nil ? "" : "accessibility_\(singleControl!.indexInCodeControl + 1)nd".ub_localized) + "accessibility_code_input_textfield".ub_localized
-            } else {
-                return (singleControl == nil ? "" : "accessibility_\(singleControl!.indexInCodeControl + 1)nd".ub_localized) + "accessibility_code_input_textfield_empty".ub_localized
-            }
+    override var editingInteractionConfiguration: UIEditingInteractionConfiguration {
+        if disableEditionInteraction {
+            return .none
         }
-        set {
-            super.accessibilityLabel = newValue
-        }
-    }
-
-    override var accessibilityHint: String? {
-        get {
-            return "accessibility_code_input_hint".ub_localized
-        }
-        set {
-            super.accessibilityHint = newValue
-        }
+        return super.editingInteractionConfiguration
     }
 }
