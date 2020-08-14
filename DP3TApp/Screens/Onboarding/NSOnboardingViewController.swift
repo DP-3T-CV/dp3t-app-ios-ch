@@ -15,6 +15,8 @@ class NSOnboardingViewController: NSViewController {
     private let leftSwipeRecognizer = UISwipeGestureRecognizer()
     private let rightSwipeRecognizer = UISwipeGestureRecognizer()
 
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialLight))
+
     private let splashVC = NSSplashViewController()
 
     private let step1VC = NSOnboardingStepViewController(model: NSOnboardingStepModel.step1)
@@ -51,7 +53,7 @@ class NSOnboardingViewController: NSViewController {
     }
 
     private let continueContainer = UIView()
-    private let continueButton = NSSimpleTextButton(title: "onboarding_continue_button".ub_localized, color: .ns_blue)
+    private let continueButton = NSButton(title: "onboarding_continue_button".ub_localized, style: .normal(.ns_blue))
     private let finishButton = NSButton(title: "onboarding_finish_button".ub_localized, style: .normal(.ns_blue))
 
     private var currentStep: Int = 0
@@ -81,6 +83,8 @@ class NSOnboardingViewController: NSViewController {
         setupSwipeRecognizers()
         addStepViewControllers()
         addSplashViewController()
+
+        addStatusBarBlurView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -102,7 +106,22 @@ class NSOnboardingViewController: NSViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             UIView.animate(withDuration: 0.5) {
                 self.splashVC.view.alpha = 0
+                self.blurView.alpha = 1
             }
+        }
+    }
+
+    fileprivate func addStatusBarBlurView() {
+        blurView.alpha = 0
+
+        view.addSubview(blurView)
+
+        let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+        let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+
+        blurView.snp.makeConstraints { make in
+            make.leading.top.trailing.equalToSuperview()
+            make.height.equalTo(statusBarHeight)
         }
     }
 
@@ -119,8 +138,6 @@ class NSOnboardingViewController: NSViewController {
         } else {
             showContinueButton()
         }
-
-        continueButton.title = stepViewControllers[step].continueButtonText
 
         if isLast {
             finishButton.alpha = 0
@@ -153,13 +170,17 @@ class NSOnboardingViewController: NSViewController {
             vcToHide.fadeAnimation(fromFactor: 0, toFactor: -1, delay: 0.0, completion: { completed in
                 if completed {
                     vcToHide.view.isHidden = true
+                    self.continueButton.title = self.stepViewControllers[step].continueButtonText
+                    UIAccessibility.post(notification: .screenChanged, argument: nil)
                 }
             })
         } else if step < stepViewControllers.count - 1, !forward {
+            continueButton.title = stepViewControllers[step].continueButtonText
             let vcToHide = stepViewControllers[step + 1]
             vcToHide.fadeAnimation(fromFactor: 0, toFactor: 1, delay: 0.0, completion: { completed in
                 if completed {
                     vcToHide.view.isHidden = true
+                    UIAccessibility.post(notification: .screenChanged, argument: nil)
                 }
             })
         }
@@ -168,8 +189,6 @@ class NSOnboardingViewController: NSViewController {
         vcToShow.view.layoutIfNeeded()
 
         currentStep = step
-
-        UIAccessibility.post(notification: .screenChanged, argument: nil)
     }
 
     private func showContinueButton() {
@@ -269,18 +288,47 @@ class NSOnboardingViewController: NSViewController {
 
         switch recognizer.direction {
         case .left:
-            if [pushPermissionStepIndex, tracingPermissionStepIndex, disclaimerStepIndex].contains(currentStep) {
-                // Disable swipe forward on permission screens
-                return
-            }
-            setOnboardingStep(currentStep + 1, animated: true)
+            _ = didSwipeLeft()
         case .right:
-            if currentStep == pushPermissionStepIndex + 1 || currentStep == tracingPermissionStepIndex + 1 { // Disable swipe back to permission screens
-                return
-            }
-            setOnboardingStep(currentStep - 1, animated: true)
+            _ = didSwipeRight()
         default:
             break
         }
+    }
+
+    override func accessibilityScroll(_ direction: UIAccessibilityScrollDirection) -> Bool {
+        if direction == .right {
+            // Previous Page
+            return didSwipeRight()
+        } else if direction == .left {
+            // next page
+            return didSwipeLeft()
+        }
+
+        return true
+    }
+
+    private func didSwipeLeft() -> Bool {
+        guard splashVC.view.alpha == 0 else {
+            return false
+        }
+        if [pushPermissionStepIndex, tracingPermissionStepIndex, disclaimerStepIndex].contains(currentStep) {
+            // Disable swipe forward on permission screens
+            return false
+        }
+        setOnboardingStep(currentStep + 1, animated: true)
+        return true
+    }
+
+    private func didSwipeRight() -> Bool {
+        guard splashVC.view.alpha == 0 else {
+            return false
+        }
+        if currentStep == pushPermissionStepIndex + 1 || currentStep == tracingPermissionStepIndex + 1 { // Disable swipe back to permission screens
+            return false
+        }
+        setOnboardingStep(currentStep - 1, animated: true)
+
+        return true
     }
 }

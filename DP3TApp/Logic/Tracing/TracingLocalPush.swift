@@ -9,12 +9,14 @@
  */
 
 import DP3TSDK
+import ExposureNotification
 import Foundation
 import UserNotifications
 
 protocol UserNotificationCenter {
     var delegate: UNUserNotificationCenterDelegate? { get set }
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?)
+    func removeDeliveredNotifications(withIdentifiers identifiers: [String])
     func removeAllDeliveredNotifications()
     func removePendingNotificationRequests(withIdentifiers identifiers: [String])
 }
@@ -47,6 +49,7 @@ class TracingLocalPush: NSObject {
     init(notificationCenter: UserNotificationCenter = UNUserNotificationCenter.current(), keychain: KeychainProtocol = Keychain()) {
         center = notificationCenter
         _exposureIdentifiers.keychain = keychain
+        _scheduledErrorIdentifiers.keychain = keychain
         super.init()
         center.delegate = self
     }
@@ -73,6 +76,14 @@ class TracingLocalPush: NSObject {
         }
     }
 
+    @KeychainPersisted(key: "scheduledErrorIdentifiers", defaultValue: [])
+    private var scheduledErrorIdentifiers: [ErrorIdentifiers]
+
+    enum ErrorIdentifiers: String, CaseIterable, Codable {
+        case bluetooth = "ch.admin.bag.notification.bluetooth.warning"
+        case permission = "ch.admin.bag.notification.permission.warning"
+    }
+
     private func scheduleNotification(identifier: String) {
         let content = UNMutableNotificationContent()
         content.title = "push_exposed_title".ub_localized
@@ -82,32 +93,41 @@ class TracingLocalPush: NSObject {
         center.add(request, withCompletionHandler: nil)
     }
 
-    private func alreadyShowsMeldung() -> Bool {
+    private func alreadyShowsReport() -> Bool {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
             let navigationVC = appDelegate.window?.rootViewController as? NSNavigationController {
-            if navigationVC.viewControllers.last is NSMeldungenDetailViewController {
+            if navigationVC.viewControllers.last is NSReportsDetailViewController {
                 return true
             }
         }
         return false
     }
 
-    private func jumpToMeldung() {
-        guard !alreadyShowsMeldung() else {
+    private func jumpToReport() {
+        guard !alreadyShowsReport() else {
             return
         }
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
             let navigationVC = appDelegate.window?.rootViewController as? NSNavigationController {
             navigationVC.popToRootViewController(animated: false)
-            (navigationVC.viewControllers.first as? NSHomescreenViewController)?.presentMeldungenDetail()
+            (navigationVC.viewControllers.first as? NSHomescreenViewController)?.presentReportsDetail()
         }
     }
 
     // MARK: - Sync warnings
 
-    // If sync doesnt work for 2 days, we show a notification
-    // User should open app to fix issues
+    // 1: If the background tak doesnt work for 2 days we show a notification
+    //    User should open app to fix issues
+
+    private func scheduleSyncWarningNotification(delay: TimeInterval, identifier: String) {
+        let content = UNMutableNotificationContent()
+        content.title = "sync_warning_notification_title".ub_localized
+        content.body = "sync_warning_notification_text".ub_localized
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        center.add(request, withCompletionHandler: nil)
+    }
 
     private let notificationIdentifier1 = "ch.admin.bag.notification.syncWarning1"
     private let notificationIdentifier2 = "ch.admin.bag.notification.syncWarning2"
@@ -116,35 +136,100 @@ class TracingLocalPush: NSObject {
     private let timeInterval2: TimeInterval = 60 * 60 * 24 * 7 // Seven days
 
     func removeSyncWarningTriggers() {
-        center.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier1, notificationIdentifier2])
+        center.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier1, notificationIdentifier2, syncErrorNotificationIdentifier])
     }
 
-    func resetSyncWarningTriggers(tracingState: TracingState) {
-        if TracingManager.shared.isActivated {
-            if let lastSync = tracingState.lastSync {
-                resetSyncWarningTriggers(lastSuccess: lastSync)
-            }
-        } else {
-            removeSyncWarningTriggers()
+    // This method gets called everytime we get executed in the backgrund or if the app was launched manually
+    func resetBackgroundTaskWarningTriggers() {
+        // Adding a request with the same identifier again automatically cancels an existing request with that identifier, if present
+        scheduleSyncWarningNotification(delay: timeInterval1, identifier: notificationIdentifier1)
+        scheduleSyncWarningNotification(delay: timeInterval2, identifier: notificationIdentifier2)
+    }
+
+    // 1: If a error happens during sync we show a notification after 1 day
+    //    we cancel the notification if the error was resolved in the meantime
+
+    private let syncErrorNotificationIdentifier = "ch.admin.bag.notification.syncWarning1"
+    private let syncErrorNotificationDelay: TimeInterval = 60 * 60 * 24 * 1 // One days
+
+    func handleSync(result: SyncResult) {
+        switch result {
+        case .failure:
+            scheduleSyncWarningNotification(delay: syncErrorNotificationDelay, identifier: syncErrorNotificationIdentifier)
+        case .success:
+            center.removePendingNotificationRequests(withIdentifiers: [syncErrorNotificationIdentifier])
+        case .skipped:
+            break
         }
     }
 
-    func resetSyncWarningTriggers(lastSuccess: Date) {
+    func handleTracingState(_ state: DP3TSDK.TrackingState) {
+        switch state {
+        case .initialization:
+            break
+        case .active, .stopped:
+            resetAllErrorNotifications()
+        case let .inactive(error: error):
+            switch error {
+            case .bluetoothTurnedOff:
+                scheduleBluetoothNotification()
+            case let .exposureNotificationError(error: error):
+                if let error = error as? ENError {
+                    handleENError(error)
+                }
+            case .permissonError:
+                schedulePermissonErrorNotification()
+            default:
+                break
+            }
+        }
+    }
+
+    private func scheduleBluetoothNotification() {
+        scheduleErrorNotification(identifier: .bluetooth,
+                                  title: "bluetooth_turned_off_title".ub_localized,
+                                  text: "bluetooth_turned_off_text".ub_localized)
+    }
+
+    private func schedulePermissonErrorNotification() {
+        scheduleErrorNotification(identifier: .permission,
+                                  title: "tracing_permission_error_title_ios".ub_localized,
+                                  text: "tracing_permission_error_text_ios".ub_localized)
+    }
+
+    private func handleENError(_ error: ENError) {
+        switch error.code {
+        case .bluetoothOff:
+            scheduleBluetoothNotification()
+        case .notAuthorized, .notEnabled, .restricted:
+            schedulePermissonErrorNotification()
+        default:
+            break
+        }
+    }
+
+    private func scheduleErrorNotification(identifier: ErrorIdentifiers, title: String, text: String) {
+        guard !scheduledErrorIdentifiers.contains(identifier) else {
+            return
+        }
+        scheduledErrorIdentifiers.append(identifier)
+
         let content = UNMutableNotificationContent()
-        content.title = "sync_warning_notification_title".ub_localized
-        content.body = "sync_warning_notification_text".ub_localized
+        content.title = title
+        content.body = text
+        content.sound = .default
+        // set the notification to trigger in 1 minute since the state could only be temporäry
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+        let request = UNNotificationRequest(identifier: identifier.rawValue, content: content, trigger: trigger)
+        center.add(request, withCompletionHandler: nil)
+    }
 
-        let timePassed = lastSuccess.timeIntervalSinceNow
+    private func resetAllErrorNotifications() {
+        let identifiers = ErrorIdentifiers.allCases.map(\.rawValue)
+        center.removeDeliveredNotifications(withIdentifiers: identifiers)
+        center.removePendingNotificationRequests(withIdentifiers: identifiers)
 
-        let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval1 - timePassed, repeats: false)
-        let request1 = UNNotificationRequest(identifier: notificationIdentifier1, content: content, trigger: trigger1)
-
-        let trigger2 = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval2 - timePassed, repeats: false)
-        let request2 = UNNotificationRequest(identifier: notificationIdentifier2, content: content, trigger: trigger2)
-
-        // Adding a request with the same identifier again automatically cancels an existing request with that identifier, if present
-        center.add(request1, withCompletionHandler: nil)
-        center.add(request2, withCompletionHandler: nil)
+        scheduledErrorIdentifiers.removeAll()
     }
 }
 
@@ -152,7 +237,7 @@ extension TracingLocalPush: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        if alreadyShowsMeldung(), exposureIdentifiers.contains(notification.request.identifier) {
+        if alreadyShowsReport(), exposureIdentifiers.contains(notification.request.identifier) {
             completionHandler([])
         } else {
             completionHandler([.alert, .sound])
@@ -168,6 +253,6 @@ extension TracingLocalPush: UNUserNotificationCenterDelegate {
             return // cancelled
         }
 
-        jumpToMeldung()
+        jumpToReport()
     }
 }

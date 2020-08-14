@@ -66,13 +66,15 @@ class NSWhatToDoSymptomViewController: NSViewController {
 
         titleContentStackView.addArrangedView(subtitleLabel)
         titleContentStackView.addArrangedView(titleLabel)
+        titleContentStackView.accessibilityTraits = [.header]
+
         titleContentStackView.addSpacerView(3.0)
 
         stackScrollView.addArrangedView(titleContentStackView)
 
         stackScrollView.addSpacerView(NSPadding.large)
 
-        let imageView = UIImageView(image: UIImage(named: "illu-symptome-title"))
+        let imageView = UIImageView(image: UIImage(named: "illu-symptoms-title"))
         imageView.contentMode = .scaleAspectFit
         stackScrollView.addArrangedView(imageView)
 
@@ -80,40 +82,18 @@ class NSWhatToDoSymptomViewController: NSViewController {
 
         stackScrollView.addArrangedView(symptomView)
 
-        let externalLinkButtonInSymptomView = NSExternalLinkButton(style: .normal(color: .ns_purple))
-        externalLinkButtonInSymptomView.title = "symptom_detail_box_button".ub_localized
-        symptomView.contentView.addSpacerView(NSPadding.medium)
-        symptomView.contentView.addArrangedSubview(externalLinkButtonInSymptomView)
-        externalLinkButtonInSymptomView.touchUpCallback = { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.presentCoronaCheck()
-        }
-
         stackScrollView.addSpacerView(3.0 * NSPadding.large)
 
-        let infoView = NSOnboardingInfoView(icon: UIImage(named: "ic-check-round")!, text: "symptom_faq1_text".ub_localized, title: "symptom_faq1_title".ub_localized, leftRightInset: 0)
+        let infoView = NSOnboardingInfoView(icon: UIImage(named: "ic-check-round")!, text: "symptom_faq1_text".ub_localized, title: "symptom_faq1_title".ub_localized, leftRightInset: 0, dynamicIconTintColor: .ns_purple)
 
         stackScrollView.addArrangedView(infoView)
 
-        stackScrollView.addSpacerView(3 * NSPadding.large)
-
-        stackScrollView.addArrangedView(NSButton.faqButton(color: .ns_purple))
-
-        stackScrollView.addSpacerView(NSPadding.large)
+        stackScrollView.addSpacerView(3.0 * NSPadding.large)
     }
 
     private func setupAccessibility() {
         titleContentStackView.isAccessibilityElement = true
         titleContentStackView.accessibilityLabel = subtitleLabel.text!.deleteSuffix("...") + titleLabel.text!
-    }
-
-    // MARK: - Detail
-
-    private func presentCoronaCheck() {
-        if let url =
-            URL(string: "symptom_detail_corona_check_url".ub_localized) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
     }
 }
 

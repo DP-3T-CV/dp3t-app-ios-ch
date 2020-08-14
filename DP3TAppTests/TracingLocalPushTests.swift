@@ -11,25 +11,6 @@
 @testable import DP3TApp
 import XCTest
 
-private class MockNotificationCenter: UserNotificationCenter {
-    var delegate: UNUserNotificationCenterDelegate?
-
-    var removeAllDeliveredNotificationsCalled = 0
-
-    var requests: [UNNotificationRequest] = []
-
-    func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
-        requests.append(request)
-        completionHandler?(nil)
-    }
-
-    func removeAllDeliveredNotifications() {
-        removeAllDeliveredNotificationsCalled += 1
-    }
-
-    func removePendingNotificationRequests(withIdentifiers _: [String]) {}
-}
-
 private class MockIdentifierProvider: ExposureIdentifierProvider {
     var exposureIdentifiers: [String]?
 }
@@ -43,6 +24,38 @@ class TracingLocalPushTests: XCTestCase {
         keychain = MockKeychain()
         center = MockNotificationCenter()
         tlp = TracingLocalPush(notificationCenter: center, keychain: keychain)
+    }
+
+    func testBackgroundTaskWarning() {
+        let referenceDate = Date()
+        tlp.resetBackgroundTaskWarningTriggers()
+        XCTAssertEqual(center.requests.count, 2)
+
+        let first = center.requests[0]
+        let firstTimetrigger = first.trigger as! UNTimeIntervalNotificationTrigger
+
+        let second = center.requests[1]
+        let secondTimeTrigger = second.trigger as! UNTimeIntervalNotificationTrigger
+
+        let dates = [firstTimetrigger.nextTriggerDate()!, secondTimeTrigger.nextTriggerDate()!].sorted()
+        XCTAssertEqual(Int(dates[0].timeIntervalSince1970), Int(referenceDate.addingTimeInterval(60 * 60 * 24 * 2).timeIntervalSince1970))
+        XCTAssertEqual(Int(dates[1].timeIntervalSince1970), Int(referenceDate.addingTimeInterval(60 * 60 * 24 * 7).timeIntervalSince1970))
+    }
+
+    func testSyncErrorNotification() {
+        let referenceDate = Date()
+        tlp.handleSync(result: .failure(.permissonError))
+
+        XCTAssertEqual(center.requests.count, 1)
+
+        let request = center.requests.first!
+        let trigger = request.trigger as! UNTimeIntervalNotificationTrigger
+
+        XCTAssertEqual(Int(trigger.nextTriggerDate()!.timeIntervalSince(referenceDate)), 60 * 60 * 24)
+
+        tlp.handleSync(result: .success)
+
+        XCTAssertEqual(center.requests.count, 0)
     }
 
     func testRemovingNotification() {
@@ -71,5 +84,42 @@ class TracingLocalPushTests: XCTestCase {
         XCTAssertEqual(center.requests.count, 2)
         tlp.update(provider: provider)
         XCTAssertEqual(center.requests.count, 2)
+    }
+
+    func testGeneratingBluetoothNotification() {
+        tlp.handleTracingState(.inactive(error: .bluetoothTurnedOff))
+        XCTAssertEqual(center.requests.count, 1)
+        XCTAssertEqual(center.requests.first?.identifier, TracingLocalPush.ErrorIdentifiers.bluetooth.rawValue)
+
+        tlp.handleTracingState(.active)
+        XCTAssertEqual(center.requests.count, 0)
+    }
+
+    func testGeneratingPermissionNotification() {
+        tlp.handleTracingState(.inactive(error: .permissonError))
+        XCTAssertEqual(center.requests.count, 1)
+        XCTAssertEqual(center.requests.first?.identifier, TracingLocalPush.ErrorIdentifiers.permission.rawValue)
+
+        tlp.handleTracingState(.active)
+        XCTAssertEqual(center.requests.count, 0)
+    }
+
+    func testGeneratingNotificationOnlyOnce() {
+        tlp.handleTracingState(.inactive(error: .permissonError))
+        XCTAssertEqual(center.requests.count, 1)
+        tlp.handleTracingState(.inactive(error: .permissonError))
+        tlp.handleTracingState(.inactive(error: .permissonError))
+        XCTAssertEqual(center.requests.count, 1)
+        tlp.handleTracingState(.inactive(error: .bluetoothTurnedOff))
+        XCTAssertEqual(center.requests.count, 2)
+        tlp.handleTracingState(.inactive(error: .bluetoothTurnedOff))
+        tlp.handleTracingState(.inactive(error: .bluetoothTurnedOff))
+        tlp.handleTracingState(.inactive(error: .bluetoothTurnedOff))
+        XCTAssertEqual(center.requests.count, 2)
+        XCTAssert(center.requests.map(\.identifier).contains(TracingLocalPush.ErrorIdentifiers.permission.rawValue))
+        XCTAssert(center.requests.map(\.identifier).contains(TracingLocalPush.ErrorIdentifiers.bluetooth.rawValue))
+
+        tlp.handleTracingState(.active)
+        XCTAssertEqual(center.requests.count, 0)
     }
 }
