@@ -13,7 +13,7 @@ import UIKit
 class NSFontSize {
     private static let normalBodyFontSize: CGFloat = 16.0
 
-    public static let bodyFontSize: CGFloat = {
+    public static func bodyFontSize() -> CGFloat {
         // default from system is 17.
         let bfs = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.body).pointSize - 1.0
 
@@ -22,10 +22,10 @@ class NSFontSize {
         let minimum: CGFloat = 0.5 * preferredSize
 
         return min(max(minimum, bfs), maximum)
-    }()
+    }
 
     public static let fontSizeMultiplicator: CGFloat = {
-        max(1.0, bodyFontSize / normalBodyFontSize)
+        max(1.0, bodyFontSize() / normalBodyFontSize)
     }()
 }
 
@@ -36,15 +36,18 @@ public enum NSLabelType: UBLabelType {
     case smallLight
     case textBold
     case smallBold
+    case ultraSmallBold
     case button // used for button
+    case smallButton // used for button
     case uppercaseBold
     case date
     case smallRegular
     case interRegular
     case interBold
+    case statsCounter
 
     public var font: UIFont {
-        let bfs = NSFontSize.bodyFontSize
+        let bfs = NSFontSize.bodyFontSize()
 
         var boldFontName = "Inter-Bold"
         var regularFontName = "Inter-Regular"
@@ -66,12 +69,15 @@ public enum NSLabelType: UBLabelType {
         case .smallLight: return UIFont(name: lightFontName, size: bfs - 3.0)!
         case .textBold: return UIFont(name: boldFontName, size: bfs)!
         case .smallBold: return UIFont(name: boldFontName, size: bfs - 3.0)!
+        case .ultraSmallBold: return UIFont(name: boldFontName, size: bfs - 5.0)!
         case .button: return UIFont(name: boldFontName, size: bfs)!
+        case .smallButton: return UIFont(name: boldFontName, size: bfs - 3.0)!
         case .uppercaseBold: return UIFont(name: boldFontName, size: bfs)!
         case .date: return UIFont(name: boldFontName, size: bfs - 3.0)!
         case .smallRegular: return UIFont(name: regularFontName, size: bfs - 3.0)!
         case .interRegular: return UIFont(name: regularFontName, size: bfs - 3.0)!
         case .interBold: return UIFont(name: boldFontName, size: bfs - 3.0)!
+        case .statsCounter: return UIFont(name: boldFontName, size: bfs + 23.0)!
         }
     }
 
@@ -80,7 +86,7 @@ public enum NSLabelType: UBLabelType {
         case .button, .splashTitle:
             return .white
         case .smallRegular:
-            return UIColor.black.withAlphaComponent(0.28)
+            return UIColor.ns_text.withAlphaComponent(0.28).withHighContrastColor(color: UIColor.black.withAlphaComponent(0.7))
         default:
             return .ns_text
         }
@@ -92,7 +98,9 @@ public enum NSLabelType: UBLabelType {
         case .splashTitle: return 30.0 / 22.0
         case .textBold: return 24.0 / 16.0
         case .smallBold: return 24.0 / 16.0
+        case .ultraSmallBold: return 24.0 / 16.0
         case .button: return 1.0
+        case .smallButton: return 24.0 / 16.0
         case .uppercaseBold: return 26.0 / 16.0
         case .textLight: return 24.0 / 16.0
         case .smallLight: return 24.0 / 16.0
@@ -100,6 +108,7 @@ public enum NSLabelType: UBLabelType {
         case .smallRegular: return 26.0 / 13.0
         case .interRegular: return 24.0 / 16.0
         case .interBold: return 24.0 / 16.0
+        case .statsCounter: return 30.0 / 22.0
         }
     }
 
@@ -128,8 +137,7 @@ public enum NSLabelType: UBLabelType {
     }
 
     public var hyphenationFactor: Float {
-        if self == .splashTitle { return 0.0 }
-        return 1.0
+        return 0.0
     }
 
     public var lineBreakMode: NSLineBreakMode {
@@ -138,4 +146,22 @@ public enum NSLabelType: UBLabelType {
     }
 }
 
-class NSLabel: UBLabel<NSLabelType> {}
+class NSLabel: UBLabel<NSLabelType> {
+    private var labelType: NSLabelType
+
+    override init(_ type: NSLabelType, textColor: UIColor? = nil, numberOfLines: Int = 0, textAlignment: NSTextAlignment = .left) {
+        labelType = type
+        super.init(type, textColor: textColor, numberOfLines: numberOfLines, textAlignment: textAlignment)
+    }
+
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            font = labelType.font
+        }
+    }
+}

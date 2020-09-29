@@ -22,7 +22,7 @@ import UIKit
 
         private let infoView: UIView = {
             let view = UIView()
-            view.backgroundColor = .ns_backgroundSecondary
+            view.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_background)
             return view
         }()
 
@@ -42,7 +42,7 @@ import UIKit
             tableView.register(NSSynchronizationTableViewSectionView.self, forHeaderFooterViewReuseIdentifier: "SectionHeader")
             tableView.separatorStyle = .none
             tableView.separatorInset = .zero
-            tableView.backgroundColor = .ns_backgroundSecondary
+            tableView.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_background)
 
             view.addSubview(tableView)
 
@@ -80,7 +80,7 @@ import UIKit
             let title = NSLabel(.title)
             title.numberOfLines = 0
             title.text = "synchronizations_view_info_title".ub_localized
-            let infoQuestion = NSOnboardingInfoView(icon: UIImage(named: "ic-sync")!, text: "synchronizations_view_info_answer".ub_localized, title: "synchronizations_view_info_question".ub_localized, leftRightInset: 0)
+            let infoQuestion = NSOnboardingInfoView(icon: UIImage(named: "ic-sync")!, text: "synchronizations_view_info_answer".ub_localized, title: "synchronizations_view_info_question".ub_localized, leftRightInset: 0, dynamicIconTintColor: .ns_blue)
 
             infoView.addSubview(infoQuestion)
             infoView.addSubview(title)
@@ -120,7 +120,12 @@ import UIKit
                 cell.set(title: "synchronizations_view_empty_list".ub_localized, date: "")
                 return cell
             }
-            cell.contentView.backgroundColor = index.row % 2 == 1 ? .ns_background : .ns_backgroundSecondary
+            if index.row % 2 == 1 {
+                cell.contentView.backgroundColor = .setColorsForTheme(lightColor: .ns_background, darkColor: .ns_backgroundSecondary)
+            } else {
+                cell.contentView.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_backgroundTertiary)
+            }
+
             let log = model[index.row]
             var cellTitle = log.evetType.displayString
             if let payload = log.payload {

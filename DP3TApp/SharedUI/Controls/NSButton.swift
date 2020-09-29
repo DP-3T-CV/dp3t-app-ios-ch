@@ -91,6 +91,9 @@ class NSButton: UBButton {
         titleLabel?.font = NSLabelType.button.font
         setTitleColor(style.textColor, for: .normal)
 
+        let disabledColor = UIColor.setColorsForTheme(lightColor: style.textColor, darkColor: style.textColor.withAlphaComponent(0.15))
+        setTitleColor(disabledColor, for: .disabled)
+
         if let c = customTextColor {
             setTitleColor(c, for: .normal)
         }
@@ -118,7 +121,7 @@ class NSButton: UBButton {
 
     override var isEnabled: Bool {
         didSet {
-            backgroundColor = isEnabled ? style.backgroundColor : UIColor.black.withAlphaComponent(0.15)
+            backgroundColor = isEnabled ? style.backgroundColor : UIColor.ns_disabledButtonBackground
         }
     }
 
@@ -131,11 +134,17 @@ class NSButton: UBButton {
 
         return contentSize
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            titleLabel?.font = NSLabelType.button.font
+        }
+    }
 }
 
 extension NSButton {
     static func faqButton(color: UIColor) -> UIView {
-        // let faqButton = NSButton(title: "faq_button_title".ub_localized, style: .outlineUppercase(color))
         let faqButton = NSExternalLinkButton(style: .outlined(color: color))
         faqButton.title = "faq_button_title".ub_localized
 
@@ -156,6 +165,7 @@ extension NSButton {
         }
 
         faqButton.accessibilityHint = "accessibility_faq_button_hint".ub_localized
+        faqButton.accessibilityTraits = [.button, .header]
         return view
     }
 }

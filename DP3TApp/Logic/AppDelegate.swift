@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @UBUserDefault(key: "isFirstLaunch", defaultValue: true)
     var isFirstLaunch: Bool
 
+    lazy var navigationController: NSNavigationController = NSNavigationController(rootViewController: tabBarController)
+    lazy var tabBarController: NSTabBarController = NSTabBarController()
+
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Pre-populate isFirstLaunch for users which already installed the app before we introduced this flag
         if UserStorage.shared.hasCompletedOnboarding {
@@ -36,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // defer window initialization if app was launched in
         // background because of location change
         if shouldSetupWindow(application: application, launchOptions: launchOptions) {
+            TracingLocalPush.shared.resetBackgroundTaskWarningTriggers()
             setupWindow()
             willAppearAfterColdstart(application, coldStart: true, backgroundTime: 0)
         }
@@ -67,12 +71,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KeychainMigration.migrate()
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.overrideUserInterfaceStyle = .light
 
-        TracingManager.shared.beginUpdatesAndTracing()
+        DatabaseSyncer.shared.syncDatabaseIfNeeded()
 
         window?.makeKey()
-        window?.rootViewController = NSNavigationController(rootViewController: NSHomescreenViewController())
+        window?.rootViewController = navigationController
 
         setupAppearance()
 
@@ -94,7 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Logic for coldstart / background
 
         // if app is cold-started or comes from background > 30 minutes,
-        // do the force update check
         if coldStart || backgroundTime > 30.0 * 60.0 {
             if !jumpToMessageIfRequired(onlyFirst: true) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -102,10 +104,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             NSSynchronizationPersistence.shared?.removeLogsBefore14Days()
-            startForceUpdateCheck()
+
+            // if app was longer than 1h in background make sure to select homescreen in tabbar
+            if backgroundTime > 60.0 * 60.0 {
+                tabBarController.currentTab = .homescreen
+            }
         } else {
             _ = jumpToMessageIfRequired(onlyFirst: false)
         }
+
+        startForceUpdateCheck()
 
         FakePublishManager.shared.runTask()
 
@@ -115,18 +123,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func jumpToMessageIfRequired(onlyFirst: Bool) -> Bool {
         let shouldJump: Bool
         if onlyFirst {
-            shouldJump = UIStateManager.shared.uiState.shouldStartAtMeldungenDetail
+            shouldJump = UIStateManager.shared.uiState.shouldStartAtReportsDetail
         } else {
-            shouldJump = UIStateManager.shared.uiState.shouldStartAtMeldungenDetail && UIStateManager.shared.uiState.meldungenDetail.showMeldungWithAnimation
+            shouldJump = UIStateManager.shared.uiState.shouldStartAtReportsDetail && UIStateManager.shared.uiState.reportsDetail.showReportWithAnimation
         }
-        if shouldJump,
-            let navigationController = window?.rootViewController as? NSNavigationController,
-            let homescreenVC = navigationController.viewControllers.first as? NSHomescreenViewController {
-            // no need to present NSMeldungenDetailViewController if its already showing
-            if !(navigationController.viewControllers.last is NSMeldungenDetailViewController) {
-                navigationController.popToRootViewController(animated: false)
-                homescreenVC.presentMeldungenDetail(animated: false)
-            }
+        if shouldJump {
+            TracingLocalPush.shared.jumpToReport(animated: false)
             return true
         } else {
             return false
@@ -157,10 +159,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func application(_: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        DatabaseSyncer.shared.performFetch(completionHandler: completionHandler)
-    }
-
     // MARK: - Force update
 
     private func startForceUpdateCheck() {
@@ -176,5 +174,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .font: NSLabelType.textBold.font,
             .foregroundColor: UIColor.ns_text,
         ]
+
+        // This is still necessary because setting a bold font through
+        // UITabBarAppearance() results in truncated text when coming back
+        // from background.
+        //
+        // Also see https://stackoverflow.com/questions/58641202/ios-tabbar-item-title-issue-in-ios13
+        UITabBarItem.appearance().setTitleTextAttributes([
+            .font: NSLabelType.ultraSmallBold.font,
+            .foregroundColor: UIColor.ns_tabbarNormalBlue,
+        ], for: .normal)
+
+        UITabBarItem.appearance().setTitleTextAttributes([
+            .font: NSLabelType.ultraSmallBold.font,
+            .foregroundColor: UIColor.ns_tabbarSelectedBlue,
+        ], for: .selected)
     }
 }
