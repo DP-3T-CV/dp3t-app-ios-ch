@@ -70,10 +70,10 @@ class NSBluetoothSettingsControl: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
 
-        backgroundColor = .white
+        backgroundColor = .ns_moduleBackground
 
         titleLabel.text = "tracing_setting_title".ub_localized
-        subtitleLabel.text = "tracing_setting_text_ios".ub_localized
+        subtitleLabel.text = "tracing_setting_text_ios".ub_localized_per_version
         switchControl.onTintColor = .ns_blue
 
         setup()
@@ -150,7 +150,11 @@ class NSBluetoothSettingsControl: UIView {
     @objc private func switchChanged() {
         // change tracing manager
         if TracingManager.shared.isActivated != switchControl.isOn {
-            TracingManager.shared.isActivated = switchControl.isOn
+            if switchControl.isOn {
+                TracingManager.shared.startTracing()
+            } else {
+                TracingManager.shared.endTracing()
+            }
         }
 
         UIAccessibility.post(notification: .layoutChanged, argument: switchControl)
@@ -178,7 +182,7 @@ class NSBluetoothSettingsControl: UIView {
             }, completion: nil)
 
         case .tracingDisabled, .tracingEnded: fallthrough
-        case .bluetoothTurnedOff, .bluetoothPermissionError, .timeInconsistencyError, .unexpectedError, .tracingPermissionError:
+        case .bluetoothTurnedOff, .bluetoothPermissionError, .timeInconsistencyError, .unexpectedError, .tracingPermissionError, .tracingAuthorizationUnknown:
             inactiveViewConstraint?.activate()
             activeViewConstraint?.deactivate()
 

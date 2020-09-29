@@ -37,7 +37,7 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
         title = "app_name".ub_localized
 
         tabBarItem.image = UIImage(named: "ic-tracing")
-        tabBarItem.title = "tab_tracing_title".ub_localized
+        tabBarItem.title = "bottom_nav_tab_home".ub_localized
 
         // always load view at init, even if app starts at reports detail
         loadViewIfNeeded()
@@ -47,7 +47,7 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .ns_backgroundSecondary
+        view.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_background)
 
         setupLayout()
 
@@ -104,6 +104,10 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
                 }
             }
         }
+
+        if UIAccessibility.isVoiceOverRunning {
+            stackScrollView.scrollView.setContentOffset(.zero, animated: false)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -154,22 +158,21 @@ class NSHomescreenViewController: NSTitleViewScrollViewController {
 
             let debugScreenContainer = UIView()
 
-            if Environment.current != Environment.prod {
-                debugScreenContainer.addSubview(debugScreenButton)
-                debugScreenButton.snp.makeConstraints { make in
-                    make.left.right.lessThanOrEqualToSuperview().inset(NSPadding.medium)
-                    make.top.bottom.centerX.equalToSuperview()
-                }
-
-                debugScreenButton.touchUpCallback = { [weak self] in
-                    guard let strongSelf = self else { return }
-                    strongSelf.presentDebugScreen()
-                }
-
-                stackScrollView.addArrangedView(debugScreenContainer)
-
-                stackScrollView.addSpacerView(NSPadding.large)
+            debugScreenContainer.addSubview(debugScreenButton)
+            debugScreenButton.snp.makeConstraints { make in
+                make.left.right.lessThanOrEqualToSuperview().inset(NSPadding.medium)
+                make.top.bottom.centerX.equalToSuperview()
             }
+
+            debugScreenButton.touchUpCallback = { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.presentDebugScreen()
+            }
+
+            stackScrollView.addArrangedView(debugScreenContainer)
+
+            stackScrollView.addSpacerView(NSPadding.large)
+
             debugScreenContainer.alpha = 0
         #endif
 

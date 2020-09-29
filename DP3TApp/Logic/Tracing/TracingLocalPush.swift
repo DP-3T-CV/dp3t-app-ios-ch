@@ -41,7 +41,7 @@ extension TracingState: ExposureIdentifierProvider {
 }
 
 /// Helper to show a local push notification when the state of the user changes from not-exposed to exposed
-class TracingLocalPush: NSObject {
+class TracingLocalPush: NSObject, LocalPushProtocol {
     static let shared = TracingLocalPush()
 
     private var center: UserNotificationCenter
@@ -54,7 +54,7 @@ class TracingLocalPush: NSObject {
         center.delegate = self
     }
 
-    func update(provider: ExposureIdentifierProvider) {
+    func scheduleExposureNotificationsIfNeeded(identifierProvider provider: ExposureIdentifierProvider) {
         if let identifers = provider.exposureIdentifiers {
             exposureIdentifiers = identifers
         }
@@ -94,24 +94,31 @@ class TracingLocalPush: NSObject {
     }
 
     private func alreadyShowsReport() -> Bool {
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-            let navigationVC = appDelegate.window?.rootViewController as? NSNavigationController {
-            if navigationVC.viewControllers.last is NSReportsDetailViewController {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            if appDelegate.navigationController.viewControllers.last is NSReportsDetailViewController {
                 return true
             }
         }
         return false
     }
 
-    private func jumpToReport() {
+    func jumpToReport(animated: Bool = true) {
         guard !alreadyShowsReport() else {
             return
         }
 
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-            let navigationVC = appDelegate.window?.rootViewController as? NSNavigationController {
-            navigationVC.popToRootViewController(animated: false)
-            (navigationVC.viewControllers.first as? NSHomescreenViewController)?.presentReportsDetail()
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            // Dismiss any modal views (if even present)
+            appDelegate.navigationController.dismiss(animated: false)
+
+            // Pop to root view controller
+            appDelegate.navigationController.popToRootViewController(animated: false)
+
+            // Reset tab bar back to homescreen tab
+            appDelegate.tabBarController.currentTab = .homescreen
+
+            // Present detail from home screen view controller
+            appDelegate.tabBarController.homescreen.presentReportsDetail(animated: animated)
         }
     }
 
@@ -193,8 +200,8 @@ class TracingLocalPush: NSObject {
 
     private func schedulePermissonErrorNotification() {
         scheduleErrorNotification(identifier: .permission,
-                                  title: "tracing_permission_error_title_ios".ub_localized,
-                                  text: "tracing_permission_error_text_ios".ub_localized)
+                                  title: "tracing_permission_error_title_ios".ub_localized.replaceSettingsString,
+                                  text: "tracing_permission_error_text_ios".ub_localized.replaceSettingsString)
     }
 
     private func handleENError(_ error: ENError) {

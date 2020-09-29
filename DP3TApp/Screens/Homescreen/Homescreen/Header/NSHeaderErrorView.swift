@@ -69,7 +69,7 @@ class NSHeaderErrorView: UIView {
 
     private func createDot() -> UIView {
         let v = UIView()
-        v.backgroundColor = .ns_background
+        v.backgroundColor = UIColor.white
         v.layer.cornerRadius = 4.5
         v.snp.makeConstraints { make in
             make.size.equalTo(9)
@@ -94,7 +94,7 @@ class NSHeaderErrorView: UIView {
                 self.imageView.image = UIImage(named: "ic-header-bt-off")!
             case .bluetoothPermissionError:
                 self.imageView.image = UIImage(named: "ic-header-bt-disabled")!
-            case .tracingPermissionError:
+            case .tracingPermissionError, .tracingAuthorizationUnknown:
                 self.imageView.image = UIImage(named: "ic-tracing-error")!
             }
         }, completion: nil)
