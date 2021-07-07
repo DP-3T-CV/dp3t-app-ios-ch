@@ -34,7 +34,7 @@ class NSInformTracingEndViewController: NSInformBottomButtonViewController {
         }
 
         stackScrollView.addSpacerView(NSPadding.large)
-        let imageView = UIImageView(image: UIImage(named: "outro-tracing-ended"))
+        let imageView = UIImageView(image: UIImage(named: "outro-tracing-checkin-inactive"))
         imageView.contentMode = .scaleAspectFit
         stackScrollView.addArrangedView(imageView)
 
@@ -52,7 +52,7 @@ class NSInformTracingEndViewController: NSInformBottomButtonViewController {
         }
 
         titleLabel.text = "tracing_ended_title".ub_localized
-        textLabel.text = "tracing_ended_text".ub_localized
+        textLabel.text = "tracing_ended_info".ub_localized
 
         enableBottomButton = true
     }

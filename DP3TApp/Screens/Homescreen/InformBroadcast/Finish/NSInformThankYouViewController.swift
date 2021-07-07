@@ -16,6 +16,15 @@ class NSInformThankYouViewController: NSInformBottomButtonViewController {
     private let titleLabel = NSLabel(.title, numberOfLines: 0, textAlignment: .center)
     private let textLabel = NSLabel(.textLight, textAlignment: .center)
 
+    private let onsetDate: Date?
+    private let hasSentCheckIns: Bool
+
+    init(onsetDate: Date?, hasSentCheckIns: Bool) {
+        self.onsetDate = onsetDate
+        self.hasSentCheckIns = hasSentCheckIns
+        super.init()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,7 +61,32 @@ class NSInformThankYouViewController: NSInformBottomButtonViewController {
         }
 
         titleLabel.text = "inform_send_thankyou".ub_localized
-        textLabel.text = "inform_send_thankyou_text".ub_localized
+
+        var text = ""
+        var boldText = ""
+
+        if let date = onsetDate {
+            boldText = "inform_send_thankyou_text_onsetdate".ub_localized
+                .replacingOccurrences(of: "{ONSET_DATE}", with: DateFormatter.ub_dayWithMonthString(from: date))
+
+            text = text
+                .appending("inform_send_thankyou_text_onsetdate_info".ub_localized)
+                .appending("\n")
+                .appending(boldText)
+        }
+
+        if hasSentCheckIns {
+            if onsetDate != nil {
+                text = text.appending("\n\n")
+            }
+            text = text.appending("inform_send_thankyou_text_checkins".ub_localized)
+        }
+
+        text = text
+            .appending("\n\n")
+            .appending("inform_send_thankyou_text_stop_infection_chains".ub_localized)
+
+        textLabel.attributedText = text.formattingOccurrenceBold(boldText)
 
         enableBottomButton = true
     }

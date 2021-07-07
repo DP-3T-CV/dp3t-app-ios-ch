@@ -63,7 +63,7 @@ class NSSimpleModuleBaseView: UIView {
     // MARK: - Setup
 
     private func setup() {
-        backgroundColor = .ns_background
+        backgroundColor = .ns_moduleBackground
         ub_addShadow(radius: 4, opacity: 0.1, xOffset: 0, yOffset: -1)
         let topInset = NSPadding.medium + NSPadding.small
 
@@ -71,6 +71,7 @@ class NSSimpleModuleBaseView: UIView {
         titleContentStackView.axis = .vertical
         titleContentStackView.alignment = .leading
         titleContentStackView.spacing = NSPadding.small
+        titleContentStackView.accessibilityTraits = .header
         titleContentStackView.isAccessibilityElement = true
         titleContentStackView.accessibilityLabel = (subtitleLabel.text ?? "").deleteSuffix("...") + (titleLabel.text ?? "")
         addSubview(titleContentStackView)

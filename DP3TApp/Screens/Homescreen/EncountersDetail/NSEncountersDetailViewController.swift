@@ -8,10 +8,11 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+import DP3TSDK
 import UIKit
 
 class NSEncountersDetailViewController: NSTitleViewScrollViewController {
-    private let bluetoothControl: NSBluetoothSettingsControl
+    private let tracingControl: NSTracingSettingsControl
 
     private let lastSyncronizationControl: NSLastSyncronizationControl
 
@@ -20,7 +21,7 @@ class NSEncountersDetailViewController: NSTitleViewScrollViewController {
     // MARK: - Init
 
     init(initialState: UIStateModel.EncountersDetail) {
-        bluetoothControl = NSBluetoothSettingsControl(initialState: initialState)
+        tracingControl = NSTracingSettingsControl(initialState: initialState)
         appTitleView = NSAppTitleView(initialState: initialState.tracing)
         lastSyncronizationControl = NSLastSyncronizationControl(frame: .zero)
 
@@ -33,13 +34,49 @@ class NSEncountersDetailViewController: NSTitleViewScrollViewController {
             guard let strongSelf = self else { return }
             strongSelf.updateState(state)
         })
+
+        tracingControl.switchCallback = { [weak self] state, confirmCallback in
+            guard let self = self else { return }
+            // if trackingState is permissionError show tutorial view
+            if state, #available(iOS 13.7, *) {
+                switch UIStateManager.shared.trackingState {
+                case let .inactive(e):
+                    switch e {
+                    case .permissionError, .exposureNotificationError:
+                        confirmCallback(!state)
+                        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+                        NSSettingsTutorialViewController().presentInNavigationController(from: appDelegate.tabBarController, useLine: false)
+                        return
+                    default:
+                        break
+                    }
+                default:
+                    break
+                }
+            }
+            // only show popup when switching tracing off
+            guard !state else {
+                NSLocalPush.shared.resetReminderNotification()
+                confirmCallback(state)
+                return
+            }
+            let vc = NSTracingReminderViewController()
+            vc.dismissCallback = { confirmed in
+                if confirmed {
+                    confirmCallback(state)
+                } else {
+                    confirmCallback(!state)
+                }
+            }
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 
     // MARK: - View
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .ns_backgroundSecondary
+        view.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_background)
         setup()
     }
 
@@ -70,9 +107,9 @@ class NSEncountersDetailViewController: NSTitleViewScrollViewController {
             make.edges.equalToSuperview()
         }
 
-        bluetoothControl.viewToBeLayouted = view
+        tracingControl.viewToBeLayouted = view
 
-        stackScrollView.addArrangedView(bluetoothControl)
+        stackScrollView.addArrangedView(tracingControl)
 
         stackScrollView.addSpacerView(NSPadding.large)
         stackScrollView.addArrangedView(lastSyncronizationControl)
@@ -100,6 +137,7 @@ class NSEncountersDetailViewController: NSTitleViewScrollViewController {
             lastSyncronizationControl.isChevronImageViewHidden = false
         #else
             lastSyncronizationControl.isChevronImageViewHidden = true
+            lastSyncronizationControl.isUserInteractionEnabled = false
         #endif
     }
 

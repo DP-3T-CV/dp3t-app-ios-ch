@@ -24,7 +24,7 @@
 "inform_send_thankyou" = "Shumë faleminderit";
 
 /*Informieren: Danke Text*/
-"inform_send_thankyou_text" = "ID e rastit të aplikacionit tuaj u dërguan.\n\nNë këtë mënyrë na ndihmoni, për të ndaluar zinxhirin e infeksionit.";
+"inform_send_thankyou_text" = "Kodet e identifikimit të aplikacionit tuaj u dërguan.\n\nNë këtë mënyrë na ndihmoni, për të ndaluar zinxhirin e infeksionit.";
 
 /*Informieren: Button Titel*/
 "inform_fertig_button_title" = "Mbyll";
@@ -100,7 +100,7 @@
 "meldungen_meldung_title" = "Infeksion i mundshëm";
 
 /*Text im Meldung Detail*/
-"meldungen_meldung_text" = "Ekziston dyshimi i një infeksioni të mundshëm.";
+"meldungen_meldung_text" = "Ju mund të jeni infektuar";
 
 /*Titel ob Tracing aktiv*/
 "tracing_active_title" = "APP është aktiv";
@@ -190,7 +190,7 @@
 "inform_detail_box_subtitle" = "Me kodin Covid...";
 
 /*Inform Detai Weisse Box Titel*/
-"inform_detail_box_title" = "Ndalo zinxhirin e infeksionit";
+"inform_detail_box_title" = "Informoni për infektimet e mundshme";
 
 /*Inform Detail Weisse Box Button*/
 "inform_detail_box_button" = "Fut kodin e Covid";
@@ -211,7 +211,7 @@
 "symptom_detail_box_title" = "Kryeni testin";
 
 /*Symptom Detail Weisse Box Button*/
-"symptom_detail_box_button" = "Mëso më shumë";
+"symptom_detail_box_button" = "Informacione të mëtejshme";
 
 /*Symptom Detail Weisse Box Text*/
 "symptom_detail_box_text" = "BAG rekomandon që të gjithë personat me simptoma të COVID-19 të kryejnë testimin. Telefononi një mjeke apo një mjek ose një institucion shëndetësor.";
@@ -224,7 +224,7 @@
 "tracing_turned_off_title" = "Gjurmimi i çaktivizuar";
 "tracing_turned_off_text" = "Aktivizoni gjurmimin që aplikacioni të funksionojë.";
 "bluetooth_turned_off_title" = "Bluetooth fikur";
-"bluetooth_turned_off_text" = "Ndizni Bluetooth në pajisje në mënyrë që gjurmimi të funksionojë.";
+"bluetooth_turned_off_text" = "Ndizni Bluetooth në pajisjen tuaj në mënyrë që të funksionojë gjurmimi anonim.";
 "bluetooth_turn_on_button_title" = "Ndiz Bluetooth";
 "bluetooth_permission_error_title" = "Përdorimi i Bluetooth u refuzua";
 "bluetooth_permission_error_text" = "Lejoni përdorimin e Bluetooth, në mënyrë që gjurmimi të funksionojë.";
@@ -246,7 +246,7 @@
 "meldung_detail_positive_tested_title" = "Pozitiv në test";
 
 /*Meldung Detail: Positiv Getestet Subtitel*/
-"meldung_detail_positive_tested_subtitle" = "Ju keni rezultuar pozitiv me koronavirusin e ri.";
+"meldung_detail_positive_tested_subtitle" = "Ju keni rezultuar pozitiv me koronavirusin.";
 
 /*Meldung Detail Positiv Getestet Weisse Box Subtitel*/
 "meldung_detail_positive_test_box_subtitle" = "Çfarë nevojitet të bëj?";
@@ -256,11 +256,11 @@
 
 /*Meldung Detail Positiv Getestet Weisse Box Text*/
 "meldung_detail_positive_test_box_text" = "Ndiqni udhëzimet e caktuara për izolimin";
-"tracing_ended_title" = "Gjurmimi i përfunduar";
-"tracing_ended_text" = "Nuk ruhet më asnjë kontakt.";
+"tracing_ended_title" = "Kontaktet dhe Check-in janë çaktivizuar";
+"tracing_ended_text" = "Nuk ruhet asnjë kontakt";
 "exposed_info_contact_hotline" = "Kontaktoni";
 "meldung_homescreen_positive_info_line1" = "Ndiqni";
-"meldung_homescreen_positive_info_line2" = "Udhëzimet për vetë-izolimin";
+"meldung_homescreen_positive_info_line2" = "Udhëzimet për izolimin";
 
 /*Meldung Detail Exposed Neue Meldung*/
 "meldung_detail_exposed_new_meldung" = "Njoftim i ri";
@@ -270,8 +270,10 @@
 "meldung_homescreen_positiv_title" = "Pozitiv në test";
 
 /*Meldung Detail Exposed Subtitel*/
-"meldung_detail_exposed_subtitle" = "Ekziston dyshimi i një infeksioni të mundshëm.";
-"meldung_homescreen_positiv_text" = "Ju keni rezultuar pozitiv me koronavirusin e ri.";
+"meldung_detail_exposed_subtitle" = "Ju mund të jeni infektuar";
+
+/*Meldung auf Homescreen: Positiv getestet*/
+"meldung_homescreen_positiv_text" = "Ju keni rezultuar pozitiv me koronavirusin.";
 
 /*Debug Screen: Onboarding Reset Button*/
 "reset_onboarding" = "Rivendos onboarding";
@@ -319,10 +321,10 @@
 "onboarding_prinzip_title" = "Një hap përpara\nvirusit";
 
 /*Onboarding Prinzip Text*/
-"onboarding_prinzip_text1" = "Me aplikacionin Swiss Covid të gjithë ne mund të ndihmojmë për të frenuar përhapjen e koronavirusit të ri.";
+"onboarding_prinzip_text1" = "Me aplikacionin Swiss Covid të gjithë ne mund të ndihmojmë për të frenuar përhapjen e koronavirusin.";
 
 /*Onboarding Prinzip Text*/
-"onboarding_prinzip_text2" = "Aplikacioni ju informon nëse jeni ekspozuar potencialisht me koronavirusin e ri.";
+"onboarding_prinzip_text2" = "Aplikacioni ju informon nëse jeni ekspozuar potencialisht me koronavirus.";
 
 /*Onboarding Privacy: Titel oben*/
 "onboarding_privacy_heading" = "Privacy by Design";
@@ -337,7 +339,7 @@
 "onboarding_privacy_text2" = "ID e ruajtura të rastit mbeten në telefonin tuaj celular dhe fshihen pas 14 ditësh.";
 
 /*Onboarding Begegnungen: Titel oben*/
-"onboarding_begegnungen_heading" = "Si funksionon aplikacioni?";
+"onboarding_begegnungen_heading" = "Kontaktet";
 
 /*Onboarding Begegnungen: Titel*/
 "onboarding_begegnungen_title" = "Identifikon kontaktet\nfalë Bluetooth";
@@ -355,7 +357,7 @@
 "onboarding_meldung_title" = "Njoftim në rastin e një\ninfeksioni të mundshëm";
 
 /*Onboarding Meldung: Text*/
-"onboarding_meldung_text1" = "Aplikacioni ju informon nëse jeni ekspozuar potencialisht me koronavirusin e ri.";
+"onboarding_meldung_text1" = "Aplikacioni ju informon nëse jeni ekspozuar potencialisht me koronavirus.";
 
 /*Onboarding Meldung: Text*/
 "onboarding_meldung_text2" = "Me sjelljen e duhur ju mund të ndërprisni zinxhirin e infeksionit dhe të mbroni të tjerët.";
@@ -409,7 +411,7 @@
 "onboarding_go_title" = "Aplikacioni është instaluar";
 
 /*Text auf dem letzten Onboarding Screen*/
-"onboarding_go_text" = "Shumë faleminderit që na ndihmoni për të ndërprerë zinxhirin e infeksionit.";
+"onboarding_go_text" = "Shumë faleminderit që na ndihmoni për të ndaluar zgjerimin e koronavirusit.";
 
 /*Button-Label auf dem letzten Onboarding screen*/
 "onboarding_go_button" = "Nis";
@@ -436,7 +438,7 @@
 "meldung_detail_new_contact_title" = "Infeksion i mundshëm";
 
 /*Meldungen Detail: Text*/
-"meldung_detail_new_contact_subtitle" = "Ekziston dyshimi i një infeksioni të mundshëm.";
+"meldung_detail_new_contact_subtitle" = "Ju mund të jeni infektuar";
 
 /*Fehler mit Uhrzeit Titel*/
 "time_inconsistency_title" = "Gabim i orës";
@@ -454,7 +456,7 @@
 "meldungen_background_error_title" = "Përditësimi në sfond i fikur";
 
 /*Text für Hintergrund Fehler*/
-"meldungen_background_error_text" = "\"Go to \"Settings -> General > Background App Refresh\" and make sure “Wi-Fi & Mobile Data” is selected. Background App Refresh can then be disabled for each app individually. \"";
+"meldungen_background_error_text" = "Shkoni tek \"Einstellungen (Cilësimet) > Allgemein (Të përgjithshme) > Hintergrundaktualizierung (Përditësimi në sfond)\" dhe sigurohuni që është zgjedhur \"WLAN & Mobile Daten (WLAN dhe të dhënat celulare)\". Më pas \"Background App Refresh\" mund të aktivizohet individualisht për çdo aplikacion.";
 
 /*Button Titel für Hintergrundfehler beheben*/
 "meldungen_background_error_button" = "Ndrysho cilësimet";
@@ -568,13 +570,7 @@
 "meldungen_nomeldungen_faq1_title" = "Çfarë janë mesazhet?";
 
 /*Meldungen: Keine Meldungen FAQ Text*/
-"meldungen_nomeldungen_faq1_text" = "Aplikacioni kontrollon rregullisht nëse përdoruesit e tjerë që keni takuar kanë rezultuar pozitivë në test.\n\nNë rast infeksioni të mundshëm informoheni me një mesazh në ekranin e mbyllur.";
-
-/*Meldungen: Keine Meldungen FAQ Titel*/
-"meldungen_nomeldungen_faq2_titel" = "Çfarë do të thotë infeksion i mundshëm?";
-
-/*Meldungen: Keine Meldungen FAQ Text*/
-"meldungen_nomeldungen_faq2_text" = "Aplikacioni nuk kontrollon vetëm nëse ka pasur kontakt me persona të infektuar, por edhe se për sa kohë dhe në çfarë distance ishin këta persona.\n\nPërdoruesi informohet vetëm nëse dyshimi për një infeksion të mundshëm është mjaft i madh.";
+"meldungen_nomeldungen_faq1_text" = "Aplikacioni kontrollon rregullisht nëse përdoruesit e tjerë që keni takuar ose ata që janë kontrolluar në të njëjtin vend kanë rezultuar pozitivë në test.\n\nNë rast infektimi të mundshëm informoheni me një mesazh në ekranin e mbyllur.";
 
 /*Meldungen Detail Weisse Box Texte Unten*/
 "meldungen_detail_explanation_text3" = "Infoline SwissCovid ju këshillon për mundësinë e një testi falas.";
@@ -601,13 +597,13 @@
 "inform_detail_faq1_title" = "Çfarë është një kod Covid?";
 
 /*Inform Detail: FAQ Text*/
-"inform_detail_faq1_text" = "Personat që kanë rezultuar pozitivë me koronavirusin e ri marrin një kod Covid.\n\nNë këtë mënyrë sigurohet që nga aplikacioni të sinjalizohen vetëm rastet e konfirmuara.";
+"inform_detail_faq1_text" = "Njerëzit që kanë rezultuar pozitivë për koronavirusin (test PCR ose test i shpejtë i antigjenit) marrin një kod Covid.\n\nKjo siguron se vetëm rastet e konfirmuara raportohen përmes aplikacionit.";
 
 /*Inform Detail: FAQ Titel*/
 "inform_detail_faq2_title" = "Çfarë dërgohet?";
 
 /*Inform Detail FAQ Text*/
-"inform_detail_faq2_text" = "Dërgohen vetëm ID e rastit të aplikacionit tuaj, asnjë e dhënë personale.\n\nNë këtë mënyrë mësoni përdoruesit e tjerë të alikacionit SwissCovid, të cilët mundësisht janë infektuar.";
+"inform_detail_faq2_text" = "Dërgohen vetëm çelësat personal të aplikacionit tuaj dhe ID e koduara të Check-ins tuaj, asnjë e dhënë personale.\n\nNë këtë mënyrë mësoni përdorueset dhe përdoruesit e tjerë të aplikacionit SwissCovid, të cilët ka mundësi të jenë infektuar.";
 
 /*Telefonnummer der Infoline*/
 "infoline_tel_number" = "+41 58 387 77 78";
@@ -616,25 +612,25 @@
 "faq_button_url" = "https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/faq-kontakte-downloads/haeufig-gestellte-fragen.html?faq-url=/de/categories/swisscovid-app";
 
 /*Informieren Flow: Titel erster Screen*/
-"inform_code_intro_title" = "Udhëzim i rëndësishëm";
+"inform_code_intro_title" = "Informacion për futjen e të dhënave";
 
 /*Informieren-Flow: Erster Screen Text*/
-"inform_code_intro_text" = "Edhe pse nuk dërgohet asnjë e dhënë personale, mund të ndodhë që dikush mund të kujtohet për kontaktin me anë të datës.";
+"inform_code_intro_text" = "Edhe pse nuk dërgohet asnjë e dhënë personale, mund të ndodhë që dikush mund të kujtohet për kontaktin me ju me anë të datës.";
 
 /*Inform-Flow: Erster Screen Button*/
-"inform_code_intro_button" = "Kuptova";
+"inform_code_intro_button" = "Pranoj";
 
 /*Symptome: FAQ Titel*/
 "symptom_faq1_title" = "Çfarë simptomash ka COVID-19?";
 
 /*Symptome: FAQ Text*/
-"symptom_faq1_text" = "Simptomat më të shpeshta janë:\n\n– Temperaturë, ndjesi ethesh\n– Dhimbje fyti\n– Kollë (zakonisht e thatë)\n– Vështirësi në frymëmarrje\n– Dhimbje muskujsh\n– Humbje e papritur e shqisës së nuhatjes dhe/ose të shijuarit";
+"symptom_faq1_text" = "Simptomat më të shpeshta janë:\n\n– Temperaturë, ndjesi ethesh\n– Dhimbje fyti\n– Kollë (zakonisht e thatë)\n– Vështirësi në frymëmarrje\n– Dhimbje kraharori\n– Humbje e papritur e shqisës së nuhatjes dhe/ose të shijuarit\n\nJanë gjithashtu të mundshme simptomat e mëposhtme:\n\n– Dhimbje koke\n– Dobësi e përgjithshme, parehati\n– Dhimbje muskulore\n– Nuhat\nSimptoma gastrointestinale (të përziera, të vjella, diarre, dhimbje abdominale)\n– Skuqje e lëkurës";
 
 /*Meldungen: Positiv getestet FAQ Titel*/
-"meldungen_positive_tested_faq1_title" = "Përse ka përfunduar gjurmimi?";
+"meldungen_positive_tested_faq1_title" = "Pse është çaktivizuar gjurmimi?";
 
 /*Meldungen: Positiv getestet FAQ Text*/
-"meldungen_positive_tested_faq1_text" = "Gjurmimi në aplikacion përfundon automatikisht pas një rezultati pozitiv në test.";
+"meldungen_positive_tested_faq1_text" = "Pas një testi pozitiv, gjurmimi çaktivizohet automatikisht në aplikacion. Gjurmimi mund të riaktivizohet pasi të keni mbaruar izolimin.";
 
 /*Sprache Abkürzung (BITTE NICHT ÄNDERN)*/
 "language_key" = "sq";
@@ -674,8 +670,7 @@
 "onboarding_gaen_title" = "Aktivizo gjurmimin";
 
 /*Text auf der Onboarding Page für die Permission der Exposure-Library, iOS*/
-/*Fuzzy*/
-"onboarding_gaen_text_ios" = "Për të përdorur aplikacionin, funksioni Njoftime rreth COVID-19 duhet të jetë i aktivizuar.";
+"onboarding_gaen_text_ios" = "Funksioni i gjurmimit duhet të jetë i aktivizuar, në mënyrë që të dallohen kontaktet.";
 
 /*Aktivieren-Button auf der Onboarding Page für die Permission der Exposure-Library*/
 "onboarding_gaen_button_activate" = "Aktivizo";
@@ -702,12 +697,12 @@
 "delete_reports_dialog" = "Dëshironi vërtet ta fshini njoftimin?";
 
 /*Code-Eingabe in der App löschen, wenn infiziert*/
-"delete_infection_button" = "Fshi njoftimin";
+"delete_infection_button" = "Fundi i izolimit";
 
-/*Meldung im Löschen Dialog nach Code-Einfragen*/
+/*Meldung im Löschen Dialog nach Isolation-Beenden, kommt auch auf Homescreen-Popup*/
 "delete_infection_dialog" = "Dëshironi vërtet ta fshini njoftimin?";
 "android_onboarding_battery_permission_title" = "Injoro optimizimin e baterisë";
-"android_onboarding_battery_permission_text" = "Për të identifikuar gjithnjë kontaktet, optimizimi i baterisë duhet të jetë i fikur për këtë aplikacion.";
+"android_onboarding_battery_permission_text" = "Në mënyrë që aplikacioni të funksionojë, optimizimi i baterisë duhet të jetë i fikur.";
 "android_onboarding_battery_permission_button" = "Lejo";
 "android_onboarding_battery_permission_button_deactivated" = "OK";
 "android_onboarding_battery_permission_info_1_title" = "Vetëm për këtë aplikacion";
@@ -730,8 +725,7 @@
 "tracing_permission_error_title_ios" = "Njoftime rreth ekspozimit ndaj COVID-19 i çaktivizuar";
 
 /*Fehler-Text, wenn Tracing deaktiviert wurde im System, iOS*/
-/*Fuzzy*/
-"tracing_permission_error_text_ios" = "Aktivizoni Njoftime rreth ekspozimit ndaj COVID-19, në mënyrë që gjurmimi të funksionojë.";
+"tracing_permission_error_text_ios" = "Aktivizoni {TRACING_SETTING_TEXT}, në mënyrë që të funksionojë gjurmimi anonim.";
 
 /*Error-Meldung, wenn der Benutzer während des Informieren-Flows bei GApple das Key-Sharing nicht erlaubt.*/
 "user_cancelled_key_sharing_error" = "Mesazhi nuk u dërgua dot. Ju lutemi lejoni ndarjen e ID të rastit tuaj me aplikacionin SwissCovid.";
@@ -771,18 +765,18 @@
 "tracing_active_tracking_always_info" = "SwissCovid mbetet aktiv, edhe nëse aplikacioni mbyllet.";
 
 /*title in splash screen of onboarding*/
-"oboarding_splashscreen_title" = "SwissCovid \nndalon zinxhirin \ne infeksionit.";
-"inform_detail_faq3_text" = "Edhe pse nuk dërgohet asnjë e dhënë personale, mund të ndodhë që dikush mund të kujtohet për kontaktin me anë të datës.";
+"oboarding_splashscreen_title" = "SwissCovid –\nnë rastin e një rreziku infektimi ju informon shpejt.";
+"inform_detail_faq3_text" = "Po, por edhe pse nuk dërgohet asnjë e dhënë personale, mund të ndodhë që dikush mund të kujtohet për kontaktin me ju me anë të datës.";
 "inform_detail_faq3_title" = "A mbetem unë anonim?";
 
 /*Meldung Detail Weiss Box unten*/
-"meldungen_detail_explanation_text4" = "Në rastin e simptomave të para bëni kontrollin e koronavirusit ose telefononi mjeken ose mjekun tuaj.";
+"meldungen_detail_explanation_text4" = "Në rastin e simptomave të para, telefononi një mjeke, një mjek ose një institucion shëndetësor.";
 
 /*Text beim Bluetooth Control*/
 "tracing_setting_text_android" = "Njoftime rreth ekspozimit ndaj COVID-19";
 
 /*Text auf der Onboarding Page für die Permission der Exposure-Library, Android*/
-"onboarding_gaen_text_android" = "Për të përdorur aplikacionin, funksioni Njoftime rreth COVID-19 duhet të jetë i aktivizuar.";
+"onboarding_gaen_text_android" = "Funksioni i gjurmimit duhet të jetë i aktivizuar, në mënyrë që të dallohen kontaktet.";
 
 /*Onboarding Disclaimer Screen: AppName Title*/
 "onboarding_disclaimer_heading" = "SwissCovid";
@@ -839,7 +833,8 @@
 "meldungen_detail_free_test_title" = "Testi pa kosto është i mundur";
 
 /*Meldungen Detail Kostenloser Test Box Text*/
-"meldungen_detail_free_test_text" = "Infoline SwissCovid ju këshillon për mundësinë e një testi falas për koronavirusin.";
+/*Fuzzy*/
+"meldungen_detail_free_test_text_old" = "Udhëzuesi \"SwissCovid\" ju informon për mundësinë e një testi falas të koronavirusit.";
 
 /*Button title on the Home Screen when the Tracing is deactivated to directly activate it.*/
 "activate_tracing_button" = "Aktivizo gjurmimin";
@@ -869,49 +864,876 @@
 "infobox_close_button_accessibility" = "Mbyll";
 
 /*Title for the Home View Travel Card.*/
-"travel_title" = "";
+"travel_title" = "Udhëtimi";
 
-/*Info text that is displayed on the Home Travel Card.*/
-"travel_home_description" = "";
+/*Info text that is displayed  on the Home Travel Card.*/
+"travel_home_description" = "Kontaktet e SwissCovid funksionojnë në shtetet më poshtë:";
 
-/*Introductory Text that is displayed at the top of the travel settings screen.*/
-"travel_screen_introduction" = "";
+/*First title for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_title_1" = "Cfarë do të thotë kjo?";
 
-/*First title for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_title_1" = "";
+/*First text for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_text_1" = "Nëse jeni duke udhëtuar në një nga vendet e pajtueshme, nuk duhet të instaloni asnjë aplikacion tjetër korona (Corona-App) për kontaktet. \n\nSwissCovid kontrollon çelësat personal të publikuara në vendet e pajtueshme. Kështu edhe ju mund të paralajmëroheni për një infektim të mundshëm jashtë shtetit.";
 
-/*First text for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_text_1" = "";
+/*Second title for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_title_2" = "Çfarë ndodh kur regjistron kodin Covid?";
 
-/*Second title for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_title_2" = "";
-
-/*Second text for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_text_2" = "";
-
-/*Button title for the Add Countries Button in the travel screen.*/
-"travel_screen_add_countries_button" = "";
-
-/*Text that is displayed under a country name that indicates until what date the user will still receive notifications from this country.*/
-"travel_screen_notifications_activated_until" = "";
-
-/*List Header for the favourites in the "Add countries" Screen of the Travel feature.*/
-"travel_screen_favourites" = "";
-
-/*List header for other countries in the "add countries" screen of the travel feature.*/
-"travel_screen_other_countries" = "";
-
-/*Title for the explanation at the bottom of the "add countries" screen of the travel feature.*/
-"travel_screen_add_countries_explanation_title" = "";
-
-/*Text for the explanation at the bottom of the "add countries" screen of the travel feature.*/
-"travel_screen_add_countries_explanation_text" = "";
-
-/*Information text that asks the user about informing other countries when he enters a covid code into the app.*/
-"travel_report_code_info" = "";
+/*Second text for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_text_2" = "Kur regjistroni kodin Covid, kodet e identifikimit që dërgoni do të shpërndahen gjithashtu me shtetet e përfshira.\n\nNë mënyrë që udhëtarët nga jashtë shtetit të mund të paralajmërohen, kjo bëhet pavarësisht nëse keni qenë vetë jashtë shtetit ose jo.";
 
 /*Accessibility: FAQ button hint wenn die app verlassen wird und eine website öffnet*/
-"accessibility_faq_button_hint_non_bag" = "";
+"accessibility_faq_button_hint_non_bag" = "Ky buton ju largon nga aplikacioni dhe hap një faqe interneti.";
 
 /*voice over string der vorgelesen wird wenn noch kein sync stattgefunden hat*/
-"begegnung_detail_no_last_sync_accessibility" = "";
+"begegnung_detail_no_last_sync_accessibility" = "Nuk ka sinkronizime të deritanishme";
+
+/*Text für Hintergrundfehler auf Android*/
+"meldungen_background_error_text_android" = "Ndryshoni cilësimet, për t'u informuar për një mesazh të ri edhe jashtë aplikacionit.";
+
+/*Telefonnummer der allgemeinen Infoline Coronavirus*/
+"infoline_coronavirus_number" = "+41 58 387 77 80";
+
+/*Text beim Bluetooth Control iOS 14*/
+"tracing_setting_text_ios_14_0" = "Exposure Notifications";
+"bottom_nav_tab_home" = "SwissCovid";
+"bottom_nav_tab_stats" = "Shifra";
+"stats_title" = "përdorin tashmë \"SwissCovid\"";
+"stats_legend_new_infections" = "Infektimet e reja të raportuara";
+"stats_legend_new_infections_average" = "Mesatarja 7-ditore";
+"stats_legend_entered_covidcodes" = "Kodi i futur i Covid";
+"share_app_supertitle" = "Së bashku…";
+"share_app_title" = "të parandalojmë infektimet";
+"share_app_button" = "Shpërndaj aplikacionin";
+"share_app_body" = "Nëse shumë nga kontaktet tuaja përdorin mundësisht aplikacionin SwissCovid, atëherë mund të informoheni shpejt për një rrezik të infektimit.";
+
+/*Text der geteilt wird*/
+"share_app_message" = "Me aplikacionin Swiss Covid të gjithë ne mund të ndihmojmë për të frenuar përhapjen e koronavirusin.";
+
+/*URL die geteilt wird*/
+"share_app_url" = "https://bag-coronavirus.ch/swisscovid-app/#download";
+
+/*Zahlenformat für die Aktive nutzer nummer {COUNT} wird durch die aktuelle Zahl ersetzt z.b. "1.59"*/
+"stats_counter" = "{COUNT} Mio.";
+
+/*Statistik Tag der Daten "{DAY}" wird mit dem Aktualisierungsdatum ersetzt z.B. "14.9."*/
+"stats_source_day" = "Versioni i të dhënave {DAY}";
+
+/*Links zu weiteren Statistiken*/
+"stats_more_statistics_button" = "Statistika të tjera";
+
+/*URL zu weiteren statistiken*/
+"stats_more_statistics_url" = "https://www.covid19.admin.ch/de/overview";
+
+/*Body of the error message shown when the statistics data cannot be loaded*/
+"stats_loading_error_text" = "Momentalisht të dhënat nuk mund të ngarkohen";
+
+/*Zahlenformat für die Aktive nutzer nummer {COUNT} wird durch die aktuelle Zahl ersetzt z.b. "1.59". Voll Millionen wort*/
+"stats_counter_full" = "{COUNT} milion";
+
+/*iOS settings tutorial title*/
+"ios_settings_tutorial_title" = "Aktivizo mesazhet e takimit";
+
+/*iOS settings tutorial open settings button*/
+"ios_settings_tutorial_open_settings_button" = "Hap cilësimet";
+
+/*iOS settings tutorial schritt 1*/
+"ios_settings_tutorial_step_1_text" = "Hapni cilësimet e sistemit nëpërmjet butonit poshtë.";
+
+/*iOS settings tutorial schritt 2*/
+"ios_settings_tutorial_step_2_text" = "Zgjidhni:";
+
+/*ios settings tutorial exposure notification text wie in iOS settings*/
+"ios_settings_tutorial_step_2_exposure_notification" = "Mesazhet e takimit";
+
+/*iOS settings tutorial schritt 3*/
+"ios_settings_tutorial_step_3_text" = "Aktivizoni së pari funksionin...";
+
+/*iOS settings tutorial share exposure notification text wie in iOS settings*/
+"ios_settings_tutorial_step_3_share_exposure_information" = "Ndaj informacionet e takimit";
+
+/*iOS settings tutorial schritt 4*/
+"ios_settings_tutorial_step_4_text" = "Nëse nuk e keni bërë tashmë, atëherë tani mund ta përcaktoni SwissCovid si rajon aktiv.";
+
+/*iOS settings tutorial set as aktive region wie in iOS settings*/
+"ios_settings_tutorial_step_4_set_as_aktive_region" = "Përcakto si rajon aktiv";
+
+/*ios tracing permission fehlermeldung button text*/
+"ios_tracing_permission_error_button" = "Kështu funksionon";
+
+/*Subtitle für Meldung Detail Screen Header wenn nur eine Begegnung angezeigt wird.*/
+"meldung_detail_exposed_subtitle_last_encounter" = "Takimi i fundit";
+
+/*Subtitle für Meldung Detail Screen Header wenn alle Begegnungen angezeigt werden.*/
+"meldung_detail_exposed_subtitle_all_encounters" = "Të gjitha takimet";
+
+/*Button Titel im Meldung Detail Header, wenn nur eine Meldung angezeigt wird.*/
+"meldung_detail_exposed_show_all_button" = "Shfaq të gjitha";
+
+/*Button Titel im Meldung Detail Header, wenn alle Meldungen angezeigt werden.*/
+"meldung_detail_exposed_show_less_button" = "Shfaq më pak";
+
+/*Titel vom SwissCovid Leitfaden bei Kontaktmeldung*/
+"meldungen_detail_leitfaden_title" = "Udhëzuesi \"SwissCovid\"";
+
+/*Text zum SwissCovid Leitfaden bei Kontaktmeldung*/
+"meldungen_detail_leitfaden_text" = "Përgjigjuni pyetjeve në udhëzuesin \"SwissCovid\" për të mësuar se si të reagoni siç duhet.";
+
+/*Button Text zum Öffnen vom SwissCovid Leitfaden*/
+"meldungen_detail_open_leitfaden_button" = "Plotëso tani";
+
+/*Title für Infotext zu SwissCovid Infoline*/
+"meldungen_tel_information_title" = "Informacion telefonik";
+
+/*Infotext zu SwissCovid Infoline*/
+"meldungen_tel_information_text" = "Në rastin e pyetjeve të tjera, linja e informacionit \"SwissCovid\" ju jep informacion edhe me anë të telefonit.";
+
+/*Hinweis Text nach dem Ausfüllen vom SwissCovid Leitfaden, dass man erneut ausfüllen kann*/
+"meldungen_detail_leitfaden_again_text" = "Këtu ju mund ta hapni sërish udhëzuesin \"SwissCovid\" në çdo kohë.";
+
+/*Button Text um SwissCovid Leitfaden erneut zu öffnen*/
+"meldungen_detail_open_leitfaden_again_button" = "Shko tek udhëzuesi";
+
+/*Homescreen Text mit Hinweis zu SwissCovid Leitfaden bei einer Meldung*/
+"exposed_info_answer_questions_in_leitfaden" = "Përgjigjuni pyetjeve në";
+
+/*Homescreen Text mit Hinweis zu SwissCovid Leitfaden bei einer Meldung*/
+"exposed_info_swisscovid_leitfaden" = "Udhëzuesi \"SwissCovid\"";
+
+/*Dialog Text beim Löschen einer Meldung über einen möglichen Kontakt*/
+"delete_notification_dialog" = "Njoftimi për një infektim të mundshëm shërben si vërtetim që ju keni nevojë për një test falas të koronavirusit. Nëse ju e fshini këtë njoftim, atëherë e humbisni këtë vërtetim dhe lidhjen për udhëzuesin \"SwissCovid\".";
+
+/*URL to the SwissCovid Leitfaden*/
+"swisscovid_leitfaden_url" = "https://swisscovid.foph-coronavirus.ch/screening?contactDates={CONTACT_DATES}";
+
+/*Tracing Erinnerung 4 Stunden Radio Button*/
+"tracing_reminder_radio_four_hours" = "4 orë";
+
+/*Tracing Erinnerung 8 Stunden Radio Button*/
+"tracing_reminder_radio_eight_hours" = "8 orë";
+
+/*Tracing Erinnerung 12 Stunden Radio Button*/
+"tracing_reminder_radio_twelve_hours" = "12 orë";
+
+/*Tracing Erinnerung keine Erinngerung Radio Button*/
+"tracing_reminder_radio_no_reminder" = "Pa përkujtesë";
+
+/*Tracing Erinnerung bestätigen Button*/
+"tracing_reminder_confirm_button" = "Në rregull";
+
+/*Tracing Erinnerung abbrechen Button*/
+"tracing_reminder_cancel_button" = "Ndërprit";
+
+/*Tracing Erinnerung Titel*/
+"tracing_reminder_title" = "Vendos përkujtesë";
+
+/*Tracing Erinnerung Untertitel*/
+"tracing_reminder_subtitle" = "SwissCovid mund t'ju kujtojë që të riaktivizoni gjurmimin.";
+
+/*Tracing Erinnerung Warnung*/
+"tracing_reminder_warning" = "Gjurmimi u çaktivizua.";
+
+/*Kantonname Zürich*/
+"canton_zurich" = "Zyrih";
+
+/*Kantonname Aargau*/
+"canton_aargau" = "Aargau";
+
+/*Kantonname Appenzell Innerrhoden*/
+"canton_appenzell_innerrhoden" = "Appenzell Innerrhoden";
+
+/*Kantonname Appenzell Ausserrhoden*/
+"canton_appenzell_ausserrhoden" = "Appenzell Ausserrhoden";
+
+/*Kantonname Bern*/
+"canton_berne" = "Bernë";
+
+/*Kantonname Basel-Landschaft*/
+"canton_basel_country" = "Basel-Landschaft";
+
+/*Kantonname Basel-Stadt*/
+"canton_basel_city" = "Basel-Stadt";
+
+/*Kantonname Freiburg*/
+"canton_fribourg" = "Freiburg";
+
+/*Kantonname Genf*/
+"canton_geneva" = "Genf";
+
+/*Kantonname Glarus*/
+"canton_glarus" = "Glarus";
+
+/*Kantonname Graubünden*/
+"canton_graubuenden" = "Graubunden";
+
+/*Kantonname Jura*/
+"canton_jura" = "Jura";
+
+/*Kantonname Luzern*/
+"canton_lucerne" = "Lucernë";
+
+/*Kantonname Neuenburg*/
+"canton_neuchatel" = "Neuenburg";
+
+/*Kantonname Nidwalden*/
+"canton_nidwalden" = "Nidualden";
+
+/*Kantonname Obwalden*/
+"canton_obwalden" = "Obualden";
+
+/*Kantonname St. Gallen*/
+"canton_st_gallen" = "St. Gallen";
+
+/*Kantonname Schaffhausen*/
+"canton_schaffhausen" = "Schaffhausen";
+
+/*Kantonname Solothurn*/
+"canton_solothurn" = "Soloturn";
+
+/*Kantonname Schwyz*/
+"canton_schwyz" = "Schuyz";
+
+/*Kantonname Thurgau*/
+"canton_thurgovia" = "Turgau";
+
+/*Kantonname Tessin*/
+"canton_ticino" = "Tessin";
+
+/*Kantonname Uri*/
+"canton_uri" = "Uri";
+
+/*Kantonname Waadt*/
+"canton_vaud" = "Uaadt";
+
+/*Kantonname Wallis*/
+"canton_valais" = "Uallis";
+
+/*Kantonname Zug*/
+"canton_zug" = "Zug";
+
+/*Kantonname Fürstentum Liechtenstein*/
+"country_liechtenstein" = "Principata e Lihtenshtajnit";
+
+/*Test standorte Popup Titel*/
+"test_location_popup_title" = "Ku mund të bëj një test?";
+
+/*Test standorte Popup Text*/
+"test_location_popup_text" = "Ju mund të testoheni për koronavirusin në mjekë, qendra provash, spitale dhe farmaci të ndryshme. Informacioni në lidhje me ofertat e testeve mund të gjenden në faqet e internetit të kantonit:";
+
+/*Notification Channel name for Tracing Reactivation Reminders on Android Devices (Only visible in System Settings)*/
+"android_reminder_channel_name" = "Përkujtues i aktivizimit të gjurmuesit";
+
+/*Titel der Tracing-Reaktivierungs-Notification*/
+"tracing_reminder_notification_title" = "Aktivizo gjurmimin";
+
+/*Subtitle der Tracing-Reaktivierungs-Notification*/
+"tracing_reminder_notification_subtitle" = "Aktivizoni gjurmimin në mënyrë që aplikacioni të ruajë takimet dhe të marrë mesazhe.";
+
+/*iOS Blockierende View bei benötigten OS update: Titel*/
+"ios_software_update_blocking_title" = "Nevojitet aktualizimi i softuerit";
+
+/*iOS Blockierende View bei benötigten OS update: text*/
+"ios_software_update_blocking_text" = "Duhet të instaloni versionin më të fundit të iOS që SwissCovid të funksionojë.";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial title*/
+"ios_software_update_blocking_tutorial_title" = "Funksionon kështu:";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial first*/
+"ios_software_update_blocking_tutorial_first" = "Hap \"Cilësimet\" tek ekrani kryesor";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial second*/
+"ios_software_update_blocking_tutorial_second" = "Shko tek";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial second settings general (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_second_settings" = "Të përgjithshme";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial third*/
+"ios_software_update_blocking_tutorial_third" = "Zgjidh";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial third software update (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_third_software_update" = "Përditësimi i softuerit";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial fourth*/
+"ios_software_update_blocking_tutorial_fourth" = "Trokit mbi…";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial fourth load and install (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_fourth_load_and_install" = "Shkarko dhe instalo";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial apple button*/
+"ios_software_update_blocking_tutorial_apple" = "Udhëzime nga Apple";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial apple url*/
+"ios_software_update_blocking_tutorial_apple_url" = "https://support.apple.com/en-us/HT204204";
+
+/*iOS Notification Text bei benötigten OS update*/
+"ios_software_update_notification_title" = "Nevojitet aktualizimi i softuerit";
+
+/*iOS Notification Text bei benötigten OS update*/
+"ios_software_update_notification_text" = "Duhet të instaloni versionin më të fundit të iOS që SwissCovid të funksionojë.";
+
+/*Button Text um die Isolation zu beenden*/
+"delete_infection_dialog_finish_button" = "Përfundo";
+
+/*Text der nach der Eingabe des Covidcodes angezeigt wird.*/
+"tracing_ended_info" = "Nuk ruhen më kontakte të reja dhe gjithashtu Check-ins e reja nuk janë më të mundshme.\n\nTë dyja funksionet mund të aktivizohen përsëri, pasi të ketë mbaruar izolimi.";
+"testlocation_url_canton_aargau" = "https://www.ag.ch/de/themen_1/coronavirus_2/coronavirus.jsp";
+"testlocation_url_canton_appenzell_ausserrhoden" = "https://www.ar.ch/verwaltung/departement-gesundheit-und-soziales/amt-fuer-gesundheit/informationsseite-coronavirus/";
+"testlocation_url_canton_appenzell_innerrhoden" = "https://www.ai.ch/themen/gesundheit-alter-und-soziales/gesundheitsfoerderung-und-praevention/uebertragbare-krankheiten/coronavirus";
+"testlocation_url_canton_basel_country" = "https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/amt-fur-gesundheit/medizinische-dienste/kantonsarztlicher-dienst/aktuelles";
+"testlocation_url_canton_basel_city" = "https://www.coronavirus.bs.ch/";
+"testlocation_url_canton_berne" = "http://www.be.ch/corona";
+"testlocation_url_canton_fribourg" = "https://www.fr.ch/sante/covid-19/coronavirus-informations-actuelles-toutes-les-actualites-liees-au-covid-19-mesures-prises-faq-statistiques";
+"testlocation_url_canton_geneva" = "https://www.ge.ch/covid-19-se-proteger-proteger-autres";
+"testlocation_url_canton_glarus" = "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/gesundheit/coronavirus.html/4817";
+"testlocation_url_canton_graubuenden" = "https://www.gr.ch/DE/institutionen/verwaltung/djsg/ga/coronavirus/info/Seiten/Start.aspx";
+"testlocation_url_canton_jura" = "https://www.jura.ch/fr/Autorites/Coronavirus/Accueil/Coronavirus-Informations-officielles-a-la-population-jurassienne.html";
+"testlocation_url_canton_lucerne" = "https://gesundheit.lu.ch/themen/Humanmedizin/Infektionskrankheiten/Informationen_Coronavirus";
+"testlocation_url_canton_neuchatel" = "https://www.ne.ch/autorites/DFS/SCSP/medecin-cantonal/maladies-vaccinations/Pages/Coronavirus.aspx";
+"testlocation_url_canton_nidwalden" = "https://www.nw.ch/gesundheitsamtdienste/6044";
+"testlocation_url_canton_obwalden" = "https://www.ow.ch/de/verwaltung/dienstleistungen/?dienst_id=5962";
+"testlocation_url_canton_st_gallen" = "https://www.sg.ch/tools/informationen-coronavirus.html";
+"testlocation_url_canton_schaffhausen" = "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Departement-des-Innern/Gesundheitsamt-2954701-DE.html";
+"testlocation_url_canton_schwyz" = "https://www.sz.ch/behoerden/information-medien/medienmitteilungen/coronavirus.html/72-416-412-1379-6948";
+"testlocation_url_canton_solothurn" = "https://corona.so.ch/";
+"testlocation_url_canton_thurgovia" = "https://www.tg.ch/news/fachdossier-coronavirus.html/10552";
+"testlocation_url_canton_ticino" = "https://www4.ti.ch/dss/dsp/covid19/home/";
+"testlocation_url_canton_uri" = "https://www.ur.ch/themen/2962";
+"testlocation_url_canton_valais" = "https://www.vs.ch/web/coronavirus/";
+"testlocation_url_canton_zug" = "https://www.zg.ch/behoerden/gesundheitsdirektion/amt-fuer-gesundheit/corona";
+"testlocation_url_canton_vaud" = "https://www.vd.ch/toutes-les-actualites/hotline-et-informations-sur-le-coronavirus/";
+
+/*Fuzzy*/
+"testlocation_url_canton_zurich" = "https://www.zh.ch/de/gesundheit/coronavirus.html";
+"testlocation_url_country_liechtenstein" = "https://www.llv.li/inhalt/118724/amtsstellen/coronavirus";
+
+/*text for info box pop up for the hearing impaired*/
+"hearing_impaired_info" = "A jeni i shurdhër ose keni probleme dëgjimi dhe nuk mund të telefononi?\n\nAtëherë na dërgoni një email te covid-support@medgate.ch";
+
+/*Überschrift des Covidcodes-Statistik-Moduls*/
+"stats_covidcodes_title" = "Kodet Covid";
+
+/*Überschrift des Fallzahlen-Statistik Moduls*/
+"stats_cases_title" = "Numrat e rasteve";
+
+/*Untertitel des Fallzahlen-Statistik-Moduls*/
+"stats_cases_subtitle" = "Raste aktuale";
+
+/*Label der "Total eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_total_label" = "të regjistruara";
+
+/*Label der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_label" = "brenda 0-2 ditëve";
+
+/*Label der "7-Tage-Schnitt Fallzahlen" Statistik*/
+"stats_cases_7day_average_label" = "Mesatarja 7 ditore";
+
+/*Label der "Änderung gegenüber Vorwoche Fallzahlen" Statistik*/
+"stats_cases_rel_prev_week_label" = "në javën e mëparshme";
+
+/*Überschrift des Info-Popups auf dem Statistik-Screen*/
+"stats_info_popup_title" = "Detaje mbi numrat";
+
+/*Untertitel des Infopopups zu Covidcodes-Statistiken*/
+"stats_info_popup_subtitle_covidcodes" = "Kodet Covid të regjistruara";
+
+/*Untertitel des Infopopups zu Fallzahlen-Statistiken*/
+"stats_info_popup_subtitle_cases" = "Numrat e rasteve";
+
+/*Beschreibung der "Total eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_total_description" = "Numri i rasteve Covid të regjistruara që kur aplikacioni SwissCovid filloi në qershor të vitit 2020. Ky është numri sa njerëz kanë njoftuar kontaktet e tyre për infeksion të mundshëm përmes aplikacionit.";
+
+/*Beschreibung der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_description" = "Raporti i kodeve Covid të regjistruara brenda dy ditëve të para pas shfaqjes së simptomave. Kjo përqindje lidhet me 7 ditët e fundit.\n\nKoha është faktor vendimtar në luftën ndaj koronavirusit: sa më e shkurtër të jetë koha nga fillimi i simptomave, rezultatit të testit dhe regjistrimit të kodit Covid, aq më shpejt kontaktet e njoftuara mund të qëndrojnë në shtëpi dhe të mbrojnë të tjerët.";
+
+/*Beschreibung der "7-Tage-Schnitt Fallzahlen" Statistik*/
+"stats_cases_7day_average_description" = "Tregon mesataren e infeksioneve të reja të raportuara në ditë për 7 ditë.";
+
+/*Beschreibung der "Änderung gegenüber Vorwoche Fallzahlen" Statistik*/
+"stats_cases_rel_prev_week_description" = "Tregon ndryshimin në mesataren 7-ditore në krahasim me një javë më parë.";
+
+/*Label der "Aktuelle Entwicklung" Statistik*/
+"stats_cases_current_label" = "Raste aktuale";
+
+/*Beschreibung der "Aktuelle Entwicklung" Statistik*/
+"stats_cases_current_description" = "Grafiku tregon infeksionet e reja të raportuara gjatë 28 ditëve të fundit. Kjo jep një pasqyrë të rasteve aktuale.";
+
+/*Inform Detail: Infobox Text*/
+"inform_detail_infobox1_text" = "A keni dalë pozitiv në test (testi PCR ose testi i shpejtë antigjen) dhe nuk keni marrë një kod Covid pas 4 orësh?\nAtëherë na telefononi këtu:";
+
+/*Inform Detail: Infobox Title*/
+"inform_detail_infobox1_title" = "Nuk keni marrë ende asnjë kod Covid?";
+
+/*Titel des Popups mit der Frage, ob der User die Isolation beendet hat*/
+"homescreen_isolation_ended_popup_title" = "A e keni mbaruar periudhën tuaj të izolimit?";
+
+/*Text des Popups mit der Frage, ob der User die Isolation beendet hat*/
+"homescreen_isolation_ended_popup_text" = "Gjurmimi mund të riaktivizohet sapo të keni mbaruar periudhën e izolimit.";
+
+/*Ja-Antwort*/
+"answer_yes" = "Po";
+
+/*Nein-Antwort*/
+"answer_no" = "Jo";
+
+/*Text in der Infobox auf dem Reisen-Screen*/
+"travel_screen_info" = "Udhëtim jashtë shtetit? Në këto vende funksionojnëkontaktet e SwissCovid.";
+
+/*Überschrift der Liste der kompatiblen Länder auf dem Reisen-Screen*/
+"travel_screen_compatible_countries" = "Shtetet e përfshira:";
+
+/*Informieren Flow: Erster Screen Reise-Infotext*/
+"inform_code_travel_text" = "Në mënyrë që udhëtarët nga jashtë shtetit të mund të paralajmërohen pas një kontakti, çelësat personal shpërndahen me aplikacionet për koronavirusin të vendeve të përfshira.";
+
+/*Überschrift der "eingegebene Covidcodes" Statistikbox*/
+"stats_covidcodes_total_header" = "Total";
+
+/*Überschrift der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_header" = "Aktual";
+
+/*Überschrift im Popup für die "Veränderung zur Vorwoche" Statistik*/
+"stats_cases_rel_prev_week_popup_header" = "Ndryshimi me javën e mëparshme";
+
+/*Meldungen: Positiv getestet FAQ 2 Titel (Benachrichtigung)*/
+"meldungen_positive_tested_faq2_title" = "Kush njoftohet?";
+
+/*Meldungen: Positiv getestet FAQ 2 Text (Benachrichtigung)*/
+"meldungen_positive_tested_faq2_text" = "Të gjitha kontaktet në periudhën e fazës suaj të infektimit nga {ONSET_DATE} deri në futjen e kodit Covid njoftohen, nëse ekziston rreziku i një infektimi – për shkak të distancës dhe kohëzgjatjes ose nëse jeni kontrolluar në të njëjtin vend.";
+
+/*Informieren: Danke Text Onset Date*/
+"inform_send_thankyou_text_onsetdate" = "{ONSET_DATE} – sot";
+
+/*Informieren: Danke Text Abschluss*/
+"inform_send_thankyou_text_stop_infection_chains" = "Duke vepruar kështu, ju ndihmoni të informoni të tjerët për një infektim të mundshëm.";
+
+/*Informieren: Danke Text Onset Date Einleitung*/
+"inform_send_thankyou_text_onsetdate_info" = "Çelësat privatë të aplikacionit tuaj janë dërguar për periudhën kohore vijuese:";
+
+/*Dialogtext wenn ein Covidcode eingegeben wird während das Tracing deaktiviert ist*/
+/*Fuzzy*/
+"inform_tracing_enabled_explanation" = "Kur futni një kod Covid, gjurmimi duhet të aktivizohet në mënyrë që çelësat tuaj privatë të mund të shpërndahen.";
+
+/*Leitfaden Info Popup Text*/
+"leitfaden_infopopup_text" = "Nëse shtypni \"{BUTTON_TITLE}\", dilni nga aplikacioni dhe kaloni në faqen e internetit të udhëzuesit SwissCovid. Të dhënat e takimeve të fundit të infektimeve të mundshme dërgohen gjithashtu në faqen e internetit.";
+
+/*Leitfaden InfoPopup Titel*/
+"leitfaden_infopopup_title" = "Informacion për udhëzuesin SwissCovid";
+
+/*Update Boarding: Titel*/
+"germany_update_boarding_title" = "E pajtueshme me Gjermaninë";
+
+/*Update Boarding: Text*/
+"germany_update_boarding_text" = "Ju gjithashtu informoheni nëse keni qenë në kontakt me një person që përdor aplikacionin gjerman Corona-Warn-App dhe më vonë keni rezultuar pozitiv dhe anasjelltas. Për këtë qëllim, kushtet e përdorimit dhe deklarata për mbrojtjen e të dhënave janë aktualizuar.";
+
+/*Update Boarding: Heading oben*/
+"germany_update_boarding_heading" = "Aktualizimi i SwissCovid";
+
+/*Debug Screen: Update-Boarding Reset Button*/
+"reset_update_boarding" = "Rivendos update boarding";
+
+/*Meldungen Detail Kostenloser Test Box Text*/
+"meldungen_detail_free_test_text" = "Një test i koronavirusit është i dobishëm dhe rekomandohet që nga dita e 5-të pas datës së treguar të kontaktit.";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt in wievielen Tagen ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_in_x_tagen" = "Në {COUNT} ditë";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt dass jetzt ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_now" = "Tani";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt dass in 1 Tag ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_tomorrow" = "Në 1 ditë";
+
+/*Check-Ins: Titel vom Reminder Push*/
+"checkout_reminder_title" = "Kujtesa e Check-out";
+
+/*Check-Ins: Check-out Reminder Push Text*/
+"checkout_reminder_text" = "Dëshironi të kontrolloheni?";
+
+/*Check-Ins: Auto-Checkout Push Titel*/
+"auto_checkout_title" = "Checkout automatik";
+
+/*Check-Ins: Auto-checkout Push Text*/
+"auto_checkout_body" = "Ju u kontrolluat automatikisht.";
+
+/*Check-Ins: Qr-Scanner Text*/
+"qrscanner_scan_qr_text" = "Skanoni dhe kontrolloni kodin QR";
+
+/*Check-Ins: Fehler beim QR-Code scannen*/
+"qrscanner_error" = "Kodi QR i pavlefshëm!";
+
+/*Check-Ins: Anpassung Check-In Datumwahl von*/
+"datepicker_from" = "Nga";
+
+/*Check-Ins: Datumsauswahl bis*/
+"datepicker_to" = "Deri";
+
+/*Check-Ins: Notiz hinzufügen zu Check-In*/
+"edit_mode_addcomment" = "Shtoni shënimin";
+
+/*Check-Ins: Notiz zu Check-In Placeholder Text*/
+"edit_mode_comment_placeholder" = "psh. Me kë ishit aty?";
+
+/*Fertig Button Text*/
+"done_button" = "Gati";
+
+/*Check-Ins: Titel für Erinnerung*/
+"checkin_set_reminder" = "Kujtesa e Check-out";
+
+/*Check-Ins: Erinnerung Option Aus*/
+"reminder_option_off" = "Off";
+
+/*Check-Ins: Tagebuch Zugriff Text*/
+"authenticate_for_diary" = "Autentifikohuni për aksesin në ditar";
+
+/*Check-Ins: Errinnerungsoption Stunden*/
+"reminder_option_hours" = "{HOURS} h";
+
+/*Check-Ins: Errinnerungsoption Minuten*/
+"reminder_option_minutes" = "{MINUTES}'";
+
+/*Check-Ins: Fehler wenn Kamera-Erlaubnis nicht gegeben*/
+"qr_scanner_no_camera_permission" = "Aplikacionit i nevojitet aksesi në kamera për të skanuar kodin QR.";
+
+/*Check-Ins: Tagebuch Titel*/
+"diary_title" = "Check-ins e mia";
+
+/*Check-Ins: Button Titel zum Einchecken*/
+"checkin_button_title" = "Check-in";
+
+/*Check-Ins: iOS Kamera Erlaubnis Text*/
+"NSCameraUsageDescription" = "Kamera nevojitet për të skanuar kodin QR.";
+
+/*Check-Ins: FaceID Text um Tagebuch anzuschauen*/
+"NSFaceIDUsageDescription" = "Lejoni Face-ID për të pasur akses të sigurt në ditarin tuaj.";
+
+/*Check-Ins: Text der angezeigt wieso FaceId gebraucht wird*/
+"face_id_reason_text" = "Autentifikohuni për aksesin në ditar";
+
+/*Check-Ins: Check-Out Button Title*/
+"checkout_button_title" = "Check out";
+
+/*Check-Ins: Titel Modul auf Homescreen*/
+"module_checkins_title" = "Check-in";
+
+/*Check-Ins: Titel vom Check-In Screen*/
+"checkin_title" = "Check-In";
+
+/*Check-Ins: QR-Code erstellen Titel*/
+"checkins_create_qr_code" = "Krijoni kodin QR";
+
+/*Veranstaltungen-Screen Titel*/
+"events_title" = "Krijoni kodin QR";
+
+/*Check-Ins: Jetzt einchecken Button Titel*/
+"check_in_now_button_title" = "Kontrollohuni tani";
+
+/*Check-Ins: Reminder Fehlermeldung Titel*/
+"checkin_reminder_settings_alert_title" = "Kujtesa nuk u vendos dot";
+
+/*Check-Ins: Erinnerungen Fehlermeldung Text*/
+"checkin_reminder_settings_alert_message" = "Në mënyrë që të merrni kujtesa nga Check-out, duhet të lejoni \\\"Njoftimet\\'’ te cilësimet e aplikacionit.";
+
+/*Check-Ins: Reminder Popup Anpassen*/
+"checkin_reminder_option_open_settings" = "Përshtat";
+
+/*Check-Ins: Bearbeiten von Check-Ins Titel*/
+"edit_controller_title" = "Përpuno";
+
+/*Check-Ins: Tagebuch leeres Tagbuch Titel*/
+"empty_diary_title" = "Nuk ekziston ende asnjë shënim";
+
+/*Check-Ins: Tagebuch leer, Text*/
+"empty_diary_text" = "Nëse skanoni një kod QR të SwissCovid për t’u kontrolluar në vend, atëherë këtu krijohet automatikisht një shënim.";
+
+/*Check-Ins: Kamera Erlaubnis Text*/
+"camera_permission_dialog_text" = "SwissCovid i nevojitet aksesi në kamerën e pajisjes suaj. Kamera përdoret vetëm për të skanuar kodin QR.";
+
+/*Check-Ins: Button Titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären*/
+"camera_permission_dialog_action" = "Lejoni aksesin e kamerës";
+
+/*Check-Ins: Veranstaltung Titel Placeholder*/
+"web_generator_title_placeholder" = "p.sh. Hapësira ose emri për rastin";
+
+/*Check-Ins: Veranstaltungen Detail PDF Button*/
+"show_pdf_button" = "Printoni në PDF";
+"bottom_nav_tab_info" = "Info";
+"error_network_title" = "Gabim i rrjetit";
+"error_network_text" = "Kontrolloni lidhjen tuaj të internetit.";
+"error_action_retry" = "Provoheni përsëri";
+"error_notification_deactivated_title" = "Njoftimet janë çaktivizuar";
+"error_notification_deactivated_text" = "Ndryshoni cilësimet për t’u informuar direkt me një njoftim.";
+"error_action_change_settings" = "Ndryshoni cilësimet";
+"error_camera_permission_title" = "Asnjë akses në kamera";
+"error_camera_permission_text" = "Aplikacionit i nevojitet aksesi në kamera për të skanuar kodin QR.";
+"error_title" = "Gabim";
+"qr_scanner_error_code_not_yet_valid" = "Kodi QR nuk është ende i vlefshëm";
+"qr_scanner_error_code_not_valid_anymore" = "Kodi QR nuk është më i vlefshëm";
+"error_already_checked_in" = "Ju jeni kontrolluar tashmë.";
+"error_update_text" = "Ky kod QR nuk është i pajtueshëm me versionin e aplikacionit të instaluar. Përditësoni aplikacionin për të vazhduar më tej.";
+"error_update_title" = "Përditësimi i nevojshëm";
+"error_action_update" = "Përditësoni tani";
+"ongoing_notification_checkout_quick_action" = "Check out";
+"reminder_notification_snooze_action" = "Snooze";
+"android_ongoing_checkin_notification_channel_name" = "Mesazh i përhershëm i Checkin";
+"ongoing_notification_title" = "Ju jeni kontrolluar nga ora {TIME}.";
+
+/*Check-Ins: Sichern Button bei Check-out*/
+"checkout_save_button_title" = "Siguro";
+
+/*Check-Ins: QR-Code scannen Button*/
+"scan_qr_code_button_title" = "Skanoni kodin QR";
+
+/*Titel der Infobox auf dem Homescreen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_title" = "Check-In i çaktivizuar";
+
+/*Text der Infobox auf dem Homescreen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_text" = "Ndërkohë nuk është i mundur asnjë Check-in";
+
+/*Text im Check-Ins-Screen im nicht eingecheckten Zustand*/
+"checkin_detail_checked_out_text" = "Skanoni një kod QR të SwissCovid për t’u kontrolluar në vend.";
+
+/*Text im Check-Ins-Screen, im Tagebuch-Modul*/
+"checkin_detail_diary_text" = "Nëse skanoni një kod QR të SwissCovid për t’u kontrolluar në vend, atëherë këtu krijohet automatikisht një shënim.";
+
+/*Label im Checkin-Modul im eingecheckten Zustand*/
+"checkin_checked_in" = "Ju jeni kontrolluar";
+"checkout_from_to_date" = "{DATE1} deri {DATE2}";
+"inform_detail_covidcode_info_button" = "Më shumë për kodin Covid";
+
+/*Check-Ins: Button Entfernen um Check-In zu löschen*/
+"remove_from_diary_button" = "Hiqni shënimin";
+
+/*Check-Ins: QR-Code löschen Titel Button*/
+"delete_button_title" = "Fshi";
+
+/*Check-Ins: Teile QR-Code Button Titel*/
+"share_button_title" = "Shpërndaj";
+
+/*Check-Ins: Drucken Button auf PDF-Detailseite*/
+"print_button_title" = "Printo";
+
+/*Check-Ins: Beschreibung Modul auf Homescreen*/
+"module_checkins_description" = "Skanoni një kod QR të SwissCovid për t’u kontrolluar në vend.";
+
+/*Titel im "Covidcode flow", wo man check ins wählen kann, welche geshared werden sollen.*/
+"inform_share_checkins_title" = "Shpërndani shënimet e Check-in";
+
+/*Untertitel im "Covidcode flow", wo man check ins wählen kann, welche geshared werden sollen.*/
+"inform_share_checkins_subtitle" = "Nëse shpërndani shënimet tuaja të Check-in, atëherë aplikacioni njofton personat, të cilët janë kontrolluar në të njëjtën kohë në të njëjtin vend.";
+
+/*Button text, um alle Checkins zu selektieren*/
+"inform_share_checkins_select_all" = "Zgjidhni gjithçka që përshtatet";
+"inform_dont_send_button_title" = "Mos dërgoni";
+"inform_dont_share_button_title" = "Mos shpërndani";
+"inform_really_not_share_title" = "Vërtet të mos shpërndani?";
+"inform_really_not_share_subtitle" = "Shpërndarja e çelësave tuaj personal ndihmon ''SwissCovid'' për të njoftuar persona të tjerë të infektuar potencialisht dhe për të parandaluar zgjerimin e mëtejshëm të virusit. Nëse nuk i shpërndani çelësat tuaj personal, atëherë nuk njoftohet asnjë person i infektuar potencialisht.";
+
+/*Remove from Diary Warning view title*/
+"remove_diary_warning_title" = "Hiqni shënimin";
+
+/*Remove from diary warning view explanation text*/
+"remove_diary_warning_text" = "Shënimi juaj hiqet nga lista në mënyrë të paprapësueshme.";
+
+/*Remove from diary warning view remove button title*/
+"remove_diary_remove_now_button" = "Hiqni plotësisht";
+
+/*Hide from diary warning title*/
+"remove_diary_warning_hide_title" = "Thjesht ta fshini dhe të njoftoheni gjithsesi?";
+
+/*Titel auf der "CovidCode eingeben"-Card auf dem Home Screen*/
+"home_covidcode_card_title" = "Keni dalë pozitiv në test?";
+
+/*Text auf der "Isolation beenden"-Card auf dem Home Screen*/
+"home_end_isolation_card_text" = "Aktivizoni përsëri kontaktet dhe Check-in.";
+
+/*Check-Ins: Erinnerungsoption Stunden & Minuten*/
+"reminder_option_hours_minutes" = "{HOURS} h {MINUTES}'";
+
+/*Text, welcher im Checkin-Overview Screen erscheint, wenn der Benutzer sich in Isolation befindet.*/
+"checkin_overview_isolation_text" = "Ju nuk mund të kontrolloheni më, sepse keni dalë pozitiv në test.";
+
+/*Veranstaltungen-Card Text im Infotab*/
+"events_card_subtitle" = "Krijoni një kod QR për SwissCovid, me të cilin mund të kontrolloni personat në vend.";
+
+/*Dialog Text beim Löschen eines erstellten QR Codes.*/
+"delete_qr_code_dialog" = "Dëshironi vërtet ta fshini kodin QR? Kodet e printuara QR mbeten gjithsesi të vlefshme.";
+
+/*Self-Check-In Button Titel im QR-Code Screen*/
+"self_checkin_button_title" = "Self Check-In";
+
+/*Text, welcher im Checkin-Overview Screen erscheint, wenn der Benutzer nicht eingecheckt ist.*/
+"checkin_overview_checkins_explanation" = "Skanoni një kod QR të SwissCovid për t’u kontrolluar në vend.";
+
+/*Popup Titel wenn beim Checkout oder Editieren von CheckIns sich die neu gewählte Zeit mit vorhandenen aus dem Tagebuch überschneidet*/
+"checkout_overlapping_alert_title" = "Sigurimi nuk është i mundur";
+
+/*Popup Beschreibung wenn beim Checkout oder Editieren von CheckIns sich die neu gewählte Zeit mit vorhandenen aus dem Tagebuch überschneidet*/
+"checkout_overlapping_alert_description" = "Kohët tuaja të zgjedhura përkojnë me Check-ins e tjera nga ditari juaj. Kontrolloni edhe njëherë të dhënat tuaja.";
+
+/*Informieren: Danke Text Checkins Teil*/
+"inform_send_thankyou_text_checkins" = "Shënimet tuaja të zgjedhura të Check-in u dërguan. Të gjithë personat, të cilët janë kontrolluar në të njëjtën kohë në të njëjtin vend, do të njoftohen.";
+
+/*SwissCovid QR Code PDF: Headline über dem Slogan*/
+"pdf_headline" = "Check-in i SwissCovid";
+
+/*SwissCovid QR Code PDF: Slogan*/
+"pdf_slogan" = "Kontrolli pa lënë të dhëna";
+
+/*SwissCovid QR Code PDF: Erklärungstext unter dem Slogan*/
+"pdf_explanation" = "Me aplikacionin SwissCovid mund të kontrolloheni thjesht te ne, pa lënë të dhënat tuaja. Në rastin e një situate rreziku do të informoheni shpejt në aplikacion.";
+
+/*SwissCovid QR Code PDF: App Bezeichnung neben dem App Icon*/
+"pdf_swisscovid_app" = "Aplikacioni \"SwissCovid\"";
+
+/*SwissCovid QR Code PDF: Download Hinweis neben dem App Icon*/
+"pdf_download_app" = "Shkarkoni tani";
+
+/*Title im Check-Ins-Screen im nicht eingecheckten Zustand*/
+"checkin_detail_checked_out_title" = "Kontrolli pa lënë të dhëna \n";
+
+/*Text auf der "CovidCode eingeben"-Card auf dem Home Screen*/
+"home_covidcode_card_text" = "Futni këtu kodin tuaj Covid për të informuar të tjerët.";
+
+/*Titel auf der "Isolation beenden"-Card auf dem Home Screen*/
+"home_end_isolation_card_title" = "Keni përfunduar izolimin?";
+
+/*Titel auf der Card, welche zum Screen führt, wo man eigene QR Codes erstellen kann.*/
+"events_card_title" = "Dëshironi të krijoni një kod QR?";
+"checkin_footer_title1" = "Përse duhet një funksion i Check-in?";
+"checkin_footer_subtitle1" = "Aplikacioni SwissCovid zgjeron funksionin e Check-in pa futjen e të dhënave të kontaktit. Me këtë funksion, në rastin kur keni dalë pozitiv në test, ju jo vetëm që mund të informoni kontaktet e afërta, por edhe personat që janë kontrolluar në të njëjtën kohë në të njëjtin vend.";
+"checkin_footer_title2" = "Asnjë ruajtje qendrore e të dhënave";
+"checkin_footer_subtitle2" = "Për Check-ins e SwissCovid nuk duhet futur asnjë e dhënë personale si emri, adresa ose numri i telefonit dhe nuk përfshihen as të dhënat e vendndodhjes në GPS. Lista e Check-ins ruhet lokalisht në smartfonin tuaj. Pas 14 ditësh të dhënat lokale fshihen përsëri.";
+"events_empty_state_title" = "Krijoni një kod QR";
+"events_empty_state_subtitle" = "Me një kod QR të SwissCovid mund të kontrollohen në vend personat pa lënë të dhënat e tyre.";
+"events_info_box_title" = "Asnjë zëvendësim për përfshirjen e detyruar të të dhënave të kontaktit.";
+"events_info_box_text" = "Check-ins e SwissCovid nuk janë zëvendësim i detyrimit për të regjistruar të dhënat e kontaktit të përcaktuara në \"Rregulloren e Covid-19, Situatë e veçantë\".";
+"events_footer_title1" = "Ku mund të përdoren Check-ins?";
+"events_footer_title2" = "Përse duhet një funksion i Check-in?";
+"events_footer_subtitle1" = "Check-ins e SwissCovid mund të përdoren atje, ku mblidhen njerëzit, por që nuk ka asnjë detyrim për regjistrimin e të dhënave të kontaktit.\n\nVendet e mundshme të përdorimit:\n– Arsye personale\n– Arsye shoqërore\n– Takime në një ambient profesional siç janë sallat e mbledhjeve, zyrat, mensat, etj.";
+"events_footer_subtitle2" = "Aplikacioni SwissCovid zgjeron funksionin e Check-in pa futjen e të dhënave të kontaktit. Me këtë funksion, në rastin kur keni dalë pozitiv në test, ju jo vetëm që mund të informoni kontaktet e afërta, por edhe personat që janë kontrolluar në të njëjtën kohë në të njëjtin vend.";
+
+/*Subtitle vom Meldungen Card in der Liste aller Meldungen.*/
+"meldung_detail_exposed_list_card_subtitle" = "Situata e rrezikut";
+
+/*Title vom Encounters Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_title_encounters" = "Kontaktet";
+
+/*Title vom CheckIn Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_title_checkin" = "Check-in";
+
+/*Was soll ich tun? Button im Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_whattodo_button" = "Çfarë nevojitet të bëj?";
+
+/*Debug: Einstellungs-Option zum überschreiben des App-Zustands: An einem Check-In einem positiven Kontakt ausgesetzt*/
+"debug_state_setting_option_checkin_exposed" = "Check-in që ka dalë pozitiv";
+
+/*Debug: Einstellungs-Option zum überschreiben des App-Zustands: Auf verschiedener Weise einem positiven Kontakt ausgesetzt*/
+"debug_state_setting_option_mutiple_exposed" = "Check-ins që kanë dalë pozitiv / kontaktet";
+
+/*Anzeigename für User QR Codes*/
+"venue_type_user_qr_code" = "Kodi ynë QR";
+
+/*Anzeigename für User QR Codes*/
+"venue_type_contact_tracing_qr_code" = "Kodi QR i Contact Tracing";
+
+/*Text der Module im Check-ins Screen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_text_detailed" = "Pas një rezultati të testit që ka dalë pozitiv funksioni i Check-in është çaktivizuar. Ai mund të aktivizohet përsëri pas përfundimit të izolimit tuaj.";
+
+/*Check-Ins: QR-Code erstellen subtitel*/
+"checkins_create_qr_code_subtitle" = "Jepni një titull që e përshkruan më afër vendin ose arsyen tuaj.\nKy titull shfaqet gjatë Check-in.";
+"checkin_report_heading" = "Çfarë mund të bëni?";
+"checkin_report_title1" = "Mbroni kontaktet";
+"checkin_report_title2" = "Kini parasysh simptomat";
+"checkin_report_title3" = "Kryeni testin";
+"checkin_report_subtitle1" = "Ju tashmë mund të jeni i infektuar pa e vënë re. Mbani parasysh masat e higjienës dhe të mbrojtjes dhe mbroni familjen tuaj, miqtë tuaj dhe mjedisin tuaj rrethues.";
+"checkin_report_subtitle2" = "Mbikëqyrni gjendjen tuaj shëndetësore.";
+"checkin_report_subtitle3" = "Testohuni menjëherë gjatë shfaqjes së simptomave. Edhe nëse nuk shfaqet asnjë simptomë dhe nuk jeni akoma i vaksinuar plotësisht, testi i koronës është i arsyeshëm dhe i rekomandueshëm.";
+
+/*Titel von CheckIn Meldungen Screen.*/
+"meldung_detail_checkin_title" = "Check-In";
+"not_thank_you_screen_title" = "Nuk u dërgua asnjë e dhënë";
+"not_thank_you_screen_text1" = "Nuk u dërgua asnjë çelës personal.";
+"not_thank_you_screen_back_button" = "Kthehu";
+"not_thank_you_screen_dont_send_button" = "Mos dërgoni asnjë të dhënë";
+"not_thank_you_screen_text2" = "Nuk u dërgua asnjë shënim për Check-in.";
+
+/*Button text, um ausgewählte Checkins zu senden*/
+"inform_share_checkins_send_button_title" = "Shpërndani zgjedhjen";
+"inform_share_checkins_not_send_button" = "Mos shpërndani asgjë";
+"onboarding_checkin_title" = "Kontrolli pa lënë të dhëna";
+"onboarding_checkin_heading" = "Check-ins";
+"onboarding_checkin_text1" = "Me Check-ins e SwissCovid mund të kontrolloheni në një vend ose në një takim me aplikacion.";
+"onboarding_checkin_text2" = "Prania juaj ruhet vetëm në aplikacion. Ju nuk duhet të lini asnjë të dhënë personale në aplikacion.";
+"checkin_updateboarding_text" = "Me Check-ins e SwissCovid mund të kontrolloheni në një vend ose në një takim me aplikacion. Prania juaj ruhet vetëm në aplikacion. Ju nuk duhet të lini asnjë të dhënë personale në aplikacion. Për më tepër u përditësuan kushtet e përdorimit dhe politika për privatësinë.";
+"onboarding_gaen_button_dont_activate" = "Tejkalo";
+
+/*Hide from diary warning text*/
+"remove_diary_warning_hide_text" = "Shënimi ruhet i koduar 14 ditë në sfondin e aplikacionit. Në rastin e një infektimit të mundshëm, përsëri mund të njoftoheni.";
+
+/*CheckIn ausblenden*/
+"remove_diary_warning_hide_button" = "Thjesht fshini";
+"checkin_set_reminder_explanation" = "Aplikacioni mund t’ju kujtojë për t’u kontrolluar përsëri në kohën e duhur.";
+
+/*Remove from diary warning title*/
+"remove_diary_remove_now_title" = "Ose ta hiqni plotësisht?";
+
+/*Remove from diary warning text*/
+"remove_diary_remove_now_text" = "Shënimi hiqet plotësisht. Ju nuk mund të informoheni më.";
+"not_thank_you_screen_text3" = "Nuk njoftohet askush.";
+
+/*Link Text zu Informationen übers Testen*/
+"checkin_report_link" = "Çfarë duhet të di unë rreth testimeve?";
+"instant_app_install_action" = "Instaloni dhe kontrolloni aplikacionin.";
+"partial_onboarding_box_text" = "Mbylleni konfigurimin e aplikacionit për të përdorur funksionin Tracking.";
+"partial_onboarding_box_action" = "Mbylleni tani";
+"partial_onboarding_done_title" = "Konfigurimi u mbyll";
+"partial_onboarding_done_text" = "Shumë faleminderit që na ndihmoni për të ndaluar zgjerimin e koronavirusit.";
+"web_slogan" = "Në rastin e një rreziku të infektimit informoheni shpejt.";
+
+/*Info URL for testing*/
+/*Fuzzy*/
+"test_info_url" = "https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/testen.html";
+"checkout_too_long_alert_text" = "Për këtë Check-In vlen kohëzgjatja maksimale e Check-in e {DURATION}. Kontrolloni edhe njëherë të dhënat tuaja.";
+
+/*turn camera light on*/
+"accessibility_camera_light_on" = "Ndizni dritën";
+
+/*turn camera light off*/
+"accessibility_camera_light_off" = "Fikni dritën";
+
+/*Popup Text, welcher erscheint, wenn man den Covidcode eingeben will, man aber noch eingecheckt ist.*/
+"error_cannot_enter_covidcode_while_checked_in" = "Ju jeni akoma i regjistruar. Kontrolloni përpara se të futni kodin Covid.";
+
+/*Titel auf der Card, welche zum Screen führt, wo man eigene QR Codes erstellen kann. Wird angezeigt falls bereits ein QR Code erstellt wurde*/
+"events_card_title_events_not_empty" = "Kodi im QR";
+
+/*Popup Beschreibung wenn beim Checkout oder Editieren von CheckIns die Checkin-Zeit nach der Checkout-Zeit liegt*/
+"checkout_inverse_time_alert_description" = "Koha juaj e zgjedhur Checkout është përpara kohës së Check-In. Kontrolloni edhe njëherë të dhënat tuaja.";
+
+/*Titel für die Notification die SwissCovid 2.0 ankündigt*/
+"update_notification_checkin_feature_title" = "Funksion i ri: Check-In";
+
+/*Text für die Notification die SwissCovid 2.0 ankündigt*/
+"update_notification_checkin_feature_text" = "Faleminderit për përdorimin e SwissCovid. Me versionin më të ri të aplikacionit mund të regjistroheni në vend pa lënë asnjë të dhënë.";
+
+/*Titel für aktuellen Check-in im Tagebuch*/
+"diary_current_title" = "Aktuale";
+
+/*Snooze Option um 30min später an Checkout zu erinnern*/
+"ios_snooze_option_30min" = "Kujtohuni përsëri (30 min)";
+
+/*Snooze Option um 1h später an Checkout zu erinnern*/
+"ios_snooze_option_1h" = "Kujtohuni përsëri (1 orë)";
+
+/*Snooze Option um 2h später an Checkout zu erinnern*/
+"ios_snooze_option_2h" = "Kujtohuni përsëri (2 orë)";
+
+/*Notification Quickaction um jetzt auszuchecken*/
+"ios_notification_checkout_now" = "Kontrollohuni tani";
+
+/*Hinweis falls fälschlicherweise ein Covid-Zertifikat mit SwissCovid gescannt wird.*/
+"covid_certificate_alert_text" = "Për skanimin e këtij kodi QR përdorni aplikacionin ''COVID Certificate (Certifikata e COVID)''.";
+
+/*Button um Covid Certificate App zu öffnen*/
+"covid_certificate_open_app" = "Hapni aplikacionin";
+
+/*Button um Covid Certificate App zu installieren*/
+"covid_certificate_install_app" = "Instaloni aplikacionin";

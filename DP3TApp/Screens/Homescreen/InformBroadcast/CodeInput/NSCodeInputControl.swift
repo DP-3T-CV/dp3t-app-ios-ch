@@ -44,6 +44,18 @@ class NSCodeControl: UIView {
 
     // MARK: - Public functions
 
+    public func set(code: String) {
+        guard code.count == numberOfInputs, let first = controls.first else { return }
+
+        fill(text: code, startControl: first)
+
+        controls.forEach { c in
+            _ = c.resignFirstResponder()
+        }
+
+        currentControl = nil
+    }
+
     public func code() -> String {
         var code = ""
 
@@ -285,7 +297,7 @@ class NSCodeSingleControl: UIView, UITextFieldDelegate {
             layer.borderColor = UIColor.ns_purple.cgColor
         } else {
             layer.borderWidth = 1.0
-            layer.borderColor = UIColor(ub_hexString: "#e5e5e5")?.cgColor
+            layer.borderColor = UIColor.setColorsForTheme(lightColor: UIColor(ub_hexString: "#e5e5e5")!, darkColor: .clear).cgColor
         }
     }
 
@@ -372,6 +384,7 @@ class NSTextField: UITextField {
         return action == #selector(UIResponderStandardEditActions.paste)
     }
 
+    @available(iOS 13.0, *)
     override var editingInteractionConfiguration: UIEditingInteractionConfiguration {
         if disableEditionInteraction {
             return .none

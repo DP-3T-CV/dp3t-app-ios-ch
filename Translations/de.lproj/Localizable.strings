@@ -24,7 +24,7 @@
 "inform_send_thankyou" = "Vielen Dank";
 
 /*Informieren: Danke Text*/
-"inform_send_thankyou_text" = "Die zufälligen IDs Ihrer App wurden gesendet.\n\nDamit helfen Sie mit, Infektionsketten zu stoppen.";
+"inform_send_thankyou_text" = "Die privaten Schlüssel Ihrer App wurden gesendet.\n\nDamit helfen Sie mit, Infektionsketten zu stoppen.";
 
 /*Informieren: Button Titel*/
 "inform_fertig_button_title" = "Schliessen";
@@ -100,7 +100,7 @@
 "meldungen_meldung_title" = "Mögliche Ansteckung";
 
 /*Text im Meldung Detail*/
-"meldungen_meldung_text" = "Es besteht die Möglichkeit einer Ansteckung.";
+"meldungen_meldung_text" = "Sie könnten sich angesteckt haben";
 
 /*Titel ob Tracing aktiv*/
 "tracing_active_title" = "App aktiv";
@@ -190,13 +190,13 @@
 "inform_detail_box_subtitle" = "Mit dem Covidcode...";
 
 /*Inform Detai Weisse Box Titel*/
-"inform_detail_box_title" = "Infektionsketten stoppen";
+"inform_detail_box_title" = "Vor möglichen Ansteckungen warnen";
 
 /*Inform Detail Weisse Box Button*/
 "inform_detail_box_button" = "Covidcode eingeben";
 
 /*Informieren Detail Weisse Box Text*/
-"inform_detail_box_text" = "Mit der Eingabe des Covidcodes teilen Sie der App mit, dass Sie positiv auf das neue Coronavirus getestet wurden.";
+"inform_detail_box_text" = "Mit der Eingabe des Covidcodes teilen Sie der App mit, dass Sie positiv auf das Coronavirus getestet wurden.";
 
 /*Symptome Detail Subtitel*/
 "symptom_detail_subtitle" = "Was tun, wenn ich ...";
@@ -211,7 +211,7 @@
 "symptom_detail_box_title" = "Testen lassen";
 
 /*Symptom Detail Weisse Box Button*/
-"symptom_detail_box_button" = "Mehr erfahren";
+"symptom_detail_box_button" = "Weitere Informationen";
 
 /*Symptom Detail Weisse Box Text*/
 "symptom_detail_box_text" = "Das BAG empfiehlt allen Personen mit COVID-19-Symptomen, sich testen zu lassen. Rufen Sie eine Ärztin bzw. einen Arzt oder eine Gesundheitseinrichtung an.";
@@ -223,8 +223,8 @@
 "symptom_detail_navigation_title" = "Symptome";
 "tracing_turned_off_title" = "Tracing deaktiviert";
 "tracing_turned_off_text" = "Aktivieren Sie das Tracing, damit die App funktioniert.";
-"bluetooth_turned_off_title" = "Bluetooth Off";
-"bluetooth_turned_off_text" = "Schalten Sie Bluetooth auf Ihrem Mobiltelefon ein, damit das Tracing funktioniert.";
+"bluetooth_turned_off_title" = "Bluetooth aus";
+"bluetooth_turned_off_text" = "Schalten Sie Bluetooth auf Ihrem Gerät ein, damit das anonyme Tracing funktioniert.";
 "bluetooth_turn_on_button_title" = "Bluetooth einschalten";
 "bluetooth_permission_error_title" = "Bluetooth Verwendung abgelehnt";
 "bluetooth_permission_error_text" = "Erlauben Sie die Verwendung von Bluetooth, damit das Tracing funktioniert.";
@@ -246,7 +246,7 @@
 "meldung_detail_positive_tested_title" = "Positiv getestet";
 
 /*Meldung Detail: Positiv Getestet Subtitel*/
-"meldung_detail_positive_tested_subtitle" = "Sie wurden positiv auf das neue Coronavirus getestet.";
+"meldung_detail_positive_tested_subtitle" = "Sie wurden positiv auf das Coronavirus getestet.";
 
 /*Meldung Detail Positiv Getestet Weisse Box Subtitel*/
 "meldung_detail_positive_test_box_subtitle" = "Was soll ich tun?";
@@ -256,13 +256,13 @@
 
 /*Meldung Detail Positiv Getestet Weisse Box Text*/
 "meldung_detail_positive_test_box_text" = "Befolgen Sie die erhaltenen Anweisungen zur Isolation";
-"tracing_ended_title" = "Tracing beendet";
-"tracing_ended_text" = "Es werden keine Begegnungen mehr gespeichert.";
+"tracing_ended_title" = "Begegnungen und Check-in deaktiviert";
+"tracing_ended_text" = "Es werden keine Begegnungen gespeichert";
 "exposed_info_contact_hotline" = "Kontaktieren Sie die";
 "meldung_homescreen_positive_info_line1" = "Befolgen Sie die";
 
 /*CFL: Selbst-Isolation*/
-"meldung_homescreen_positive_info_line2" = "Anweisungen zur Selbstisolation";
+"meldung_homescreen_positive_info_line2" = "Anweisungen zur Isolation";
 
 /*Meldung Detail Exposed Neue Meldung*/
 "meldung_detail_exposed_new_meldung" = "Neue Meldung";
@@ -272,8 +272,10 @@
 "meldung_homescreen_positiv_title" = "Positiv getestet";
 
 /*Meldung Detail Exposed Subtitel*/
-"meldung_detail_exposed_subtitle" = "Es besteht die Möglichkeit einer Ansteckung.";
-"meldung_homescreen_positiv_text" = "Sie wurden positiv auf das neue Coronavirus getestet.";
+"meldung_detail_exposed_subtitle" = "Sie könnten sich angesteckt haben";
+
+/*Meldung auf Homescreen: Positiv getestet*/
+"meldung_homescreen_positiv_text" = "Sie wurden positiv auf das Coronavirus getestet.";
 
 /*Debug Screen: Onboarding Reset Button*/
 "reset_onboarding" = "Onboarding zurücksetzen";
@@ -323,10 +325,10 @@
 "onboarding_prinzip_title" = "Dem Virus einen\nSchritt voraus";
 
 /*Onboarding Prinzip Text*/
-"onboarding_prinzip_text1" = "Mit der SwissCovid App können alle dazu beitragen, die Verbreitung des neuen Coronavirus einzudämmen.";
+"onboarding_prinzip_text1" = "Mit der SwissCovid App können alle dazu beitragen, die Verbreitung des Coronavirus einzudämmen.";
 
 /*Onboarding Prinzip Text*/
-"onboarding_prinzip_text2" = "Die App informiert Sie, wenn Sie potenziell dem neuen Coronavirus ausgesetzt waren.";
+"onboarding_prinzip_text2" = "Die App warnt Sie, wenn Sie potenziell dem Coronavirus ausgesetzt waren.";
 
 /*Onboarding Privacy: Titel oben*/
 "onboarding_privacy_heading" = "Privacy by Design";
@@ -341,7 +343,7 @@
 "onboarding_privacy_text2" = "Die gespeicherten zufälligen IDs bleiben auf Ihrem Mobiltelefon und werden nach 14 Tagen gelöscht.";
 
 /*Onboarding Begegnungen: Titel oben*/
-"onboarding_begegnungen_heading" = "Wie funktioniert die App?";
+"onboarding_begegnungen_heading" = "Begegnungen";
 
 /*Onboarding Begegnungen: Titel*/
 "onboarding_begegnungen_title" = "Begegnungen erkennen\ndank Bluetooth";
@@ -359,7 +361,7 @@
 "onboarding_meldung_title" = "Meldung bei einer\nmöglichen Ansteckung";
 
 /*Onboarding Meldung: Text*/
-"onboarding_meldung_text1" = "Die App informiert Sie, wenn Sie potenziell dem neuen Coronavirus ausgesetzt waren.";
+"onboarding_meldung_text1" = "Die App warnt Sie, wenn Sie potenziell dem Coronavirus ausgesetzt waren.";
 
 /*Onboarding Meldung: Text*/
 "onboarding_meldung_text2" = "Mit dem richtigen Verhalten können Sie Infektionsketten unterbrechen und andere schützen.";
@@ -396,7 +398,7 @@
 "onboarding_push_title" = "Mitteilungen erlauben";
 
 /*Onboarding Mitteilungen: Text*/
-"onboarding_push_text" = "Damit Sie von der App informiert werden, müssen Sie Mitteilungen erlauben.";
+"onboarding_push_text" = "Damit die App Sie warnen kann, müssen Sie Mitteilungen erlauben.";
 
 /*Onboarding Mitteilungen: Button*/
 "onboarding_push_button" = "Mitteilungen erlauben";
@@ -417,7 +419,7 @@
 "onboarding_go_title" = "Die App ist eingerichtet";
 
 /*Text auf dem letzten Onboarding Screen*/
-"onboarding_go_text" = "Vielen Dank, dass Sie mithelfen, Infektionsketten zu unterbrechen.";
+"onboarding_go_text" = "Vielen Dank, dass Sie mithelfen, die Verbreitung des Coronavirus einzudämmen.";
 
 /*Button-Label auf dem letzten Onboarding screen*/
 "onboarding_go_button" = "Starten";
@@ -444,7 +446,7 @@
 "meldung_detail_new_contact_title" = "Erneuter Verdacht";
 
 /*Meldungen Detail: Text*/
-"meldung_detail_new_contact_subtitle" = "Es besteht die Möglichkeit einer Ansteckung.";
+"meldung_detail_new_contact_subtitle" = "Sie könnten sich angesteckt haben";
 
 /*Fehler mit Uhrzeit Titel*/
 "time_inconsistency_title" = "Uhrzeit Fehler";
@@ -462,7 +464,7 @@
 "meldungen_background_error_title" = "Hintergrundaktualisierung ausgeschaltet";
 
 /*Text für Hintergrund Fehler*/
-"meldungen_background_error_text" = "\"Go to \"Settings -> General > Background App Refresh\" and make sure “Wi-Fi & Mobile Data” is selected. Background App Refresh can then be disabled for each app individually. \"";
+"meldungen_background_error_text" = "Gehen Sie zu \"Einstellungen > Allgemein > Hintergrundaktualisierung\" und stellen Sie sicher, dass \"WLAN & Mobile Daten\" ausgewählt ist. Background App Refresh kann dann für jede App einzeln aktiviert werden.";
 
 /*Button Titel für Hintergrundfehler beheben*/
 "meldungen_background_error_button" = "Einstellungen ändern";
@@ -580,13 +582,7 @@
 "meldungen_nomeldungen_faq1_title" = "Was sind Meldungen?";
 
 /*Meldungen: Keine Meldungen FAQ Text*/
-"meldungen_nomeldungen_faq1_text" = "Die App prüft regelmässig, ob andere Nutzer, denen Sie begegnet sind, einen positiven Test gemeldet haben.\n\nBei einer möglichen Ansteckung werden Sie mit einer Mitteilung im Sperrbildschirm informiert.";
-
-/*Meldungen: Keine Meldungen FAQ Titel*/
-"meldungen_nomeldungen_faq2_titel" = "Was bedeutet mögliche Ansteckung?";
-
-/*Meldungen: Keine Meldungen FAQ Text*/
-"meldungen_nomeldungen_faq2_text" = "Die App prüft nicht nur, ob Begegnungen mit infizierten Personen stattfanden, sondern auch wie lange und wie nahe diese waren.\n\nNur wenn die Möglichkeit einer Ansteckung gross genug ist, werden Sie informiert.";
+"meldungen_nomeldungen_faq1_text" = "Die App prüft regelmässig, ob andere Nutzer, denen Sie begegnet sind oder die am gleichen Ort eingecheckt waren, ein positives Testergebnis gemeldet haben.\n\nBei einer möglichen Ansteckung werden Sie mit einer Mitteilung im Sperrbildschirm informiert.";
 
 /*Meldungen Detail Weisse Box Texte Unten*/
 "meldungen_detail_explanation_text3" = "Die Infoline SwissCovid berät Sie über die Möglichkeit eines kostenlosen Tests.";
@@ -613,13 +609,14 @@
 "inform_detail_faq1_title" = "Was ist ein Covidcode?";
 
 /*Inform Detail: FAQ Text*/
-"inform_detail_faq1_text" = "Positiv auf das neue Coronavirus getestete Personen erhalten einen Covidcode.\n\nDamit wird sichergestellt, dass nur bestätigte Fälle über die App gemeldet werden.";
+/*Fuzzy*/
+"inform_detail_faq1_text" = "Positiv auf das Coronavirus getestete Personen (PCR-Test oder Antigen-Schnelltest) erhalten einen Covidcode.\n\nDamit wird sichergestellt, dass nur bestätigte Fälle über die App gemeldet werden.";
 
 /*Inform Detail: FAQ Titel*/
 "inform_detail_faq2_title" = "Was wird gesendet?";
 
 /*Inform Detail FAQ Text*/
-"inform_detail_faq2_text" = "Es werden nur die zufälligen IDs Ihrer App gesendet, keine persönlichen Daten.\n\nDamit erfahren andere SwissCovid App Nutzer, dass die Möglichkeit einer Ansteckung besteht.";
+"inform_detail_faq2_text" = "Es werden nur die privaten Schlüssel Ihrer App und die verschlüsselten IDs Ihrer Check-ins gesendet, keine persönlichen Daten.\n\nDamit erfahren andere Nutzerinnen und Nutzer der SwissCovid-App, dass die Möglichkeit einer Ansteckung besteht.";
 
 /*Telefonnummer der Infoline*/
 "infoline_tel_number" = "+41 58 387 77 78";
@@ -628,25 +625,25 @@
 "faq_button_url" = "https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/faq-kontakte-downloads/haeufig-gestellte-fragen.html?faq-url=/de/categories/swisscovid-app";
 
 /*Informieren Flow: Titel erster Screen*/
-"inform_code_intro_title" = "Wichtiger Hinweis";
+"inform_code_intro_title" = "Information zur Eingabe";
 
 /*Informieren-Flow: Erster Screen Text*/
-"inform_code_intro_text" = "Obwohl keine Daten zu Ihrer Person gesendet werden, kann es sein, dass sich jemand anhand des Datums an die Begegnung erinnern kann.";
+"inform_code_intro_text" = "Obwohl keine Daten zu Ihrer Person gesendet werden, könnte es sein, dass sich jemand anhand des Datums an die Begegnung mit Ihnen erinnern kann.";
 
 /*Inform-Flow: Erster Screen Button*/
-"inform_code_intro_button" = "Verstanden";
+"inform_code_intro_button" = "Einverstanden";
 
 /*Symptome: FAQ Titel*/
 "symptom_faq1_title" = "Was sind COVID-19-Symptome?";
 
 /*Symptome: FAQ Text*/
-"symptom_faq1_text" = "Diese Symptome treten häufig auf:\n\n– Fieber, Fiebergefühl\n– Halsschmerzen\n– Husten (meist trocken)\n– Kurzatmigkeit\n– Muskelschmerzen\n– Plötzlicher Verlust des Geruchs- und oder Geschmackssinns";
+"symptom_faq1_text" = "Diese Symptome treten häufig auf:\n\n– Fieber, Fiebergefühl\n– Halsschmerzen\n– Husten (meist trocken)\n– Kurzatmigkeit\n– Brustschmerzen\n– Plötzlicher Verlust des Geruchs- und/oder Geschmackssinns\n\nZudem sind folgende Symptome möglich:\n\n– Kopfschmerzen\n– Allgemeine Schwäche, Unwohlsein\n– Muskelschmerzen\n– Schnupfen\n– Magen-Darm-Symptome (Übelkeit, Erbrechen, Durchfall, Bauchschmerzen)\n– Hautausschläge";
 
 /*Meldungen: Positiv getestet FAQ Titel*/
-"meldungen_positive_tested_faq1_title" = "Warum ist das Tracing beendet?";
+"meldungen_positive_tested_faq1_title" = "Warum ist das Tracing deaktiviert?";
 
 /*Meldungen: Positiv getestet FAQ Text*/
-"meldungen_positive_tested_faq1_text" = "Nach einem positiven Test wird das Tracing in der App automatisch beendet.";
+"meldungen_positive_tested_faq1_text" = "Nach einem positiven Testergebnis wird das Tracing in der App automatisch deaktiviert. Das Tracing kann wieder aktiviert werden, sobald Sie die Isolation beendet haben.";
 
 /*Sprache Abkürzung (BITTE NICHT ÄNDERN)*/
 "language_key" = "de";
@@ -690,7 +687,7 @@
 
 /*Text auf der Onboarding Page für die Permission der Exposure-Library, iOS*/
 /*Fuzzy*/
-"onboarding_gaen_text_ios" = "Um die App nutzen zu können, müssen COVID-19-Kontaktmitteilungen aktiviert werden.";
+"onboarding_gaen_text_ios" = "Die Tracing-Funktion muss aktiviert sein, damit Begegnungen erkannt werden.";
 
 /*Aktivieren-Button auf der Onboarding Page für die Permission der Exposure-Library*/
 "onboarding_gaen_button_activate" = "Aktivieren";
@@ -720,13 +717,13 @@
 
 /*Code-Eingabe in der App löschen, wenn infiziert*/
 /*Fuzzy*/
-"delete_infection_button" = "Meldung löschen";
+"delete_infection_button" = "Isolation beenden";
 
-/*Meldung im Löschen Dialog nach Code-Einfragen*/
+/*Meldung im Löschen Dialog nach Isolation-Beenden, kommt auch auf Homescreen-Popup*/
 /*Fuzzy*/
-"delete_infection_dialog" = "Möchten sie die Meldung wirklich löschen?";
+"delete_infection_dialog" = "Möchten Sie die Isolation wirklich beenden?";
 "android_onboarding_battery_permission_title" = "Akku-Optimierung ignorieren";
-"android_onboarding_battery_permission_text" = "Um Begegnungen immer erkennen zu können, muss die Akku-Optimierung für diese App ausgeschaltet sein.";
+"android_onboarding_battery_permission_text" = "Damit die App funktioniert, muss die Akku-Optimierung ausgeschaltet sein.";
 "android_onboarding_battery_permission_button" = "Zulassen";
 "android_onboarding_battery_permission_button_deactivated" = "OK";
 "android_onboarding_battery_permission_info_1_title" = "Nur für diese App";
@@ -746,11 +743,11 @@
 
 /*Fehler-Titel, wenn Tracing deaktiviert wurde im System, iOS*/
 /*Fuzzy*/
-"tracing_permission_error_title_ios" = "COVID-19-Kontaktmitteilungen deaktiviert";
+"tracing_permission_error_title_ios" = "{TRACING_SETTING_TEXT} deaktiviert";
 
 /*Fehler-Text, wenn Tracing deaktiviert wurde im System, iOS*/
 /*Fuzzy*/
-"tracing_permission_error_text_ios" = "Aktivieren Sie COVID-19-Kontaktmitteilungen, damit das Tracing funktioniert.";
+"tracing_permission_error_text_ios" = "Aktivieren Sie {TRACING_SETTING_TEXT}, damit das anonyme Tracing funktioniert.";
 
 /*Error-Meldung, wenn der Benutzer während des Informieren-Flows bei GApple das Key-Sharing nicht erlaubt.*/
 "user_cancelled_key_sharing_error" = "Die Meldung konnte nicht gesendet werden. Bitte erlauben Sie das Teilen Ihrer zufälligen IDs mit der SwissCovid App.";
@@ -792,19 +789,19 @@
 "tracing_active_tracking_always_info" = "SwissCovid bleibt aktiv, auch wenn die App geschlossen wird.";
 
 /*title in splash screen of onboarding*/
-"oboarding_splashscreen_title" = "SwissCovid \nstoppt \nInfektionsketten.";
-"inform_detail_faq3_text" = "Obwohl keine Daten zu Ihrer Person gesendet werden, kann es sein, dass sich jemand anhand des Datums an die Begegnung erinnern kann.";
+"oboarding_splashscreen_title" = "SwissCovid –\nbei einem Ansteckungsrisiko schnell informiert.";
+"inform_detail_faq3_text" = "Ja, aber obwohl keine Daten zu Ihrer Person gesendet werden, könnte es sein, dass sich jemand anhand des Datums an die Begegnung mit Ihnen erinnern kann.";
 "inform_detail_faq3_title" = "Bleibe ich anonym?";
 
 /*Meldung Detail Weiss Box unten*/
 /*Fuzzy*/
-"meldungen_detail_explanation_text4" = "Bei ersten Symptomen machen Sie bitte den Coronavirus-Check oder rufen Sie Ihre Ärztin / Ihren Arzt an.";
+"meldungen_detail_explanation_text4" = "Bei ersten Symptomen rufen Sie eine Ärztin bzw. einen Arzt oder eine Gesundheitseinrichtung an.";
 
 /*Text beim Bluetooth Control*/
 "tracing_setting_text_android" = "COVID-19-Benachrichtigungen";
 
 /*Text auf der Onboarding Page für die Permission der Exposure-Library, Android*/
-"onboarding_gaen_text_android" = "Um die App nutzen zu können, müssen COVID-19 Benachrichtigungen aktiviert werden.";
+"onboarding_gaen_text_android" = "Die Tracing-Funktion muss aktiviert sein, damit Begegnungen erkannt werden.";
 
 /*Onboarding Disclaimer Screen: AppName Title*/
 "onboarding_disclaimer_heading" = "SwissCovid";
@@ -861,7 +858,8 @@
 "meldungen_detail_free_test_title" = "Kostenloser Test möglich";
 
 /*Meldungen Detail Kostenloser Test Box Text*/
-"meldungen_detail_free_test_text" = "Die Infoline SwissCovid berät Sie über die Möglichkeit eines kostenlosen Corona Tests.";
+/*Fuzzy*/
+"meldungen_detail_free_test_text_old" = "Der SwissCovid Leitfaden informiert Sie über die Möglichkeit eines kostenlosen Coronavirus-Tests.";
 
 /*Button title on the Home Screen when the Tracing is deactivated to directly activate it.*/
 "activate_tracing_button" = "Tracing aktivieren";
@@ -893,51 +891,930 @@
 /*Title for the Home View Travel Card.*/
 "travel_title" = "Reisen";
 
-/*Info text that is displayed on the Home Travel Card.*/
-"travel_home_description" = "Sie können das Tracing für kompatible Länder aktivieren.";
+/*Info text that is displayed  on the Home Travel Card.*/
+"travel_home_description" = "SwissCovid-Begegnungen funktioniert in den folgenden Ländern:";
 
-/*Introductory Text that is displayed at the top of the travel settings screen.*/
-"travel_screen_introduction" = "Unterwegs im Ausland? Während Reisen können Sie das Tracing für folgende Länder aktivieren:";
-
-/*First title for the travel feature explanation at the bottom of the travel screen.*/
+/*First title for the travel feauter explenation at the bottom of the travel screen.*/
 /*Fuzzy*/
 "travel_screen_explanation_title_1" = "Was bedeutet das?";
 
-/*First text for the travel feature explanation at the bottom of the travel screen.*/
-/*Fuzzy*/
-"travel_screen_explanation_text_1" = "Während Sie das Tracing für ein anderes Land aktiviert haben, überprüft Ihre App auch die in diesem Land veröffentlichten zufälligen IDs.\n\nSo können Sie auch bei einer möglichen Ansteckung im Ausland gewarnt werden.";
+/*First text for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_text_1" = "Wenn Sie in einem der kompatiblen Länder unterwegs sind, müssen Sie für Begegnungen keine andere Corona-App installieren.\n\nSwissCovid überprüft die in den kompatiblen Ländern veröffentlichten privaten Schlüssel. So können Sie auch bei einer möglichen Ansteckung im Ausland gewarnt werden.";
 
-/*Second title for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_title_2" = "Und nach der Rückkehr?";
+/*Second title for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_title_2" = "Was geschieht bei Eingabe des Covidcodes?";
 
-/*Second text for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_text_2" = "Sobald Sie zurück sind, können Sie das Land wieder deaktivieren. Meldungen aus dem entsprechenden Land werden noch für 10 Tage empfangen. \n\nSo ist sichergestellt, dass Sie bei einer möglichen Ansteckung im Ausland auch nach Ihrer Rückkehr gewarnt werden.";
-
-/*Button title for the Add Countries Button in the travel screen.*/
-/*Fuzzy*/
-"travel_screen_add_countries_button" = "Länder hinzufügen";
-
-/*Text that is displayed under a country name that indicates until what date the user will still receive notifications from this country.*/
-"travel_screen_notifications_activated_until" = "Meldungen noch bis {DATE}";
-
-/*List Header for the favourites in the "Add countries" Screen of the Travel feature.*/
-"travel_screen_favourites" = "Favoriten";
-
-/*List header for other countries in the "add countries" screen of the travel feature.*/
-"travel_screen_other_countries" = "Weitere Länder";
-
-/*Title for the explanation at the bottom of the "add countries" screen of the travel feature.*/
-"travel_screen_add_countries_explanation_title" = "Was ist mit den anderen Ländern?";
-
-/*Text for the explanation at the bottom of the "add countries" screen of the travel feature.*/
-"travel_screen_add_countries_explanation_text" = "Damit Ihre App auf die Daten aus anderen Ländern zugreifen kann, braucht es bilaterale Abkommen.\n\nWir sind bemüht, die Liste der kompatiblen Länder so schnell wie möglich zu ergänzen.";
-
-/*Information text that asks the user about informing other countries when he enters a covid code into the app.*/
-"travel_report_code_info" = "Waren Sie in den letzten 14 Tagen in einem der aufgeführten Länder?\n\nWählen Sie das entsprechende Land, um auch diese Begegnungen zu informieren.";
+/*Second text for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_text_2" = "Bei der Eingabe des Covidcodes werden die von Ihnen gesendeten privaten Schlüssel auch mit den kompatiblen Ländern geteilt.\n\nDamit auch Reisende aus dem Ausland gewarnt werden können, geschieht das unabhängig davon, ob Sie selber im Ausland unterwegs waren oder nicht.";
 
 /*Accessibility: FAQ button hint wenn die app verlassen wird und eine website öffnet*/
 /*Fuzzy*/
 "accessibility_faq_button_hint_non_bag" = "Dieser Button verlässt die App und öffnet eine Website.";
 
 /*voice over string der vorgelesen wird wenn noch kein sync stattgefunden hat*/
-"begegnung_detail_no_last_sync_accessibility" = "";
+"begegnung_detail_no_last_sync_accessibility" = "Keine bisherigen Synchronisationen";
+
+/*Text für Hintergrundfehler auf Android*/
+"meldungen_background_error_text_android" = "Ändern Sie die Einstellungen, um bei einer neuen Meldung auch ausserhalb der App informiert zu werden.";
+
+/*Telefonnummer der allgemeinen Infoline Coronavirus*/
+"infoline_coronavirus_number" = "+41 58 387 77 80";
+
+/*Text beim Bluetooth Control iOS 14*/
+/*Fuzzy*/
+"tracing_setting_text_ios_14_0" = "Begegnungsmitteilungen";
+"bottom_nav_tab_home" = "SwissCovid";
+"bottom_nav_tab_stats" = "Zahlen";
+"stats_title" = "nutzen bereits SwissCovid";
+"stats_legend_new_infections" = "Gemeldete Neuinfektionen";
+"stats_legend_new_infections_average" = "7-Tage-Schnitt";
+"stats_legend_entered_covidcodes" = "Eingegebene Covidcodes";
+"share_app_supertitle" = "Gemeinsam…";
+"share_app_title" = "Ansteckungen verhindern";
+"share_app_button" = "App teilen";
+
+/*Fuzzy*/
+"share_app_body" = "Wenn möglichst viele Ihrer Kontakte die SwissCovid App nutzen, können Sie bei einem Ansteckungsrisiko schnell informiert werden.";
+
+/*Text der geteilt wird*/
+"share_app_message" = "Mit der SwissCovid App können alle dazu beitragen, die Verbreitung des Coronavirus einzudämmen.";
+
+/*URL die geteilt wird*/
+"share_app_url" = "https://bag-coronavirus.ch/swisscovid-app/#download";
+
+/*Zahlenformat für die Aktive nutzer nummer {COUNT} wird durch die aktuelle Zahl ersetzt z.b. "1.59"*/
+"stats_counter" = "{COUNT} Mio.";
+
+/*Statistik Tag der Daten "{DAY}" wird mit dem Aktualisierungsdatum ersetzt z.B. "14.9."*/
+"stats_source_day" = "Stand der Daten {DAY}";
+
+/*Links zu weiteren Statistiken*/
+"stats_more_statistics_button" = "Weitere Statistiken";
+
+/*URL zu weiteren statistiken*/
+"stats_more_statistics_url" = "https://www.covid19.admin.ch/de/overview";
+
+/*Body of the error message shown when the statistics data cannot be loaded*/
+"stats_loading_error_text" = "Die Daten können im Moment nicht geladen werden";
+
+/*Zahlenformat für die Aktive nutzer nummer {COUNT} wird durch die aktuelle Zahl ersetzt z.b. "1.59". Voll Millionen wort*/
+"stats_counter_full" = "{COUNT} Millionen";
+
+/*iOS settings tutorial title*/
+"ios_settings_tutorial_title" = "Begegnungsmitteilungen aktivieren";
+
+/*iOS settings tutorial open settings button*/
+"ios_settings_tutorial_open_settings_button" = "Einstellungen öffnen";
+
+/*iOS settings tutorial schritt 1*/
+"ios_settings_tutorial_step_1_text" = "Öffnen Sie die Systemeinstellungen über die Taste unten.";
+
+/*iOS settings tutorial schritt 2*/
+"ios_settings_tutorial_step_2_text" = "Wählen Sie:";
+
+/*ios settings tutorial exposure notification text wie in iOS settings*/
+"ios_settings_tutorial_step_2_exposure_notification" = "Begegnungsmitteilungen";
+
+/*iOS settings tutorial schritt 3*/
+"ios_settings_tutorial_step_3_text" = "Aktivieren Sie zuerst die Funktion…";
+
+/*iOS settings tutorial share exposure notification text wie in iOS settings*/
+"ios_settings_tutorial_step_3_share_exposure_information" = "Begegnungsinformationen teilen";
+
+/*iOS settings tutorial schritt 4*/
+"ios_settings_tutorial_step_4_text" = "Falls noch nicht geschehen, können Sie nun SwissCovid als aktive Region festlegen.";
+
+/*iOS settings tutorial set as aktive region wie in iOS settings*/
+"ios_settings_tutorial_step_4_set_as_aktive_region" = "Als aktive Region festlegen";
+
+/*ios tracing permission fehlermeldung button text*/
+"ios_tracing_permission_error_button" = "So funktionierts";
+
+/*Subtitle für Meldung Detail Screen Header wenn nur eine Begegnung angezeigt wird.*/
+/*Fuzzy*/
+"meldung_detail_exposed_subtitle_last_encounter" = "Letzte Begegnung";
+
+/*Subtitle für Meldung Detail Screen Header wenn alle Begegnungen angezeigt werden.*/
+"meldung_detail_exposed_subtitle_all_encounters" = "Alle Begegnungen";
+
+/*Button Titel im Meldung Detail Header, wenn nur eine Meldung angezeigt wird.*/
+/*Fuzzy*/
+"meldung_detail_exposed_show_all_button" = "Alle anzeigen";
+
+/*Button Titel im Meldung Detail Header, wenn alle Meldungen angezeigt werden.*/
+"meldung_detail_exposed_show_less_button" = "Weniger anzeigen";
+
+/*Titel vom SwissCovid Leitfaden bei Kontaktmeldung*/
+"meldungen_detail_leitfaden_title" = "SwissCovid Leitfaden";
+
+/*Text zum SwissCovid Leitfaden bei Kontaktmeldung*/
+"meldungen_detail_leitfaden_text" = "Beantworten Sie die Fragen im SwissCovid Leitfaden um zu erfahren, wie Sie richtig reagieren.";
+
+/*Button Text zum Öffnen vom SwissCovid Leitfaden*/
+"meldungen_detail_open_leitfaden_button" = "Jetzt ausfüllen";
+
+/*Title für Infotext zu SwissCovid Infoline*/
+"meldungen_tel_information_title" = "Telefonische Auskunft";
+
+/*Infotext zu SwissCovid Infoline*/
+"meldungen_tel_information_text" = "Bei weiteren Fragen gibt Ihnen die Infoline SwissCovid gerne auch telefonisch Auskunft.";
+
+/*Hinweis Text nach dem Ausfüllen vom SwissCovid Leitfaden, dass man erneut ausfüllen kann*/
+"meldungen_detail_leitfaden_again_text" = "Sie können den SwissCovid Leitfaden hier jederzeit erneut öffnen.";
+
+/*Button Text um SwissCovid Leitfaden erneut zu öffnen*/
+"meldungen_detail_open_leitfaden_again_button" = "Zum Leitfaden";
+
+/*Homescreen Text mit Hinweis zu SwissCovid Leitfaden bei einer Meldung*/
+"exposed_info_answer_questions_in_leitfaden" = "Beantworten Sie die Fragen im";
+
+/*Homescreen Text mit Hinweis zu SwissCovid Leitfaden bei einer Meldung*/
+"exposed_info_swisscovid_leitfaden" = "SwissCovid Leitfaden";
+
+/*Dialog Text beim Löschen einer Meldung über einen möglichen Kontakt*/
+"delete_notification_dialog" = "Die Meldung über eine mögliche Ansteckung dient als Nachweis, den Sie für einen kostenlosen Coronavirus-Test benötigen. Wenn Sie diese Meldung löschen, verlieren Sie diesen Nachweis und den Link für den SwissCovid Leitfaden.";
+
+/*URL to the SwissCovid Leitfaden*/
+"swisscovid_leitfaden_url" = "https://swisscovid.bag-coronavirus.ch/screening?contactDates={CONTACT_DATES}";
+
+/*Tracing Erinnerung 4 Stunden Radio Button*/
+"tracing_reminder_radio_four_hours" = "4 Stunden";
+
+/*Tracing Erinnerung 8 Stunden Radio Button*/
+"tracing_reminder_radio_eight_hours" = "8 Stunden";
+
+/*Tracing Erinnerung 12 Stunden Radio Button*/
+"tracing_reminder_radio_twelve_hours" = "12 Stunden";
+
+/*Tracing Erinnerung keine Erinngerung Radio Button*/
+"tracing_reminder_radio_no_reminder" = "Keine Erinnerung";
+
+/*Tracing Erinnerung bestätigen Button*/
+"tracing_reminder_confirm_button" = "OK";
+
+/*Tracing Erinnerung abbrechen Button*/
+"tracing_reminder_cancel_button" = "Abbrechen";
+
+/*Tracing Erinnerung Titel*/
+"tracing_reminder_title" = "Erinnerung setzen";
+
+/*Tracing Erinnerung Untertitel*/
+"tracing_reminder_subtitle" = "SwissCovid kann Sie daran erinnern, das Tracing wieder zu aktivieren.";
+
+/*Tracing Erinnerung Warnung*/
+"tracing_reminder_warning" = "Das Tracing wird deaktiviert.";
+
+/*Kantonname Zürich*/
+/*Fuzzy*/
+"canton_zurich" = "Zürich";
+
+/*Kantonname Aargau*/
+/*Fuzzy*/
+"canton_aargau" = "Aargau";
+
+/*Kantonname Appenzell Innerrhoden*/
+/*Fuzzy*/
+"canton_appenzell_innerrhoden" = "Appenzell Innerrhoden";
+
+/*Kantonname Appenzell Ausserrhoden*/
+/*Fuzzy*/
+"canton_appenzell_ausserrhoden" = "Appenzell Ausserrhoden";
+
+/*Kantonname Bern*/
+/*Fuzzy*/
+"canton_berne" = "Bern";
+
+/*Kantonname Basel-Landschaft*/
+/*Fuzzy*/
+"canton_basel_country" = "Basel-Landschaft";
+
+/*Kantonname Basel-Stadt*/
+/*Fuzzy*/
+"canton_basel_city" = "Basel-Stadt";
+
+/*Kantonname Freiburg*/
+/*Fuzzy*/
+"canton_fribourg" = "Freiburg";
+
+/*Kantonname Genf*/
+/*Fuzzy*/
+"canton_geneva" = "Genf";
+
+/*Kantonname Glarus*/
+/*Fuzzy*/
+"canton_glarus" = "Glarus";
+
+/*Kantonname Graubünden*/
+/*Fuzzy*/
+"canton_graubuenden" = "Graubünden";
+
+/*Kantonname Jura*/
+/*Fuzzy*/
+"canton_jura" = "Jura";
+
+/*Kantonname Luzern*/
+/*Fuzzy*/
+"canton_lucerne" = "Luzern";
+
+/*Kantonname Neuenburg*/
+/*Fuzzy*/
+"canton_neuchatel" = "Neuenburg";
+
+/*Kantonname Nidwalden*/
+/*Fuzzy*/
+"canton_nidwalden" = "Nidwalden";
+
+/*Kantonname Obwalden*/
+/*Fuzzy*/
+"canton_obwalden" = "Obwalden";
+
+/*Kantonname St. Gallen*/
+/*Fuzzy*/
+"canton_st_gallen" = "St. Gallen";
+
+/*Kantonname Schaffhausen*/
+/*Fuzzy*/
+"canton_schaffhausen" = "Schaffhausen";
+
+/*Kantonname Solothurn*/
+/*Fuzzy*/
+"canton_solothurn" = "Solothurn";
+
+/*Kantonname Schwyz*/
+/*Fuzzy*/
+"canton_schwyz" = "Schwyz";
+
+/*Kantonname Thurgau*/
+/*Fuzzy*/
+"canton_thurgovia" = "Thurgau";
+
+/*Kantonname Tessin*/
+/*Fuzzy*/
+"canton_ticino" = "Tessin";
+
+/*Kantonname Uri*/
+/*Fuzzy*/
+"canton_uri" = "Uri";
+
+/*Kantonname Waadt*/
+/*Fuzzy*/
+"canton_vaud" = "Waadt";
+
+/*Kantonname Wallis*/
+/*Fuzzy*/
+"canton_valais" = "Wallis";
+
+/*Kantonname Zug*/
+/*Fuzzy*/
+"canton_zug" = "Zug";
+
+/*Kantonname Fürstentum Liechtenstein*/
+/*Fuzzy*/
+"country_liechtenstein" = "Fürstentum Liechtenstein";
+
+/*Test standorte Popup Titel*/
+"test_location_popup_title" = "Wo kann ich einen Test machen?";
+
+/*Test standorte Popup Text*/
+"test_location_popup_text" = "Sie können sich bei verschiedenen Ärztinnen und Ärzten, Testzentren, Spitälern und Apotheken auf das Coronavirus testen lassen. Informationen zu den Testangeboten finden Sie auf den kantonalen Webseiten:";
+
+/*Notification Channel name for Tracing Reactivation Reminders on Android Devices (Only visible in System Settings)*/
+"android_reminder_channel_name" = "Tracing-Aktivierungs Erinnerung";
+
+/*Titel der Tracing-Reaktivierungs-Notification*/
+"tracing_reminder_notification_title" = "Tracing aktivieren";
+
+/*Subtitle der Tracing-Reaktivierungs-Notification*/
+"tracing_reminder_notification_subtitle" = "Aktivieren Sie das Tracing, damit die App Begegnungen speichern und Meldungen empfangen kann.";
+
+/*iOS Blockierende View bei benötigten OS update: Titel*/
+"ios_software_update_blocking_title" = "Softwareupdate benötigt";
+
+/*iOS Blockierende View bei benötigten OS update: text*/
+"ios_software_update_blocking_text" = "Sie müssen Sie die aktuellste iOS Version installieren, damit SwissCovid funktioniert.";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial title*/
+"ios_software_update_blocking_tutorial_title" = "So funktionierts:";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial first*/
+"ios_software_update_blocking_tutorial_first" = "Öffnen Sie die «Einstellungen» auf dem Homescreen";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial second*/
+"ios_software_update_blocking_tutorial_second" = "Gehen Sie zu…";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial second settings general (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_second_settings" = "Allgemein";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial third*/
+"ios_software_update_blocking_tutorial_third" = "Wählen Sie…";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial third software update (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_third_software_update" = "Softwareupdate";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial fourth*/
+"ios_software_update_blocking_tutorial_fourth" = "Tippen Sie auf…";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial fourth load and install (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_fourth_load_and_install" = "Laden und installieren";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial apple button*/
+"ios_software_update_blocking_tutorial_apple" = "Anleitung von Apple";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial apple url*/
+"ios_software_update_blocking_tutorial_apple_url" = "https://support.apple.com/de-de/HT204204";
+
+/*iOS Notification Text bei benötigten OS update*/
+"ios_software_update_notification_title" = "Softwareupdate benötigt";
+
+/*iOS Notification Text bei benötigten OS update*/
+"ios_software_update_notification_text" = "Sie müssen Sie die aktuellste iOS Version installieren, damit SwissCovid funktioniert.";
+
+/*Button Text um die Isolation zu beenden*/
+"delete_infection_dialog_finish_button" = "Beenden";
+
+/*Text der nach der Eingabe des Covidcodes angezeigt wird.*/
+"tracing_ended_info" = "Es werden keine neuen Begegnungen mehr gespeichert und neue Check-ins sind auch nicht mehr möglich.\n\nBeide Funktionen können wieder aktiviert werden, nachdem die Isolation beendet wurde.";
+"testlocation_url_canton_aargau" = "https://www.ag.ch/de/themen_1/coronavirus_2/coronavirus.jsp";
+"testlocation_url_canton_appenzell_ausserrhoden" = "https://www.ar.ch/verwaltung/departement-gesundheit-und-soziales/amt-fuer-gesundheit/informationsseite-coronavirus/";
+"testlocation_url_canton_appenzell_innerrhoden" = "https://www.ai.ch/themen/gesundheit-alter-und-soziales/gesundheitsfoerderung-und-praevention/uebertragbare-krankheiten/coronavirus";
+"testlocation_url_canton_basel_country" = "https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/amt-fur-gesundheit/medizinische-dienste/kantonsarztlicher-dienst/aktuelles";
+"testlocation_url_canton_basel_city" = "https://www.coronavirus.bs.ch/";
+"testlocation_url_canton_berne" = "http://www.be.ch/corona";
+"testlocation_url_canton_fribourg" = "https://www.fr.ch/de/gesundheit/covid-19/coronavirus-aktuelle-informationen-alle-news-in-zusammenhang-mit-covid-19-getroffene-massnahmen-faq";
+"testlocation_url_canton_geneva" = "https://www.ge.ch/covid-19-se-proteger-proteger-autres";
+"testlocation_url_canton_glarus" = "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/gesundheit/coronavirus.html/4817";
+"testlocation_url_canton_graubuenden" = "https://www.gr.ch/DE/institutionen/verwaltung/djsg/ga/coronavirus/info/Seiten/Start.aspx";
+"testlocation_url_canton_jura" = "https://www.jura.ch/fr/Autorites/Coronavirus/Accueil/Coronavirus-Informations-officielles-a-la-population-jurassienne.html";
+"testlocation_url_canton_lucerne" = "https://gesundheit.lu.ch/themen/Humanmedizin/Infektionskrankheiten/Informationen_Coronavirus";
+"testlocation_url_canton_neuchatel" = "https://www.ne.ch/autorites/DFS/SCSP/medecin-cantonal/maladies-vaccinations/Pages/Coronavirus.aspx";
+"testlocation_url_canton_nidwalden" = "https://www.nw.ch/gesundheitsamtdienste/6044";
+"testlocation_url_canton_obwalden" = "https://www.ow.ch/de/verwaltung/dienstleistungen/?dienst_id=5962";
+"testlocation_url_canton_st_gallen" = "https://www.sg.ch/tools/informationen-coronavirus.html";
+"testlocation_url_canton_schaffhausen" = "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Departement-des-Innern/Gesundheitsamt-2954701-DE.html";
+"testlocation_url_canton_schwyz" = "https://www.sz.ch/behoerden/information-medien/medienmitteilungen/coronavirus.html/72-416-412-1379-6948";
+"testlocation_url_canton_solothurn" = "https://corona.so.ch/";
+"testlocation_url_canton_thurgovia" = "https://www.tg.ch/news/fachdossier-coronavirus.html/10552";
+"testlocation_url_canton_ticino" = "https://www4.ti.ch/dss/dsp/covid19/home/";
+"testlocation_url_canton_uri" = "https://www.ur.ch/themen/2962";
+"testlocation_url_canton_valais" = "https://www.vs.ch/de/web/coronavirus/home";
+"testlocation_url_canton_zug" = "https://www.zg.ch/behoerden/gesundheitsdirektion/amt-fuer-gesundheit/corona";
+"testlocation_url_canton_vaud" = "https://www.vd.ch/toutes-les-actualites/hotline-et-informations-sur-le-coronavirus/";
+
+/*Fuzzy*/
+"testlocation_url_canton_zurich" = "https://www.zh.ch/de/gesundheit/coronavirus.html";
+"testlocation_url_country_liechtenstein" = "https://www.llv.li/inhalt/118724/amtsstellen/coronavirus";
+
+/*text for info box pop up for the hearing impaired*/
+/*Fuzzy*/
+"hearing_impaired_info" = "Sind Sie gehörlos oder hörbehindert und können nicht anrufen?\n\nDann senden Sie eine E-Mail an covid-support@medgate.ch";
+
+/*Überschrift des Covidcodes-Statistik-Moduls*/
+"stats_covidcodes_title" = "Covidcodes";
+
+/*Überschrift des Fallzahlen-Statistik Moduls*/
+"stats_cases_title" = "Fallzahlen";
+
+/*Untertitel des Fallzahlen-Statistik-Moduls*/
+"stats_cases_subtitle" = "aktuelle Entwicklung";
+
+/*Label der "Total eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_total_label" = "eingegeben";
+
+/*Label der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_label" = "innert 0-2 Tagen";
+
+/*Label der "7-Tage-Schnitt Fallzahlen" Statistik*/
+"stats_cases_7day_average_label" = "7-Tage-Schnitt";
+
+/*Label der "Änderung gegenüber Vorwoche Fallzahlen" Statistik*/
+"stats_cases_rel_prev_week_label" = "zur Vorwoche";
+
+/*Überschrift des Info-Popups auf dem Statistik-Screen*/
+"stats_info_popup_title" = "Details zu den Zahlen";
+
+/*Untertitel des Infopopups zu Covidcodes-Statistiken*/
+"stats_info_popup_subtitle_covidcodes" = "Eingegebene Covidcodes";
+
+/*Untertitel des Infopopups zu Fallzahlen-Statistiken*/
+"stats_info_popup_subtitle_cases" = "Fallzahlen";
+
+/*Beschreibung der "Total eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_total_description" = "Anzahl der eingegebenen Covidcodes seit dem Start der SwissCovid App im Juni 2020. So viele Menschen haben durch die App ihre Kontakte über eine mögliche Ansteckung benachrichtigt.";
+
+/*Beschreibung der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_description" = "Anteil der Covidcodes, die innerhalb der ersten beiden Tage nach Symptombeginn bereits eingegeben wurden. Dieser Anteil bezieht sich auf die letzten 7 Tage.\n\nDie Zeit ist bei der Bekämpfung des Coronavirus ein entscheidender Faktor: je kürzer die Zeit zwischen Symptombeginn, Testresultat und der Covidcode-Eingabe, desto früher können benachrichtigte Kontakte zu Hause bleiben und andere schützen.";
+
+/*Beschreibung der "7-Tage-Schnitt Fallzahlen" Statistik*/
+"stats_cases_7day_average_description" = "Zeigt den Durchschnitt der gemeldeten Neuinfektionen pro Tag über 7 Tage.";
+
+/*Beschreibung der "Änderung gegenüber Vorwoche Fallzahlen" Statistik*/
+"stats_cases_rel_prev_week_description" = "Zeigt die Veränderung des 7-Tage-Schnitts im Vergleich zum Stand von vor einer Woche.";
+
+/*Label der "Aktuelle Entwicklung" Statistik*/
+"stats_cases_current_label" = "Aktuelle Entwicklung";
+
+/*Beschreibung der "Aktuelle Entwicklung" Statistik*/
+"stats_cases_current_description" = "Die Grafik zeigt die gemeldeten Neuinfektionen der letzten 28 Tage. Dies gibt einen Überblick über die aktuelle Entwicklung.";
+
+/*Inform Detail: Infobox Text*/
+"inform_detail_infobox1_text" = "Sie wurden positiv getestet (PCR-Test oder Antigen-Schnelltest) und haben nach 4h noch keinen Covidcode erhalten?\nDann rufen Sie hier an:";
+
+/*Inform Detail: Infobox Title*/
+"inform_detail_infobox1_title" = "Noch keinen Covidcode?";
+
+/*Titel des Popups mit der Frage, ob der User die Isolation beendet hat*/
+"homescreen_isolation_ended_popup_title" = "Haben Sie Ihre Isolation beendet?";
+
+/*Text des Popups mit der Frage, ob der User die Isolation beendet hat*/
+"homescreen_isolation_ended_popup_text" = "Das Tracing kann wieder aktiviert werden, sobald Sie die Isolation beendet haben.";
+
+/*Ja-Antwort*/
+"answer_yes" = "Ja";
+
+/*Nein-Antwort*/
+"answer_no" = "Nein";
+
+/*Text in der Infobox auf dem Reisen-Screen*/
+/*Fuzzy*/
+"travel_screen_info" = "Unterwegs im Ausland? In diesen Ländern funktioniert SwissCovid-Begegnungen.";
+
+/*Überschrift der Liste der kompatiblen Länder auf dem Reisen-Screen*/
+"travel_screen_compatible_countries" = "Kompatible Länder:";
+
+/*Informieren Flow: Erster Screen Reise-Infotext*/
+"inform_code_travel_text" = "Damit auch Reisende aus dem Ausland nach einer Begegnung gewarnt werden können, werden die privaten Schlüssel mit den Corona-Apps der kompatiblen Länder geteilt.";
+
+/*Überschrift der "eingegebene Covidcodes" Statistikbox*/
+"stats_covidcodes_total_header" = "Total";
+
+/*Überschrift der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_header" = "Aktuell";
+
+/*Überschrift im Popup für die "Veränderung zur Vorwoche" Statistik*/
+"stats_cases_rel_prev_week_popup_header" = "Veränderung zur Vorwoche";
+
+/*Meldungen: Positiv getestet FAQ 2 Titel (Benachrichtigung)*/
+"meldungen_positive_tested_faq2_title" = "Wer wird benachrichtigt?";
+
+/*Meldungen: Positiv getestet FAQ 2 Text (Benachrichtigung)*/
+"meldungen_positive_tested_faq2_text" = "Es werden alle Kontakte im Zeitraum Ihrer Ansteckungsphase vom {ONSET_DATE} bis zur Eingabe des Covidcodes benachrichtigt, wenn das Risiko einer Ansteckung bestand – auf Grund der Distanz und Dauer oder wenn Sie am gleichen Ort eingecheckt waren.";
+
+/*Informieren: Danke Text Onset Date*/
+"inform_send_thankyou_text_onsetdate" = "{ONSET_DATE} – heute";
+
+/*Informieren: Danke Text Abschluss*/
+"inform_send_thankyou_text_stop_infection_chains" = "Auf diese Weise helfen Sie, andere vor einer möglichen Ansteckung zu warnen.";
+
+/*Informieren: Danke Text Onset Date Einleitung*/
+"inform_send_thankyou_text_onsetdate_info" = "Die privaten Schlüssel Ihrer App wurden für den folgenden Zeitraum gesendet:";
+
+/*Dialogtext wenn ein Covidcode eingegeben wird während das Tracing deaktiviert ist*/
+/*Fuzzy*/
+"inform_tracing_enabled_explanation" = "Bitte Tracing aktivieren, um automatisch erkannte Begegnungen zu teilen und andere zu warnen.";
+
+/*Leitfaden Info Popup Text*/
+/*Fuzzy*/
+"leitfaden_infopopup_text" = "Wenn Sie \"{BUTTON_TITLE}\" drücken, verlassen Sie die App und wechseln auf die Website des SwissCovid Leitfadens. Dabei werden die Daten der letzten Begegnungen von möglichen Ansteckungen der Website mitgeschickt.";
+
+/*Leitfaden InfoPopup Titel*/
+"leitfaden_infopopup_title" = "Information SwissCovid Leitfaden";
+
+/*Update Boarding: Titel*/
+"germany_update_boarding_title" = "Kompatibel mit Deutschland";
+
+/*Update Boarding: Text*/
+"germany_update_boarding_text" = "Sie werden auch informiert, wenn Sie mit einer Person in Kontakt waren, welche die deutsche Corona-Warn-App nutzt und später positiv getestet wurde und umgekehrt. Dazu wurden die Nutzungsbedingungen und Datenschutzerklärung aktualisiert.";
+
+/*Update Boarding: Heading oben*/
+"germany_update_boarding_heading" = "SwissCovid Update";
+
+/*Debug Screen: Update-Boarding Reset Button*/
+"reset_update_boarding" = "Update Boarding zurücksetzen";
+
+/*Meldungen Detail Kostenloser Test Box Text*/
+"meldungen_detail_free_test_text" = "Ein Corona Test ist ab dem 5. Tag nach dem angezeigten Kontaktdatum sinnvoll und empfohlen.";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt in wievielen Tagen ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_in_x_tagen" = "In {COUNT} Tagen";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt dass jetzt ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_now" = "Jetzt";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt dass in 1 Tag ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_tomorrow" = "In 1 Tag";
+
+/*Check-Ins: Titel vom Reminder Push*/
+"checkout_reminder_title" = "Check-out Erinnerung";
+
+/*Check-Ins: Check-out Reminder Push Text*/
+"checkout_reminder_text" = "Möchten Sie auschecken?";
+
+/*Check-Ins: Auto-Checkout Push Titel*/
+"auto_checkout_title" = "Automatischer Checkout";
+
+/*Check-Ins: Auto-checkout Push Text*/
+"auto_checkout_body" = "Sie wurden automatisch ausgecheckt.";
+
+/*Check-Ins: Qr-Scanner Text*/
+"qrscanner_scan_qr_text" = "QR-Code scannen und einchecken";
+
+/*Check-Ins: Fehler beim QR-Code scannen*/
+"qrscanner_error" = "Kein gültiger QR-Code!";
+
+/*Check-Ins: Anpassung Check-In Datumwahl von*/
+"datepicker_from" = "Von";
+
+/*Check-Ins: Datumsauswahl bis*/
+"datepicker_to" = "Bis";
+
+/*Check-Ins: Notiz hinzufügen zu Check-In*/
+"edit_mode_addcomment" = "Notiz hinzufügen";
+
+/*Check-Ins: Notiz zu Check-In Placeholder Text*/
+"edit_mode_comment_placeholder" = "zb. Mit wem waren Sie da?";
+
+/*Fertig Button Text*/
+"done_button" = "Fertig";
+
+/*Check-Ins: Titel für Erinnerung*/
+"checkin_set_reminder" = "Check-out Erinnerung";
+
+/*Check-Ins: Erinnerung Option Aus*/
+"reminder_option_off" = "Aus";
+
+/*Check-Ins: Tagebuch Zugriff Text*/
+"authenticate_for_diary" = "Authentifizieren Sie sich für den Zugriff auf das Tagebuch";
+
+/*Check-Ins: Errinnerungsoption Stunden*/
+"reminder_option_hours" = "{HOURS} h";
+
+/*Check-Ins: Errinnerungsoption Minuten*/
+"reminder_option_minutes" = "{MINUTES}'";
+
+/*Check-Ins: Fehler wenn Kamera-Erlaubnis nicht gegeben*/
+"qr_scanner_no_camera_permission" = "Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.";
+
+/*Check-Ins: Tagebuch Titel*/
+"diary_title" = "Meine Check-ins";
+
+/*Check-Ins: Button Titel zum Einchecken*/
+"checkin_button_title" = "Check-in";
+
+/*Check-Ins: iOS Kamera Erlaubnis Text*/
+"NSCameraUsageDescription" = "Die Kamera wird benötigt, um den QR-Code zu scannen.";
+
+/*Check-Ins: FaceID Text um Tagebuch anzuschauen*/
+"NSFaceIDUsageDescription" = "Erlauben Sie Face-ID, um sicher auf Ihr Tagebuch zuzugreifen.";
+
+/*Check-Ins: Text der angezeigt wieso FaceId gebraucht wird*/
+"face_id_reason_text" = "Authentifizieren Sie sich für den Zugriff auf das Tagebuch";
+
+/*Check-Ins: Check-Out Button Title*/
+"checkout_button_title" = "Check out";
+
+/*Check-Ins: Titel Modul auf Homescreen*/
+"module_checkins_title" = "Check-in";
+
+/*Check-Ins: Titel vom Check-In Screen*/
+"checkin_title" = "Check-In";
+
+/*Check-Ins: QR-Code erstellen Titel*/
+"checkins_create_qr_code" = "QR-Code erstellen";
+
+/*Veranstaltungen-Screen Titel*/
+"events_title" = "QR-Codes erstellen";
+
+/*Check-Ins: Jetzt einchecken Button Titel*/
+"check_in_now_button_title" = "Jetzt einchecken";
+
+/*Check-Ins: Reminder Fehlermeldung Titel*/
+"checkin_reminder_settings_alert_title" = "Die Erinnerung konnte nicht gesetzt werden";
+
+/*Check-Ins: Erinnerungen Fehlermeldung Text*/
+"checkin_reminder_settings_alert_message" = "Damit Sie Check-out Erinnerungen erhalten, müssen Sie \\\"Mitteilungen\\\" in den App-Einstellungen erlauben.";
+
+/*Check-Ins: Reminder Popup Anpassen*/
+"checkin_reminder_option_open_settings" = "Anpassen";
+
+/*Check-Ins: Bearbeiten von Check-Ins Titel*/
+"edit_controller_title" = "Bearbeiten";
+
+/*Check-Ins: Tagebuch leeres Tagbuch Titel*/
+"empty_diary_title" = "Noch keine Einträge vorhanden";
+
+/*Check-Ins: Tagebuch leer, Text*/
+"empty_diary_text" = "Wenn Sie einen SwissCovid-QR-Code scannen, um sich vor Ort einzuchecken, wird hier automatisch ein Eintrag angelegt.";
+
+/*Check-Ins: Kamera Erlaubnis Text*/
+"camera_permission_dialog_text" = "SwissCovid benötigt Zugriff auf die Kamera Ihres Gerätes. Die Kamera wird nur verwendet, um QR Codes zu scannen.";
+
+/*Check-Ins: Button Titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären*/
+"camera_permission_dialog_action" = "Kamera-Zugriff erlauben";
+
+/*Check-Ins: Veranstaltung Titel Placeholder*/
+/*Fuzzy*/
+"web_generator_title_placeholder" = "z.B. Raum oder Anlassname";
+
+/*Check-Ins: Veranstaltungen Detail PDF Button*/
+"show_pdf_button" = "PDF drucken";
+"bottom_nav_tab_info" = "Info";
+"error_network_title" = "Netzwerk Fehler";
+"error_network_text" = "Überprüfen Sie Ihre Internet Verbindung.";
+"error_action_retry" = "Erneut versuchen";
+"error_notification_deactivated_title" = "Mitteilungen deaktiviert";
+"error_notification_deactivated_text" = "Ändern Sie die Einstellungen, um bei einer Meldung direkt informiert zu werden.";
+"error_action_change_settings" = "Einstellungen ändern";
+"error_camera_permission_title" = "Kein Zugriff auf Kamera";
+"error_camera_permission_text" = "Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können.";
+"error_title" = "Fehler";
+"qr_scanner_error_code_not_yet_valid" = "QR-Code noch nicht gültig";
+"qr_scanner_error_code_not_valid_anymore" = "QR-Code nicht mehr gültig";
+"error_already_checked_in" = "Sie sind bereits eingecheckt.";
+"error_update_text" = "Dieser QR-Code ist nicht mit der installierten App-Version kompatibel. Bitte aktualisieren Sie die App, um fortzufahren.";
+"error_update_title" = "Update erforderlich";
+"error_action_update" = "Jetzt aktualisieren";
+"ongoing_notification_checkout_quick_action" = "Check out";
+"reminder_notification_snooze_action" = "Snooze";
+"android_ongoing_checkin_notification_channel_name" = "Permanente Checkin Meldung";
+"ongoing_notification_title" = "Sie sind eingecheckt seit {TIME} Uhr.";
+
+/*Check-Ins: Sichern Button bei Check-out*/
+"checkout_save_button_title" = "Sichern";
+
+/*Check-Ins: QR-Code scannen Button*/
+/*Fuzzy*/
+"scan_qr_code_button_title" = "QR-Code scannen";
+
+/*Titel der Infobox auf dem Homescreen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_title" = "Check-In deaktiviert";
+
+/*Text der Infobox auf dem Homescreen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_text" = "Derzeit ist kein Check-in möglich";
+
+/*Text im Check-Ins-Screen im nicht eingecheckten Zustand*/
+"checkin_detail_checked_out_text" = "Scannen Sie einen SwissCovid-QR-Code, um sich vor Ort einzuchecken.";
+
+/*Text im Check-Ins-Screen, im Tagebuch-Modul*/
+"checkin_detail_diary_text" = "Wenn Sie einen SwissCovid-QR-Code scannen, um sich vor Ort einzuchecken, wird hier automatisch ein Eintrag angelegt.";
+
+/*Label im Checkin-Modul im eingecheckten Zustand*/
+/*Fuzzy*/
+"checkin_checked_in" = "Sie sind eingecheckt";
+"checkout_from_to_date" = "{DATE1} bis {DATE2}";
+"inform_detail_covidcode_info_button" = "Mehr zum Covidcode";
+
+/*Check-Ins: Button Entfernen um Check-In zu löschen*/
+"remove_from_diary_button" = "Eintrag entfernen";
+
+/*Check-Ins: QR-Code löschen Titel Button*/
+"delete_button_title" = "Löschen";
+
+/*Check-Ins: Teile QR-Code Button Titel*/
+/*Fuzzy*/
+"share_button_title" = "Teilen";
+
+/*Check-Ins: Drucken Button auf PDF-Detailseite*/
+"print_button_title" = "Drucken";
+
+/*Check-Ins: Beschreibung Modul auf Homescreen*/
+"module_checkins_description" = "Scannen Sie einen SwissCovid-QR-Code, um sich vor Ort einzuchecken.";
+
+/*Titel im "Covidcode flow", wo man check ins wählen kann, welche geshared werden sollen.*/
+"inform_share_checkins_title" = "Check-in-Einträge teilen";
+
+/*Untertitel im "Covidcode flow", wo man check ins wählen kann, welche geshared werden sollen.*/
+"inform_share_checkins_subtitle" = "Wenn Sie Ihre Check-in-Einträge teilen, kann die App Personen benachrichtigen, die zum gleichen Zeitpunkt am gleichen Ort eingecheckt haben.";
+
+/*Button text, um alle Checkins zu selektieren*/
+"inform_share_checkins_select_all" = "Alle passenden auswählen";
+"inform_dont_send_button_title" = "Nicht senden";
+"inform_dont_share_button_title" = "Nicht teilen";
+"inform_really_not_share_title" = "Wirklich nicht teilen?";
+"inform_really_not_share_subtitle" = "Das Teilen Ihrer privaten Schlüssel hilft «SwissCovid», andere potenziell infizierte Personen zu benachrichtigen und die weitere Ausbreitung des Virus zu verhindern. Wenn Sie Ihre privaten Schlüssel nicht teilen, werden keine potenziell infizierten Personen benachrichtigt.";
+
+/*Remove from Diary Warning view title*/
+"remove_diary_warning_title" = "Eintrag entfernen";
+
+/*Remove from diary warning view explanation text*/
+"remove_diary_warning_text" = "Ihr Eintrag wird unwiderruflich aus der Liste entfernt.";
+
+/*Remove from diary warning view remove button title*/
+"remove_diary_remove_now_button" = "Vollständig entfernen";
+
+/*Hide from diary warning title*/
+/*Fuzzy*/
+"remove_diary_warning_hide_title" = "Nur ausblenden und weiterhin benachrichtigt werden?";
+
+/*Titel auf der "CovidCode eingeben"-Card auf dem Home Screen*/
+"home_covidcode_card_title" = "Positiv getestet?";
+
+/*Text auf der "Isolation beenden"-Card auf dem Home Screen*/
+/*Fuzzy*/
+"home_end_isolation_card_text" = "Begegnungen und Check-in wieder aktivieren.";
+
+/*Check-Ins: Erinnerungsoption Stunden & Minuten*/
+"reminder_option_hours_minutes" = "{HOURS} h {MINUTES}'";
+
+/*Text, welcher im Checkin-Overview Screen erscheint, wenn der Benutzer sich in Isolation befindet.*/
+"checkin_overview_isolation_text" = "Sie können nicht mehr einchecken, wenn Sie positiv getestet wurden.";
+
+/*Veranstaltungen-Card Text im Infotab*/
+"events_card_subtitle" = "Erstellen Sie einen SwissCovid-QR-Code, mit dem sich Personen vor Ort einchecken können.";
+
+/*Dialog Text beim Löschen eines erstellten QR Codes.*/
+"delete_qr_code_dialog" = "Möchten Sie den QR Code wirklich löschen? Gedruckte QR-Codes bleiben weiterhin gültig.";
+
+/*Self-Check-In Button Titel im QR-Code Screen*/
+"self_checkin_button_title" = "Self Check-In";
+
+/*Text, welcher im Checkin-Overview Screen erscheint, wenn der Benutzer nicht eingecheckt ist.*/
+"checkin_overview_checkins_explanation" = "Scannen Sie einen SwissCovid-QR-Code, um sich vor Ort einzuchecken.";
+
+/*Popup Titel wenn beim Checkout oder Editieren von CheckIns sich die neu gewählte Zeit mit vorhandenen aus dem Tagebuch überschneidet*/
+"checkout_overlapping_alert_title" = "Sichern nicht möglich";
+
+/*Popup Beschreibung wenn beim Checkout oder Editieren von CheckIns sich die neu gewählte Zeit mit vorhandenen aus dem Tagebuch überschneidet*/
+"checkout_overlapping_alert_description" = "Ihre gewählten Zeiten überschneiden sich mit anderen Check-Ins aus ihrem Tagebuch. Bitte überprüfen Sie nochmals Ihre Angabe.";
+
+/*Informieren: Danke Text Checkins Teil*/
+"inform_send_thankyou_text_checkins" = "Ihre ausgewählten Check-In-Einträge wurden gesendet. Alle Personen, die zum gleichen Zeitpunkt am gleichen Ort eingecheckt haben, werden benachrichtigt.";
+
+/*SwissCovid QR Code PDF: Headline über dem Slogan*/
+"pdf_headline" = "SwissCovid-Check-in";
+
+/*SwissCovid QR Code PDF: Slogan*/
+"pdf_slogan" = "Einchecken ohne Daten zu hinterlassen";
+
+/*SwissCovid QR Code PDF: Erklärungstext unter dem Slogan*/
+"pdf_explanation" = "Mit der SwissCovid App können Sie sich bei uns einfach einchecken, ohne Ihre Daten zu hinterlassen. Bei einer Risikosituation werden Sie in der App schnell informiert.";
+
+/*SwissCovid QR Code PDF: App Bezeichnung neben dem App Icon*/
+"pdf_swisscovid_app" = "SwissCovid App";
+
+/*SwissCovid QR Code PDF: Download Hinweis neben dem App Icon*/
+"pdf_download_app" = "Jetzt downloaden";
+
+/*Title im Check-Ins-Screen im nicht eingecheckten Zustand*/
+"checkin_detail_checked_out_title" = "Einchecken ohne Daten \nzu hinterlassen";
+
+/*Text auf der "CovidCode eingeben"-Card auf dem Home Screen*/
+"home_covidcode_card_text" = "Geben Sie hier Ihren Covidcode ein, um andere zu warnen.";
+
+/*Titel auf der "Isolation beenden"-Card auf dem Home Screen*/
+"home_end_isolation_card_title" = "Isolation beenden?";
+
+/*Titel auf der Card, welche zum Screen führt, wo man eigene QR Codes erstellen kann.*/
+"events_card_title" = "Sie möchten QR-Codes erstellen?";
+
+/*Fuzzy*/
+"checkin_footer_title1" = "Warum eine Check-in-Funktion?";
+
+/*Fuzzy*/
+"checkin_footer_subtitle1" = "Die Check-in-Funktion ohne Erfassung der Kontaktdaten erweitert die SwissCovid App. Mit dieser Funktion können Sie im Falle eines positiven Tests nicht nur enge Kontakte, sondern auch Personen, die zum gleichen Zeitpunkt am gleichen Ort eingecheckt haben, warnen.";
+
+/*Fuzzy*/
+"checkin_footer_title2" = "Keine zentrale Datenspeicherung";
+
+/*Fuzzy*/
+"checkin_footer_subtitle2" = "Für die SwissCovid-Check-ins müssen keine persönlichen Daten wie Name, Adresse oder Telefonnummer angegeben werden und es werden auch keine GPS-Standortdaten erfasst. Die Liste der Check-ins wird lokal auf Ihrem Smartphone gespeichert. Nach 14 Tagen werden die lokalen Daten wieder gelöscht.";
+"events_empty_state_title" = "Erstellen Sie einen QR-Code";
+"events_empty_state_subtitle" = "Mit einem SwissCovid-QR-Code können sich Personen vor Ort einchecken, ohne ihre Daten zu hinterlassen.";
+"events_info_box_title" = "Kein Ersatz für die obligatorische Kontaktdatenerfassung";
+"events_info_box_text" = "SwissCovid-Check-ins sind kein Ersatz für die in der «Covid-19-Verordnung besondere Lage» vorgeschriebene Kontaktdatenerfassungspflicht.";
+"events_footer_title1" = "Wo können Check-ins eingesetzt werden?";
+"events_footer_title2" = "Warum eine Check-in-Funktion?";
+"events_footer_subtitle1" = "SwissCovid-Check-ins können dort eingesetzt werden, wo sich Menschen treffen, aber keine Pflicht zur Kontaktdatenerfassung besteht.\n\nMögliche Einsatzorte:\n– Private Anlässe\n– Vereinsanlässe\n– Zusammenkünfte im professionellen Umfeld wie z.B. Sitzungszimmer, Büroräume, Kantinen, etc.";
+"events_footer_subtitle2" = "Die Check-in-Funktion ohne Erfassung der Kontaktdaten erweitert die SwissCovid App. Mit dieser Funktion können Sie im Falle eines positiven Tests nicht nur enge Kontakte, sondern auch Personen, die zum gleichen Zeitpunkt am gleichen Ort eingecheckt haben, warnen.";
+
+/*Subtitle vom Meldungen Card in der Liste aller Meldungen.*/
+"meldung_detail_exposed_list_card_subtitle" = "Risikosituation";
+
+/*Title vom Encounters Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_title_encounters" = "Begegnungen";
+
+/*Title vom CheckIn Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_title_checkin" = "Check-in";
+
+/*Was soll ich tun? Button im Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_whattodo_button" = "Was soll ich tun?";
+
+/*Debug: Einstellungs-Option zum überschreiben des App-Zustands: An einem Check-In einem positiven Kontakt ausgesetzt*/
+"debug_state_setting_option_checkin_exposed" = "Positiver Check-in";
+
+/*Debug: Einstellungs-Option zum überschreiben des App-Zustands: Auf verschiedener Weise einem positiven Kontakt ausgesetzt*/
+"debug_state_setting_option_mutiple_exposed" = "Positive Check-ins / Kontakte";
+
+/*Anzeigename für User QR Codes*/
+"venue_type_user_qr_code" = "User QR Code";
+
+/*Anzeigename für User QR Codes*/
+"venue_type_contact_tracing_qr_code" = "Contact Tracing QR Code";
+
+/*Text der Module im Check-ins Screen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_text_detailed" = "Nach einem positiven Testergebnis ist die Check-in-Funktion automatisch deaktiviert. Sie kann nach Beendigung Ihrer Isolation wieder aktiviert werden.";
+
+/*Check-Ins: QR-Code erstellen subtitel*/
+"checkins_create_qr_code_subtitle" = "Vergeben Sie einen Titel, der den Ort oder Ihren Anlass näher beschreibt.\nDieser Titel wird beim Check-in angezeigt.";
+"checkin_report_heading" = "Was können Sie tun?";
+"checkin_report_title1" = "Kontakte schützen";
+"checkin_report_title2" = "Auf Symptome achten";
+"checkin_report_title3" = "Testen lassen";
+"checkin_report_subtitle1" = "Sie könnten bereits ansteckend sein, ohne es zu merken. Beachten Sie die geltenden Hygiene- und Schutzmassnahmen und schützen Sie Ihre Familie, Ihre Freunde und Ihr Umfeld.";
+"checkin_report_subtitle2" = "Überwachen Sie Ihren Gesundheitszustand.";
+"checkin_report_subtitle3" = "Lassen Sie sich beim Auftreten von Symptomen sofort testen. Wenn keine Symptome auftreten und Sie noch nicht vollständig geimpft sind, ist ein Corona-Test ebenfalls sinnvoll und empfohlen.";
+
+/*Titel von CheckIn Meldungen Screen.*/
+/*Fuzzy*/
+"meldung_detail_checkin_title" = "Check-In";
+"not_thank_you_screen_title" = "Keine Daten gesendet";
+
+/*Fuzzy*/
+"not_thank_you_screen_text1" = "Es wurden keine privaten Schlüssel gesendet.";
+"not_thank_you_screen_back_button" = "Zurück";
+"not_thank_you_screen_dont_send_button" = "Keine Daten senden";
+
+/*Fuzzy*/
+"not_thank_you_screen_text2" = "Es wurden keine Check-In-Einträge gesendet.";
+
+/*Button text, um ausgewählte Checkins zu senden*/
+"inform_share_checkins_send_button_title" = "Auswahl teilen";
+"inform_share_checkins_not_send_button" = "Nichts teilen";
+"onboarding_checkin_title" = "Einchecken ohne Daten zu hinterlassen";
+"onboarding_checkin_heading" = "Check-ins";
+"onboarding_checkin_text1" = "Mit SwissCovid-Check-ins können Sie sich mit der App an einem Ort oder bei einem Treffen einchecken.";
+"onboarding_checkin_text2" = "Ihre Anwesenheit wird nur in der App gespeichert. Sie müssen keine persönlichen Daten in der App hinterlassen.";
+"checkin_updateboarding_text" = "Mit SwissCovid-Check-ins können Sie sich mit der App an einem Ort oder bei einem Treffen einchecken. Ihre Anwesenheit wird nur in der App gespeichert. Sie müssen keine persönlichen Daten in der App hinterlassen. Dazu wurden die Nutzungsbedingungen und Datenschutzerklärung aktualisiert.";
+"onboarding_gaen_button_dont_activate" = "Überspringen";
+
+/*Hide from diary warning text*/
+"remove_diary_warning_hide_text" = "Der Eintrag wird 14 Tage verschlüsselt im Hintergrund der App gespeichert. Bei einer möglichen Ansteckung können Sie so trotzdem benachrichtigt werden.";
+
+/*CheckIn ausblenden*/
+"remove_diary_warning_hide_button" = "Nur ausblenden";
+"checkin_set_reminder_explanation" = "Die App kann Sie erinnern, zum richtigen Zeitpunkt wieder auszuchecken.";
+
+/*Remove from diary warning title*/
+"remove_diary_remove_now_title" = "Oder vollständig entfernen?";
+
+/*Remove from diary warning text*/
+"remove_diary_remove_now_text" = "Der Eintrag wird vollständig entfernt. Sie können nicht mehr gewarnt werden.";
+"not_thank_you_screen_text3" = "Es wird niemand benachrichtigt.";
+
+/*Link Text zu Informationen übers Testen*/
+"checkin_report_link" = "Was muss ich übers Testen wissen?";
+"instant_app_install_action" = "App installieren und einchecken";
+"partial_onboarding_box_text" = "Schliessen Sie die App-Konfiguration ab, um die Tracing-Funktion verwenden zu können.";
+"partial_onboarding_box_action" = "Jetzt abschliessen";
+"partial_onboarding_done_title" = "Konfiguration abgeschlossen";
+"partial_onboarding_done_text" = "Vielen Dank, dass Sie mithelfen, die Verbreitung des Coronavirus einzudämmen.";
+"web_slogan" = "Bei einem Ansteckungsrisiko schnell informiert.";
+
+/*Info URL for testing*/
+/*Fuzzy*/
+"test_info_url" = "https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/testen.html";
+"checkout_too_long_alert_text" = "Für diesen Check-In gilt eine maximale Check-in Dauer von {DURATION}. Bitte überprüfen Sie nochmals Ihre Angabe.";
+
+/*turn camera light on*/
+"accessibility_camera_light_on" = "Licht an";
+
+/*turn camera light off*/
+"accessibility_camera_light_off" = "Licht aus";
+
+/*Popup Text, welcher erscheint, wenn man den Covidcode eingeben will, man aber noch eingecheckt ist.*/
+"error_cannot_enter_covidcode_while_checked_in" = "Sie sind noch eingecheckt. Bitte checken Sie aus bevor Sie den Covidcode eingeben.";
+
+/*Titel auf der Card, welche zum Screen führt, wo man eigene QR Codes erstellen kann. Wird angezeigt falls bereits ein QR Code erstellt wurde*/
+"events_card_title_events_not_empty" = "Meine QR-Codes";
+
+/*Popup Beschreibung wenn beim Checkout oder Editieren von CheckIns die Checkin-Zeit nach der Checkout-Zeit liegt*/
+"checkout_inverse_time_alert_description" = "Ihre gewählte Checkout-Zeit liegt vor der Check-In-Zeit. Bitte überprüfen Sie nochmals Ihre Angabe.";
+
+/*Titel für die Notification die SwissCovid 2.0 ankündigt*/
+"update_notification_checkin_feature_title" = "Neue Funktion: Check-in";
+
+/*Text für die Notification die SwissCovid 2.0 ankündigt*/
+"update_notification_checkin_feature_text" = "Danke für die Nutzung von SwissCovid. Mit der neusten App-Version können Sie sich vor Ort einchecken, ohne Daten zu hinterlassen.";
+
+/*Titel für aktuellen Check-in im Tagebuch*/
+"diary_current_title" = "Aktuell";
+
+/*Snooze Option um 30min später an Checkout zu erinnern*/
+"ios_snooze_option_30min" = "Nochmals erinnern (30min)";
+
+/*Snooze Option um 1h später an Checkout zu erinnern*/
+"ios_snooze_option_1h" = "Nochmals erinnern (1h)";
+
+/*Snooze Option um 2h später an Checkout zu erinnern*/
+"ios_snooze_option_2h" = "Nochmals erinnern (2h)";
+
+/*Notification Quickaction um jetzt auszuchecken*/
+"ios_notification_checkout_now" = "Jetzt auschecken";
+
+/*Hinweis falls fälschlicherweise ein Covid-Zertifikat mit SwissCovid gescannt wird.*/
+"covid_certificate_alert_text" = "Bitte benutzen Sie zum Scannen dieses QR-Codes die App \"COVID Certificate\".";
+
+/*Button um Covid Certificate App zu öffnen*/
+"covid_certificate_open_app" = "App öffnen";
+
+/*Button um Covid Certificate App zu installieren*/
+"covid_certificate_install_app" = "App installieren";

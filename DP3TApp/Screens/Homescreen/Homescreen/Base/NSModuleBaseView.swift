@@ -18,19 +18,25 @@ class NSModuleBaseView: UIControl {
             headerView.title
         }
         set {
-            headerView.title = newValue
-            stackView.accessibilityLabel = newValue
+            if let headerTitle = newValue {
+                headerView.title = headerTitle
+                stackView.accessibilityLabel = headerTitle
+            } else {
+                headerView.isHidden = true
+            }
         }
     }
 
     let headerView = NSModuleHeaderView()
     internal let stackView = NSClickthroughStackView()
 
+    var enableHighlightBackground = true
+
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
 
-        backgroundColor = .ns_background
+        backgroundColor = .ns_moduleBackground
 
         setupLayout()
         setupAccessibility()
@@ -82,7 +88,8 @@ class NSModuleBaseView: UIControl {
 
     override var isHighlighted: Bool {
         didSet {
-            backgroundColor = isHighlighted ? .ns_background_highlighted : .ns_background
+            guard enableHighlightBackground else { return }
+            backgroundColor = isHighlighted ? .ns_background_highlighted : .ns_moduleBackground
         }
     }
 }
@@ -94,7 +101,7 @@ extension NSModuleBaseView {
         isAccessibilityElement = false
         accessibilityElementsHidden = false
         stackView.isAccessibilityElement = true
-        stackView.accessibilityTraits = [.button]
+        stackView.accessibilityTraits = [.button, .header]
     }
 
     func updateAccessibility(with sectionViews: [UIView]) {

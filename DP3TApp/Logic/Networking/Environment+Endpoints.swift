@@ -18,8 +18,18 @@ extension Endpoint {
         return Environment.current.configService.endpoint("config", queryParameters: ["appversion": av, "osversion": os, "buildnr": buildnr])
     }
 
+    /// Get onset date
+    static func onsetDate(auth: AuthorizationRequestBody) -> Endpoint {
+        return Environment.current.codegenService.endpoint("onset/date", method: .post, headers: ["accept": "*/*", "Content-Type": "application/json"], body: auth)
+    }
+
     /// Validate Code
     static func onset(auth: AuthorizationRequestBody) -> Endpoint {
         return Environment.current.codegenService.endpoint("onset", method: .post, headers: ["accept": "*/*", "Content-Type": "application/json"], body: auth)
+    }
+
+    /// Statistics
+    static func statistics() -> Endpoint {
+        return Environment.current.configService.endpoint("statistics")
     }
 }

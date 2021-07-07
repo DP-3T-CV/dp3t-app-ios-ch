@@ -22,7 +22,7 @@ import UIKit
 
         private let infoView: UIView = {
             let view = UIView()
-            view.backgroundColor = .ns_backgroundSecondary
+            view.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_background)
             return view
         }()
 
@@ -42,7 +42,7 @@ import UIKit
             tableView.register(NSSynchronizationTableViewSectionView.self, forHeaderFooterViewReuseIdentifier: "SectionHeader")
             tableView.separatorStyle = .none
             tableView.separatorInset = .zero
-            tableView.backgroundColor = .ns_backgroundSecondary
+            tableView.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_background)
 
             view.addSubview(tableView)
 
@@ -82,7 +82,15 @@ import UIKit
             title.text = "synchronizations_view_info_title".ub_localized
             let infoQuestion = NSOnboardingInfoView(icon: UIImage(named: "ic-sync")!, text: "synchronizations_view_info_answer".ub_localized, title: "synchronizations_view_info_question".ub_localized, leftRightInset: 0, dynamicIconTintColor: .ns_blue)
 
+            let nextFakeRequest = FakePublishManager.shared.nextScheduledFakeRequestDate
+            let nextFakeInfoView = NSOnboardingInfoView(icon: UIImage(named: "ic-tracing")!,
+                                                        text: "synchronizations_next_fake_request".ub_localized + " " + dateFormatter.string(from: nextFakeRequest),
+                                                        title: nil,
+                                                        leftRightInset: 0,
+                                                        dynamicIconTintColor: .ns_blue)
+
             infoView.addSubview(infoQuestion)
+            infoView.addSubview(nextFakeInfoView)
             infoView.addSubview(title)
 
             title.snp.makeConstraints { make in
@@ -91,6 +99,11 @@ import UIKit
 
             infoQuestion.snp.makeConstraints { make in
                 make.top.equalTo(title.snp.bottom).offset(NSPadding.medium)
+                make.leading.trailing.equalTo(infoView.layoutMarginsGuide)
+            }
+
+            nextFakeInfoView.snp.makeConstraints { make in
+                make.top.equalTo(infoQuestion.snp.bottom).offset(NSPadding.medium)
                 make.leading.trailing.bottom.equalTo(infoView.layoutMarginsGuide)
             }
         }
@@ -120,7 +133,12 @@ import UIKit
                 cell.set(title: "synchronizations_view_empty_list".ub_localized, date: "")
                 return cell
             }
-            cell.contentView.backgroundColor = index.row % 2 == 1 ? .ns_background : .ns_backgroundSecondary
+            if index.row % 2 == 1 {
+                cell.contentView.backgroundColor = .setColorsForTheme(lightColor: .ns_background, darkColor: .ns_backgroundSecondary)
+            } else {
+                cell.contentView.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_backgroundTertiary)
+            }
+
             let log = model[index.row]
             var cellTitle = log.evetType.displayString
             if let payload = log.payload {
@@ -175,6 +193,7 @@ import UIKit
                 case .fakeRequest: return "synchronizations_view_sync_via_fake_request".ub_localized
                 case .nextDayKeyUpload: return "synchronizations_view_sync_via_next_day_key_upload".ub_localized
             #endif
+            case .config: return "synchronizations_view_config_request".ub_localized
             }
         }
     }

@@ -91,23 +91,21 @@ class CertificateEvaluator: NSObject, URLSessionDelegate {
                      "codegen-service.bag.admin.ch",
                      "codegen-service-d.bag.admin.ch",
                      "codegen-service-a.bag.admin.ch",
-                     "codegen-service-t.bag.admin.ch"]
+                     "codegen-service-t.bag.admin.ch",
+                     "www.pt-d.bfs.admin.ch",
+                     "www.pt-a.bfs.admin.ch",
+                     "www.pt-t.bfs.admin.ch",
+                     "www.pt.bfs.admin.ch"]
         for host in hosts {
             if let certificate = bundle.getCertificate(with: host) {
-                let evaluator = UBPinnedCertificatesTrustEvaluator(certificates: [certificate], validateHost: true)
+                let evaluator = UBPinnedCertificatesTrustEvaluator(certificates: [certificate],
+                                                                   acceptSelfSignedCertificates: true,
+                                                                   performDefaultValidation: false,
+                                                                   validateHost: true)
                 evaluators[host] = evaluator
             } else {
                 assertionFailure("Could not load certificate for pinned host")
             }
-        }
-
-        // for these host we just pin the intermediate certificate of quoVadis
-        if let c = bundle.getCertificate(with: "QuoVadis") {
-            let evaluator = UBPinnedCertificatesTrustEvaluator(certificates: [c], validateHost: true)
-            evaluators["www.pt-d.bfs.admin.ch"] = evaluator
-            evaluators["www.pt-a.bfs.admin.ch"] = evaluator
-            evaluators["www.pt-t.bfs.admin.ch"] = evaluator
-            evaluators["www.pt.bfs.admin.ch"] = evaluator
         }
 
         return UBServerTrustManager(evaluators: evaluators)
@@ -134,7 +132,7 @@ class CertificateEvaluator: NSObject, URLSessionDelegate {
         let host = challenge.protectionSpace.host
 
         guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
-            let trust = challenge.protectionSpace.serverTrust else {
+              let trust = challenge.protectionSpace.serverTrust else {
             return (.cancelAuthenticationChallenge, nil, nil)
         }
 
@@ -156,8 +154,8 @@ class CertificateEvaluator: NSObject, URLSessionDelegate {
 extension Bundle {
     func getCertificate(with name: String, fileExtension: String = "der") -> SecCertificate? {
         if let certificateURL = url(forResource: name, withExtension: fileExtension),
-            let certificateData = try? Data(contentsOf: certificateURL),
-            let certificate = SecCertificateCreateWithData(nil, certificateData as CFData) {
+           let certificateData = try? Data(contentsOf: certificateURL),
+           let certificate = SecCertificateCreateWithData(nil, certificateData as CFData) {
             return certificate
         }
         return nil

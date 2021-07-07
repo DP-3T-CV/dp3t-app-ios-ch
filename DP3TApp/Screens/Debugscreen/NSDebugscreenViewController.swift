@@ -24,7 +24,7 @@
             private let mockModuleView = NSDebugScreenMockView()
         #endif
 
-        private let certificatePinningButton = NSButton(title: "", style: .uppercase(.ns_purple))
+        private let certificatePinningButton = NSButton(title: "", style: .normal(.ns_purple))
         private let certificatePinningView = NSSimpleModuleBaseView(title: "")
 
         #if ENABLE_LOGGING
@@ -42,7 +42,7 @@
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            view.backgroundColor = .ns_backgroundSecondary
+            view.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_background)
             setup()
             certificatePinningView.contentView.addArrangedView(certificatePinningButton)
             certificatePinningButton.addTarget(self, action: #selector(toggleCertificatePinning), for: .touchUpInside)

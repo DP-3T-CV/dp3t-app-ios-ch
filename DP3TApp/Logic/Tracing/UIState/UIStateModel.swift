@@ -18,6 +18,8 @@ struct UIStateModel: Equatable {
     var shouldStartAtReportsDetail = false
     var reportsDetail: ReportsDetail = ReportsDetail()
 
+    var checkInStateModel: CheckInStateModel = CheckInStateModel()
+
     #if ENABLE_STATUS_OVERRIDE
         var debug: Debug = Debug()
     #endif
@@ -28,15 +30,24 @@ struct UIStateModel: Equatable {
         case bluetoothTurnedOff
         case bluetoothPermissionError
         case tracingPermissionError(code: String?)
+        case tracingAuthorizationUnknown
         case timeInconsistencyError
         case unexpectedError(code: String?)
         case tracingEnded
+        case onboarding
     }
 
     enum ReportState: Equatable {
         case noReport
         case exposed
-        case infected
+        case infected(oldestSharedKeyDate: Date?)
+
+        var isInfected: Bool {
+            if case .infected = self {
+                return true
+            }
+            return false
+        }
     }
 
     struct Homescreen: Equatable {
@@ -60,28 +71,39 @@ struct UIStateModel: Equatable {
             var url: URL?
             var isDismissible: Bool?
             var infoId: String?
+            var hearingImpairedInfo: String?
         }
 
         var header: TracingState = .tracingActive
         var encounters: TracingState = .tracingActive
         var reports: Reports = Reports()
         var infoBox: InfoBox?
+        var countries: [String] = []
     }
 
     struct EncountersDetail: Equatable {
         var tracingEnabled: Bool = true
+        var tracingSettingEnabled: Bool = true
         var tracing: TracingState = .tracingActive
     }
 
     struct ReportsDetail: Equatable {
         var report: ReportState = .noReport
         var reports: [NSReportModel] = []
-        var phoneCallState: PhoneCallState = .notCalled
+        var checkInReports: [NSCheckInReportModel] = []
+        var didOpenLeitfaden: Bool = false
         var showReportWithAnimation: Bool = false
 
         struct NSReportModel: Equatable {
             let identifier: UUID
             let timestamp: Date
+        }
+
+        struct NSCheckInReportModel: Equatable {
+            let checkInIdentifier: String
+            let arrivalTime: Date
+            let departureTime: Date
+            let venueDescription: String?
         }
 
         enum PhoneCallState: Equatable {
@@ -100,9 +122,57 @@ struct UIStateModel: Equatable {
 
             enum DebugInfectionStatus: Equatable {
                 case healthy
-                case exposed
-                case infected
+                case exposed1 // exposed with 1 contact
+                case exposed5 // exposed with 5 contact
+                case exposed10 // exposed with 10 contact
+                case exposed20 // exposed with 20 contact
+                case checkInExposed1
+                case checkInExposed5
+                case checkInAndEncounterExposed
+                case infected(oldestSharedKeyDate: Date?)
+
+                static let exposedStates: [Self] = [.exposed1, .exposed5, .exposed10, .exposed20]
+
+                var isExposed: Bool {
+                    Self.exposedStates.contains(self)
+                }
+
+                var isInfected: Bool {
+                    if case .infected = self {
+                        return true
+                    }
+                    return false
+                }
             }
         }
     #endif
+
+    struct CheckInStateModel: Equatable {
+        var checkInState: CheckInState = .noCheckIn
+        var exposureState: ExposureState = .noExposure
+        var diaryState: [[CheckIn]] = []
+        var errorState = ErrorState(error: nil)
+
+        enum CheckInState: Equatable {
+            case noCheckIn
+            case checkIn(CheckIn)
+            case checkInEnded
+
+            var currentCheckIn: CheckIn? {
+                if case let .checkIn(checkIn) = self {
+                    return checkIn
+                }
+                return nil
+            }
+        }
+
+        enum ExposureState: Equatable {
+            case noExposure
+            case exposure(exposure: [CheckInExposure], exposureByDay: [[CheckInExposure]])
+        }
+
+        struct ErrorState: Equatable {
+            let error: String?
+        }
+    }
 }

@@ -35,12 +35,12 @@ extension DP3TTracingError: LocalizedError, CodedError {
             return error.localizedDescription
         case .caseSynchronizationError, .userAlreadyMarkedAsInfected, .cancelled:
             return unexpected.ub_localized
-        case let .databaseError(error):
-            return error?.localizedDescription
         case .bluetoothTurnedOff:
             return "bluetooth_turned_off".ub_localized // custom UI, this should never be visible
-        case .permissonError:
+        case .permissionError:
             return "bluetooth_permission_turned_off".ub_localized // custom UI, this should never be visible
+        case .authorizationUnknown:
+            return "authorization unknown" // custom UI, this should never be visible
         case let .exposureNotificationError(error: error):
             let nsError = error as NSError
             if nsError.domain == "ENErrorDomain", nsError.code == 4 {
@@ -56,14 +56,14 @@ extension DP3TTracingError: LocalizedError, CodedError {
             return error.errorCodeString
         case .caseSynchronizationError(errors: _):
             return "ICASYN"
-        case .databaseError(error: _):
-            return "IDBERR"
         case .bluetoothTurnedOff:
             return "IBLOFF"
         case .cancelled:
             return "ICANCU"
-        case .permissonError:
+        case .permissionError:
             return "IPERME"
+        case .authorizationUnknown:
+            return "IPERMU"
         case .userAlreadyMarkedAsInfected:
             return "IUAMAI"
         case let .exposureNotificationError(error: error):
@@ -102,7 +102,6 @@ extension DP3TNetworkingError: LocalizedError, CodedError {
         case .noDataReturned: fallthrough
         case .couldNotParseData: fallthrough
         case .couldNotEncodeBody: fallthrough
-        case .batchReleaseTimeMissmatch: fallthrough
         case .jwtSignatureError:
             return "unexpected_error_title".ub_localized
         }
@@ -123,8 +122,6 @@ extension DP3TNetworkingError: LocalizedError, CodedError {
             return "IPARS"
         case .couldNotEncodeBody:
             return "IBODEN"
-        case .batchReleaseTimeMissmatch:
-            return "IBRTMM"
         case .timeInconsistency(shift: _):
             return "ITIMIN"
         case let .jwtSignatureError(code: code, debugDescription: _):
@@ -144,6 +141,7 @@ extension NetworkError: LocalizedError, CodedError {
             return "network_error".ub_localized
         case .statusError(code: _): fallthrough
         case .parseError: fallthrough
+        case .jwtError(error: _): fallthrough
         case .unexpected(error: _):
             return "unexpected_error_title".ub_localized
         }
@@ -157,32 +155,15 @@ extension NetworkError: LocalizedError, CodedError {
             return "IBST\(code)"
         case .parseError:
             return "ICPARS"
+        case let .jwtError(error: error):
+            if let error = error as? DP3TNetworkingError {
+                return "IJWTNE\(error.errorCode)"
+            }
+            let nsError = error as NSError
+            return "IJWT\(nsError.code)"
         case let .unexpected(error: error):
             let nsError = error as NSError
             return "IUNXN\(nsError.code)"
-        }
-    }
-}
-
-/// Swift does not (yet) allow to specify what kind off error is thrown
-/// Since we only want to pass CodedErrors through the app
-/// We wrap everything that should not happen
-enum UnexpectedThrownError: LocalizedError, CodedError {
-    var errorTitle: String? {
-        nil
-    }
-
-    case startTracing(error: Error)
-
-    var errorDescription: String? {
-        return "unexpected_error_title".ub_localized
-    }
-
-    var errorCodeString: String? {
-        switch self {
-        case let .startTracing(error):
-            let nsError = error as NSError
-            return "IUSTE\(nsError.code)"
         }
     }
 }

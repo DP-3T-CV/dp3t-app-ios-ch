@@ -64,7 +64,11 @@ class NSWebViewController: NSViewController {
         }
 
         if closeable {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didPressClose))
+            if #available(iOS 13.0, *) {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didPressClose))
+            } else {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic-close"), style: .plain, target: self, action: #selector(didPressClose))
+            }
         }
     }
 
@@ -79,8 +83,6 @@ class NSWebViewController: NSViewController {
 
             string = string.replacingOccurrences(of: "{VERSION}", with: Bundle.appVersion)
             string = string.replacingOccurrences(of: "{BUILD}", with: Bundle.buildNumber + Bundle.environment)
-            string = string.replacingOccurrences(of: "{APPVERSION}", with: Bundle.appVersion)
-            string = string.replacingOccurrences(of: "{RELEASEDATE}", with: DateFormatter.ub_dayString(from: Bundle.buildDate ?? Date()))
 
             webView.loadHTMLString(string, baseURL: url.deletingLastPathComponent())
         } catch {}
@@ -118,7 +120,7 @@ extension NSWebViewController: WKNavigationDelegate {
         switch navigationAction.navigationType {
         case .linkActivated:
             guard let url = navigationAction.request.url,
-                let scheme = url.scheme else {
+                  let scheme = url.scheme else {
                 decisionHandler(.allow)
                 return
             }
@@ -159,8 +161,6 @@ extension Bundle {
             switch Environment.current {
             case .dev:
                 return " DEV"
-            case .test:
-                return " TEST"
             case .abnahme:
                 return " ABNAHME"
             case .prod:
@@ -170,8 +170,6 @@ extension Bundle {
             switch Environment.current {
             case .dev:
                 return " DEV"
-            case .test:
-                return " TEST"
             case .abnahme:
                 return " ABNAHME"
             case .prod:

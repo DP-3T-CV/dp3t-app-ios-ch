@@ -59,6 +59,9 @@ class UIStateManager: NSObject {
     }
 
     func refresh() {
+        // don't obtain state if device is not supported
+        guard TracingManager.shared.isSupported else { return }
+
         // disable updates until end of block update
         guard !isPerformingBlockUpdate else {
             return
@@ -147,6 +150,23 @@ class UIStateManager: NSObject {
         }
     }
 
+    var lastCheckInSyncErrorTime: Date? {
+        didSet {
+            if let time = lastSyncErrorTime, firstSyncErrorTime == nil {
+                firstSyncErrorTime = time
+            }
+            refresh()
+        }
+    }
+
+    var checkInError: CodedError? {
+        didSet {
+            if (syncError == nil) != (oldValue == nil) {
+                refresh()
+            }
+        }
+    }
+
     @KeychainPersisted(key: "hasTimeInconsistencyError", defaultValue: false)
     var hasTimeInconsistencyError: Bool
 
@@ -168,9 +188,8 @@ class UIStateManager: NSObject {
                 switch (e1, e2) {
                 case (.networkingError(_), .networkingError(_)),
                      (.caseSynchronizationError, .caseSynchronizationError),
-                     (.databaseError(_), .databaseError(_)),
                      (.bluetoothTurnedOff, .bluetoothTurnedOff),
-                     (.permissonError, .permissonError):
+                     (.permissionError, .permissionError):
                     return
                 // TODO: Long changing list of errors and default value is dangerous
                 default:

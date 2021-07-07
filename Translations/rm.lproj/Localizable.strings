@@ -24,13 +24,13 @@
 "inform_send_thankyou" = "Grazia fitg";
 
 /*Informieren: Danke Text*/
-"inform_send_thankyou_text" = "Las IDs casualas da Vossa app èn vegnidas tramessas.\n\nUschia gidais Vus da franar chadainas d'infecziun.";
+"inform_send_thankyou_text" = "Las clavs privatas da Vossa app èn vegnidas tramessas.\n\nUschia gidais Vus da franar chadainas d'infecziun.";
 
 /*Informieren: Button Titel*/
 "inform_fertig_button_title" = "Serrar";
 
 /*Titel auf Homescreen für Begegnungen*/
-"handshakes_title_homescreen" = "Scuntradas";
+"handshakes_title_homescreen" = "Inscunters";
 
 /*Abbrechen*/
 "cancel" = "Interrumper";
@@ -60,10 +60,10 @@
 "bluetooth_permission_turned_off" = "L'app na funcziuna betg, perquai che Vus n’avais betg dà l'autorisaziun bluetooth.";
 
 /*Permission Text für Bluetooth*/
-"NSBluetoothPeripheralUsageDescription" = "Scuntradas vegnan identifitgadas via bluetooth, economisant l'energia.";
+"NSBluetoothPeripheralUsageDescription" = "Inscunters vegnan identifitgads via bluetooth, economisant l'energia.";
 
 /*Permission Text für Bluetooth*/
-"NSBluetoothAlwaysUsageDescription" = "Scuntradas vegnan identifitgadas via bluetooth, economisant l'energia.";
+"NSBluetoothAlwaysUsageDescription" = "Inscunters vegnan identifitgads via bluetooth, economisant l'energia.";
 
 /*Inform: Titel der Code abschicken Seite*/
 "inform_code_title" = "Endatar il code covid";
@@ -99,13 +99,13 @@
 "meldungen_meldung_title" = "Eventuala infecziun";
 
 /*Text im Meldung Detail*/
-"meldungen_meldung_text" = "Ina infecziun è pussaivla.";
+"meldungen_meldung_text" = "Igl è pussaivel che Vus essas As infectada/infectà.";
 
 /*Titel ob Tracing aktiv*/
 "tracing_active_title" = "App activa";
 
 /*Text bei Tracing aktiv*/
-"tracing_active_text" = "Scuntradas vegnan arcunadas en moda anonima";
+"tracing_active_text" = "Inscunters vegnan arcunads en moda anonima";
 
 /*Android: Fehler Text bei Tracing*/
 "android_tracing_error_title" = "Tracing inactiv";
@@ -168,7 +168,7 @@
 "tab_tracing_title" = "Tracing";
 
 /*Titel auf Homescreen für Was tun Section*/
-"whattodo_title_symptoms" = "Sintoms da malsogna";
+"whattodo_title_symptoms" = "sintoms da malsogna";
 
 /*Subtitel auf Homescreen für Was Tun Section*/
 "whattodo_subtitle_symptoms" = "Tge far en cas da…";
@@ -189,7 +189,7 @@
 "inform_detail_box_subtitle" = "Cun il code covid...";
 
 /*Inform Detai Weisse Box Titel*/
-"inform_detail_box_title" = "Franar chadainas d'infecziun";
+"inform_detail_box_title" = "Avertir en cas d'ina eventuala infecziun";
 
 /*Inform Detail Weisse Box Button*/
 "inform_detail_box_button" = "Endatar il code covid";
@@ -210,7 +210,7 @@
 "symptom_detail_box_title" = "Laschar testar";
 
 /*Symptom Detail Weisse Box Button*/
-"symptom_detail_box_button" = "Dapli infurmaziuns";
+"symptom_detail_box_button" = "Ulteriuras infurmaziuns";
 
 /*Symptom Detail Weisse Box Text*/
 "symptom_detail_box_text" = "Il UFSP recumonda a tut las persunas cun sintoms da COVID-19 da sa laschar testar. Contactai ina media resp. in medi u ina instituziun da sanadad.";
@@ -222,8 +222,8 @@
 "symptom_detail_navigation_title" = "Sintoms";
 "tracing_turned_off_title" = "Tracing deactivà";
 "tracing_turned_off_text" = "Activai il tracing per far funcziunar l'app.";
-"bluetooth_turned_off_title" = "Bluetooth off";
-"bluetooth_turned_off_text" = "Activai bluetooth sin Voss apparat per far funcziunar il tracing.";
+"bluetooth_turned_off_title" = "Deactivà Bluetooth";
+"bluetooth_turned_off_text" = "Activai Bluetooth sin Voss apparat per ch'il tracing anonim funcziunia.";
 "bluetooth_turn_on_button_title" = "Activar bluetooth";
 "bluetooth_permission_error_title" = "Refusà l’activaziun bluetooth";
 "bluetooth_permission_error_text" = "Permettai l’activaziun da bluetooth per far funcziunar il tracing.";
@@ -245,7 +245,7 @@
 "meldung_detail_positive_tested_title" = "Testada/testà en moda positiva";
 
 /*Meldung Detail: Positiv Getestet Subtitel*/
-"meldung_detail_positive_tested_subtitle" = "Vus essas vegnida testada/vegnì testà en moda positiva sin il nov coronavirus.";
+"meldung_detail_positive_tested_subtitle" = "Vus essas vegnida testada/vegnì testà en moda positiva sin il coronavirus.";
 
 /*Meldung Detail Positiv Getestet Weisse Box Subtitel*/
 "meldung_detail_positive_test_box_subtitle" = "Tge duai jau far?";
@@ -255,11 +255,11 @@
 
 /*Meldung Detail Positiv Getestet Weisse Box Text*/
 "meldung_detail_positive_test_box_text" = "Observai las instrucziuns davart l'isolaziun che Vus avais retschavì";
-"tracing_ended_title" = "Tracing terminà";
-"tracing_ended_text" = "I na vegnan arcunadas pli naginas scuntradas.";
+"tracing_ended_title" = "Deactivà inscunters e registraziuns";
+"tracing_ended_text" = "I na vegnan arcunads nagins inscunters";
 "exposed_info_contact_hotline" = "Contactai la";
 "meldung_homescreen_positive_info_line1" = "Observai la";
-"meldung_homescreen_positive_info_line2" = "Instrucziuns davart l'autoisolaziun";
+"meldung_homescreen_positive_info_line2" = "Instrucziuns davart l'isolaziun";
 
 /*Meldung Detail Exposed Neue Meldung*/
 "meldung_detail_exposed_new_meldung" = "Nov avis";
@@ -269,8 +269,10 @@
 "meldung_homescreen_positiv_title" = "Testada/testà en moda positiva";
 
 /*Meldung Detail Exposed Subtitel*/
-"meldung_detail_exposed_subtitle" = "Ina infecziun è pussaivla.";
-"meldung_homescreen_positiv_text" = "Vus essas vegnida testada/vegnì testà en moda positiva sin il nov coronavirus.";
+"meldung_detail_exposed_subtitle" = "Igl è pussaivel che Vus essas As infectada/infectà.";
+
+/*Meldung auf Homescreen: Positiv getestet*/
+"meldung_homescreen_positiv_text" = "Vus essas vegnida testada/vegnì testà en moda positiva sin il coronavirus.";
 
 /*Debug Screen: Onboarding Reset Button*/
 "reset_onboarding" = "Redefinir onboarding";
@@ -318,10 +320,10 @@
 "onboarding_prinzip_title" = "In pass ordavant al virus";
 
 /*Onboarding Prinzip Text*/
-"onboarding_prinzip_text1" = "Cun l'app SwissCovid pon tuts gidar da franar la derasaziun dal nov coronavirus.";
+"onboarding_prinzip_text1" = "Cun l'app SwissCovid pon tuts gidar da franar la derasaziun dal coronavirus.";
 
 /*Onboarding Prinzip Text*/
-"onboarding_prinzip_text2" = "L'app As infurmescha, sche Vus essas stada exponida/stà exponì al nov coronavirus.";
+"onboarding_prinzip_text2" = "L'app As avertescha, sche Vus essas stada exponida/stà exponì potenzialmain al coronavirus.";
 
 /*Onboarding Privacy: Titel oben*/
 "onboarding_privacy_heading" = "Privacy by Design";
@@ -336,10 +338,10 @@
 "onboarding_privacy_text2" = "Las IDs casualas arcunadas restan sin Voss telefon mobil e vegnan stizzadas suenter 14 dis.";
 
 /*Onboarding Begegnungen: Titel oben*/
-"onboarding_begegnungen_heading" = "Co funcziuna l'app?";
+"onboarding_begegnungen_heading" = "Inscunters";
 
 /*Onboarding Begegnungen: Titel*/
-"onboarding_begegnungen_title" = "Identifitgar scuntradas grazia a bluetooth";
+"onboarding_begegnungen_title" = "Identifitgar inscunters grazia a bluetooth";
 
 /*Onboarding Begegnungen: Text*/
 "onboarding_begegnungen_text1" = "L'app percorscha automaticamain, sche dus utilisaders èn damanaivel in da l’auter per in tschert temp.";
@@ -354,7 +356,7 @@
 "onboarding_meldung_title" = "Avis en cas d'ina eventuala infecziun";
 
 /*Onboarding Meldung: Text*/
-"onboarding_meldung_text1" = "L'app As infurmescha, sche Vus essas stada exponida/stà exponì potenzialmain al nov coronavirus.";
+"onboarding_meldung_text1" = "L'app As avertescha, sche Vus essas stada exponida/stà exponì potenzialmain al coronavirus.";
 
 /*Onboarding Meldung: Text*/
 "onboarding_meldung_text2" = "Cun il cumportament gist pudais Vus interrumper chadainas d'infecziun e proteger autras persunas.";
@@ -387,7 +389,7 @@
 "onboarding_push_title" = "Permetter communicaziuns";
 
 /*Onboarding Mitteilungen: Text*/
-"onboarding_push_text" = "Per vegnir infurmada/infurmà da l'app stuais Vus permetter communicaziuns.";
+"onboarding_push_text" = "Per che l'app possia avertir Vus, stuais Vus permetter messadis.";
 
 /*Onboarding Mitteilungen: Button*/
 "onboarding_push_button" = "Permetter communicaziuns";
@@ -408,7 +410,7 @@
 "onboarding_go_title" = "L'app è installada";
 
 /*Text auf dem letzten Onboarding Screen*/
-"onboarding_go_text" = "Grazia fitg che Vus gidais d'interrumper chadainas d'infecziun.";
+"onboarding_go_text" = "Grazia fitg che Vus gidais a franar la derasaziun dal coronavirus.";
 
 /*Button-Label auf dem letzten Onboarding screen*/
 "onboarding_go_button" = "Cumenzar";
@@ -435,7 +437,7 @@
 "meldung_detail_new_contact_title" = "Nov suspect";
 
 /*Meldungen Detail: Text*/
-"meldung_detail_new_contact_subtitle" = "Ina infecziun è pussaivla.";
+"meldung_detail_new_contact_subtitle" = "Igl è pussaivel che Vus essas As infectada/infectà.";
 
 /*Fehler mit Uhrzeit Titel*/
 "time_inconsistency_title" = "Sbagl ura";
@@ -453,7 +455,7 @@
 "meldungen_background_error_title" = "Deactivà actualisaziun dal fund ";
 
 /*Text für Hintergrund Fehler*/
-"meldungen_background_error_text" = "Midai la configuraziun per vegnir infurmada/infurmà en cas d’in nov avis er ordaifer l'app.";
+"meldungen_background_error_text" = "Giai a \"Einstellungen > Allgemein > Hintergrundaktualisierung\" e verifitgai che \"WLAN & Moblie Daten\" saja selecziunà. Background App Refresh po alura vegnir activà separadamain per mintga app.";
 
 /*Button Titel für Hintergrundfehler beheben*/
 "meldungen_background_error_button" = "Midar configuraziun";
@@ -543,16 +545,16 @@
 "menu_impressum" = "Impressum";
 
 /*Begegnungen: FAQ Titel*/
-"begegnung_detail_faq1_title" = "Tge vul dir scuntrada?";
+"begegnung_detail_faq1_title" = "Tge vul dir inscunter?";
 
 /*Begegnungen: FAQ Text*/
-"begegnung_detail_faq1_text" = "Sche telefons mobils cun l'app sa chattan damanaivel in da l'auter per in tschert temp, vegn quai registrà sin l'apparat sco scuntrada.";
+"begegnung_detail_faq1_text" = "Sche telefons mobils cun l'app sa chattan damanaivel in da l'auter per in tschert temp, vegn quai registrà sin l'apparat sco inscunter.";
 
 /*Begegnungen: FAQ Titel*/
 "begegnung_detail_faq2_title" = "Èn mias datas segiras?";
 
 /*Begegnungen: FAQ Text*/
-"begegnung_detail_faq2_text" = "En cas d'ina scuntrada vegnan barattadas mo IDs casualas. \n\nQuellas vegnan arcunadas localmain sin ils apparats e puspè stizzadas suenter 14 dis.";
+"begegnung_detail_faq2_text" = "En cas d'in inscunter vegnan barattadas mo IDs casualas. \n\nQuellas vegnan arcunadas localmain sin ils apparats e puspè stizzadas suenter 14 dis.";
 
 /*Begegnungen: FAQ Titel*/
 "begegnungen_detail_faq3_title" = "Sto bluetooth adina esser activà?";
@@ -567,13 +569,7 @@
 "meldungen_nomeldungen_faq1_title" = "Tge èn avis?";
 
 /*Meldungen: Keine Meldungen FAQ Text*/
-"meldungen_nomeldungen_faq1_text" = "L'app verifitgescha regularmain, sche autras utilisadras ed auters utilisaders che Vus avais scuntrà han annunzià in test positiv.\n\nEn cas d'ina eventuala infecziun vegnis Vus orientada/orientà cun ina communicaziun sin il visur bloccà.";
-
-/*Meldungen: Keine Meldungen FAQ Titel*/
-"meldungen_nomeldungen_faq2_titel" = "Tge vul dir eventuala infecziun?";
-
-/*Meldungen: Keine Meldungen FAQ Text*/
-"meldungen_nomeldungen_faq2_text" = "L'app n'examinescha betg sulettamain, sch'i ha dà scuntradas cun persunas infectadas, mabain er quant ditg ch'ellas han durà e quant damanaivel che Vus essas stada/stà a questas persunas.\n\nVus vegnis infurmada/infurmà mo, sche la pussaivladad d'esser infectada/infectà è gronda avunda.";
+"meldungen_nomeldungen_faq1_text" = "L'app controllescha regularmain, sche autras utilisadras ed auters utilisaders che Vus avais inscuntrà u ch'èn stads registrads en il medem lieu han annunzià in test positiv.\n\nEn cas d'ina eventuala infecziun, As infurmescha in messadi sin il visur bloccà.";
 
 /*Meldungen Detail Weisse Box Texte Unten*/
 "meldungen_detail_explanation_text3" = "L'infoline SwissCovid As cusseglia davart la pussaivladad d'in test gratuit.";
@@ -600,13 +596,13 @@
 "inform_detail_faq1_title" = "Tge è in code covid?";
 
 /*Inform Detail: FAQ Text*/
-"inform_detail_faq1_text" = "Persunas ch’èn vegnidas testadas en moda positiva sin il nov coronavirus survegnan in code covid.\n      \nUschia vegni garantì che mo cas confermads vegnan avisads via l'app.";
+"inform_detail_faq1_text" = "Persunas cun in test positiv sin il coronavirus (test da PCR u test svelt d'antigens) retschaivan in code covid.\n\nUschia vegn garantì ch'i vegnian annunziads sur l'app mo ils cas confermads.";
 
 /*Inform Detail: FAQ Titel*/
 "inform_detail_faq2_title" = "Tge vegn tramess?";
 
 /*Inform Detail FAQ Text*/
-"inform_detail_faq2_text" = "I vegnan tramessas mo las IDs casualas da Vossa app, naginas datas persunalas.\n\nUschia vegnan autras utilisadras ed auters utilisaders da l'app SwissCovid a savair ch'ina  infecziun è pussaivla.";
+"inform_detail_faq2_text" = "I vegnan tramessas mo las clavs privatas da Vossa app e las IDs codadas da Vossas registraziuns, naginas datas persunalas.\n\nUschia vegnan autras utilisadras ed auters utilisaders da l'app SwissCovid a savair ch’ellas u els èn eventualmain s’infectadas/s’infectads.";
 
 /*Telefonnummer der Infoline*/
 "infoline_tel_number" = "+41 58 387 77 78";
@@ -615,25 +611,25 @@
 "faq_button_url" = "https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/faq-kontakte-downloads/haeufig-gestellte-fragen.html?faq-url=/de/categories/swisscovid-app";
 
 /*Informieren Flow: Titel erster Screen*/
-"inform_code_intro_title" = "Infurmaziun impurtanta";
+"inform_code_intro_title" = "Infurmaziun davart l'endataziun";
 
 /*Informieren-Flow: Erster Screen Text*/
-"inform_code_intro_text" = "Cumbain ch'i na vegnan tramessas naginas datas davart Vossa persuna, èsi pussaivel ch'insatgi sa regorda da la scuntrada a maun da la data.";
+"inform_code_intro_text" = "Malgrà ch'i na vegnan tramessas naginas datas persunalas, èsi pussaivel ch'insatgi sa regorda – a maun da la data – da l'inscunter cun Vus.";
 
 /*Inform-Flow: Erster Screen Button*/
-"inform_code_intro_button" = "Chapì";
+"inform_code_intro_button" = "D'accord";
 
 /*Symptome: FAQ Titel*/
 "symptom_faq1_title" = "Tge èn sintoms da COVID-19?";
 
 /*Symptome: FAQ Text*/
-"symptom_faq1_text" = "Quests sintoms cumparan savens:\n\n– fevra, sentiment da fevra\n– mal la gula\n– tuss (per il solit tuss sitga)\n– respiraziun asmatica\n– mal ils musculs\n– perdita andetga da l'odurat e/u dal palat\n";
+"symptom_faq1_text" = "Quests sintoms cumparan savens:\n\n– fevra, sentiment da fevra\n– mal la gula\n– tuss (per il solit tuss sitga)\n– respiraziun asmatica\n– mal il pèz\n– perdita andetga da l'odurat e/u dal palat\n\nPussaivels èn er ils suandants sintoms:\n\n– mal il chau\n– deblezza generala, malesser\n– mal ils musculs\n– dafraid\n– sintoms dal tract digestiv (indispostadad, vomitar, diarrea, mal il venter)\n– eczems";
 
 /*Meldungen: Positiv getestet FAQ Titel*/
-"meldungen_positive_tested_faq1_title" = "Pertge è il tracing terminà?";
+"meldungen_positive_tested_faq1_title" = "Pertge è il tracing deactivà?";
 
 /*Meldungen: Positiv getestet FAQ Text*/
-"meldungen_positive_tested_faq1_text" = "Suenter in test positiv vegn il tracing en l'app terminà automaticamain.";
+"meldungen_positive_tested_faq1_text" = "Suenter in test positiv vegn il tracing en l'app deactivà automaticamain. Il tracing po puspè vegnir activà, uschespert che Vus avais terminà l'isolaziun.";
 
 /*Sprache Abkürzung (BITTE NICHT ÄNDERN)*/
 "language_key" = "rm";
@@ -673,7 +669,7 @@
 "onboarding_gaen_title" = "Activar tracing";
 
 /*Text auf der Onboarding Page für die Permission der Exposure-Library, iOS*/
-"onboarding_gaen_text_ios" = "Per pudair utilisar l'app, ston vegnir activadas communicaziuns da contact COVID-19.";
+"onboarding_gaen_text_ios" = "Per pudair identifitgar inscunters èsi necessari d'activar la funcziun da tracing.";
 
 /*Aktivieren-Button auf der Onboarding Page für die Permission der Exposure-Library*/
 "onboarding_gaen_button_activate" = "Activar";
@@ -700,12 +696,12 @@
 "delete_reports_dialog" = "Vulais Vus propi stizzar l’avis?";
 
 /*Code-Eingabe in der App löschen, wenn infiziert*/
-"delete_infection_button" = "Stizzar avis";
+"delete_infection_button" = "Terminar l'isolaziun";
 
-/*Meldung im Löschen Dialog nach Code-Einfragen*/
+/*Meldung im Löschen Dialog nach Isolation-Beenden, kommt auch auf Homescreen-Popup*/
 "delete_infection_dialog" = "Vulais Vus propi stizzar l’avis?";
 "android_onboarding_battery_permission_title" = "Ignorar l'optimaziun da l'accu";
-"android_onboarding_battery_permission_text" = "Per pudair identifitgar las scuntradas d’in cuntin, sto l'optimaziun da l'accu esser deactivada per questa app.";
+"android_onboarding_battery_permission_text" = "Per che l'app funcziunia sto l'optimaziun da l'accu esser deactivada.";
 "android_onboarding_battery_permission_button" = "Permetter";
 "android_onboarding_battery_permission_button_deactivated" = "OK";
 "android_onboarding_battery_permission_info_1_title" = "Mo per questa app";
@@ -727,7 +723,7 @@
 "tracing_permission_error_title_ios" = "Deactivà communicaziuns da contact COVID-19 ";
 
 /*Fehler-Text, wenn Tracing deaktiviert wurde im System, iOS*/
-"tracing_permission_error_text_ios" = "Activai communicaziuns da contact COVID-19 per ch'il tracing funcziunia.";
+"tracing_permission_error_text_ios" = "Activai {TRACING_SETTING_TEXT} per ch'il tracing anonim funcziunia.";
 
 /*Error-Meldung, wenn der Benutzer während des Informieren-Flows bei GApple das Key-Sharing nicht erlaubt.*/
 "user_cancelled_key_sharing_error" = "La communicaziun n'ha betg pudì vegnir tramessa. Permettai per plaschair da cundivider Vossas IDs casualas cun l'app SwissCovid.";
@@ -767,18 +763,18 @@
 "tracing_active_tracking_always_info" = "SwissCovid resta activ, er sche l'app vegn serrada.";
 
 /*title in splash screen of onboarding*/
-"oboarding_splashscreen_title" = "SwissCovid \nfraina \nchadainas d'infecziun.\n";
-"inform_detail_faq3_text" = "Cumbain ch'i na vegnan tramessas naginas datas davart Vossa persuna, èsi pussaivel ch'insatgi sa regorda da la scuntrada a maun da la data.";
+"oboarding_splashscreen_title" = "SwissCovid –\ninfurmescha svelt en cas d'ina ristga d'infecziun.\n";
+"inform_detail_faq3_text" = "Malgrà ch'i na vegnan tramessas naginas datas persunalas, èsi pussaivel ch'insatgi sa regordav– a maun da la data – da l'inscunter cun Vus.";
 "inform_detail_faq3_title" = "Rest jau anonima/anonim?";
 
 /*Meldung Detail Weiss Box unten*/
-"meldungen_detail_explanation_text4" = "Faschai per plaschair il check coronavirus en cas d'emprims sintoms u telefonai a Vossa media / Voss medi.";
+"meldungen_detail_explanation_text4" = "En cas d'emprims sintoms contactai ina media resp. in medi u ina instituziun da sanadad.";
 
 /*Text beim Bluetooth Control*/
 "tracing_setting_text_android" = "Communicaziuns COVID-19";
 
 /*Text auf der Onboarding Page für die Permission der Exposure-Library, Android*/
-"onboarding_gaen_text_android" = "Per pudair utilisar l'app, ston vegnir activadas communicaziuns COVID-19";
+"onboarding_gaen_text_android" = "Per pudair identifitgar inscunters sto vegnir activada la funcziun da tracing.";
 
 /*Onboarding Disclaimer Screen: AppName Title*/
 "onboarding_disclaimer_heading" = "SwissCovid";
@@ -835,13 +831,14 @@
 "meldungen_detail_free_test_title" = "Pussaivel da far in test gratuit";
 
 /*Meldungen Detail Kostenloser Test Box Text*/
-"meldungen_detail_free_test_text" = "L'infoline SwissCovid As cusseglia davart la pussaivladad d'As laschar testar gratuitamain sin il coronavirus.";
+/*Fuzzy*/
+"meldungen_detail_free_test_text_old" = "Il mussavia SwissCovid As infurmescha davart la pussaivladad da far in test dal coronavirus gratuit.";
 
 /*Button title on the Home Screen when the Tracing is deactivated to directly activate it.*/
 "activate_tracing_button" = "Activar tracing";
 
 /*Detailed Version of tracing_turned_off_text that is displayed to the user in the Tracing Detail View when the Tracing is deactivated.*/
-"tracing_turned_off_detailed_text" = "Activai il tracing per che l'app possia arcunar scuntradas e retschaiver avis.";
+"tracing_turned_off_detailed_text" = "Activai il tracing per che l'app possia arcunar inscunters e retschaiver avis.";
 
 /*Warning that is displayed to the user in the Home View under the Meldungen-Card.*/
 "meldungen_tracing_not_active_warning" = "Sch'il tracing è deactivà, na pon er vegnidas retschavids nagins avis.";
@@ -865,49 +862,876 @@
 "infobox_close_button_accessibility" = "Serrar";
 
 /*Title for the Home View Travel Card.*/
-"travel_title" = "";
+"travel_title" = "Viadis";
 
-/*Info text that is displayed on the Home Travel Card.*/
-"travel_home_description" = "";
+/*Info text that is displayed  on the Home Travel Card.*/
+"travel_home_description" = "Inscunters SwissCovid funcziuna en ils suandants pajais:";
 
-/*Introductory Text that is displayed at the top of the travel settings screen.*/
-"travel_screen_introduction" = "";
+/*First title for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_title_1" = "Tge vul quai dir?";
 
-/*First title for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_title_1" = "";
+/*First text for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_text_1" = "Sche Vus essas en in pajais cumpatibel, na stuais Vus betg installar in'autra app da corona.\n\nSwissCovid verifitgescha las clavs privatas ch'èn vegnidas publitgadas en ils pajais cumpatibels. Uschia pudais Vus vegnir infurmada resp. infurmà er en cas d'ina eventuala infecziun a l'exteriur.";
 
-/*First text for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_text_1" = "";
+/*Second title for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_title_2" = "Tge capita, sche jau endatesch il code covid?";
 
-/*Second title for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_title_2" = "";
-
-/*Second text for the travel feature explanation at the bottom of the travel screen.*/
-"travel_screen_explanation_text_2" = "";
-
-/*Button title for the Add Countries Button in the travel screen.*/
-"travel_screen_add_countries_button" = "";
-
-/*Text that is displayed under a country name that indicates until what date the user will still receive notifications from this country.*/
-"travel_screen_notifications_activated_until" = "";
-
-/*List Header for the favourites in the "Add countries" Screen of the Travel feature.*/
-"travel_screen_favourites" = "";
-
-/*List header for other countries in the "add countries" screen of the travel feature.*/
-"travel_screen_other_countries" = "";
-
-/*Title for the explanation at the bottom of the "add countries" screen of the travel feature.*/
-"travel_screen_add_countries_explanation_title" = "";
-
-/*Text for the explanation at the bottom of the "add countries" screen of the travel feature.*/
-"travel_screen_add_countries_explanation_text" = "";
-
-/*Information text that asks the user about informing other countries when he enters a covid code into the app.*/
-"travel_report_code_info" = "";
+/*Second text for the travel feauter explenation at the bottom of the travel screen.*/
+"travel_screen_explanation_text_2" = "Sche Vus endatais il code covid vegnan las clavs privatas che Vus avais tramess er cundivididas cun ils pajais cumpatibels.\n\nPer che er las viagiaturas ed ils viagiaturs da l'exteriur possian vegnir infurmads, succeda quai independentamain dal fatg, sche Vus essas sezza stada resp. sez stà a l'exteriur u betg.";
 
 /*Accessibility: FAQ button hint wenn die app verlassen wird und eine website öffnet*/
-"accessibility_faq_button_hint_non_bag" = "";
+"accessibility_faq_button_hint_non_bag" = "Quest buttun banduna l'app ad avra ina pagina d'internet. ";
 
 /*voice over string der vorgelesen wird wenn noch kein sync stattgefunden hat*/
-"begegnung_detail_no_last_sync_accessibility" = "";
+"begegnung_detail_no_last_sync_accessibility" = "Naginas sincronisaziuns precedentas";
+
+/*Text für Hintergrundfehler auf Android*/
+"meldungen_background_error_text_android" = "Midai la configuraziun per esser infurmà/infurmada tar ina nova communicaziun er ordaifer l'app.";
+
+/*Telefonnummer der allgemeinen Infoline Coronavirus*/
+"infoline_coronavirus_number" = "+41 58 387 77 80";
+
+/*Text beim Bluetooth Control iOS 14*/
+"tracing_setting_text_ios_14_0" = "Exposure Notifications";
+"bottom_nav_tab_home" = "SwissCovid";
+"bottom_nav_tab_stats" = "Cifras";
+"stats_title" = "dovran gia SwissCovid";
+"stats_legend_new_infections" = "infecziuns novas annunziadas";
+"stats_legend_new_infections_average" = "media da 7 dis";
+"stats_legend_entered_covidcodes" = "codes covid endatads";
+"share_app_supertitle" = "Impedir…";
+"share_app_title" = "cuminaivlamain infecziuns";
+"share_app_button" = "Cundivider l'app";
+"share_app_body" = "Sche uschè blers da Voss contacts sco pussaivel dovran l'app SwissCovid, pudais Vus vegnir infurmada u infurmà svelt en cas d'ina ristga d'infecziun.";
+
+/*Text der geteilt wird*/
+"share_app_message" = "Cun l'app SwissCovid pon tuts gidar da franar la derasaziun dal coronavirus.";
+
+/*URL die geteilt wird*/
+"share_app_url" = "https://bag-coronavirus.ch/swisscovid-app/#download";
+
+/*Zahlenformat für die Aktive nutzer nummer {COUNT} wird durch die aktuelle Zahl ersetzt z.b. "1.59"*/
+"stats_counter" = "{COUNT} miu.";
+
+/*Statistik Tag der Daten "{DAY}" wird mit dem Aktualisierungsdatum ersetzt z.B. "14.9."*/
+"stats_source_day" = "Ultima actualisaziun da las datas ils {DAY}";
+
+/*Links zu weiteren Statistiken*/
+"stats_more_statistics_button" = "Ulteriuras statisticas";
+
+/*URL zu weiteren statistiken*/
+"stats_more_statistics_url" = "https://www.covid19.admin.ch/rm/overview";
+
+/*Body of the error message shown when the statistics data cannot be loaded*/
+"stats_loading_error_text" = "Actualmain na pon las datas betg vegnir chargiadas";
+
+/*Zahlenformat für die Aktive nutzer nummer {COUNT} wird durch die aktuelle Zahl ersetzt z.b. "1.59". Voll Millionen wort*/
+"stats_counter_full" = "{COUNT} miu.";
+
+/*iOS settings tutorial title*/
+"ios_settings_tutorial_title" = "Activar ils avis d'inscunters";
+
+/*iOS settings tutorial open settings button*/
+"ios_settings_tutorial_open_settings_button" = "Avrir ils parameters";
+
+/*iOS settings tutorial schritt 1*/
+"ios_settings_tutorial_step_1_text" = "Avri ils parameters dal sistem cun cliccar sin la tasta sutvart. ";
+
+/*iOS settings tutorial schritt 2*/
+"ios_settings_tutorial_step_2_text" = "Selecziunai:";
+
+/*ios settings tutorial exposure notification text wie in iOS settings*/
+"ios_settings_tutorial_step_2_exposure_notification" = "Avis d'inscunters";
+
+/*iOS settings tutorial schritt 3*/
+"ios_settings_tutorial_step_3_text" = "Activai l'emprim la funcziun…";
+
+/*iOS settings tutorial share exposure notification text wie in iOS settings*/
+"ios_settings_tutorial_step_3_share_exposure_information" = "Parter las infurmaziuns davart inscunters";
+
+/*iOS settings tutorial schritt 4*/
+"ios_settings_tutorial_step_4_text" = "Sche quai n'è betg anc betg, pudais Vus fixar ussa SwissCovid sco regiun activa.";
+
+/*iOS settings tutorial set as aktive region wie in iOS settings*/
+"ios_settings_tutorial_step_4_set_as_aktive_region" = "Fixar sco regiun activa";
+
+/*ios tracing permission fehlermeldung button text*/
+"ios_tracing_permission_error_button" = "Uschia funcziuni";
+
+/*Subtitle für Meldung Detail Screen Header wenn nur eine Begegnung angezeigt wird.*/
+"meldung_detail_exposed_subtitle_last_encounter" = "Ultim inscunter";
+
+/*Subtitle für Meldung Detail Screen Header wenn alle Begegnungen angezeigt werden.*/
+"meldung_detail_exposed_subtitle_all_encounters" = "Tut ils inscunters";
+
+/*Button Titel im Meldung Detail Header, wenn nur eine Meldung angezeigt wird.*/
+"meldung_detail_exposed_show_all_button" = "Mussar tuts";
+
+/*Button Titel im Meldung Detail Header, wenn alle Meldungen angezeigt werden.*/
+"meldung_detail_exposed_show_less_button" = "Mussar damain";
+
+/*Titel vom SwissCovid Leitfaden bei Kontaktmeldung*/
+"meldungen_detail_leitfaden_title" = "Mussavia SwissCovid";
+
+/*Text zum SwissCovid Leitfaden bei Kontaktmeldung*/
+"meldungen_detail_leitfaden_text" = "Respundi las dumondas en il mussavia SwissCovid per vegnir a savair co reagir endretg. ";
+
+/*Button Text zum Öffnen vom SwissCovid Leitfaden*/
+"meldungen_detail_open_leitfaden_button" = "Emplenir ussa";
+
+/*Title für Infotext zu SwissCovid Infoline*/
+"meldungen_tel_information_title" = "Infurmaziuns per telefon";
+
+/*Infotext zu SwissCovid Infoline*/
+"meldungen_tel_information_text" = "En cas d'ulteriuras dumondas As dat l'infoline SwissCovid gugent er infurmaziuns per telefon.";
+
+/*Hinweis Text nach dem Ausfüllen vom SwissCovid Leitfaden, dass man erneut ausfüllen kann*/
+"meldungen_detail_leitfaden_again_text" = "Qua pudais Vus da tut temp avrir danovamain il mussavia SwissCovid";
+
+/*Button Text um SwissCovid Leitfaden erneut zu öffnen*/
+"meldungen_detail_open_leitfaden_again_button" = "Al mussavia";
+
+/*Homescreen Text mit Hinweis zu SwissCovid Leitfaden bei einer Meldung*/
+"exposed_info_answer_questions_in_leitfaden" = "Respundai las dumondas en il ";
+
+/*Homescreen Text mit Hinweis zu SwissCovid Leitfaden bei einer Meldung*/
+"exposed_info_swisscovid_leitfaden" = "Mussavia SwissCovid";
+
+/*Dialog Text beim Löschen einer Meldung über einen möglichen Kontakt*/
+"delete_notification_dialog" = "L'avis davart in'eventuala infecziun serva sco cumprova che Vus druvais per in test dal coronavirus gratuit. Sche Vus stizzais quest avis, perdais Vus la cumprova ed il link per il mussavia SwissCovid.";
+
+/*URL to the SwissCovid Leitfaden*/
+"swisscovid_leitfaden_url" = "https://swisscovid.bag-coronavirus.ch/screening?contactDates={CONTACT_DATES}";
+
+/*Tracing Erinnerung 4 Stunden Radio Button*/
+"tracing_reminder_radio_four_hours" = "4 uras";
+
+/*Tracing Erinnerung 8 Stunden Radio Button*/
+"tracing_reminder_radio_eight_hours" = "8 uras";
+
+/*Tracing Erinnerung 12 Stunden Radio Button*/
+"tracing_reminder_radio_twelve_hours" = "12 uras";
+
+/*Tracing Erinnerung keine Erinngerung Radio Button*/
+"tracing_reminder_radio_no_reminder" = "Nagina regurdientscha";
+
+/*Tracing Erinnerung bestätigen Button*/
+"tracing_reminder_confirm_button" = "OK";
+
+/*Tracing Erinnerung abbrechen Button*/
+"tracing_reminder_cancel_button" = "Interrumper";
+
+/*Tracing Erinnerung Titel*/
+"tracing_reminder_title" = "Endrizzar ina regurdientscha";
+
+/*Tracing Erinnerung Untertitel*/
+"tracing_reminder_subtitle" = "SwissCovid As po regurdar da puspè activar il tracing.";
+
+/*Tracing Erinnerung Warnung*/
+"tracing_reminder_warning" = "Il tracing vegn deactivà.";
+
+/*Kantonname Zürich*/
+"canton_zurich" = "Turitg";
+
+/*Kantonname Aargau*/
+"canton_aargau" = "Argovia";
+
+/*Kantonname Appenzell Innerrhoden*/
+"canton_appenzell_innerrhoden" = "Appenzell Dadens";
+
+/*Kantonname Appenzell Ausserrhoden*/
+"canton_appenzell_ausserrhoden" = "Appenzell Dadora";
+
+/*Kantonname Bern*/
+"canton_berne" = "Berna";
+
+/*Kantonname Basel-Landschaft*/
+"canton_basel_country" = "Basilea-Champagna";
+
+/*Kantonname Basel-Stadt*/
+"canton_basel_city" = "Basilea-Citad";
+
+/*Kantonname Freiburg*/
+"canton_fribourg" = "Friburg";
+
+/*Kantonname Genf*/
+"canton_geneva" = "Genevra";
+
+/*Kantonname Glarus*/
+"canton_glarus" = "Glaruna";
+
+/*Kantonname Graubünden*/
+"canton_graubuenden" = "Grischun";
+
+/*Kantonname Jura*/
+"canton_jura" = "Giura";
+
+/*Kantonname Luzern*/
+"canton_lucerne" = "Lucerna";
+
+/*Kantonname Neuenburg*/
+"canton_neuchatel" = "Neuchâtel";
+
+/*Kantonname Nidwalden*/
+"canton_nidwalden" = "Sutsilvania";
+
+/*Kantonname Obwalden*/
+"canton_obwalden" = "Sursilvania";
+
+/*Kantonname St. Gallen*/
+"canton_st_gallen" = "Son Gagl";
+
+/*Kantonname Schaffhausen*/
+"canton_schaffhausen" = "Schaffusa";
+
+/*Kantonname Solothurn*/
+"canton_solothurn" = "Soloturn";
+
+/*Kantonname Schwyz*/
+"canton_schwyz" = "Sviz";
+
+/*Kantonname Thurgau*/
+"canton_thurgovia" = "Turgovia";
+
+/*Kantonname Tessin*/
+"canton_ticino" = "Tessin";
+
+/*Kantonname Uri*/
+"canton_uri" = "Uri";
+
+/*Kantonname Waadt*/
+"canton_vaud" = "Vad";
+
+/*Kantonname Wallis*/
+"canton_valais" = "Vallais";
+
+/*Kantonname Zug*/
+"canton_zug" = "Zug";
+
+/*Kantonname Fürstentum Liechtenstein*/
+"country_liechtenstein" = "Principadi da Liechtenstein";
+
+/*Test standorte Popup Titel*/
+"test_location_popup_title" = "Nua poss jau far in test?";
+
+/*Test standorte Popup Text*/
+"test_location_popup_text" = "Vus pudais As laschar testar sin il coronavirus tar differentas medias e medis, en centers da test, en ospitals ed en apotecas. Infurmaziuns davart las purschidas da test chattais Vus sin las paginas chantunalas:";
+
+/*Notification Channel name for Tracing Reactivation Reminders on Android Devices (Only visible in System Settings)*/
+"android_reminder_channel_name" = "Regurdientscha d'activar il tracing";
+
+/*Titel der Tracing-Reaktivierungs-Notification*/
+"tracing_reminder_notification_title" = "Activar il tracing";
+
+/*Subtitle der Tracing-Reaktivierungs-Notification*/
+"tracing_reminder_notification_subtitle" = "Activai il tracing per che l'app possia arcunar inscunters e retschaiver avis";
+
+/*iOS Blockierende View bei benötigten OS update: Titel*/
+"ios_software_update_blocking_title" = "Igl è necessari d'actualisar la software";
+
+/*iOS Blockierende View bei benötigten OS update: text*/
+"ios_software_update_blocking_text" = "Vus stuais avair installà la versiun dad iOS la pli actuala, per che SwissCovid funcziunia.";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial title*/
+"ios_software_update_blocking_tutorial_title" = "Uschia funcziuni:";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial first*/
+"ios_software_update_blocking_tutorial_first" = "Avri «Einstellungen» sin Voss homescreen";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial second*/
+"ios_software_update_blocking_tutorial_second" = "Giai tar…";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial second settings general (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_second_settings" = "«Allgemein»";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial third*/
+"ios_software_update_blocking_tutorial_third" = "Selecziunai…";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial third software update (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_third_software_update" = "«Softwareupdate»";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial fourth*/
+"ios_software_update_blocking_tutorial_fourth" = "Cliccai sin…";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial fourth load and install (Muss mit dem Eintrag in den IOS Einstellungen übereinstimmen!)*/
+"ios_software_update_blocking_tutorial_fourth_load_and_install" = "«Laden und installieren»";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial apple button*/
+"ios_software_update_blocking_tutorial_apple" = "Instrucziuns dad Apple";
+
+/*iOS Blockierende View bei benötigten OS update: Tutorial apple url*/
+"ios_software_update_blocking_tutorial_apple_url" = "https://support.apple.com/de-de/HT204204";
+
+/*iOS Notification Text bei benötigten OS update*/
+"ios_software_update_notification_title" = "Igl è necessari d'actualisar la software";
+
+/*iOS Notification Text bei benötigten OS update*/
+"ios_software_update_notification_text" = "Vus stuais avair installà la versiun dad iOS la pli actuala, per che SwissCovid funcziunia.";
+
+/*Button Text um die Isolation zu beenden*/
+"delete_infection_dialog_finish_button" = "Terminar";
+
+/*Text der nach der Eingabe des Covidcodes angezeigt wird.*/
+"tracing_ended_info" = "I na vegnan arcunads pli nagins novs inscunters ed i n'è betg pli pussaivel da far novas registraziuns.\nTuttas duas funcziuns pon vegnir reactivadas uschespert che Vus avais terminà l'isolaziun.";
+"testlocation_url_canton_aargau" = "https://www.ag.ch/de/themen_1/coronavirus_2/coronavirus.jsp";
+"testlocation_url_canton_appenzell_ausserrhoden" = "https://www.ar.ch/verwaltung/departement-gesundheit-und-soziales/amt-fuer-gesundheit/informationsseite-coronavirus/";
+"testlocation_url_canton_appenzell_innerrhoden" = "https://www.ai.ch/themen/gesundheit-alter-und-soziales/gesundheitsfoerderung-und-praevention/uebertragbare-krankheiten/coronavirus";
+"testlocation_url_canton_basel_country" = "https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/amt-fur-gesundheit/medizinische-dienste/kantonsarztlicher-dienst/aktuelles";
+"testlocation_url_canton_basel_city" = "https://www.coronavirus.bs.ch/";
+"testlocation_url_canton_berne" = "http://www.be.ch/corona";
+"testlocation_url_canton_fribourg" = "https://www.fr.ch/sante/covid-19/coronavirus-informations-actuelles-toutes-les-actualites-liees-au-covid-19-mesures-prises-faq-statistiques";
+"testlocation_url_canton_geneva" = "https://www.ge.ch/covid-19-se-proteger-proteger-autres";
+"testlocation_url_canton_glarus" = "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/gesundheit/coronavirus.html/4817";
+"testlocation_url_canton_graubuenden" = "https://www.gr.ch/RM/instituziuns/administraziun/djsg/ga/coronavirus/info/Seiten/Start.aspx";
+"testlocation_url_canton_jura" = "https://www.jura.ch/fr/Autorites/Coronavirus/Accueil/Coronavirus-Informations-officielles-a-la-population-jurassienne.html";
+"testlocation_url_canton_lucerne" = "https://gesundheit.lu.ch/themen/Humanmedizin/Infektionskrankheiten/Informationen_Coronavirus";
+"testlocation_url_canton_neuchatel" = "https://www.ne.ch/autorites/DFS/SCSP/medecin-cantonal/maladies-vaccinations/Pages/Coronavirus.aspx";
+"testlocation_url_canton_nidwalden" = "https://www.nw.ch/gesundheitsamtdienste/6044";
+"testlocation_url_canton_obwalden" = "https://www.ow.ch/de/verwaltung/dienstleistungen/?dienst_id=5962";
+"testlocation_url_canton_st_gallen" = "https://www.sg.ch/tools/informationen-coronavirus.html";
+"testlocation_url_canton_schaffhausen" = "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Departement-des-Innern/Gesundheitsamt-2954701-DE.html";
+"testlocation_url_canton_schwyz" = "https://www.sz.ch/behoerden/information-medien/medienmitteilungen/coronavirus.html/72-416-412-1379-6948";
+"testlocation_url_canton_solothurn" = "https://corona.so.ch/";
+"testlocation_url_canton_thurgovia" = "https://www.tg.ch/news/fachdossier-coronavirus.html/10552";
+"testlocation_url_canton_ticino" = "https://www4.ti.ch/dss/dsp/covid19/home/";
+"testlocation_url_canton_uri" = "https://www.ur.ch/themen/2962";
+"testlocation_url_canton_valais" = "https://www.vs.ch/web/coronavirus/";
+"testlocation_url_canton_zug" = "https://www.zg.ch/behoerden/gesundheitsdirektion/amt-fuer-gesundheit/corona";
+"testlocation_url_canton_vaud" = "https://www.vd.ch/toutes-les-actualites/hotline-et-informations-sur-le-coronavirus/";
+
+/*Fuzzy*/
+"testlocation_url_canton_zurich" = "https://www.zh.ch/de/gesundheit/coronavirus.html";
+"testlocation_url_country_liechtenstein" = "https://www.llv.li/inhalt/118724/amtsstellen/coronavirus";
+
+/*text for info box pop up for the hearing impaired*/
+"hearing_impaired_info" = "Essas Vus senza udida u avais Vus in impediment d'udida e na pudais betg telefonar?\n\nAlura tramettai in e-mail a covid-support@medgate.ch";
+
+/*Überschrift des Covidcodes-Statistik-Moduls*/
+"stats_covidcodes_title" = "Codes covid";
+
+/*Überschrift des Fallzahlen-Statistik Moduls*/
+"stats_cases_title" = "Dumber dals cas";
+
+/*Untertitel des Fallzahlen-Statistik-Moduls*/
+"stats_cases_subtitle" = "svilup actual";
+
+/*Label der "Total eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_total_label" = "endatà";
+
+/*Label der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_label" = "entaifer 0-2 dis";
+
+/*Label der "7-Tage-Schnitt Fallzahlen" Statistik*/
+"stats_cases_7day_average_label" = "media da 7 dis";
+
+/*Label der "Änderung gegenüber Vorwoche Fallzahlen" Statistik*/
+"stats_cases_rel_prev_week_label" = "envers l'emna precedenta";
+
+/*Überschrift des Info-Popups auf dem Statistik-Screen*/
+"stats_info_popup_title" = "Detagls davart las cifras";
+
+/*Untertitel des Infopopups zu Covidcodes-Statistiken*/
+"stats_info_popup_subtitle_covidcodes" = "Codes covid endatads";
+
+/*Untertitel des Infopopups zu Fallzahlen-Statistiken*/
+"stats_info_popup_subtitle_cases" = "Dumber dals cas";
+
+/*Beschreibung der "Total eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_total_description" = "Dumber dals codes covid endatads dapi il cumenzament da l'app SwissCovid il zercladur 2020. Uschè bleras persunas han infurmà tras l'app lur contacts davart ina eventuala infecziun.";
+
+/*Beschreibung der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_description" = "Quota dals codes covid ch'èn vegnids endatads entaifer ils emprims dus dis suenter il cumenzament dals sintoms. Questa quota sa referescha als ultims 7 dis.\n\nIl temp è in factur decisiv en il cumbat cunter il coronavirus: pli curt ch'il temp tranter il cumenzament dals sintoms, il resultat dal test e l'endataziun dal code covid è, e pli baud ch'ils contacts infurmads pon restar a chasa e proteger autras persunas.";
+
+/*Beschreibung der "7-Tage-Schnitt Fallzahlen" Statistik*/
+"stats_cases_7day_average_description" = "Mussa la media da las infecziuns novas per di sur 7 dis.";
+
+/*Beschreibung der "Änderung gegenüber Vorwoche Fallzahlen" Statistik*/
+"stats_cases_rel_prev_week_description" = "Mussa la midada da la media da 7 dis en cumparegliaziun cun il stadi d'avant in'emna.";
+
+/*Label der "Aktuelle Entwicklung" Statistik*/
+"stats_cases_current_label" = "Svilup actual";
+
+/*Beschreibung der "Aktuelle Entwicklung" Statistik*/
+"stats_cases_current_description" = "La grafica mussa las infecziuns novas annunziadas dals ultims 28 dis. Quai dat ina survista dal svilup actual.";
+
+/*Inform Detail: Infobox Text*/
+"inform_detail_infobox1_text" = "Avais Vus in test positiv (test da PCR u test svelt d'antigens) e n'avais suenter 4 uras anc betg retschavì in code covid?\nAlura telefonai qua:";
+
+/*Inform Detail: Infobox Title*/
+"inform_detail_infobox1_title" = "Anc nagin code covid?";
+
+/*Titel des Popups mit der Frage, ob der User die Isolation beendet hat*/
+"homescreen_isolation_ended_popup_title" = "Avais Vus terminà Vossa isolaziun?";
+
+/*Text des Popups mit der Frage, ob der User die Isolation beendet hat*/
+"homescreen_isolation_ended_popup_text" = "Il tracing po puspè vegnir activà, uschespert che Vus avais terminà l'isolaziun.";
+
+/*Ja-Antwort*/
+"answer_yes" = "Gea";
+
+/*Nein-Antwort*/
+"answer_no" = "Na";
+
+/*Text in der Infobox auf dem Reisen-Screen*/
+"travel_screen_info" = "En gir a l'exteriur? En quests pajais funcziuna SwissCovid.";
+
+/*Überschrift der Liste der kompatiblen Länder auf dem Reisen-Screen*/
+"travel_screen_compatible_countries" = "Pajais cumpatibels:";
+
+/*Informieren Flow: Erster Screen Reise-Infotext*/
+"inform_code_travel_text" = "Per che er las viagiaturas ed ils viagiaturs da l'exteriur possian vegnir infurmads suenter in inscunter, vegnan cundivididas las clavs privatas cun las apps da corona dals pajais cumpatibels.";
+
+/*Überschrift der "eingegebene Covidcodes" Statistikbox*/
+"stats_covidcodes_total_header" = "total";
+
+/*Überschrift der "Innert 0-2 Tagen eingegebene Covidcodes" Statistik*/
+"stats_covidcodes_0to2days_header" = "actual";
+
+/*Überschrift im Popup für die "Veränderung zur Vorwoche" Statistik*/
+"stats_cases_rel_prev_week_popup_header" = "Midada envers l'emna precedenta";
+
+/*Meldungen: Positiv getestet FAQ 2 Titel (Benachrichtigung)*/
+"meldungen_positive_tested_faq2_title" = "Tgi vegn infurmà?";
+
+/*Meldungen: Positiv getestet FAQ 2 Text (Benachrichtigung)*/
+"meldungen_positive_tested_faq2_text" = "I vegnan infurmads tut ils contacts durant il spazi da temp da Vossa fasa contagiusa dals {ONSET_DATE} fin a l'endataziun dal code covid, sch'igl existiva ina ristga d'infecziun – sin basa da la distanza e da la durada u sche Vus essas stada registrada/stà registrà en il medem lieu.";
+
+/*Informieren: Danke Text Onset Date*/
+"inform_send_thankyou_text_onsetdate" = "{ONSET_DATE} – oz";
+
+/*Informieren: Danke Text Abschluss*/
+"inform_send_thankyou_text_stop_infection_chains" = "Uschia gidais Vus d'avertir auters d'ina eventuala infecziun.";
+
+/*Informieren: Danke Text Onset Date Einleitung*/
+"inform_send_thankyou_text_onsetdate_info" = "Las clavs privatas da Vossa app èn vegnidas tramessas per il suandant spazi da temp:";
+
+/*Dialogtext wenn ein Covidcode eingegeben wird während das Tracing deaktiviert ist*/
+/*Fuzzy*/
+"inform_tracing_enabled_explanation" = "Per che Vossas clavs privatas possian vegnir cundivididas sto il tracing esser activà cun endatar in code covid.";
+
+/*Leitfaden Info Popup Text*/
+"leitfaden_infopopup_text" = "Sche Vus schmatgais sin \"{BUTTON_TITLE}\", bandunais Vus l'app e midais a la pagina d'internet dal mussavia SwissCovid. Uschia vegnan tramessas a la pagina d'internet er las datas dals ultims inscunters d'eventualas infecziuns.";
+
+/*Leitfaden InfoPopup Titel*/
+"leitfaden_infopopup_title" = "Infurmaziun mussavia SwissCovid";
+
+/*Update Boarding: Titel*/
+"germany_update_boarding_title" = "Cumpatibel cun la Germania";
+
+/*Update Boarding: Text*/
+"germany_update_boarding_text" = "Vus vegnis er infurmada resp. infurmà, sche Vus avais gì contact cun ina persuna che fa diever da l'app d'avertiment da corona tudestga e che ha gì pli tard in test positiv e viceversa. Perquai èn vegnidas actualisadas las cundiziuns d'utilisaziun e la decleraziun davart la protecziun da datas.";
+
+/*Update Boarding: Heading oben*/
+"germany_update_boarding_heading" = "Update SwissCovid";
+
+/*Debug Screen: Update-Boarding Reset Button*/
+"reset_update_boarding" = "Redefinir update boarding";
+
+/*Meldungen Detail Kostenloser Test Box Text*/
+"meldungen_detail_free_test_text" = "In test da corona è raschunaivel e vegn recumandà a partir dal tschintgavel di suenter la data da contact inditgada.";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt in wievielen Tagen ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_in_x_tagen" = "En {COUNT} dis";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt dass jetzt ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_now" = "Ussa";
+
+/*Anzeige in der blauen Box im MeldungenDetail Screen, welche angibt dass in 1 Tag ein Test gemacht werden soll.*/
+"meldungen_detail_free_test_tomorrow" = "En 1 di";
+
+/*Check-Ins: Titel vom Reminder Push*/
+"checkout_reminder_title" = "Pro memoria sortida";
+
+/*Check-Ins: Check-out Reminder Push Text*/
+"checkout_reminder_text" = "Vulais Vus sortir?";
+
+/*Check-Ins: Auto-Checkout Push Titel*/
+"auto_checkout_title" = "Sortir automaticamain";
+
+/*Check-Ins: Auto-checkout Push Text*/
+"auto_checkout_body" = "Vus essas sortida/sortì automaticamain.";
+
+/*Check-Ins: Qr-Scanner Text*/
+"qrscanner_scan_qr_text" = "Scannar il code QR e sa registrar";
+
+/*Check-Ins: Fehler beim QR-Code scannen*/
+"qrscanner_error" = "Il code QR n'è betg valaivel!";
+
+/*Check-Ins: Anpassung Check-In Datumwahl von*/
+"datepicker_from" = "Da";
+
+/*Check-Ins: Datumsauswahl bis*/
+"datepicker_to" = "Fin";
+
+/*Check-Ins: Notiz hinzufügen zu Check-In*/
+"edit_mode_addcomment" = "Agiuntar ina notizia";
+
+/*Check-Ins: Notiz zu Check-In Placeholder Text*/
+"edit_mode_comment_placeholder" = "p.ex. Cun tgi essas Vus stada/stà là?";
+
+/*Fertig Button Text*/
+"done_button" = "Finì";
+
+/*Check-Ins: Titel für Erinnerung*/
+"checkin_set_reminder" = "Pro memoria sortida";
+
+/*Check-Ins: Erinnerung Option Aus*/
+"reminder_option_off" = "Off";
+
+/*Check-Ins: Tagebuch Zugriff Text*/
+"authenticate_for_diary" = "As autentifitgai per avair access al diari";
+
+/*Check-Ins: Errinnerungsoption Stunden*/
+"reminder_option_hours" = "{HOURS} h";
+
+/*Check-Ins: Errinnerungsoption Minuten*/
+"reminder_option_minutes" = "{MINUTES}'";
+
+/*Check-Ins: Fehler wenn Kamera-Erlaubnis nicht gegeben*/
+"qr_scanner_no_camera_permission" = "Per pudair scannar il code QR dovra l'app access a la camera.";
+
+/*Check-Ins: Tagebuch Titel*/
+"diary_title" = "Mias registraziuns";
+
+/*Check-Ins: Button Titel zum Einchecken*/
+"checkin_button_title" = "Registraziun";
+
+/*Check-Ins: iOS Kamera Erlaubnis Text*/
+"NSCameraUsageDescription" = "La camera è necessaria per scannar il code QR.";
+
+/*Check-Ins: FaceID Text um Tagebuch anzuschauen*/
+"NSFaceIDUsageDescription" = "Permettai Face-ID per pudair acceder a moda segira a Voss diari.";
+
+/*Check-Ins: Text der angezeigt wieso FaceId gebraucht wird*/
+"face_id_reason_text" = "As autentifitgai per avair access al diari";
+
+/*Check-Ins: Check-Out Button Title*/
+"checkout_button_title" = "Sortida";
+
+/*Check-Ins: Titel Modul auf Homescreen*/
+"module_checkins_title" = "Registraziun";
+
+/*Check-Ins: Titel vom Check-In Screen*/
+"checkin_title" = "Registraziun";
+
+/*Check-Ins: QR-Code erstellen Titel*/
+"checkins_create_qr_code" = "Crear in code QR";
+
+/*Veranstaltungen-Screen Titel*/
+"events_title" = "Crear codes QR";
+
+/*Check-Ins: Jetzt einchecken Button Titel*/
+"check_in_now_button_title" = "Sa registrar ussa";
+
+/*Check-Ins: Reminder Fehlermeldung Titel*/
+"checkin_reminder_settings_alert_title" = "I n'è betg stà pussaivel d'activar il pro memoria";
+
+/*Check-Ins: Erinnerungen Fehlermeldung Text*/
+"checkin_reminder_settings_alert_message" = "Per survegnir in pro memoria da sortir stuais Vus permetter \\\"messadis\\\" en las configuraziuns da l'app.";
+
+/*Check-Ins: Reminder Popup Anpassen*/
+"checkin_reminder_option_open_settings" = "Adattar";
+
+/*Check-Ins: Bearbeiten von Check-Ins Titel*/
+"edit_controller_title" = "Modifitgar";
+
+/*Check-Ins: Tagebuch leeres Tagbuch Titel*/
+"empty_diary_title" = "Anc naginas endataziuns avant maun";
+
+/*Check-Ins: Tagebuch leer, Text*/
+"empty_diary_text" = "Sche Vus scannais in code QR da SwissCovid per As registrar al lieu, vegn arcunada qua automaticamain in'endataziun.";
+
+/*Check-Ins: Kamera Erlaubnis Text*/
+"camera_permission_dialog_text" = "SwissCovid dovra l'access a la camera da Voss apparat. La camera vegn mo duvrada per scannar ils codes QR.\n";
+
+/*Check-Ins: Button Titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären*/
+"camera_permission_dialog_action" = "Permetter l'access a la camera";
+
+/*Check-Ins: Veranstaltung Titel Placeholder*/
+"web_generator_title_placeholder" = "p.ex. stanza u num da l'occurrenza";
+
+/*Check-Ins: Veranstaltungen Detail PDF Button*/
+"show_pdf_button" = "Stampar il PDF";
+"bottom_nav_tab_info" = "Info";
+"error_network_title" = "Sbagl da la rait";
+"error_network_text" = "Controllai Vossa colliaziun d'internet.";
+"error_action_retry" = "Empruvar danovamain";
+"error_notification_deactivated_title" = "Deactivà messadis";
+"error_notification_deactivated_text" = "Midai las configuraziuns per vegnir infurmada/infurmà directamain en cas d'in avis.";
+"error_action_change_settings" = "Midar las configuraziuns";
+"error_camera_permission_title" = "Nagin access a la camera";
+"error_camera_permission_text" = "L'app dovra access a la camera per pudair scannar il code QR.";
+"error_title" = "Sbagl";
+"qr_scanner_error_code_not_yet_valid" = "Il code QR n'è anc betg valaivel";
+"qr_scanner_error_code_not_valid_anymore" = "Il code QR n'è betg pli valaivel";
+"error_already_checked_in" = "Vus essas gia As registrada/registrà.";
+"error_update_text" = "Quest code QR n'è betg cumpatibel cun la versiun da l'app installada. Per plaschair actualisar l'app per cuntinuar.";
+"error_update_title" = "In update è necessari";
+"error_action_update" = "Actualisar ussa";
+"ongoing_notification_checkout_quick_action" = "Sortir ";
+"reminder_notification_snooze_action" = "Snooze";
+"android_ongoing_checkin_notification_channel_name" = "Avis permanent da sa registrar";
+"ongoing_notification_title" = "Vus essas As registrada/registrà dapi las {TIME}.";
+
+/*Check-Ins: Sichern Button bei Check-out*/
+"checkout_save_button_title" = "Arcunar";
+
+/*Check-Ins: QR-Code scannen Button*/
+"scan_qr_code_button_title" = "Scannar il code QR";
+
+/*Titel der Infobox auf dem Homescreen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_title" = "Deactivà la registraziun";
+
+/*Text der Infobox auf dem Homescreen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_text" = "Actualmain n'èsi betg pussaivel da sa registrar";
+
+/*Text im Check-Ins-Screen im nicht eingecheckten Zustand*/
+"checkin_detail_checked_out_text" = "Scannai in code QR da SwissCovid per As registrar al lieu.";
+
+/*Text im Check-Ins-Screen, im Tagebuch-Modul*/
+"checkin_detail_diary_text" = "Sche Vus scannais in code QR da SwissCovid per As registrar al lieu, vegn arcunada qua automaticamain in'endataziun.";
+
+/*Label im Checkin-Modul im eingecheckten Zustand*/
+"checkin_checked_in" = "Vus essas As registrada/registrà";
+"checkout_from_to_date" = "{DATE1} fin {DATE2}";
+"inform_detail_covidcode_info_button" = "Dapli davart il code covid";
+
+/*Check-Ins: Button Entfernen um Check-In zu löschen*/
+"remove_from_diary_button" = "Stizzar l'endataziun";
+
+/*Check-Ins: QR-Code löschen Titel Button*/
+"delete_button_title" = "Stizzar";
+
+/*Check-Ins: Teile QR-Code Button Titel*/
+"share_button_title" = "Cundivider";
+
+/*Check-Ins: Drucken Button auf PDF-Detailseite*/
+"print_button_title" = "Stampar";
+
+/*Check-Ins: Beschreibung Modul auf Homescreen*/
+"module_checkins_description" = "Scannai in code QR da SwissCovid per As registrar al lieu.";
+
+/*Titel im "Covidcode flow", wo man check ins wählen kann, welche geshared werden sollen.*/
+"inform_share_checkins_title" = "Cundivider las endataziuns da registraziun";
+
+/*Untertitel im "Covidcode flow", wo man check ins wählen kann, welche geshared werden sollen.*/
+"inform_share_checkins_subtitle" = "Sche Vus cundividais Vossas endataziuns da registraziun, po l'app infurmar persunas ch'èn stadas registradas il medem mument en il medem lieu.";
+
+/*Button text, um alle Checkins zu selektieren*/
+"inform_share_checkins_select_all" = "Selecziunar tuttas";
+"inform_dont_send_button_title" = "Betg trametter";
+"inform_dont_share_button_title" = "Betg cundivider";
+"inform_really_not_share_title" = "Propi betg cundivider?";
+"inform_really_not_share_subtitle" = "Cun cundivider Vossas clavs privatas gidais Vus SwissCovid ad infurmar autras persunas potenzialmain infectadas ed ad impedir in'ulteriura derasaziun dal virus. Sche Vus na cundividais betg Vossas clavs privatas, na vegnan avertidas naginas persunas potenzialmain infectadas.";
+
+/*Remove from Diary Warning view title*/
+"remove_diary_warning_title" = "Stizzar l'endataziun";
+
+/*Remove from diary warning view explanation text*/
+"remove_diary_warning_text" = "Vossa endataziun vegn stizzada definitivamain da la glista.";
+
+/*Remove from diary warning view remove button title*/
+"remove_diary_remove_now_button" = "Stizzar dal tuttafatg";
+
+/*Hide from diary warning title*/
+"remove_diary_warning_hide_title" = "Mo zuppentar e vegnir infurmada/infurmà vinavant?";
+
+/*Titel auf der "CovidCode eingeben"-Card auf dem Home Screen*/
+"home_covidcode_card_title" = "Survegnì in resultat positiv?";
+
+/*Text auf der "Isolation beenden"-Card auf dem Home Screen*/
+"home_end_isolation_card_text" = "Puspè activar inscunters e registraziuns.";
+
+/*Check-Ins: Erinnerungsoption Stunden & Minuten*/
+"reminder_option_hours_minutes" = "{HOURS} h {MINUTES}'";
+
+/*Text, welcher im Checkin-Overview Screen erscheint, wenn der Benutzer sich in Isolation befindet.*/
+"checkin_overview_isolation_text" = "Vus na pudais betg pli As registrar, sche Vus avais survegnì in resultat positiv.";
+
+/*Veranstaltungen-Card Text im Infotab*/
+"events_card_subtitle" = "Creai in code QR, cun il qual persunas pon sa registrar al lieu.";
+
+/*Dialog Text beim Löschen eines erstellten QR Codes.*/
+"delete_qr_code_dialog" = "Vulais Vus propi stizzar il code QR? Ils codes QR stampads restan vinavant valaivels.";
+
+/*Self-Check-In Button Titel im QR-Code Screen*/
+"self_checkin_button_title" = "Autoregistraziun";
+
+/*Text, welcher im Checkin-Overview Screen erscheint, wenn der Benutzer nicht eingecheckt ist.*/
+"checkin_overview_checkins_explanation" = "Scannai in code QR da SwissCovid per As registrar al lieu.";
+
+/*Popup Titel wenn beim Checkout oder Editieren von CheckIns sich die neu gewählte Zeit mit vorhandenen aus dem Tagebuch überschneidet*/
+"checkout_overlapping_alert_title" = "Betg pussaivel d'arcunar";
+
+/*Popup Beschreibung wenn beim Checkout oder Editieren von CheckIns sich die neu gewählte Zeit mit vorhandenen aus dem Tagebuch überschneidet*/
+"checkout_overlapping_alert_description" = "Ils temps che Vus avais selecziunà coincidan cun autras registraziuns da Voss diari. Per plaschair controllar anc ina giada Vossas indicaziuns.";
+
+/*Informieren: Danke Text Checkins Teil*/
+"inform_send_thankyou_text_checkins" = "Las endataziuns da las registraziuns che Vus avais selecziunà èn vegnidas tramessas. Tut las persunas ch'èn stadas registradas il medem mument en il medem lieu vegnan infurmadas.";
+
+/*SwissCovid QR Code PDF: Headline über dem Slogan*/
+"pdf_headline" = "Registraziun SwissCovid";
+
+/*SwissCovid QR Code PDF: Slogan*/
+"pdf_slogan" = "Sa registrar senza inditgar datas";
+
+/*SwissCovid QR Code PDF: Erklärungstext unter dem Slogan*/
+"pdf_explanation" = "Cun l'app SwissCovid pudais Vus As registrar tar nus a moda simpla e senza inditgar Vossas datas. En cas d'ina situaziun da ristga As infurmescha l'app sveltamain.";
+
+/*SwissCovid QR Code PDF: App Bezeichnung neben dem App Icon*/
+"pdf_swisscovid_app" = "App SwissCovid";
+
+/*SwissCovid QR Code PDF: Download Hinweis neben dem App Icon*/
+"pdf_download_app" = "Telechargiar ussa";
+
+/*Title im Check-Ins-Screen im nicht eingecheckten Zustand*/
+"checkin_detail_checked_out_title" = "Sa registrar senza inditgar datas";
+
+/*Text auf der "CovidCode eingeben"-Card auf dem Home Screen*/
+"home_covidcode_card_text" = "Endatai qua Voss code covid per avertir autras persunas.";
+
+/*Titel auf der "Isolation beenden"-Card auf dem Home Screen*/
+"home_end_isolation_card_title" = "Terminar l'isolaziun?";
+
+/*Titel auf der Card, welche zum Screen führt, wo man eigene QR Codes erstellen kann.*/
+"events_card_title" = "Vulais Vus crear codes QR?";
+"checkin_footer_title1" = "Pertge dovri ina funcziun da sa registrar?";
+"checkin_footer_subtitle1" = "La funcziun da sa registrar senza endatar las datas da contact cumplettescha l'app SwissCovid. Cun agid da questa funcziun na pudais Vus avertir betg mo stretgs contacts en cas d'in resultat positiv, mabain er las persunas ch'èn stadas registradas il medem mument en il medem lieu.";
+"checkin_footer_title2" = "Las datas na vegnan betg arcunadas en moda centrala.";
+"checkin_footer_subtitle2" = "Per las registraziuns da SwissCovid na stuais Vus inditgar naginas datas persunalas sco il num, l'adressa u il numer da telefon ed i na vegnan arcunadas naginas datas da GPS davart la posiziun. La glista da las registraziuns vegn arcunada localmain sin Voss smartphone. Suenter 14 dis vegnan las datas localas puspè stizzadas.";
+"events_empty_state_title" = "Creai in code QR";
+"events_empty_state_subtitle" = "Cun in code QR da SwissCovid pon persunas sa registrar al lieu senza inditgar lur datas.";
+"events_info_box_title" = "Na remplazza betg la registraziun obligatorica da datas da contact";
+"events_info_box_text" = "Las registraziuns da SwissCovid na remplazzan betg l'obligaziun da registrar las datas da contact prescritta en l'Ordinaziun davart COVID-19 situaziun speziala.";
+"events_footer_title1" = "En tge situaziuns pon ins duvrar la funcziun da sa registrar?";
+"events_footer_title2" = "Pertge dovri ina funcziun da sa registrar?";
+"events_footer_subtitle1" = "Registraziuns da SwissCovid pon vegnir en funcziun là, nua che persunas s'inscuntran, ma i na dat nagina obligaziun da registrar las datas da contact.\n\nQuai pon esser p.ex.:\n- occurrenzas privatas\n- occurrenzas d'uniuns\n- reuniuns en l'ambient professiunal sco p.ex. stanzas da seduta, biros, cantinas, etc.";
+"events_footer_subtitle2" = "La funcziun da sa registrar senza endatar las datas da contact cumplettescha l'app SwissCovid. Cun agid da questa funcziun na pudais Vus avertir betg mo stretgs contacts en cas d'in resultat positiv, mabain er las persunas ch'èn stadas registradas il medem mument en il medem lieu.";
+
+/*Subtitle vom Meldungen Card in der Liste aller Meldungen.*/
+"meldung_detail_exposed_list_card_subtitle" = "Situaziun da ristga";
+
+/*Title vom Encounters Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_title_encounters" = "Inscunters";
+
+/*Title vom CheckIn Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_title_checkin" = "Registraziun";
+
+/*Was soll ich tun? Button im Meldungen Card in der Liste aller Meldungen*/
+"meldung_detail_exposed_list_card_whattodo_button" = "Tge duai jau far?";
+
+/*Debug: Einstellungs-Option zum überschreiben des App-Zustands: An einem Check-In einem positiven Kontakt ausgesetzt*/
+"debug_state_setting_option_checkin_exposed" = "Registraziun positiva";
+
+/*Debug: Einstellungs-Option zum überschreiben des App-Zustands: Auf verschiedener Weise einem positiven Kontakt ausgesetzt*/
+"debug_state_setting_option_mutiple_exposed" = "Registraziuns positivas/contacts positivs";
+
+/*Anzeigename für User QR Codes*/
+"venue_type_user_qr_code" = "Code QR utilisadra/utilisader";
+
+/*Anzeigename für User QR Codes*/
+"venue_type_contact_tracing_qr_code" = "Code QR contact tracing";
+
+/*Text der Module im Check-ins Screen, wenn aufgrund von Isolation keine Checkins mehr möglich sind*/
+"checkin_ended_text_detailed" = "Suenter in test positiv vegn la funcziun da sa registrar deactivada automaticamain. Ella po puspè vegnir activada, uschespert che Vus avais terminà l'isolaziun.";
+
+/*Check-Ins: QR-Code erstellen subtitel*/
+"checkins_create_qr_code_subtitle" = "Tscherni in titel che descriva pli detagliadamain il lieu u Vossa occurrenza. Il titel vegn mussà tar la registraziun.";
+"checkin_report_heading" = "Tge pudais Vus far?";
+"checkin_report_title1" = "Proteger contacts";
+"checkin_report_title2" = "Far stim da sintoms";
+"checkin_report_title3" = "Laschar far in test";
+"checkin_report_subtitle1" = "Vus pudais gia esser infectusa u infectus senza badar quai. Observai las mesiras d'igiena e da protecziun vertentas e protegi Vossa famiglia, Vossas amias e Voss amis sco er Voss conturn.";
+"checkin_report_subtitle2" = "Survegliai Voss stadi da sanadad.";
+"checkin_report_subtitle3" = "Faschai immediatamain in test, sche Vus avais sintoms. In test dal coronavirus è raschunaivel e vegn cusseglià, er sche Vus n'avais nagins sintoms e sche Vus n'essas anc betg vaccinada u vaccinà cumplettamain.";
+
+/*Titel von CheckIn Meldungen Screen.*/
+"meldung_detail_checkin_title" = "Registraziun";
+"not_thank_you_screen_title" = "I n’èn vegnidas tramessas naginas datas";
+"not_thank_you_screen_text1" = "I n’èn vegnidas tramessas naginas clavs privatas";
+"not_thank_you_screen_back_button" = "Enavos";
+"not_thank_you_screen_dont_send_button" = "Trametter naginas datas";
+"not_thank_you_screen_text2" = "I n’èn vegnidas tramessas naginas endataziuns da registraziuns";
+
+/*Button text, um ausgewählte Checkins zu senden*/
+"inform_share_checkins_send_button_title" = "Cundivider la selecziun";
+"inform_share_checkins_not_send_button" = "Cundivider nagut";
+"onboarding_checkin_title" = "Sa registrar senza inditgar datas";
+"onboarding_checkin_heading" = "Registraziuns";
+"onboarding_checkin_text1" = "Cun las registraziuns da SwissCovid pudais Vus As registrar cun l'app en in lieu u a chaschun d'in inscunter.";
+"onboarding_checkin_text2" = "Vossa preschientscha vegn arcunada mo en l'app. Vus na stuais inditgar naginas datas persunalas en l'app.";
+"checkin_updateboarding_text" = "Cun las registraziuns da SwissCovid pudais Vus As registrar cun l'app en in lieu u a chaschun d'in inscunter. Vossa preschientscha vegn arcunada mo en l'app. Vus na stuais inditgar naginas datas persunalas en l'app. Las cundiziuns d'utilisaziun e la decleraziun davart la protecziun da datas èn vegnidas actualisadas en quest connex.";
+"onboarding_gaen_button_dont_activate" = "Sursiglir";
+
+/*Hide from diary warning text*/
+"remove_diary_warning_hide_text" = "L'endataziun vegn arcunada durant 14 dis a moda codada davosvart en l'app. Uschia èsi tuttina pussaivel d'As infurmar en cas d'ina eventuala infecziun.";
+
+/*CheckIn ausblenden*/
+"remove_diary_warning_hide_button" = "Mo zuppentar";
+"checkin_set_reminder_explanation" = "L'app As po regurdar il dretg mument da puspè sortir.";
+
+/*Remove from diary warning title*/
+"remove_diary_remove_now_title" = "U stizzar dal tuttafatg?";
+
+/*Remove from diary warning text*/
+"remove_diary_remove_now_text" = "L'endataziun vegn stizzada dal tuttafatg. I n'è betg pli pussaivel d'As avertir.";
+"not_thank_you_screen_text3" = "Nagin na vegn infurmà.";
+
+/*Link Text zu Informationen übers Testen*/
+"checkin_report_link" = "Tge stoss jau savair davart il tests?";
+"instant_app_install_action" = "Installar l'app e sa registrar";
+"partial_onboarding_box_text" = "Terminai las configuraziuns da l'app per pudair far diever da la funcziun da tracing.";
+"partial_onboarding_box_action" = "Terminar ussa";
+"partial_onboarding_done_title" = "La configuraziun è terminada";
+"partial_onboarding_done_text" = "Grazia fitg che Vus gidais a franar la derasaziun dal coronavirus.";
+"web_slogan" = "Infurmescha svelt en cas d'ina ristga d'infecziun";
+
+/*Info URL for testing*/
+/*Fuzzy*/
+"test_info_url" = "https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/testen.html";
+"checkout_too_long_alert_text" = "Per questa registraziun vala ina durada da registraziun maximala da {DURATION}. Verifitgai per plaschair anc ina giada Vossa indicaziun.";
+
+/*turn camera light on*/
+"accessibility_camera_light_on" = "Activar la glisch da giaglioffa";
+
+/*turn camera light off*/
+"accessibility_camera_light_off" = "Deactivar la glisch da giaglioffa";
+
+/*Popup Text, welcher erscheint, wenn man den Covidcode eingeben will, man aber noch eingecheckt ist.*/
+"error_cannot_enter_covidcode_while_checked_in" = "Vus essas anc registrada u registrà. Sorti per plaschair avant che Vus endatais il code COVID.";
+
+/*Titel auf der Card, welche zum Screen führt, wo man eigene QR Codes erstellen kann. Wird angezeigt falls bereits ein QR Code erstellt wurde*/
+"events_card_title_events_not_empty" = "Mes codes QR";
+
+/*Popup Beschreibung wenn beim Checkout oder Editieren von CheckIns die Checkin-Zeit nach der Checkout-Zeit liegt*/
+"checkout_inverse_time_alert_description" = "Voss temp da sortida tschernì è avant il temp da registraziun. Verifitgai per plaschair anc ina giada Vossa indicaziun.";
+
+/*Titel für die Notification die SwissCovid 2.0 ankündigt*/
+"update_notification_checkin_feature_title" = "Nova funcziun: Registraziun";
+
+/*Text für die Notification die SwissCovid 2.0 ankündigt*/
+"update_notification_checkin_feature_text" = "Grazia fitg che Vus duvrais SwissCovid. Cun la versiun da l'app la pli nova pudais Vus As registrar al lieu, senza inditgar datas.";
+
+/*Titel für aktuellen Check-in im Tagebuch*/
+"diary_current_title" = "Actual";
+
+/*Snooze Option um 30min später an Checkout zu erinnern*/
+"ios_snooze_option_30min" = "Regurdar danovamain (30 min)";
+
+/*Snooze Option um 1h später an Checkout zu erinnern*/
+"ios_snooze_option_1h" = "Regurdar danovamain (1 ura)";
+
+/*Snooze Option um 2h später an Checkout zu erinnern*/
+"ios_snooze_option_2h" = "Regurdar danovamain (2 uras)";
+
+/*Notification Quickaction um jetzt auszuchecken*/
+"ios_notification_checkout_now" = "Sortir ussa";
+
+/*Hinweis falls fälschlicherweise ein Covid-Zertifikat mit SwissCovid gescannt wird.*/
+"covid_certificate_alert_text" = "Duvrai per plaschair l'app «COVID Certificate» per scannar quest code QR.";
+
+/*Button um Covid Certificate App zu öffnen*/
+"covid_certificate_open_app" = "Avrir l'app";
+
+/*Button um Covid Certificate App zu installieren*/
+"covid_certificate_install_app" = "Installar l'app";

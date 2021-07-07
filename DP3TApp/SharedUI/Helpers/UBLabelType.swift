@@ -51,6 +51,10 @@ class UBLabel<T: UBLabelType>: UILabel {
         didSet { update() }
     }
 
+    override var attributedText: NSAttributedString? {
+        didSet { updateAttributed() }
+    }
+
     var isHtmlContent: Bool = false {
         didSet { update() }
     }
@@ -58,7 +62,7 @@ class UBLabel<T: UBLabelType>: UILabel {
     /// :nodoc:
     private func update() {
         guard var textContent = text else {
-            attributedText = nil
+            super.attributedText = nil
             return
         }
 
@@ -87,33 +91,28 @@ class UBLabel<T: UBLabelType>: UILabel {
 
         if isHtmlContent {
             textString.ub_replaceFonts(with: font)
-        } else {
-            // check paragraph style
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = textAlignment
-
-            let lineSpacing = numberOfLines == 1 ? 1.0 : type.lineSpacing
-
-            let lineHeightMultiple = (font.pointSize / font.lineHeight) * lineSpacing
-            paragraphStyle.lineSpacing = lineHeightMultiple * font.lineHeight - font.lineHeight
-            paragraphStyle.lineBreakMode = type.lineBreakMode
-
-            // check hyphenation
-            if numberOfLines != 1 {
-                paragraphStyle.hyphenationFactor = type.hyphenationFactor
+            if let textColor = textColor {
+                textString.addAttribute(NSAttributedString.Key.foregroundColor, value: textColor, range: textRange)
             }
-
-            // add attribute for paragraph
-            textString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: textRange)
-        }
-
-        // add attribute for kerning
-        if let k = type.letterSpacing {
-            textString.addAttribute(NSAttributedString.Key.kern, value: k, range: textRange)
+        } else {
+            textString.ub_addAttributes(forLabelType: type, textAlignment: textAlignment, numberOfLines: numberOfLines)
         }
 
         // set attributed text
-        attributedText = textString
+        super.attributedText = textString
+    }
+
+    /// :nodoc:
+    func updateAttributed() {
+        guard let attributedText = attributedText else {
+            // also triggers `attributedText = nil`
+            super.text = nil
+            return
+        }
+
+        super.attributedText =
+            NSMutableAttributedString(attributedString: attributedText)
+                .ub_addAttributes(forLabelType: type, textAlignment: textAlignment, numberOfLines: numberOfLines)
     }
 }
 
@@ -125,7 +124,7 @@ extension NSMutableAttributedString {
 
         enumerateAttribute(.font, in: NSRange(location: 0, length: length), options: []) { foundFont, range, _ in
             if let htmlTraits = (foundFont as? UIFont)?.fontDescriptor.symbolicTraits,
-                let adjustedDescriptor = baseFontDescriptor.withSymbolicTraits(htmlTraits) {
+               let adjustedDescriptor = baseFontDescriptor.withSymbolicTraits(htmlTraits) {
                 let newFont = UIFont(descriptor: adjustedDescriptor, size: font.pointSize)
                 changes[range] = newFont
             }
@@ -135,5 +134,35 @@ extension NSMutableAttributedString {
             removeAttribute(.font, range: range)
             addAttribute(.font, value: newFont, range: range)
         }
+    }
+
+    @discardableResult
+    fileprivate func ub_addAttributes(forLabelType type: UBLabelType, textAlignment: NSTextAlignment = .left, numberOfLines: Int = 0) -> NSMutableAttributedString {
+        // check paragraph style
+        let textRange = NSRange(location: 0, length: length)
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = textAlignment
+
+        let lineSpacing = type.lineSpacing
+
+        let lineHeightMultiple = (type.font.pointSize / type.font.lineHeight) * lineSpacing
+        paragraphStyle.lineSpacing = lineHeightMultiple * type.font.lineHeight - type.font.lineHeight
+        paragraphStyle.lineBreakMode = type.lineBreakMode
+
+        // check hyphenation
+        if numberOfLines != 1 {
+            paragraphStyle.hyphenationFactor = type.hyphenationFactor
+        }
+
+        // add attribute for paragraph
+        addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: textRange)
+
+        // add attribute for kerning
+        if let k = type.letterSpacing {
+            addAttribute(NSAttributedString.Key.kern, value: k, range: textRange)
+        }
+
+        return self
     }
 }

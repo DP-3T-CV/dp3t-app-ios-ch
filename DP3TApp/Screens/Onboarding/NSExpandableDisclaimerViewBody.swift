@@ -12,7 +12,7 @@
 import Foundation
 
 class NSExpandableDisclaimerViewBody: UIView {
-    private let textLabel = NSLabel(.smallLight)
+    private let textLabel = NSLabel(.smallLight, textColor: .ns_text)
 
     let privacyButton = NSExternalLinkButton(style: .normal(color: .ns_blue))
 
@@ -32,7 +32,7 @@ class NSExpandableDisclaimerViewBody: UIView {
 
     func stringForContent(content: Content, language: String) -> String? {
         if let path = Bundle.main.path(forResource: content.fileName(for: language), ofType: "html"),
-            let html = try? String(contentsOfFile: path) {
+           let html = try? String(contentsOfFile: path) {
             return html
         }
         return nil

@@ -13,11 +13,13 @@ import UIKit
 class NSOnboardingInfoView: UIView {
     public let stackView = UIStackView()
 
+    public let label = NSLabel(.textLight)
+
     private let leftRightInset: CGFloat
 
     let labelAreaGuide = UILayoutGuide()
 
-    init(icon: UIImage, text: String, title: String? = nil, leftRightInset: CGFloat = 2 * NSPadding.medium, dynamicIconTintColor: UIColor? = nil) {
+    init(icon: UIImage?, text: String, title: String? = nil, leftRightInset: CGFloat = 2 * NSPadding.medium, dynamicIconTintColor: UIColor? = nil) {
         self.leftRightInset = leftRightInset
 
         super.init(frame: .zero)
@@ -29,7 +31,6 @@ class NSOnboardingInfoView: UIView {
         let imgView = NSImageView(image: icon, dynamicColor: dynamicIconTintColor)
         imgView.ub_setContentPriorityRequired()
 
-        let label = NSLabel(.textLight)
         label.text = text
         label.accessibilityLabel = text.ub_localized.replacingOccurrences(of: "BAG", with: "B. A. G.")
 
@@ -59,6 +60,9 @@ class NSOnboardingInfoView: UIView {
                 make.top.equalToSuperview().inset(NSPadding.medium)
             }
             make.leading.equalToSuperview().inset(leftRightInset)
+            if icon == nil {
+                make.width.equalTo(24)
+            }
         }
 
         label.snp.makeConstraints { make in

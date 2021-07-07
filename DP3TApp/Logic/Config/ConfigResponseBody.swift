@@ -10,7 +10,7 @@
 
 import UIKit
 
-struct LocalizedValue<T: UBCodable>: UBCodable {
+struct LocalizedValue<T: Codable>: Codable {
     let dic: [String: T]
 
     init(from decoder: Decoder) throws {
@@ -38,7 +38,12 @@ struct LocalizedValue<T: UBCodable>: UBCodable {
 class ConfigResponseBody: UBCodable {
     public let forceUpdate: Bool
     public let infoBox: LocalizedValue<InfoBox>?
+    public let whatToDoPositiveTestTexts: LocalizedValue<WhatToDoPositiveTestTexts>?
     public let iOSGaenSdkConfig: GAENSDKConfig?
+    public let testLocations: LocalizedValue<[TestLocation]>?
+    public let interOpsCountries: [String]
+    public let testInformationUrls: LocalizedValue<String>?
+    public let checkInUpdateNotificationEnabled: Bool?
 
     class InfoBox: UBCodable {
         let title, msg: String
@@ -46,6 +51,7 @@ class ConfigResponseBody: UBCodable {
         let urlTitle: String?
         let infoId: String?
         let isDismissible: Bool?
+        let hearingImpairedInfo: String?
     }
 
     class GAENSDKConfig: Codable {
@@ -54,5 +60,28 @@ class ConfigResponseBody: UBCodable {
         let factorLow: Double
         let factorHigh: Double
         let triggerThreshold: Int
+    }
+
+    class WhatToDoPositiveTestTexts: UBCodable {
+        let enterCovidcodeBoxSupertitle: String
+        let enterCovidcodeBoxTitle: String
+        let enterCovidcodeBoxText: String
+        let enterCovidcodeBoxButtonTitle: String
+        let infoBox: InfoBox?
+        let faqEntries: [FAQEntry]
+
+        class FAQEntry: UBCodable {
+            let title: String
+            let text: String
+            let iconAndroid: String
+            let iconIos: String
+            let linkTitle: String?
+            let linkUrl: URL?
+        }
+    }
+
+    class TestLocation: Codable {
+        let region: String
+        let url: URL
     }
 }

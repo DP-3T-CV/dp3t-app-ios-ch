@@ -33,7 +33,7 @@ class NSWhatToDoSymptomViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.ns_backgroundSecondary
+        view.backgroundColor = .setColorsForTheme(lightColor: .ns_backgroundSecondary, darkColor: .ns_background)
 
         setupStackScrollView()
         setupLayout()
@@ -79,12 +79,15 @@ class NSWhatToDoSymptomViewController: NSViewController {
         stackScrollView.addArrangedView(imageView)
 
         stackScrollView.addSpacerView(NSPadding.large)
-
         stackScrollView.addArrangedView(symptomView)
+        symptomView.moreInformationCallback = { [weak self] in
+            guard let self = self else { return }
+            self.showMoreInformationPopup()
+        }
 
         stackScrollView.addSpacerView(3.0 * NSPadding.large)
 
-        let infoView = NSOnboardingInfoView(icon: UIImage(named: "ic-check-round")!, text: "symptom_faq1_text".ub_localized, title: "symptom_faq1_title".ub_localized, leftRightInset: 0, dynamicIconTintColor: .ns_purple)
+        let infoView = NSOnboardingInfoView(icon: UIImage(named: "ic-symptoms")!, text: "symptom_faq1_text".ub_localized, title: "symptom_faq1_title".ub_localized, leftRightInset: 0, dynamicIconTintColor: .ns_purple)
 
         stackScrollView.addArrangedView(infoView)
 
@@ -94,6 +97,10 @@ class NSWhatToDoSymptomViewController: NSViewController {
     private func setupAccessibility() {
         titleContentStackView.isAccessibilityElement = true
         titleContentStackView.accessibilityLabel = subtitleLabel.text!.deleteSuffix("...") + titleLabel.text!
+    }
+
+    private func showMoreInformationPopup() {
+        present(NSMoreTestInformationPopupViewController(), animated: true, completion: nil)
     }
 }
 

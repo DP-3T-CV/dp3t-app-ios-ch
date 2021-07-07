@@ -8,6 +8,7 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+import DP3TSDK
 import Foundation
 import UIKit
 
@@ -27,22 +28,38 @@ class NSCodeInputViewController: NSInformStepViewController, NSCodeControlProtoc
 
     private let sendButton = NSButton(title: "inform_send_button_title".ub_localized, style: .normal(.ns_purple))
 
+    private let prefill: String?
+
+    private var viewDidAppearOnce = false
+
+    var checkIns: [CheckIn]?
+
     // MARK: - View
+
+    init(prefill: String? = nil) {
+        self.prefill = prefill
+        super.init()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
         updateAccessibilityLabelOfButton(sendAllowed: false)
-
-        accessibilityElements = [codeControl.accessibilityElements ?? [], titleLabel, textLabel].compactMap { $0 }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !UIAccessibility.isVoiceOverRunning {
-            codeControl.jumpToNextField()
+
+        if !viewDidAppearOnce {
+            if let code = prefill {
+                codeControl.set(code: code)
+            } else if !UIAccessibility.isVoiceOverRunning {
+                codeControl.jumpToNextField()
+            }
         }
+
+        viewDidAppearOnce = true
     }
 
     // MARK: - Setup
@@ -125,44 +142,66 @@ class NSCodeInputViewController: NSInformStepViewController, NSCodeControlProtoc
 
         startLoading()
 
-        navigationController?.isModalInPresentation = true
+        if #available(iOS 13.0, *) {
+            navigationController?.isModalInPresentation = true
+        }
 
         navigationItem.hidesBackButton = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         rightBarButtonItem = navigationItem.rightBarButtonItem
         navigationItem.rightBarButtonItem = nil
 
-        ReportingManager.shared.report(covidCode: codeControl.code()) { [weak self] error in
+        ReportingManager.shared.getOnsetDate(covidCode: codeControl.code(), isFakeRequest: false) { [weak self] result in
             guard let self = self else { return }
-
-            if let error = error {
-                switch error {
-                case let .failure(error: error):
-                    self.stopLoading(error: error, reloadHandler: self.sendPressed)
-
-                    self.navigationItem.rightBarButtonItem = self.rightBarButtonItem
-
-                case .invalidCode:
-                    self.codeControl.clearAndRestart()
-                    self.errorView.isHidden = false
-                    self.textLabel.isHidden = true
-
-                    self.stopLoading()
-                    if UIAccessibility.isVoiceOverRunning {
-                        UIAccessibility.post(notification: .screenChanged, argument: self.errorTitleLabel)
+            switch result {
+            case let .success(onset):
+                let relevantCheckIns = CheckInManager.shared.getDiary()
+                    .filter { $0.checkOutTime != nil && $0.checkOutTime! >= onset.onset }
+                    .filter { $0.venue.venueType == .userQrCode }
+                func requestPermission() {
+                    if !ReportingManager.shared.hasUserConsent, UserStorage.shared.tracingSettingEnabled {
+                        ReportingManager.shared.getUserConsent { [weak self] result in
+                            guard let self = self else { return }
+                            switch result {
+                            case .success:
+                                CheckInSelectionViewController.presentIfNeeded(covidCode: self.codeControl.code(), checkIns: relevantCheckIns, from: self)
+                            case .failure:
+                                let vc = NSAreYouSureViewController(covidCode: self.codeControl.code(), relevantCheckIns: relevantCheckIns)
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }
+                    } else {
+                        CheckInSelectionViewController.presentIfNeeded(covidCode: self.codeControl.code(), checkIns: relevantCheckIns, from: self)
                     }
-
-                    self.navigationItem.hidesBackButton = false
-                    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-                    self.navigationItem.rightBarButtonItem = self.rightBarButtonItem
                 }
 
-            } else {
-                // success
-                // reschedule next fake request
-                FakePublishManager.shared.rescheduleFakeRequest(force: true)
-                self.navigationController?.pushViewController(NSInformThankYouViewController(), animated: true)
-                self.changePresentingViewController()
+                if !ReportingManager.shared.hasUserConsent,
+                   !UserStorage.shared.tracingSettingEnabled {
+                    let alert = UIAlertController(title: "", message: "inform_tracing_enabled_explanation".ub_localized, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "activate_tracing_button".ub_localized, style: .default, handler: { _ in
+                        TracingManager.shared.startTracing { result in
+                            if case TracingEnableResult.success = result {
+                                UserStorage.shared.tracingSettingEnabled = true
+                            }
+                            requestPermission()
+                        }
+                    }))
+                    alert.addAction(UIAlertAction(title: "meldung_in_app_alert_ignore_button".ub_localized, style: .cancel, handler: { _ in
+                        let vc = NSAreYouSureViewController(covidCode: self.codeControl.code(), relevantCheckIns: relevantCheckIns)
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    requestPermission()
+                }
+
+            case let .failure(error):
+                switch error {
+                case .invalidToken:
+                    self.invalidTokenError()
+                case let .networkError(error):
+                    self.stopLoading(error: error, reloadHandler: self.sendPressed)
+                }
             }
         }
     }
@@ -171,6 +210,21 @@ class NSCodeInputViewController: NSInformStepViewController, NSCodeControlProtoc
         let nav = presentingViewController as? NSNavigationController
         nav?.popToRootViewController(animated: true)
         nav?.pushViewController(NSReportsDetailViewController(), animated: false)
+    }
+
+    public func invalidTokenError() {
+        codeControl.clearAndRestart()
+        errorView.isHidden = false
+        textLabel.isHidden = true
+
+        stopLoading()
+        if UIAccessibility.isVoiceOverRunning {
+            UIAccessibility.post(notification: .screenChanged, argument: errorTitleLabel)
+        }
+
+        navigationItem.hidesBackButton = false
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
     // MARK: - NSCodeControlProtocol

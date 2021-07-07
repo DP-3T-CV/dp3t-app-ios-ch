@@ -69,7 +69,7 @@ class NSHeaderErrorView: UIView {
 
     private func createDot() -> UIView {
         let v = UIView()
-        v.backgroundColor = .ns_background
+        v.backgroundColor = UIColor.white
         v.layer.cornerRadius = 4.5
         v.snp.makeConstraints { make in
             make.size.equalTo(9)
@@ -79,23 +79,21 @@ class NSHeaderErrorView: UIView {
 
     private func update() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .beginFromCurrentState, animations: {
-            self.alpha = self.state == .tracingActive || self.state == .tracingEnded ? 0 : 1
+            self.alpha = self.state == .tracingActive || self.state == .tracingDisabled || self.state == .tracingEnded ? 0 : 1
         }, completion: nil)
 
         UIView.transition(with: imageView, duration: 0.3, options: [.beginFromCurrentState, .transitionCrossDissolve], animations: {
             switch self.state {
-            case .tracingActive, .tracingEnded:
+            case .tracingActive, .tracingDisabled, .tracingEnded, .onboarding:
                 self.imageView.image = nil
-            case .tracingDisabled:
-                self.imageView.image = UIImage(named: "ic-header-status-off")!
             case .timeInconsistencyError, .unexpectedError:
                 self.imageView.image = UIImage(named: "ic-header-error")!
             case .bluetoothTurnedOff:
                 self.imageView.image = UIImage(named: "ic-header-bt-off")!
             case .bluetoothPermissionError:
                 self.imageView.image = UIImage(named: "ic-header-bt-disabled")!
-            case .tracingPermissionError:
-                self.imageView.image = UIImage(named: "ic-tracing-error")!
+            case .tracingPermissionError, .tracingAuthorizationUnknown:
+                self.imageView.image = UIImage(named: "ic-header-error")!
             }
         }, completion: nil)
     }
